@@ -61,7 +61,7 @@ var gaul2 = ee.FeatureCollection('FAO/GAUL/2015/level2');
 var coastalDistricts = gaul2
   .filter(ee.Filter.eq('ADM1_NAME', 'Orissa'))
   .filter(ee.Filter.inList('ADM2_NAME',
-    ['Baleshwar', 'Bhadrak', 'Kendrapara', 'Jagatsinghapur', 'Puri']))
+    ['Baleshwar', 'Bhadrak', 'Kendrapara', 'Jagatsinghpur', 'Puri']))
   .map(function (f) {
     return f.set({
       cyclone_exposure: 'coastal',
@@ -73,7 +73,7 @@ var coastalDistricts = gaul2
 var inlandDistricts = gaul2
   .filter(ee.Filter.eq('ADM1_NAME', 'Orissa'))
   .filter(ee.Filter.inList('ADM2_NAME',
-    ['Sambalpur', 'Bargarh', 'Sundargarh']))
+    ['Dhenkanal', 'Angul', 'Cuttack']))
   .map(function (f) {
     return f.set({
       cyclone_exposure: 'inland',
