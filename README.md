@@ -47,7 +47,7 @@ RiceBaCI-GEE/
 
 | Element | Choice | Reference |
 |---|---|---|
-| Study area | 5 coastal Odisha districts (Balasore, Bhadrak, Kendrapara, Jagatsinghapur, Puri) + 3 inland controls | [GAUL 2015](https://data.apps.fao.org/catalog/dataset/gaul-2015) |
+| Study area | 5 coastal Odisha districts (Balasore, Bhadrak, Kendrapara, Jagatsinghpur, Puri) + 3 inland controls | [GAUL 2015](https://data.apps.fao.org/catalog/dataset/gaul-2015) |
 | Treatment events | Cyclones Fani (2019), Amphan (2020), Yaas (2021) | [IBTrACS v04r00](https://www.ncei.noaa.gov/products/international-best-track-archive) |
 | SAR data | Sentinel-1 GRD, IW, descending, VH+VV | [COPERNICUS/S1_GRD](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD) |
 | Optical data | Sentinel-2 L2A harmonised | [COPERNICUS/S2_SR_HARMONIZED](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED) |
