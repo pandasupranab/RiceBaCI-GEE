@@ -61,7 +61,7 @@ var COASTAL_DISTRICTS = [
 // 3 inland Odisha districts (control)
 var INLAND_DISTRICTS = [
   'Dhenkanal',
-  'Anugul',        // Angul
+  'Angul',
   'Cuttack'
 ];
 
