@@ -287,7 +287,7 @@ var labelledSamples = ee.FeatureCollection([]);
 // --- Class 2 (saline-flood): treatment years only ---
 CONFIG.cyclones.forEach(function (cyc) {
   var stack = buildFeatureStack(cyc.year);
-  var lbl   = salineMask(cyc).multiply(LABEL_SALINE).rename('label');
+  var lbl   = salineMask(cyc).multiply(LABEL_SALINE).rename('label').toInt();
   var img   = stack.addBands(lbl);
   labelledSamples = labelledSamples.merge(
     img.stratifiedSample({
@@ -306,7 +306,7 @@ CONFIG.cyclones.forEach(function (cyc) {
 // --- Class 1 (agro-flood): control years, full study area ---
 CONFIG.controlYears.forEach(function (yr) {
   var stack = buildFeatureStack(yr);
-  var lbl   = agroFloodMask(yr).multiply(LABEL_AGRO).rename('label');
+  var lbl   = agroFloodMask(yr).multiply(LABEL_AGRO).rename('label').toInt();
   var img   = stack.addBands(lbl);
   labelledSamples = labelledSamples.merge(
     img.stratifiedSample({
