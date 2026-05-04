@@ -1,4 +1,4 @@
-# riceBaCI-GEE
+# RiceBaCI-GEE
 
 **Rice phenology under tropical cyclone disruption — a Sentinel-1/2 fusion framework for the Bay of Bengal coast.**
 
