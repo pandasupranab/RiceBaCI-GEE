@@ -53,8 +53,8 @@ var CONFIG = {
 var gaul2 = ee.FeatureCollection('FAO/GAUL/2015/level2');
 var allDistricts = gaul2.filter(ee.Filter.eq('ADM1_NAME', 'Orissa'))
   .filter(ee.Filter.inList('ADM2_NAME',
-    ['Baleshwar','Bhadrak','Kendrapara','Jagatsinghapur','Puri',
-     'Sambalpur','Bargarh','Sundargarh']));
+    ['Baleshwar','Bhadrak','Kendrapara','Jagatsinghpur','Puri',
+     'Dhenkanal','Angul','Cuttack']));
 var fullAOI      = allDistricts.union(1).geometry();
 var croplandMask = ee.ImageCollection('ESA/WorldCover/v200').first().eq(40);
 
