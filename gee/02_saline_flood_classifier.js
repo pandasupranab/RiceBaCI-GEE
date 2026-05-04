@@ -50,12 +50,12 @@ var gaul2 = ee.FeatureCollection('FAO/GAUL/2015/level2');
 var coastalOdisha = gaul2
   .filter(ee.Filter.eq('ADM1_NAME', 'Orissa'))
   .filter(ee.Filter.inList('ADM2_NAME',
-    ['Baleshwar', 'Bhadrak', 'Kendrapara', 'Jagatsinghapur', 'Puri']));
+    ['Baleshwar', 'Bhadrak', 'Kendrapara', 'Jagatsinghpur', 'Puri']));
 
 var inlandOdisha = gaul2
   .filter(ee.Filter.eq('ADM1_NAME', 'Orissa'))
   .filter(ee.Filter.inList('ADM2_NAME',
-    ['Sambalpur', 'Bargarh', 'Sundargarh']));
+    ['Dhenkanal', 'Angul', 'Cuttack']));
 
 var studyAOI = coastalOdisha.union(1).geometry();
 var fullAOI  = coastalOdisha.merge(inlandOdisha).union(1).geometry();
