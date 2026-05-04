@@ -78,8 +78,8 @@ var STAGE = 'sample';   //  <— change to 'train' after Stage 1 task completes
 var CONFIG = {
   studyAreaAsset:   CLOUD_PROJECT + '/study_area_odisha_8districts',
   ibtracsAsset:     CLOUD_PROJECT + '/ibtracs_NI_2014_2024',
-  outputBase:       CLOUD_PROJECT + '/RiceBaCI_2026',
-  trainingSamplesAsset: CLOUD_PROJECT + '/RiceBaCI_2026/saline_flood_training_samples',
+  outputBase:       CLOUD_PROJECT,   // top-level (no subfolder; GEE strips it)
+  trainingSamplesAsset: CLOUD_PROJECT + '/saline_flood_training_samples',
 
   years:            [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
   treatmentYears:   [2019, 2020, 2021],
