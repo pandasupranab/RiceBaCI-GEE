@@ -467,8 +467,10 @@ print('F1 (saline-flood, class 2):', f1Saline,
 
 var blockGrid  = fullAOI.coveringGrid(
   ee.Projection('EPSG:32644'), CONFIG.blockSizeKm * 1000);
-var blockFolds = blockGrid.map(function (f) {
-  return f.set('fold', ee.Number.parse(f.get('system:index')).mod(CONFIG.nFolds));
+// system:index is a tuple-string like '20,44' — hash it via random+seed for fold
+var blockFolds = blockGrid.randomColumn('blockRand', CONFIG.seed).map(function (f) {
+  return f.set('fold', ee.Number(f.get('blockRand'))
+    .multiply(CONFIG.nFolds).floor().min(CONFIG.nFolds - 1));
 });
 
 var samplesWithFold = samplesWithRand.map(function (s) {
@@ -503,12 +505,18 @@ print('Mean CV Kappa:', cvFC.aggregate_mean('kappa'));
 
 // =============================================================================
 // 11. EXPORT FLOOD-PROBABILITY RASTERS  (one per pre-reg cyclone year)
+// 3-class RF → MULTIPROBABILITY (one band per class). We extract class 2
+// (saline-flood) probability for the manuscript figures and downstream Module 03.
 // =============================================================================
 
-var rfProb = rfClassifier.setOutputMode('PROBABILITY');
+var rfProb = rfClassifier.setOutputMode('MULTIPROBABILITY');
 
 CONFIG.cyclones.forEach(function (cyc) {
-  var prob = buildFeatureStack(cyc.year).classify(rfProb)
+  // MULTIPROBABILITY returns an array image with 3 elements [P(0), P(1), P(2)]
+  var probArr = buildFeatureStack(cyc.year).classify(rfProb);
+  // Convert array image -> 3 named bands -> select class 2 (saline-flood)
+  var probImg = probArr.arrayFlatten([['p_neither', 'p_agro', 'p_saline']]);
+  var prob    = probImg.select('p_saline')
     .rename('saline_flood_prob').toFloat()
     .set({year: cyc.year, cyclone: cyc.name,
           ntrees: CONFIG.rfTrees, seed: CONFIG.seed});
