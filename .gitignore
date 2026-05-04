@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.env
+
+# R
+.Rhistory
+.RData
+.Ruserdata
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Outputs (regenerable)
+outputs/raw/
+outputs/intermediate/
+*.tif
+*.tiff
+*.geotiff
+
+# Large data files
+data/raw/
+data/processed/
+*.csv.gz
+*.parquet
+
+# Sensitive
+*.json
+!package.json
+!package-lock.json
+credentials/
+.gee_credentials
+
+# OS
+*.log
+.cache/
+
+# Pandoc temp
+*.tmp

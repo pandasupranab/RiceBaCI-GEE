@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+title: "RiceBaCI-GEE: Decoupling Cyclone-Induced Saline Inundation from Agronomic Flooding in Sentinel-1/2 Rice Phenology Retrieval"
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Panda
+    given-names: Subranab
+    affiliation: "PhD Researcher, Agricultural Meteorology, Bhubaneswar, Odisha, India"
+type: software
+license: MIT
+repository-code: "https://github.com/[your-handle]/RiceBaCI-GEE"
+abstract: >
+  RiceBaCI-GEE is an open Google Earth Engine toolkit that distinguishes cyclone-induced
+  saline inundation from normal agronomic transplanting flooding in Sentinel-1/2 rice
+  time-series, and uses this distinction to recover unbiased phenological dates (SOS,
+  POS, EOS) for coastal Odisha Kharif rice from 2017 to 2024. The framework uses a
+  Before-After-Control-Impact (BACI) design with three named tropical cyclones (Fani
+  2019, Amphan 2020, Yaas 2021) as natural experiments.
+keywords:
+  - Sentinel-1
+  - Sentinel-2
+  - rice phenology
+  - tropical cyclone
+  - SAR-optical fusion
+  - Google Earth Engine
+  - BACI design
+  - coastal Odisha
+  - agricultural meteorology
+date-released: "2026-05-01"
+version: "0.1.0"
