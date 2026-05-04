@@ -2,7 +2,7 @@
 # RiceBaCI-GEE — R Analysis Script
 # BACI Mixed-Effects Model: Cyclone Impact on Rice Phenological Dates
 # -----------------------------------------------------------------------
-# Author:   Subranab Panda (PhD, Agricultural Meteorology)
+# Author:   Supranab Panda (PhD, Agricultural Meteorology)
 # Project:  Decoupling Cyclone-Induced Saline Inundation from Agronomic
 #           Flooding in Sentinel-1/2 Rice Phenology Retrieval
 # Target:   Remote Sensing of Environment (Elsevier)
