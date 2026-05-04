@@ -2,10 +2,18 @@
  * RiceBaCI-GEE — Module 04
  * BACI Export: District-Year Phenology Summaries to CSV
  * -----------------------------------------------------
- * Author:   Subranab Panda (PhD, Agricultural Meteorology)
+ * Author:   Supranab Panda (PhD scholar, Center for Environment and Climate,
+ *           ITER, Siksha 'O' Anusandhan University, Bhubaneswar)
+ *           pandasupranab@gmail.com
  * Project:  Decoupling Cyclone-Induced Saline Inundation from Agronomic
  *           Flooding in Sentinel-1/2 Rice Phenology Retrieval
- * Target:   Remote Sensing of Environment (Elsevier)
+ * Target:   Remote Sensing of Environment (Elsevier, zero-APC compliant)
+ * OSF reg.: https://osf.io/c4mp8  (DOI 10.17605/OSF.IO/C4MP8)
+ * Code DOI: 10.5281/zenodo.20024578 (concept) / 20024579 (v0.1.1)
+ * Repo:     https://github.com/pandasupranab/RiceBaCI-GEE
+ *
+ * STATUS:   Asset paths migrated to Cloud project; full rewrite to consume
+ *           Module 03 corrected/raw bands pending Saturday milestone.
  *
  * This module:
  *   1. Loads the SOS/POS/EOS rasters produced by Module 03 for each of the
@@ -30,7 +38,9 @@
 // =============================================================================
 
 var CONFIG = {
-  assetBase:   'projects/your-cloud-project/assets/RiceBaCI_2026',
+  studyAreaAsset: 'projects/durable-pulsar-486209-b5/assets/study_area_odisha_8districts',
+  ibtracsAsset:   'projects/durable-pulsar-486209-b5/assets/ibtracs_NI_2014_2024',
+  assetBase:      'projects/durable-pulsar-486209-b5/assets/RiceBaCI_2026',
   years:       [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
   treatYears:  [2019, 2020, 2021],
   controlYrs:  [2017, 2018, 2022, 2023, 2024],
@@ -53,13 +63,13 @@ var BAND_MAP = {
 
 // =============================================================================
 // 2. STUDY AREA — DISTRICTS WITH EXPOSURE CLASSIFICATION
+// Loaded from frozen Cloud asset (8 features, verified Module 01)
 // =============================================================================
 
-var gaul2 = ee.FeatureCollection('FAO/GAUL/2015/level2');
+var studyAreaFC = ee.FeatureCollection(CONFIG.studyAreaAsset);
 
 // Coastal treatment districts (5)
-var coastalDistricts = gaul2
-  .filter(ee.Filter.eq('ADM1_NAME', 'Orissa'))
+var coastalDistricts = studyAreaFC
   .filter(ee.Filter.inList('ADM2_NAME',
     ['Baleshwar', 'Bhadrak', 'Kendrapara', 'Jagatsinghpur', 'Puri']))
   .map(function (f) {
@@ -70,8 +80,7 @@ var coastalDistricts = gaul2
   });
 
 // Inland control districts (3)
-var inlandDistricts = gaul2
-  .filter(ee.Filter.eq('ADM1_NAME', 'Orissa'))
+var inlandDistricts = studyAreaFC
   .filter(ee.Filter.inList('ADM2_NAME',
     ['Dhenkanal', 'Angul', 'Cuttack']))
   .map(function (f) {
