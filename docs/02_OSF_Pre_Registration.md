@@ -165,7 +165,7 @@ Any analysis not listed above will be reported as exploratory and clearly flagge
 ## F. Data and code availability
 
 - **Code (live development):** `https://github.com/pandasupranab/RiceBaCI-GEE` (MIT licence).
-- **Code (permanent archive):** Zenodo, via the GitHub–Zenodo integration. A frozen DOI is minted automatically for every tagged GitHub release. Tags planned: `v0.1.0-prereg` (Week 1, paired with this OSF registration), `v1.0.0-submission` (at manuscript submission to RSE), `v1.0.0-final` (at acceptance). Concept DOI: `[pending — assigned on first release]`.
+- **Code (permanent archive):** Zenodo, via the GitHub–Zenodo integration. A frozen DOI is minted automatically for every tagged GitHub release. Tags planned: `v0.1.0-prereg` (Week 1, paired with this OSF registration), `v1.0.0-submission` (at manuscript submission to RSE), `v1.0.0-final` (at acceptance). Concept DOI: `10.5281/zenodo.20024578` (version v0.1.1-prereg DOI: `10.5281/zenodo.20024579`).
 - **Processed datasets:** Mendeley Data — corrected SOS/POS/EOS rasters, BACI tables, validation reference points (coordinates + labels + PlanetScope scene URLs only, not the imagery itself, owing to NICFI re-distribution restrictions). Reserved DOI: `[pending — minted Week 1 Thu]`.
 - **Statistical analysis scripts (R):** same GitHub repository under `/analysis/` and included in the Zenodo archive.
 - **Both repositories use username `supranab` and email `pandasupranab@gmail.com`.**
