@@ -2,7 +2,7 @@
 
 **Target journal:** Remote Sensing of Environment (Elsevier)
 **Manuscript title:** Decoupling Cyclone-Induced Saline Inundation from Agronomic Flooding in Sentinel-1/2 Rice Phenology Retrieval: A Multi-Year Bay-of-Bengal Coastal Framework (2017–2024)
-**Corresponding author:** Subranab Panda (pandasupranab@gmail.com)
+**Corresponding author:** Supranab Panda (pandasupranab@gmail.com)
 
 ---
 
