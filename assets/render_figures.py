@@ -130,13 +130,13 @@ def fig01_study_area():
         "Balasore":        (86.3, 21.3, 1.0, 0.8),
         "Bhadrak":         (85.8, 20.7, 0.9, 0.7),
         "Kendrapara":      (86.2, 20.3, 0.8, 0.6),
-        "Jagatsinghapur":  (86.0, 19.9, 0.6, 0.5),
+        "Jagatsinghpur":   (86.0, 19.9, 0.6, 0.5),
         "Puri":            (85.5, 19.6, 0.8, 0.5),
     }
     inland_districts = {
-        "Sambalpur":  (83.8, 21.2, 1.2, 1.0),
-        "Bargarh":    (83.0, 21.1, 1.1, 0.9),
-        "Sundargarh": (84.0, 22.0, 1.1, 1.0),
+        "Dhenkanal":  (85.6, 20.65, 1.1, 0.9),
+        "Angul":      (85.1, 20.85, 1.2, 1.0),
+        "Cuttack":    (85.9, 20.5,  1.0, 0.85),
     }
 
     for name, (x, y, w, h) in coastal_districts.items():
@@ -489,7 +489,7 @@ def fig05_phenology_maps():
                 (86.3, 21.3, 1.0, 0.8, "Balasore"),
                 (85.8, 20.7, 0.9, 0.7, "Bhadrak"),
                 (86.2, 20.3, 0.8, 0.6, "Kendrapara"),
-                (86.0, 19.9, 0.6, 0.5, "Jagatsinghapur"),
+                (86.0, 19.9, 0.6, 0.5, "Jagatsinghpur"),
                 (85.5, 19.6, 0.8, 0.5, "Puri"),
             ]:
                 rect = Rectangle((x0, y0), w, h, linewidth=1.0,
@@ -783,7 +783,7 @@ def fig10_intercomparison():
     gs = gridspec.GridSpec(1, 2, width_ratios=[1.5, 1], wspace=0.35)
 
     districts = ["Balasore", "Bhadrak", "Kendrapara",
-                 "Jagatsinghapur", "Puri"]
+                 "Jagatsinghpur", "Puri"]
     n = len(districts)
 
     # synthetic rice area (×1000 ha) — realistic Odisha district magnitudes
