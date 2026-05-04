@@ -131,7 +131,7 @@ This is a single-author PhD project for the duration of the manuscript cycle, bu
 
 ## Contact
 
-Subranab Panda — `pandasupranab@gmail.com` — Bhubaneswar, Odisha, India.
+Supranab Panda — `pandasupranab@gmail.com` — Bhubaneswar, Odisha, India.
 
 ## Licence
 
