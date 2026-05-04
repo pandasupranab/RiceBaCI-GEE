@@ -1,29 +1,45 @@
 cff-version: 1.2.0
 title: "RiceBaCI-GEE: Decoupling Cyclone-Induced Saline Inundation from Agronomic Flooding in Sentinel-1/2 Rice Phenology Retrieval"
-message: "If you use this software, please cite it as below."
+message: "If you use this software, please cite both the software and the companion OSF pre-registration."
 authors:
   - family-names: Panda
-    given-names: Subranab
-    affiliation: "PhD Researcher, Agricultural Meteorology, Bhubaneswar, Odisha, India"
+    given-names: Supranab
+    orcid: "https://orcid.org/0009-0009-6496-6545"
+    email: pandasupranab@gmail.com
+    affiliation: "Center for Environment and Climate, Institute of Technical Education and Research, Siksha 'O' Anusandhan (Deemed to be) University, Bhubaneswar 751030, Odisha, India"
+  - family-names: Sahu
+    given-names: Sarat Chandra
+    name-suffix: "Dr."
+    orcid: "https://orcid.org/0000-0002-8048-1910"
+    affiliation: "Director, Center for Environment and Climate, Institute of Technical Education and Research, Siksha 'O' Anusandhan (Deemed to be) University, Bhubaneswar 751030, Odisha, India"
 type: software
 license: MIT
-repository-code: "https://github.com/[your-handle]/RiceBaCI-GEE"
+repository-code: "https://github.com/pandasupranab/RiceBaCI-GEE"
+url: "https://osf.io/c4mp8"
+identifiers:
+  - type: doi
+    value: 10.17605/OSF.IO/C4MP8
+    description: "OSF pre-registration DOI (companion to this software)"
 abstract: >
-  RiceBaCI-GEE is an open Google Earth Engine toolkit that distinguishes cyclone-induced
-  saline inundation from normal agronomic transplanting flooding in Sentinel-1/2 rice
-  time-series, and uses this distinction to recover unbiased phenological dates (SOS,
-  POS, EOS) for coastal Odisha Kharif rice from 2017 to 2024. The framework uses a
-  Before-After-Control-Impact (BACI) design with three named tropical cyclones (Fani
-  2019, Amphan 2020, Yaas 2021) as natural experiments.
+  RiceBaCI-GEE is an open Google Earth Engine toolkit that distinguishes
+  cyclone-induced saline inundation from normal agronomic transplanting
+  flooding in Sentinel-1/2 rice time-series, and uses this distinction to
+  recover unbiased phenological dates (SOS, POS, EOS) for coastal Odisha
+  Kharif rice from 2017 to 2024. The framework uses a Before-After-Control-
+  Impact (BACI) design with four named tropical cyclones (Fani 2019,
+  Bulbul 2019, Amphan 2020, Yaas 2021) as natural experiments, with
+  Cyclone Hudhud 2014 reserved as an Andhra Pradesh transferability test.
 keywords:
+  - rice phenology
   - Sentinel-1
   - Sentinel-2
-  - rice phenology
   - tropical cyclone
+  - saline inundation
   - SAR-optical fusion
-  - Google Earth Engine
   - BACI design
-  - coastal Odisha
-  - agricultural meteorology
-date-released: "2026-05-01"
-version: "0.1.0"
+  - Google Earth Engine
+  - remote sensing
+  - Bay of Bengal
+  - Odisha
+version: 0.1.0-prereg
+date-released: "2026-05-04"
