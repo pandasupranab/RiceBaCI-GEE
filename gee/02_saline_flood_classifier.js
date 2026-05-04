@@ -26,11 +26,30 @@
  *   Class 0 = NEITHER: paddy pixel with no flood signature in either window.
  *
  * --------------------------------------------------------------------------
- * ARCHITECTURE
+ * ARCHITECTURE  (two-stage, asset-mediated)
  * --------------------------------------------------------------------------
- * On-the-fly: Sentinel-1/2 features built from public collections each run.
- * No dependency on cached monthly stacks. Trade-off is ~3-5 min per run vs.
- * 24 h batch precompute; chosen for fast iteration during method development.
+ * On-the-fly: Sentinel-1/2 features are built from public collections each
+ * run, with NO dependency on cached monthly stacks. Because building feature
+ * stacks for nine Kharif years (2017-2024) and sampling them in one
+ * interactive script exceeds the 5-min Code-Editor compute budget, the
+ * module is split into two stages controlled by the STAGE flag in CONFIG.
+ *
+ *   STAGE 1 — 'sample':
+ *     For each treatment year, control year, and the negative-class year,
+ *     build the feature stack on the fly, generate stratified samples, and
+ *     dispatch ONE batch task: Export.table.toAsset — saving the labelled
+ *     samples to <outputBase>/saline_flood_training_samples.
+ *     This task runs in the GEE batch queue (NO 5-min limit) and typically
+ *     completes in 15-45 min. The interactive script returns in seconds.
+ *
+ *   STAGE 2 — 'train':
+ *     Load the labelled samples FROM THE ASSET (fast — no on-the-fly
+ *     resampling), train RF, run test-set metrics, 5-fold spatial-block CV,
+ *     export per-cyclone flood-prob rasters, and export the trained
+ *     classifier. This whole pass fits comfortably in 5 min.
+ *
+ * Workflow:  set STAGE='sample', run, click Tasks > Run on the one queued
+ * task, wait for completion, then set STAGE='train', run again.
  *
  * Pre-registered RF hyperparameters (OSF §E2):
  *   numberOfTrees     300
@@ -49,10 +68,18 @@
 
 var CLOUD_PROJECT = 'projects/durable-pulsar-486209-b5/assets';
 
+// ----------------------------------------------------------------------------
+// STAGE FLAG — SET THIS BEFORE EACH RUN
+// 'sample'  : build features on-the-fly, dispatch labelled-sample export task
+// 'train'   : load labelled samples from asset, train RF, evaluate, export
+// ----------------------------------------------------------------------------
+var STAGE = 'sample';   //  <— change to 'train' after Stage 1 task completes
+
 var CONFIG = {
   studyAreaAsset:   CLOUD_PROJECT + '/study_area_odisha_8districts',
   ibtracsAsset:     CLOUD_PROJECT + '/ibtracs_NI_2014_2024',
   outputBase:       CLOUD_PROJECT + '/RiceBaCI_2026',
+  trainingSamplesAsset: CLOUD_PROJECT + '/RiceBaCI_2026/saline_flood_training_samples',
 
   years:            [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
   treatmentYears:   [2019, 2020, 2021],
@@ -85,7 +112,11 @@ var CONFIG = {
   blockSizeKm:      50,
   nFolds:           5,
 
-  scale:            10,
+  scale:            10,         // export scale for prediction rasters (Stage 2)
+  sampleScale:      30,         // resampling scale for stratifiedSample (Stage 1)
+  nSaline:          150,        // per cyclone year (3 × 150 = 450)
+  nAgro:            100,        // per control year (5 × 100 = 500)
+  nNeither:         300,        // single negative-class draw
   exportFolder:     'RiceBaCI_2026'
 };
 
@@ -279,71 +310,104 @@ function agroFloodMask(year) {
 }
 
 // =============================================================================
-// 7. SAMPLE GENERATION
+// 7. SAMPLE GENERATION OR ASSET LOAD  (depending on STAGE)
 // =============================================================================
 
-var labelledSamples = ee.FeatureCollection([]);
+var labelledSamples;
 
-// --- Class 2 (saline-flood): treatment years only ---
-CONFIG.cyclones.forEach(function (cyc) {
-  var stack = buildFeatureStack(cyc.year);
-  var lbl   = salineMask(cyc).multiply(LABEL_SALINE).rename('label').toInt();
-  var img   = stack.addBands(lbl);
-  labelledSamples = labelledSamples.merge(
-    img.stratifiedSample({
-      numPoints:  150,
+if (STAGE === 'sample') {
+  print('STAGE 1 = sample : will dispatch ONE batch export task at end.');
+
+  var samplesList = ee.List([]);
+
+  // --- Class 2 (saline-flood): treatment years only ---
+  CONFIG.cyclones.forEach(function (cyc) {
+    var stack = buildFeatureStack(cyc.year);
+    var lbl   = salineMask(cyc).multiply(LABEL_SALINE).rename('label').toInt();
+    var img   = stack.addBands(lbl);
+    var s = img.stratifiedSample({
+      numPoints:  CONFIG.nSaline,
       classBand:  'label',
-      region:     coastalGeom,  // coastal districts only for saline class
-      scale:      CONFIG.scale,
+      region:     coastalGeom,
+      scale:      CONFIG.sampleScale,
       seed:       CONFIG.seed,
       geometries: true,
       classValues: [LABEL_SALINE],
-      classPoints: [150]
-    })
-  );
-});
+      classPoints: [CONFIG.nSaline],
+      tileScale:  4
+    }).map(function (f) {
+      return f.set({source_year: cyc.year, source_cyclone: cyc.name});
+    });
+    samplesList = samplesList.add(s);
+  });
 
-// --- Class 1 (agro-flood): control years, full study area ---
-CONFIG.controlYears.forEach(function (yr) {
-  var stack = buildFeatureStack(yr);
-  var lbl   = agroFloodMask(yr).multiply(LABEL_AGRO).rename('label').toInt();
-  var img   = stack.addBands(lbl);
-  labelledSamples = labelledSamples.merge(
-    img.stratifiedSample({
-      numPoints:  100,
+  // --- Class 1 (agro-flood): control years, full study area ---
+  CONFIG.controlYears.forEach(function (yr) {
+    var stack = buildFeatureStack(yr);
+    var lbl   = agroFloodMask(yr).multiply(LABEL_AGRO).rename('label').toInt();
+    var img   = stack.addBands(lbl);
+    var s = img.stratifiedSample({
+      numPoints:  CONFIG.nAgro,
       classBand:  'label',
       region:     fullAOI,
-      scale:      CONFIG.scale,
+      scale:      CONFIG.sampleScale,
       seed:       CONFIG.seed,
       geometries: true,
       classValues: [LABEL_AGRO],
-      classPoints: [100]
-    })
-  );
-});
+      classPoints: [CONFIG.nAgro],
+      tileScale:  4
+    }).map(function (f) {
+      return f.set({source_year: yr, source_cyclone: 'control'});
+    });
+    samplesList = samplesList.add(s);
+  });
 
-// --- Class 0 (neither): random cropland in 2022 (post-cyclone control) ---
-var negStack = buildFeatureStack(2022)
-  .addBands(ee.Image.constant(LABEL_NEITHER).rename('label').toInt());
-labelledSamples = labelledSamples.merge(
-  negStack.stratifiedSample({
-    numPoints:  500,
+  // --- Class 0 (neither): random cropland in 2022 ---
+  var negStack = buildFeatureStack(2022)
+    .addBands(ee.Image.constant(LABEL_NEITHER).rename('label').toInt());
+  var negSamples = negStack.stratifiedSample({
+    numPoints:  CONFIG.nNeither,
     classBand:  'label',
     region:     fullAOI,
-    scale:      CONFIG.scale,
+    scale:      CONFIG.sampleScale,
     seed:       CONFIG.seed,
     geometries: true,
     classValues: [LABEL_NEITHER],
-    classPoints: [500]
-  })
-);
+    classPoints: [CONFIG.nNeither],
+    tileScale:  4
+  }).map(function (f) {
+    return f.set({source_year: 2022, source_cyclone: 'negative_class'});
+  });
+  samplesList = samplesList.add(negSamples);
 
-print('Total labelled samples:', labelledSamples.size());
-print('  Class breakdown:',
-  labelledSamples.aggregate_histogram('label'));
+  // Flatten the list of FeatureCollections into one FC
+  labelledSamples = ee.FeatureCollection(samplesList).flatten();
+
+  // Dispatch the ONE batch task. NO interactive .size() / aggregate_histogram
+  // calls here — those would trigger the same on-the-fly compute that timed out.
+  Export.table.toAsset({
+    collection:  labelledSamples,
+    description: 'saline_flood_training_samples',
+    assetId:     CONFIG.trainingSamplesAsset
+  });
+
+  print('STAGE 1 dispatch complete.');
+  print('NEXT: Tasks tab → Run → saline_flood_training_samples');
+  print('      Wait for status = COMPLETED (15-45 min).');
+  print('      Then set STAGE = "train" at top of script and re-run.');
+
+} else if (STAGE === 'train') {
+  print('STAGE 2 = train : loading samples from frozen asset.');
+  labelledSamples = ee.FeatureCollection(CONFIG.trainingSamplesAsset);
+  print('Total labelled samples:', labelledSamples.size());
+  print('  Class breakdown:',
+    labelledSamples.aggregate_histogram('label'));
+} else {
+  throw new Error('Unknown STAGE: ' + STAGE + ' (use "sample" or "train")');
+}
 
 // =============================================================================
-// 8. STRATIFIED 70/30 SPLIT AND RF TRAINING
+// 8. STRATIFIED 70/30 SPLIT AND RF TRAINING        (Stage 2 only — see guard)
 // =============================================================================
 
 var FEATURE_BANDS = [
@@ -351,6 +415,13 @@ var FEATURE_BANDS = [
   'NDWI_kharif_max', 'LSWI_kharif_max', 'JRC_permanence',
   'ERA5_landfall_wind', 'days_since_landfall'
 ];
+
+if (STAGE !== 'train') {
+  print('================================================');
+  print('Module 02 STAGE 1 (sample) finished. STAGE 2 skipped.');
+  print('After the Tasks > Run completes, switch STAGE to "train".');
+  print('================================================');
+} else {
 
 var samplesWithRand = labelledSamples.randomColumn('rand', CONFIG.seed);
 var trainSamples    = samplesWithRand.filter(ee.Filter.lt('rand',  0.7));
@@ -461,13 +532,7 @@ Export.classifier.toAsset({
   description: 'saline_flood_rf_classifier',
   assetId:     CONFIG.outputBase + '/saline_flood_rf_classifier'
 });
-
-// Export the labelled training samples for reproducibility
-Export.table.toAsset({
-  collection:  labelledSamples,
-  description: 'saline_flood_training_samples',
-  assetId:     CONFIG.outputBase + '/saline_flood_training_samples'
-});
+// (training-sample asset already created in Stage 1; not re-exported here)
 
 // =============================================================================
 // 12. RF FEATURE IMPORTANCE  (used in manuscript Figure 4)
@@ -493,11 +558,13 @@ CONFIG.cyclones.forEach(function (cyc) {
 });
 
 print('================================================');
-print('Module 02 dry-run complete.');
+print('Module 02 STAGE 2 (train) complete.');
 print('Next steps:');
-print('  1. Open Tasks tab to submit the 3 flood_prob_* exports,');
-print('     the trained classifier, and the training-sample asset.');
-print('  2. Inspect map layers for any obvious artifacts.');
+print('  1. Inspect OA, Kappa, F1(saline) and CV means above.');
+print('  2. Open Tasks tab to submit the 3 flood_prob_* exports');
+print('     and the trained-classifier export.');
 print('  3. If OA/F1 do not meet pre-reg thresholds, proceed to');
 print('     Module 02b (label refinement via PlanetScope NICFI).');
 print('================================================');
+
+}  // end STAGE === 'train' guard
