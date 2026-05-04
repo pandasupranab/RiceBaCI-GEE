@@ -52,7 +52,7 @@ Not applicable — the analyst (S. Panda) performs all steps. However, the rando
 
 - **Treatment units:** Sentinel-1/2 pixels (10 m) over the 5 coastal Odisha districts.
 - **Treatment condition:** Kharif seasons impacted by cyclones with landfall ≤ 200 km of district centroid in the preceding 60 days (Fani 2019, Amphan 2020, Yaas 2021).
-- **Control condition:** Kharif seasons 2017, 2018, 2022, 2023, 2024 in the same districts, plus 3 inland Odisha districts (Sambalpur, Bargarh, Sundargarh) for all 8 years as spatial controls.
+- **Control condition:** Kharif seasons 2017, 2018, 2022, 2023, 2024 in the same districts, plus 3 inland Odisha districts (Dhenkanal, Angul, Cuttack; >120 km from coast, Mahanadi basin) for all 8 years as spatial controls.
 - **BACI structure:** 2 × 2 × 5 design (treatment vs. control year × treatment vs. control district × 5 phenological metrics).
 
 ### B4. Randomization
