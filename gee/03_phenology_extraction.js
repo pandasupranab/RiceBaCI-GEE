@@ -2,7 +2,15 @@
  * RiceBaCI-GEE — Module 03: Phenology Extraction
  * Whittaker Smoothing + Beck et al. (2006) Double-Logistic Curve Fitting
  * -----------------------------------------------------------------------
- * Author:   Subranab Panda (PhD, Agricultural Meteorology)
+ * Author:   Supranab Panda (PhD scholar, Center for Environment and Climate,
+ *           ITER, Siksha 'O' Anusandhan University, Bhubaneswar)
+ * OSF:      https://osf.io/c4mp8  (DOI 10.17605/OSF.IO/C4MP8)
+ * Code DOI: 10.5281/zenodo.20024578
+ *
+ * STATUS:   Pending rewrite to on-the-fly architecture (Saturday milestone).
+ *           Currently expects monthly stack assets that are NOT yet exported.
+ *           Module 02 was migrated to on-the-fly on 2026-05-04. This module
+ *           and Module 04 will follow the same pattern. See CHANGELOG.
  * Project:  Decoupling Cyclone-Induced Saline Inundation from Agronomic
  *           Flooding in Sentinel-1/2 Rice Phenology Retrieval
  * Target:   Remote Sensing of Environment (Elsevier)
@@ -33,8 +41,12 @@
 // 1. CONFIGURATION
 // =============================================================================
 
+var CLOUD_PROJECT = 'projects/durable-pulsar-486209-b5/assets';
+
 var CONFIG = {
-  assetBase:           'projects/your-cloud-project/assets/RiceBaCI_2026',
+  studyAreaAsset:      CLOUD_PROJECT + '/study_area_odisha_8districts',
+  ibtracsAsset:        CLOUD_PROJECT + '/ibtracs_NI_2014_2024',
+  assetBase:           CLOUD_PROJECT + '/RiceBaCI_2026',
   years:               [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
   treatmentYears:      [2019, 2020, 2021],
   kharifMonths:        [6, 7, 8, 9, 10, 11],
@@ -50,12 +62,8 @@ var CONFIG = {
 // 2. STUDY AREA
 // =============================================================================
 
-var gaul2 = ee.FeatureCollection('FAO/GAUL/2015/level2');
-var allDistricts = gaul2.filter(ee.Filter.eq('ADM1_NAME', 'Orissa'))
-  .filter(ee.Filter.inList('ADM2_NAME',
-    ['Baleshwar','Bhadrak','Kendrapara','Jagatsinghpur','Puri',
-     'Dhenkanal','Angul','Cuttack']));
-var fullAOI      = allDistricts.union(1).geometry();
+var allDistricts = ee.FeatureCollection(CONFIG.studyAreaAsset);
+var fullAOI      = allDistricts.geometry();
 var croplandMask = ee.ImageCollection('ESA/WorldCover/v200').first().eq(40);
 
 // =============================================================================
