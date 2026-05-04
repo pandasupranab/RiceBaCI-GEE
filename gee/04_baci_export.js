@@ -40,7 +40,7 @@
 var CONFIG = {
   studyAreaAsset: 'projects/durable-pulsar-486209-b5/assets/study_area_odisha_8districts',
   ibtracsAsset:   'projects/durable-pulsar-486209-b5/assets/ibtracs_NI_2014_2024',
-  assetBase:      'projects/durable-pulsar-486209-b5/assets/RiceBaCI_2026',
+  assetBase:      'projects/durable-pulsar-486209-b5/assets',   // top-level; GEE strips empty subfolders
   years:       [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
   treatYears:  [2019, 2020, 2021],
   controlYrs:  [2017, 2018, 2022, 2023, 2024],
