@@ -46,7 +46,7 @@ var CLOUD_PROJECT = 'projects/durable-pulsar-486209-b5/assets';
 var CONFIG = {
   studyAreaAsset:      CLOUD_PROJECT + '/study_area_odisha_8districts',
   ibtracsAsset:        CLOUD_PROJECT + '/ibtracs_NI_2014_2024',
-  assetBase:           CLOUD_PROJECT + '/RiceBaCI_2026',
+  assetBase:           CLOUD_PROJECT,   // top-level; GEE strips empty subfolders
   years:               [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
   treatmentYears:      [2019, 2020, 2021],
   kharifMonths:        [6, 7, 8, 9, 10, 11],
