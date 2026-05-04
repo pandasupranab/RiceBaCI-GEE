@@ -173,6 +173,6 @@ During preparation of this study and pre-registration document, the authors used
 ---
 
 > **Final step:** After registering on OSF, copy the resulting OSF URL (e.g., https://osf.io/abc12/) and paste it into:
-> - `manuscript/manuscript_text.md` (search for "https://osf.io/[id]")
+> - `manuscript/manuscript_text.md` (search for "https://osf.io/c4mp8")
 > - `manuscript/00_cover_letter.md`
 > - `README.md`
