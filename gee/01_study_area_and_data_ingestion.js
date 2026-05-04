@@ -37,12 +37,9 @@
 // 1. CONFIGURATION
 // ============================================================================
 
-// ---- USER MUST EDIT THIS ----
-var IBTRACS_ASSET = 'users/PLACEHOLDER/ibtracs_NI_2014_2024';
-// Replace with: 'users/pandasupranab/ibtracs_NI_2014_2024'
-//          or: 'projects/ee-pandasupranab/assets/ibtracs_NI_2014_2024'
-// (whichever path GEE assigns you when you upload)
-// ----------------------------
+// IBTrACS asset (uploaded as Shapefile, 49 NI-basin tracks 2014-2024,
+// pre-filtered to <500 km of study-area centroid, see scripts/prepare_ibtracs.py)
+var IBTRACS_ASSET = 'projects/durable-pulsar-486209-b5/assets/ibtracs_NI_2014_2024';
 
 var STUDY_PERIOD = {
   start: '2017-01-01',
@@ -111,16 +108,24 @@ var riceCandidate = cropland.updateMask(nonWater).rename('rice_candidate');
 // 4. CYCLONE TRACKS
 // ============================================================================
 
+// Note: shapefile column names are lowercase + 10-char limit
+// (season, name, min_dist, max_wind, start_t, end_t, sid, n_fixes)
 var ibtracs;
 try {
-  ibtracs = ee.FeatureCollection(IBTRACS_ASSET);
-  ibtracs = ibtracs.filter(ee.Filter.gte('SEASON', 2014));
+  ibtracs = ee.FeatureCollection(IBTRACS_ASSET)
+    .filter(ee.Filter.gte('season', 2014))
+    .filter(ee.Filter.lte('season', 2024));
 } catch (e) {
   print('WARNING: IBTrACS asset not found at:', IBTRACS_ASSET);
-  print('  Edit the IBTRACS_ASSET variable at the top of this script.');
-  print('  Continuing with a dummy empty collection so the rest runs.');
+  print('  Verify upload at projects/durable-pulsar-486209-b5/assets/');
   ibtracs = ee.FeatureCollection([]);
 }
+
+// Pre-registered cyclone events (used in BACI as treatment years)
+var preRegEvents = ibtracs.filter(
+  ee.Filter.inList('name', ['Fani', 'Amphan', 'Yaas']));
+var transferTest = ibtracs.filter(ee.Filter.eq('name', 'Hudhud'));
+var strongStorms = ibtracs.filter(ee.Filter.gte('max_wind', 64));
 
 // Major cyclones during the study window (manual list, used for visualisation)
 var KEY_CYCLONES = [
@@ -194,10 +199,19 @@ Map.addLayer(cyclonePoints,
   { color: 'D32F2F' },
   'Cyclone landfalls (Hudhud, Fani, Bulbul, Amphan, Yaas)', true);
 
-// Cyclone tracks (if available)
+// Cyclone tracks: all 49 NI-basin tracks (faint), strong cyclones, pre-reg events, transferability test
 Map.addLayer(ibtracs,
+  { color: 'BAB9B4' },
+  'All NI tracks 2014-2024 (49)', true, 0.4);
+Map.addLayer(strongStorms,
+  { color: 'A12C7B' },
+  'Cyclone-strength tracks (>=64 kt, 9)', true, 0.7);
+Map.addLayer(preRegEvents,
   { color: 'FF6F00' },
-  'IBTrACS tracks 2014–2024', true, 0.6);
+  'Pre-registered: Fani, Amphan, Yaas', true, 1.0);
+Map.addLayer(transferTest,
+  { color: '7A39BB' },
+  'Transferability test: Hudhud 2014', true, 0.8);
 
 // Outline of the entire study area
 Map.addLayer(
