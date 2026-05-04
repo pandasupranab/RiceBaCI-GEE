@@ -20,6 +20,12 @@ identifiers:
   - type: doi
     value: 10.17605/OSF.IO/C4MP8
     description: "OSF pre-registration DOI (companion to this software)"
+  - type: doi
+    value: 10.5281/zenodo.20024578
+    description: "Zenodo concept DOI (always resolves to latest version)"
+  - type: doi
+    value: 10.5281/zenodo.20024579
+    description: "Zenodo DOI for v0.1.1-prereg release"
 abstract: >
   RiceBaCI-GEE is an open Google Earth Engine toolkit that distinguishes
   cyclone-induced saline inundation from normal agronomic transplanting
