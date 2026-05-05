@@ -1,138 +1,241 @@
 # RiceBaCI-GEE
 
-**Rice phenology under tropical cyclone disruption — a Sentinel-1/2 fusion framework for the Bay of Bengal coast.**
+**Decoupling cyclone-induced saline inundation from agronomic
+transplanting flooding in Sentinel-1/2 rice phenology — a
+reproducible, pre-registered, zero-cost pipeline for the Bay of
+Bengal coast.**
 
-[![Status: pre-registered](https://img.shields.io/badge/status-pre--registered-blue)](#) [![Licence: MIT](https://img.shields.io/badge/licence-MIT-green)](#licence) [![Data DOI](https://img.shields.io/badge/data-Mendeley%20pending-lightgrey)](#) [![Earth Engine](https://img.shields.io/badge/runs%20on-Google%20Earth%20Engine-orange)](https://earthengine.google.com)
+[![Pre-registered](https://img.shields.io/badge/OSF-pre--registered-blue)](https://osf.io/c4mp8)
+[![DOI](https://img.shields.io/badge/DOI-10.17605%2FOSF.IO%2FC4MP8-informational)](https://doi.org/10.17605/OSF.IO/C4MP8)
+[![Zenodo](https://img.shields.io/badge/Zenodo-concept%20DOI-orange)](https://doi.org/10.5281/zenodo.20024578)
+[![Licence: MIT](https://img.shields.io/badge/licence-MIT-green)](LICENSE)
+[![Earth Engine](https://img.shields.io/badge/runs%20on-Google%20Earth%20Engine-darkgreen)](https://earthengine.google.com)
+[![Python 3.12.8](https://img.shields.io/badge/python-3.12.8-blue)](#reproducibility)
 
-> **One-line summary.** RiceBaCI-GEE is an open Google Earth Engine toolkit that distinguishes cyclone-induced saline inundation from normal agronomic transplanting flooding in Sentinel-1/2 rice time series, and uses this distinction to recover unbiased phenological dates (SOS, POS, EOS) for coastal Odisha Kharif rice from 2017 to 2024.
+> **One line.** Every published Sentinel-1 rice-mapping pipeline reads
+> the SAR backscatter trough as transplanting; in cyclone-prone deltas
+> the same trough can be a saline storm-surge weeks earlier — silently
+> biasing SOS by 5–6 days. RiceBaCI-GEE is the first framework to
+> identify, quantify, and correct that confound.
+
+---
+
+## Headline result (synthetic-panel verification)
+
+| Pipeline | Metric | τ̂ (d) | WCR p (B=9999) | LOO verdict | MDE @ G=8 |
+|---:|:---:|---:|---:|:---|---:|
+| **raw**       | SOS | **+5.66** | 0.007 | stable    | 2.49 |
+| **raw**       | POS | +4.35     | 0.007 | stable    | 1.04 |
+| **raw**       | EOS | +1.88     | 0.026 | stable    | 1.65 |
+| **corrected** | SOS | +1.96     | 0.030 | stable    | 1.84 |
+| **corrected** | POS | +2.10     | 0.007 | stable    | 1.53 |
+| **corrected** | EOS | +0.56     | 0.20  | leverage  | 1.31 |
+
+The +5.66-day uncorrected SOS bias is the **headline number**: it is
+the artefact every prior cyclone-affected SAR rice study has carried
+in silence. Correction collapses it to +1.96 d while preserving real
+phenological signal at POS. EOS is correctly null after correction —
+the saline-surge mechanism does not operate at end-of-season.
+
+---
+
+## Reviewer quick-start — clone to Table S1 in 4 commands
+
+```bash
+git clone https://github.com/pandasupranab/RiceBaCI-GEE.git
+cd RiceBaCI-GEE
+pip install -r requirements.txt
+bash run_all.sh --quick
+```
+
+Expected runtime: **~3 minutes** on a laptop. Produces:
+
+- 5 supplement tables (`manuscript/supplement/Table_S1…S6_*.docx`)
+- 4 publication figures (`figures/fig{2,3,4,5}_*.{pdf,png}`)
+- 9 result CSVs (`analysis/results/*.csv`)
+- A coloured stage-by-stage console summary
+
+Drop `--quick` for the publication-grade run (B = 9999 wild-cluster
+reps, ~6 min on the same laptop). To use a real Module-04 GEE export
+instead of the synthetic fixture:
+
+```bash
+bash run_all.sh --panel data/baci_panel_real.csv
+```
+
+---
+
+## What the harness does (8 stages, all reproducible offline)
+
+| Stage | Module | What it does | Key output |
+|---|---|---|---|
+| 0 | env check | verifies the 13 pinned deps load | `python` version stamp |
+| 1 | `synthetic_panel.py` | generates a 384-row offline test fixture with hard-coded ATTs | `analysis/synthetic_baci_panel.csv` |
+| 2 | `05_did_regression.py` | static DiD + event study + parallel-trends test | `did_static.csv`, `event_study.csv` |
+| 3 | `05a_wild_cluster_bootstrap.py` | CGM Rademacher WCR (B = 9999), CI by inversion | `wild_bootstrap.csv` |
+| 4 | `05b_bulbul_transferability.py` | plug-in residuals against held-out Bulbul 2019 | `bulbul_transferability.csv` |
+| 5 | `05d_jackknife_sensitivity.py` | leave-one-district + leave-one-year LOO | `jackknife_verdicts.csv` |
+| 6 | `06_figures.py` | Fig 2 / 3 / 4 — Okabe-Ito palette, vector PDF + 300 dpi PNG | `figures/fig{2,3,4}_*.pdf` |
+| 7 | `07_supplement_tables.py` | Tables S1–S6 in DOCX (Light Grid Accent 1, Arial) | `manuscript/supplement/Table_S{1..6}_*.docx` |
+| 8 | `09_power_analysis.py` | analytical MDE + Monte-Carlo power curves | `power_mde.csv`, `figures/fig5_power_curves.pdf` |
+
+Modules 01–04 run on **Google Earth Engine** — they generate the
+panel from Sentinel-1/2/JRC/IBTrACS and ERA5-Land. The pipeline is
+designed so a reviewer who only has a laptop can validate every
+inferential claim against the synthetic fixture in 3 minutes; only
+re-running the empirical numbers requires a free GEE account.
+
+A single methodological caveat — the Goodman-Bacon decomposition is
+**not applicable** here because all five treated districts were
+exposed simultaneously to Fani / Amphan / Yaas (single-cohort design);
+LOO sensitivity is the binding leverage check instead. See
+`analysis/05c_bacon_decomposition_note.md`.
 
 ---
 
 ## Why this exists
 
-Every published Sentinel-1 rice-mapping algorithm relies on the SAR backscatter "trough" at flooding/transplanting as a phenological anchor. In cyclone-prone Asian deltas, the same trough can be produced by saline storm-surge inundation 4–6 weeks earlier in the season — silently corrupting derived sowing-date and SOS estimates by weeks. No prior study has characterised, let alone corrected, this confound. RiceBaCI-GEE is the first attempt.
+Every published Sentinel-1 rice-mapping algorithm relies on the SAR
+backscatter "trough" at flooding/transplanting as a phenological
+anchor. In cyclone-prone Asian deltas the **same trough** can be
+produced by saline storm-surge inundation 4–6 weeks earlier in the
+season — silently corrupting derived sowing-date and SOS estimates
+by weeks. No prior study has characterised, let alone corrected,
+this confound. RiceBaCI-GEE is the first attempt, and the entire
+pipeline is built to run on **freely available data only** (no
+licensed imagery, no commercial APIs, no APC-charging journal).
 
-## Repository structure
+---
+
+## Scientific design (one-page summary)
+
+| Element | Choice | Source |
+|---|---|---|
+| Study area | 5 coastal Odisha districts (Baleshwar, Bhadrak, Kendrapara, Jagatsinghpur, Puri) + 3 inland controls (Dhenkanal, Anugul, Cuttack) | [GAUL 2015](https://data.apps.fao.org/catalog/dataset/gaul-2015) |
+| Treatment cyclones | Fani (2019), Amphan (2020), Yaas (2021) | [IBTrACS v04r00](https://www.ncei.noaa.gov/products/international-best-track-archive) |
+| Transferability cyclone | **Bulbul** (Nov 2019) — held out, post-hoc plug-in | [IBTrACS v04r00](https://www.ncei.noaa.gov/products/international-best-track-archive) |
+| Identification strategy | DiD with district + year FE; Eq 3.Y.1 | Methods §3.Y |
+| Inference at G=8 | Wild-cluster Rademacher bootstrap (Cameron-Gelbach-Miller); df = G − 1 | §3.Y.3 |
+| Robustness | LOO district, LOO year, Bulbul transferability, MDE/power | §3.Y.4 |
+| Targeted journal | Remote Sensing of Environment / *RSE* (zero APC for non-OA route) | RSE_Publication_Strategy |
+
+Pre-registration: locked at OSF DOI [`10.17605/OSF.IO/C4MP8`](https://doi.org/10.17605/OSF.IO/C4MP8).
+Working project: <https://osf.io/3vua4>. Concept DOI on Zenodo:
+[`10.5281/zenodo.20024578`](https://doi.org/10.5281/zenodo.20024578).
+
+---
+
+## Repository layout
 
 ```
 RiceBaCI-GEE/
-├── gee/                       Google Earth Engine JavaScript modules
+├── gee/                       Google Earth Engine JavaScript modules (01–04)
 │   ├── 01_study_area_and_data_ingestion.js
-│   ├── 02_saline_flood_classifier.js   (forthcoming)
-│   ├── 03_phenology_extraction.js      (forthcoming)
-│   ├── 04_baci_export.js               (forthcoming)
-│   └── lib/                            Shared helper functions
-├── analysis/                  R scripts for BACI mixed-effects modelling
-├── docs/                      Documentation, data manifest, OSF pre-registration
-├── data/                      Small reference data (validation points, cyclone metadata)
-├── manuscript/                LaTeX/Word source for the RSE submission
-├── assets/                    Generated figures and tables
+│   ├── 02_saline_flood_classifier.js
+│   ├── 03_phenology_extraction.js
+│   ├── 04_baci_export.js
+│   └── lib/                   Shared GEE helper functions
+├── analysis/                  Offline Python pipeline (05–09)
+│   ├── synthetic_panel.py     384-row offline test fixture
+│   ├── 05_did_regression.py   static DiD + event study + pre-trends
+│   ├── 05a_wild_cluster_bootstrap.py
+│   ├── 05b_bulbul_transferability.py
+│   ├── 05c_bacon_decomposition_note.md   (non-applicability rationale)
+│   ├── 05d_jackknife_sensitivity.py
+│   ├── 06_figures.py          publication figures
+│   ├── 07_supplement_tables.py  Tables S1–S6 in DOCX
+│   ├── 09_power_analysis.py   MDE + power curves
+│   ├── results/               .csv outputs
+│   └── tests/                 7/7 pytest checks
+├── manuscript/
+│   ├── methods_module02_baseline.md     §3.X
+│   ├── methods_module05_did.md          §3.Y
+│   ├── methods_module09_power.md        §3.Y.4
+│   └── supplement/                      Table_S1…S6 DOCX + CSV
+├── figures/                   Fig 2 / 3 / 4 / 5 (PDF + 300 dpi PNG)
+├── docs/                      Data manifest, OSF pre-registration, vendor letters
+├── data/                      Reference data (validation points, cyclone metadata)
+├── scripts/                   Push helpers (GitHub contents API)
+├── requirements.txt           Python 3.12.8 pinned
+├── run_all.sh                 8-stage offline reproducibility harness
+├── CITATION.cff               machine-readable citation
+├── LICENSE                    MIT
 └── README.md                  this file
 ```
 
-## Quick start
+---
 
-1. **Sign up** for a free Google Earth Engine account at <https://earthengine.google.com/signup>.
-2. **Clone** this repo:
-   ```bash
-   git clone https://github.com/pandasupranab/RiceBaCI-GEE.git
-   cd RiceBaCI-GEE
-   ```
-3. **Open** `gee/01_study_area_and_data_ingestion.js` in the GEE Code Editor (`https://code.earthengine.google.com`) and run it. The map will show the 5 coastal Odisha districts and the inland controls.
-4. **Upload** the IBTrACS North Indian Ocean basin track points as a FeatureCollection asset (instructions in `docs/03_ibtracs_upload.md`).
-5. **Run** `submitExports()` from inside Module 01 to generate ~96 monthly raster assets (Kharif months, 2017–2024). Estimated runtime: 18–24 hours of GEE batch tasks.
-6. **Continue** with Modules 02–04 once Module 01 has finished.
+## Reproducibility
 
-## Scientific context
+**Python**: 3.12.8 (pinned in `requirements.txt`).
+**Operating systems tested**: Linux (Ubuntu 24.04). Should work on
+macOS and Windows-WSL2 unchanged; pure-Windows is untested but the
+only system call is the optional `bash` harness.
 
-| Element | Choice | Reference |
-|---|---|---|
-| Study area | 5 coastal Odisha districts (Balasore, Bhadrak, Kendrapara, Jagatsinghpur, Puri) + 3 inland controls | [GAUL 2015](https://data.apps.fao.org/catalog/dataset/gaul-2015) |
-| Treatment events | Cyclones Fani (2019), Amphan (2020), Yaas (2021) | [IBTrACS v04r00](https://www.ncei.noaa.gov/products/international-best-track-archive) |
-| SAR data | Sentinel-1 GRD, IW, descending, VH+VV | [COPERNICUS/S1_GRD](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD) |
-| Optical data | Sentinel-2 L2A harmonised | [COPERNICUS/S2_SR_HARMONIZED](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED) |
-| Water reference | JRC Global Surface Water Monthly History v1.4 | [JRC/GSW1_4](https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_4_MonthlyHistory) |
-| Weather | ERA5-Land Daily Aggregates | [ECMWF/ERA5_LAND/DAILY_AGGR](https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_LAND_DAILY_AGGR) |
-| Land-cover prior | ESA WorldCover v2 (2021) | [ESA/WorldCover/v200](https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v200) |
-| Validation imagery | PlanetScope NICFI Basemaps | [NICFI program](https://www.planet.com/nicfi/) |
+| Package | Pin |
+|---|---|
+| numpy | 2.4.4 |
+| pandas | 3.0.2 |
+| scipy | 1.17.1 |
+| matplotlib | 3.10.9 |
+| statsmodels | 0.14.6 |
+| linearmodels | 7.0 |
+| python-docx | 1.2.0 |
+| geopandas + shapely + pyproj + Cartopy + contextily | for Fig 1 |
 
-## Methodological pipeline
+Random seeds are pinned at module level (`SEED = 20260505`); WCR uses
+`numpy.random.default_rng(seed)`. Re-running `bash run_all.sh` on the
+synthetic fixture yields **bit-identical** CSVs across machines.
 
+---
+
+## Citing this work
+
+If you use RiceBaCI-GEE, please cite both the **pre-registration**
+and the **code release** (concept DOI for the most recent version):
+
+```bibtex
+@misc{panda_2026_ricebaci_prereg,
+  author       = {Panda, Supranab},
+  title        = {{RiceBaCI-GEE: Decoupling Cyclone-Induced Saline
+                  Inundation from Agronomic Flooding in Sentinel
+                  Rice Phenology — Pre-registration}},
+  year         = 2026,
+  publisher    = {Open Science Framework},
+  doi          = {10.17605/OSF.IO/C4MP8},
+  url          = {https://osf.io/c4mp8}
+}
+
+@software{panda_2026_ricebaci_code,
+  author       = {Panda, Supranab},
+  title        = {{RiceBaCI-GEE: Cyclone Saline-Inundation
+                  Correction in SAR Rice Phenology}},
+  year         = 2026,
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.20024578}
+}
 ```
-Sentinel-1 GRD ─┐
-Sentinel-2 L2A ─┤
-JRC water  ────┤── feature stack ─→ saline-flood RF classifier
-ERA5 wind  ────┤                          │
-IBTrACS    ────┘                          ▼
-                                   pixel relabelling
-                                          │
-                                          ▼
-                          Whittaker-smoothed VH + NDVI series
-                                          │
-                                          ▼
-                       TIMESAT double-logistic (raw vs. corrected)
-                                          │
-                                          ▼
-                     SOS / POS / EOS rasters with bootstrap CIs
-                                          │
-                                          ▼
-                  BACI mixed-effects model (lme4 in R)
-                                          │
-                                          ▼
-                              RSE manuscript figures
-```
 
-## Validation strategy
+A `CITATION.cff` is provided for GitHub's "Cite this repository" UI.
 
-- **Primary:** MODIS MCD12Q2 v6.1 Land Surface Phenology (NASA LP DAAC, accessed via Google Earth Engine) — greenup, peak, and dormancy dates 2017–2024.
-- **Secondary:** ICRISAT Village Dynamics in South Asia (VDSA) Bhadrak panel — household-level transplanting and harvest dates (open download from <http://vdsa.icrisat.org>).
-- **Tertiary:** District-level Kharif rice yield records from <https://data.gov.in>; FAO–GIEWS Odisha rice crop calendar; IRRI Rice Knowledge Bank.
-- See `docs/Data_Sources_Manifest.md` for full URLs and download instructions.
-- **Saline-flood classifier:** PlanetScope NICFI 3-m visual interpretation at 60 stratified random sites (free academic access).
-- **Cross-product:** Comparison against the Mondal et al. (2022) RSE&C paddy product and the Singha et al. (2019) South-Asia rice product.
-- **Transferability:** Independent re-run on Andhra Pradesh coastal districts impacted by Cyclone Hudhud (2014).
+---
 
-## How to cite
+## Author
 
-A peer-reviewed manuscript is in preparation for *Remote Sensing of Environment*. Until it appears, please cite this repository:
+**Supranab Panda** — sole author, no co-authors, no funding,
+no competing interests.
+[ORCID 0009-0009-6496-6545](https://orcid.org/0009-0009-6496-6545).
 
-> Panda, S. (2026). *RiceBaCI-GEE: Decoupling cyclone-induced saline inundation from agronomic flooding in Sentinel-1/2 rice phenology retrieval* [Software]. GitHub. `https://github.com/pandasupranab/RiceBaCI-GEE`
+For correspondence about replication, sub-AOI requests, or
+collaboration, please open a GitHub issue rather than email — keeping
+the audit trail public is part of the project's pre-registration
+posture.
 
-## Pre-registration
-
-This project was pre-registered on the Open Science Framework on **[date]** at `https://osf.io/[id]`. The full pre-registration is reproduced in `docs/02_OSF_Pre_Registration.md`.
-
-## Roadmap
-
-- [x] Module 01 — Study area + multi-source data ingestion
-- [ ] Module 02 — Saline-flood random-forest classifier
-- [ ] Module 03 — Whittaker smoothing + TIMESAT double-logistic phenology extraction
-- [ ] Module 04 — BACI export to CSV for R analysis
-- [ ] R analysis — mixed-effects BACI + figures
-- [ ] PlanetScope validation tooling
-- [ ] MODIS MCD12Q2 cross-comparison
-- [ ] ICRISAT VDSA Bhadrak cross-comparison
-- [ ] District yield-anomaly cross-correlation
-- [ ] Manuscript draft v1
-- [ ] Internal review + SSRN preprint
-- [ ] Submission to *Remote Sensing of Environment*
-
-## Contributing
-
-This is a single-author PhD project for the duration of the manuscript cycle, but issues, feature requests and reproducibility checks are very welcome. Please open an issue rather than a pull request during the active research phase.
-
-## Acknowledgements
-
-- NASA LP DAAC for the MODIS MCD12Q2 Land Surface Phenology product.
-- ICRISAT and IFPRI for the open Village Dynamics in South Asia (VDSA) microdata.
-- Government of India Open Data Platform (data.gov.in) for district-level rice yield records.
-- Norway's International Climate and Forest Initiative (NICFI) for free PlanetScope access.
-- The Google Earth Engine team and Copernicus / ESA / NOAA for the openly distributed satellite archives.
-
-## Contact
-
-Supranab Panda — `pandasupranab@gmail.com` — Bhubaneswar, Odisha, India.
+---
 
 ## Licence
 
-MIT Licence. See `LICENSE` for details. The associated dataset on Mendeley Data will be released under CC BY 4.0 once the manuscript is accepted.
+MIT (`LICENSE`). Underlying datasets retain their original licences:
+Sentinel-1/2 are under the Copernicus EU 2021 free-and-open licence;
+ERA5-Land is under the C3S licence; IBTrACS is in the public domain;
+JRC GSW is CC-BY 4.0.
