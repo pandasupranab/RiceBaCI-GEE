@@ -148,6 +148,13 @@ python3 analysis/10_identification_dag.py
 require_file figures/fig1b_identification_dag.pdf
 require_file figures/fig1b_identification_dag.png
 
+say "Stage 11: Module 11 — pre-Kharif cyclone climatology (Note S2 / Table S8 / Fig S1)"
+python3 analysis/11_cyclone_climatology.py --quick
+require_file analysis/results/cyclone_climatology.csv
+require_file manuscript/supplement/Table_S8_cyclone_climatology.docx
+require_file figures/figS1_cyclone_climatology.pdf
+require_file figures/figS1_cyclone_climatology.png
+
 # ----- summary ----------------------------------------------------------------
 say "Summary"
 python3 - <<'PY'
