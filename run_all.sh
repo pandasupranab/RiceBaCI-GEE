@@ -155,6 +155,13 @@ require_file manuscript/supplement/Table_S8_cyclone_climatology.docx
 require_file figures/figS1_cyclone_climatology.pdf
 require_file figures/figS1_cyclone_climatology.png
 
+say "Stage 12: Module 12 — Sentinel-1 backscatter signatures (Note S3 / Table S9 / Fig S2)"
+python3 analysis/12_backscatter_signatures.py --quick
+require_file analysis/results/backscatter_signatures.csv
+require_file manuscript/supplement/Table_S9_backscatter_features.docx
+require_file figures/figS2_backscatter_signatures.pdf
+require_file figures/figS2_backscatter_signatures.png
+
 # ----- summary ----------------------------------------------------------------
 say "Summary"
 python3 - <<'PY'
