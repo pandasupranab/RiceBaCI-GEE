@@ -244,12 +244,14 @@ def make_figure(perm_df: pd.DataFrame,
 
             title = f"{pipeline} / {metric}"
             ax.set_title(title, fontsize=9.5, loc="left", pad=2)
-            ax.text(0.98, 0.95,
+            ax.text(0.04, 0.95,
                     f"tau_real = {real:+.2f} d\np_perm = {row['p_permutation']:.3f}\n"
-                    f"({row['n_extreme']}/{row['n_perm']-1})",
+                    f"(n_extreme {row['n_extreme']}/{row['n_perm']-1})",
                     transform=ax.transAxes,
-                    ha="right", va="top",
-                    fontsize=7.5, color="0.2")
+                    ha="left", va="top",
+                    fontsize=7.2, color="0.15",
+                    bbox=dict(facecolor="white", edgecolor="none",
+                              alpha=0.85, pad=2.0))
             if i == 1:
                 ax.set_xlabel("Placebo tau (days)")
             if j == 0:
