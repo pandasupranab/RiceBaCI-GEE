@@ -118,22 +118,49 @@ permanent regression test against a known ATT.
 
 ## 3.Y.6 Robustness checks (supplement)
 
-The reported $\hat\tau$ is benchmarked against five alternative
-specifications, presented in supplementary Table S2:
+The reported $\hat\tau$ is benchmarked against four alternative
+specifications, presented in Tables S2–S5:
 
-1. **Without 2019** (drop the Fani year, leaving Amphan + Yaas);
-   tests sensitivity to a single early event.
-2. **Coastal-only sample**, comparing the five treated districts to
-   each other across pre/post (Goodman-Bacon decomposition of
-   within-treated weights).
-3. **Wild cluster bootstrap** (Cameron-Gelbach-Miller),
-   $B = 9999$, on $\tau$ — our preferred small-cluster inference.
-4. **Inland sub-sample matching** by historical SOS climatology
-   (entropy balancing on 2017–2018 means).
-5. **Bulbul transferability** (Table S3): plug-in prediction of
-   inland-Bulbul SOS from the corrected pipeline; if the residual is
-   zero-centred, the corrected pipeline generalises to events the
-   training cohort did not see.
+1. **Wild-cluster bootstrap (CGM, Module 05a).** The eight-cluster
+   panel is below the asymptotic threshold for cluster-robust
+   inference, so we re-test $H_0: \tau = 0$ with Rademacher
+   wild-cluster bootstrap, $B = 9{,}999$, residuals imposed under
+   the null (Cameron, Gelbach & Miller, 2008). 95 % CIs are
+   constructed by inversion on a 41-point grid with $B_{ci} = 499$
+   replicates per grid point. This is our preferred small-cluster
+   inference; reported $p$-values dominate the CR1 cluster-robust
+   $p$-values throughout.
+2. **Bulbul transferability (Module 05b, Table S3).** A plug-in
+   prediction of the corrected-pipeline DiD coefficient applied to
+   six Bulbul-rainfall districts (three coastal-OUTSIDE-treatment, three
+   inland) yields per-district residuals against the trained
+   $\hat\tau_{\text{corrected,SOS}}$. Residuals centred near zero
+   AND $\geq 5/6$ districts inside the 95 % prediction interval would
+   support transferability to a different cyclone class. Large
+   negative residuals would imply the corrected pipeline is mechanism-
+   specific (saline-surge correction does not transfer to post-monsoon
+   rainfall events) — itself a meaningful, falsifiable result.
+3. **Goodman-Bacon decomposition (Module 05c) — not applicable.**
+   The design is single-cohort (all five treated districts exposed in
+   2019–2021; three never-treated controls). The Bacon decomposition
+   collapses to a single 2 × 2 comparison and the "forbidden" treated-
+   as-control weight is zero by construction. We document this
+   formally and refer reviewers to Goodman-Bacon (2021, §3.1).
+4. **Leave-one-out district / year sensitivity (Module 05d, Tables S4/S5).**
+   We re-fit Eq. 3.Y.1 dropping each of the 8 districts and each of
+   the 8 years in turn and report (a) the maximum $|\hat\tau_{\text{LOO}} -
+   \hat\tau|/|\hat\tau|$ as a leverage diagnostic and (b) the most-
+   influential district / year per cell. Each cell is classified
+   `stable` ($<25 \%$ change under any LOO and no sign flip),
+   `leverage` (one observation drives $> 25 \%$), or `fragile` (some
+   LOO flips the sign). For the manuscript's headline coefficients
+   ($\hat\tau_{\text{raw,SOS}}$, $\hat\tau_{\text{corrected,SOS}}$,
+   $\hat\tau_{\text{*,POS}}$), all are `stable` on the synthetic
+   panel; we re-run on the real GEE export and report any cells
+   reclassified as `leverage` or `fragile`.
+5. **(Reserved)** Inland sub-sample matching by historical SOS
+   climatology (entropy balancing on 2017–2018 means) — deferred to
+   the rebuttal stage if reviewers raise covariate-imbalance concerns.
 
 ## 3.Y.7 Pre-registered prediction (locked at OSF c4mp8)
 
