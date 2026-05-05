@@ -1,0 +1,25 @@
+# RiceBaCI analysis-stack pin (analysis/* and figures/*)
+# Captured: 2026-05-05  Python 3.12.8
+# These versions reproduce the synthetic-panel results within numerical
+# tolerance (DiD tau within 1e-3 d). The GEE-side scripts (gee/*.js)
+# do not depend on this pin.
+
+numpy==2.4.4
+pandas==3.0.2
+scipy==1.17.1
+matplotlib==3.10.9
+
+# Statistics
+statsmodels==0.14.6
+linearmodels==7.0
+patsy==1.0.2
+
+# GIS (used only by figures/figure1_study_area.py)
+geopandas==1.1.3
+shapely==2.1.2
+pyproj==3.7.2
+Cartopy==0.25.0
+contextily==1.7.0
+
+# Document generation
+python-docx==1.2.0
