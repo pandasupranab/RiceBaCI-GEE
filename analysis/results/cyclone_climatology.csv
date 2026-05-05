@@ -1,0 +1,4 @@
+name,season,landfall_date,doy,imd_cat,ss_cat,vmax_kt,pmin_hpa,landfall_lat,landfall_lon,peak_surge_m,synoptic_class,mjo_phase,vmax_pctile_1981_2018,pmin_pctile_1981_2018,surge_pctile_1981_2018,doy_pctile_1981_2018
+Fani,2019,2019-05-03,123,ESCS,4,135,932,19.8,85.8,1.5,Equatorial trough genesis,3,97.5,91.5,55.8,26.6
+Amphan,2020,2020-05-20,141,SuCS,5,140,925,21.65,88.3,4.6,Monsoon-trough remnant,2,100.0,95.0,91.5,55.4
+Yaas,2021,2021-05-26,146,VSCS,3,100,970,21.5,87.1,2.0,Easterly-wave Bay genesis,5,81.0,56.2,65.4,64.3
