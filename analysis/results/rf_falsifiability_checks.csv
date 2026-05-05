@@ -1,0 +1,5 @@
+check_id,criterion,threshold_db,threshold_ratio,threshold_r,observed_db,observed_ratio,observed_r,margin_db,margin_ratio,margin_r,verdict,note
+F1,Median ΔVH gap (surge − transplanting) ≥ 3.0 dB,3.0,,,4.0,,,1.0,,,pass,Median ΔVH on confirmed surge events −10.5 dB; on transplanting events −6.5 dB; gap 4.0 dB exceeds 3.0 dB threshold by 1.0 dB.
+F2,Onset-rate separation (surge vs transplanting) by ≥ factor of 4,,4.0,,,12.0,,,8.0,,pass,"Transplanting onset rate 12 d, surge onset rate 1 d; ratio 12.0 well above 4.0 minimum."
+F3,ERA5 wind ⊥ transplanting onset (|r| ≤ 0.30),,,0.3,,,0.08,,,0.22,pass,Pearson r between ERA5 3-day max wind and transplanting onset DOY across the 6 study districts is +0.08 — uncorrelated within noise; wind-filter validity confirmed.
+F4,Persistent post-event VH deficit (surge) ≥ 1.0 dB at +30 d,1.0,,,1.8,,,0.8,,,pass,Surge-affected pixels show median VH at +30 d of −13.8 dB vs pre-event baseline −12.0 dB; persistent deficit 1.8 dB — salt-damage-driven canopy thinning detectable at radar.
