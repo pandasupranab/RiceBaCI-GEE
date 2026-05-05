@@ -10,9 +10,11 @@
 #   05a_wild_cluster_bootstrap      WCR p-values + CI by inversion
 #   05b_bulbul_transferability      out-of-sample plug-in residuals
 #   05d_jackknife_sensitivity       leave-one-district / leave-one-year LOO
+#   05e_placebo_tests               in-space donor-swap + in-time placebo
 #   06_figures                      Fig 2 / 3 / 4 publication PNG + PDF
-#   07_supplement_tables            Tables S1-S5 in DOCX
+#   07_supplement_tables            Tables S1-S7 in DOCX
 #   09_power_analysis               MDE table + power curves (Fig 5 / Fig S1)
+#   10_identification_dag           Fig 1B Pearl-style identification DAG
 #
 # Usage:
 #   bash run_all.sh                  # synthetic panel, full WCR (B=9999)
@@ -105,6 +107,15 @@ require_file analysis/results/jackknife_district.csv
 require_file analysis/results/jackknife_year.csv
 require_file analysis/results/jackknife_verdicts.csv
 
+# ----- stage 5e: placebo tests ------------------------------------------------
+say "Stage 5e: Module 05e — placebo / falsification (in-space + in-time)"
+python3 analysis/05e_placebo_tests.py --panel "$PANEL"
+require_file analysis/results/placebo_in_space.csv
+require_file analysis/results/placebo_summary.csv
+require_file analysis/results/placebo_in_time.csv
+require_file figures/fig6_placebo_distribution.pdf
+require_file manuscript/supplement/Table_S7_placebo.docx
+
 # ----- stage 6: figures -------------------------------------------------------
 say "Stage 6: Module 06 — publication figures"
 python3 analysis/06_figures.py --panel "$PANEL"
@@ -130,6 +141,12 @@ require_file analysis/results/power_mde.csv
 require_file analysis/results/power_curves.csv
 require_file analysis/results/power_summary.json
 require_file figures/fig5_power_curves.pdf
+
+# ----- stage 9: identification DAG --------------------------------------------
+say "Stage 9: Module 10 — identification DAG (Fig 1B)"
+python3 analysis/10_identification_dag.py
+require_file figures/fig1b_identification_dag.pdf
+require_file figures/fig1b_identification_dag.png
 
 # ----- summary ----------------------------------------------------------------
 say "Summary"
@@ -169,6 +186,11 @@ print(f"\n  G={ps['G']}, MDE range {ps['MDE_80_2sided_range_d'][0]:.2f}"
       f"-{ps['MDE_80_2sided_range_d'][1]:.2f} d")
 print(f"  power 0.80 reached at tau ≈ {ps['tau_for_power_0_80_at_G8_d']} d")
 print(f"  detectable: {ps['n_detectable_cells']}/{ps['n_total_cells']} cells")
+
+print("\nPlacebo (Module 05e):")
+df = pd.read_csv(res/"placebo_summary.csv")
+print(df[["pipeline","metric","tau_real_d","median_placebo_d",
+         "p_permutation","verdict"]].to_string(index=False))
 PY
 
 printf "\n\033[1;32mALL STAGES OK\033[0m\n"
