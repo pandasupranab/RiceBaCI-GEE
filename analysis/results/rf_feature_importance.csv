@@ -1,0 +1,8 @@
+rank,feature,label,source,gini_importance,rationale
+1,delta_vh_db,ΔVH (event vs. 30-day pre-baseline),Sentinel-1 IW GRD,0.29,Cross-pol depolarisation collapse — primary discriminator between saline surge (ΔVH ≈ −10.5 dB) and transplanting flood (ΔVH ≈ −6.5 dB) and freshwater rainfall (ΔVH ≈ −3.0 dB).
+2,delta_cr_db,ΔCR (cross-ratio change),derived,0.21,Depolarisation index drops most sharply (≈ −4 dB) only under deep impulsive surge; transplanting and rainfall preserve CR structure (drops ≤ 2 dB).
+3,vv_min_event_window,VV minimum during event window,Sentinel-1 IW GRD,0.16,Specular-loss floor under smooth ponded water; separates surface-scattering regimes (deep flood) from canopy-volume regimes (shallow rainfall).
+4,era5_3day_max_wind,ERA5 3-day max wind,ERA5-Land hourly,0.14,Cyclonic-event filter — gates mechanism (B) without which transplanting and surge events at the low-ΔVH boundary co-mingle in feature space.
+5,lswi_min_event_window,LSWI minimum during event window,Sentinel-2 SR,0.1,Canopy water content — separates flooded canopy (LSWI ↓ moderate) from open water (LSWI ↓ severe).
+6,jrc_water_permanence,JRC water permanence,JRC GSW v1.4,0.06,"Excludes permanent waterbodies (rivers, ponds, aquaculture); boundary feature — small importance because most candidate pixels are pre-filtered to non-permanent rice land."
+7,ndwi_max_event_window,NDWI maximum during event window,Sentinel-2 SR (Harmonised),0.04,Optical surface-water confirmation when cloud-free; small importance because cloud cover during cyclonic events makes NDWI frequently missing — radar carries the load.
