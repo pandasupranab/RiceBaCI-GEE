@@ -1,0 +1,16 @@
+target_id,kind,label,n_mentions,first_offset,first_match,status
+S1,note,Note S1 — Bulbul transferability,1,26888,Note S1,ok
+S2,note,Note S2 — Cyclone climatology,1,17482,Supplementary Note S2,ok
+S3,note,Note S3 — Backscatter signatures,2,10610,Supplementary Note S3,ok
+Table S1,table,Static TWFE-DiD,2,57342,Table S1,ok
+Table S2,table,Pre-trends,2,41947,Table S2,ok
+Table S3,table,Bulbul transferability residuals,4,26927,Table S3,ok
+Table S4,table,Wild-cluster bootstrap,2,45242,Table S4,ok
+Table S5,table,Jackknife LOO,3,42917,Table S5,ok
+Table S6,table,MDE / power,3,50420,Table S6,ok
+Table S7,table,Placebo / falsification,2,48062,Table S7,ok
+Table S8,table,Cyclone climatology,1,17568,Table S8,ok
+Table S9,table,Backscatter features,2,10703,Table S9,ok
+Figure S1,figure,Cyclone climatology fig,5,17625,Figure S1,ok
+Figure S2,figure,Backscatter signatures fig,2,10766,Figure S2,ok
+Figure 1B,figure,Identification DAG (panel B),3,25299,Figure 1B,ok
