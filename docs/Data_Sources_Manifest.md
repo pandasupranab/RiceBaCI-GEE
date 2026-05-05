@@ -119,4 +119,31 @@ No author institution, no supervisor permission, no funding agency, and no gover
 
 ---
 
+## Vendor / partner correspondence log
+
+A chronological audit trail of every external request the project has
+made for data, access, or imagery — and the outcome. Every entry
+includes ticket numbers and decision rationale so reviewers can
+verify the project's stated **"only freely-available data"** posture.
+
+| Date | Counterparty | Channel | Subject | Outcome |
+|---|---|---|---|---|
+| 2026-05-04 | Planet Labs (NICFI / Education-and-Research Program) | Web form | Doctoral cyclone-saline flooding study, Odisha — request for free academic access | Initial ticket **#196369** opened by Paulina Brozek; request triaged to closed-loop status. **Closed without escalation.** No reply needed. |
+| 2026-05-05 | Planet Labs (Charlotte, Education & Research) | Email, ticket **RITM0034250** | Time-Frame-Offer (TFO) — angle 2: mangrove + paddy + brackish-water as ecosystem disturbance; PU-budget structured offer | **Declined** by us. Reason: 8-district AOI ≈ 29 000 km² ≈ 50 PlanetScope quads; one full mosaic ≈ 153 k PU = 2.2 months of the offered budget; ~16 time-points required ≈ 35 months × $180/mo ≈ $6.3 k full-AOI cost — incompatible with project's zero-vendor-cost binding. Polite reply sent asking 2 optional follow-ups (research-track expanded PU; Bhitarkanika sub-AOI as a fall-back). Door left open for sub-AOI offer. |
+| 2026-05-05 | KSAT (Kongsberg Satellite Services) | Email | High-resolution SAR ad-hoc tasking — academic enquiry | **Sent** ~17:56 IST; reply pending as of last working session. |
+
+**Why this matters**: PlanetScope NICFI imagery, where freely
+available, would have been an excellent qualitative validation
+layer (true-colour visual inspection of saline-vs-fresh inundation
+signatures). Because NICFI does not cover the South-Asian study
+area outside Bhitarkanika sub-AOI, and because none of the paid
+alternatives meet the project's zero-cost binding, **all
+inferential claims in the paper are derived exclusively from the
+freely-available datasets enumerated above**. PlanetScope
+imagery, if the door eventually opens for the Bhitarkanika sub-AOI,
+will enter only as supplementary qualitative validation in a future
+version — never as a primary data source.
+
+---
+
 *Maintained as part of the RiceBaCI-GEE project. Last updated: May 2026.*
