@@ -1,0 +1,4 @@
+mechanism,label,onset_doy,onset_rate_days,vh_baseline_db,vh_min_db,delta_vh_db,vv_baseline_db,vv_min_db,delta_vv_db,cr_baseline_db,cr_min_db,delta_cr_db,vh_recovery_days,vv_recovery_days,cr_recovery_days
+transplanting_flood,Transplanting flood (agronomic),188,12,-14.0,-20.5,-6.5,-9.0,-13.5,-4.5,-5.0,-7.0,-2.0,35,50,42
+saline_storm_surge,Saline storm-surge (cyclonic),123,1,-12.0,-22.5,-10.5,-8.5,-15.0,-6.5,-3.5,-7.5,-4.0,21,28,24
+freshwater_rainfall,Freshwater rainfall (Bulbul-class),313,2,-13.5,-16.5,-3.0,-8.5,-10.0,-1.5,-5.0,-6.5,-1.5,10,8,9
