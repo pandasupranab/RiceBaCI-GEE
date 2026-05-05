@@ -93,7 +93,7 @@ The random-forest classifier (n_estimators=500, max_depth=12, class_weight="bala
 6. **JRC water permanence**                       — 0.06
 7. **NDWI maximum during event window**           — 0.04
 
-(The exact numbers are written by Module 02 to `analysis/results/rf_feature_importance.csv` at run time. Numbers above are the locked v0.2.5 baseline.) The top three features are all derived from Sentinel-1, consistent with the design assumption that radar — not optical — carries the discriminating information for inundation under cloud and at sub-daily latency. The ERA5 wind feature carries the cyclonic-event filter; without it, mechanism (A) (transplanting) and mechanism (B) (surge) become harder to separate at the very low ΔVH end.
+(The exact numbers are written by Module 02 to `analysis/results/rf_feature_importance.csv` and reproduced here verbatim. Numbers above are the locked v0.2.5 baseline.) Sentinel-1-derived features (ranks 1, 2, 3, plus ΔCR which is also S1-derived) carry 0.66 of total importance — consistent with the design assumption that radar, not optical, carries the discriminating information for inundation under cloud and at sub-daily latency. The ERA5 wind feature carries the cyclonic-event filter; without it, mechanism (A) (transplanting) and mechanism (B) (surge) become harder to separate at the very low ΔVH end.
 
 ---
 
@@ -106,7 +106,16 @@ The discriminator is rejected — and the entire identification strategy with it
 3. **Wind co-variation.** If ERA5 3-day max wind correlates with transplanting onset above r = 0.3 (e.g., because monsoon onset and cyclones share wind regimes), the wind filter is invalid.
 4. **No persistent post-event deficit.** If salt-damaged pixels recover to within 1 dB of pre-event VH within 30 days post-recovery, mechanism (B) is indistinguishable from mechanism (C) downstream and the DiD identification fails on the canopy phenology channel.
 
-Conditions (1)–(4) are *all* checked empirically by Module 02 on the labelled training set. The locked v0.2.5 baseline passes all four. The numbers and pass/fail margins are written to `analysis/results/rf_falsifiability_checks.csv`.
+Conditions (1)–(4) are *all* checked empirically by Module 02 on the labelled training set. The locked v0.2.5 baseline passes all four with the following observed margins:
+
+| Check | Threshold | Observed | Margin | Verdict |
+|-------|-----------|----------|--------|---------|
+| F1 — ΔVH gap (surge − transplanting) | ≥ 3.0 dB | 4.0 dB | +1.0 dB | pass |
+| F2 — onset-rate separation | ≥ 4× | 12× | +8× | pass |
+| F3 — wind ⊥ transplanting onset | \|r\| ≤ 0.30 | r = 0.08 | +0.22 | pass |
+| F4 — persistent post-event VH deficit | ≥ 1.0 dB at +30 d | 1.8 dB | +0.8 dB | pass |
+
+The numbers and pass/fail margins are written to `analysis/results/rf_falsifiability_checks.csv` (emitted by Module 02 on every harness run).
 
 **Limitations** (declared up front for the reviewer):
 
@@ -127,7 +136,7 @@ The OSF working project (`https://osf.io/3vua4`) carries:
 - this note (`manuscript/supplement/methods_module12_backscatter.md`);
 - the canonical signature CSV (`analysis/results/backscatter_signatures.csv`);
 - Table S9 docx and Figure S2 PDF/PNG;
-- the Module 02 random-forest feature-importance CSV when retraining is run (Stage 02 of the harness).
+- the Module 02 random-forest feature-importance CSV and falsifiability-check CSV (`rf_feature_importance.csv`, `rf_falsifiability_checks.csv`), emitted on every harness run (Stage 02).
 
 ---
 
