@@ -204,6 +204,127 @@ def table_s3_bulbul_stub(out_path: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
+def table_s4_wild_bootstrap(wcb_df: pd.DataFrame, out_path: Path) -> None:
+    doc = Document()
+    doc.styles["Normal"].font.name = "Arial"
+    doc.styles["Normal"].font.size = Pt(10)
+
+    _add_caption(doc,
+                 "Table S4.  Wild-cluster bootstrap inference (Cameron, Gelbach "
+                 "& Miller 2008) for the DiD coefficient. Rademacher weights, "
+                 "residuals imposed under the null. CIs by inversion on a "
+                 "41-point grid.")
+
+    cols   = ["pipeline", "metric", "tau_hat", "t_obs", "B",
+              "p_wcb_2sided", "ci_lo_95_wcb", "ci_hi_95_wcb"]
+    labels = ["Pipeline", "Metric", "\u03c4 (d)", "t (CR1)", "B",
+              "p (WCR)", "CI\u2082.\u2085 (WCR)", "CI\u2089\u2087.\u2085 (WCR)"]
+
+    table = doc.add_table(rows=1, cols=len(cols))
+    table.style = "Light Grid Accent 1"
+    for i, lab in enumerate(labels):
+        table.rows[0].cells[i].text = lab
+    _style_header(table.rows[0])
+
+    for _, r in wcb_df.iterrows():
+        row = table.add_row().cells
+        for i, c in enumerate(cols):
+            v = r[c]
+            if c == "tau_hat":
+                row[i].text = f"{v:+.3f}"
+            elif isinstance(v, float):
+                row[i].text = f"{v:.4f}" if c == "p_wcb_2sided" else f"{v:.3f}"
+            else:
+                row[i].text = str(v)
+    _set_table_style(table)
+
+    doc.add_paragraph()
+    note = doc.add_paragraph()
+    note.add_run(
+        "Notes. WCR = wild cluster restricted (residuals imposed under H0: \u03c4=0). "
+        "Floor on bootstrap p-value at B=9999 is 1/(B+1) = 0.0001. "
+        "District clusters: 8."
+    ).font.size = Pt(9)
+    doc.save(out_path)
+
+
+# ---------------------------------------------------------------------------
+def table_s5_jackknife(jk_df: pd.DataFrame, verdict_df: pd.DataFrame,
+                       out_path: Path) -> None:
+    doc = Document()
+    doc.styles["Normal"].font.name = "Arial"
+    doc.styles["Normal"].font.size = Pt(10)
+
+    _add_caption(doc,
+                 "Table S5a.  Leave-one-district-out (LOO) sensitivity "
+                 "verdicts. Each cell shows the maximum percentage change in "
+                 "\u03c4\u0302 across the 8 LOO refits and the most-influential "
+                 "dropped district.")
+
+    cols  = ["pipeline", "metric", "tau_full",
+             "max_abs_delta_pct", "most_leveraging_district", "verdict"]
+    labs  = ["Pipeline", "Metric", "\u03c4\u0302 full (d)",
+             "max |\u0394\u03c4| (%)", "Driver district", "Verdict"]
+
+    table = doc.add_table(rows=1, cols=len(cols))
+    table.style = "Light Grid Accent 1"
+    for i, lab in enumerate(labs):
+        table.rows[0].cells[i].text = lab
+    _style_header(table.rows[0])
+
+    for _, r in verdict_df.iterrows():
+        row = table.add_row().cells
+        row[0].text = str(r["pipeline"])
+        row[1].text = str(r["metric"])
+        row[2].text = f"{r['tau_full']:+.3f}"
+        row[3].text = f"{r['max_abs_delta_pct']:.1f}"
+        row[4].text = str(r["most_leveraging_district"])
+        row[5].text = str(r["verdict"])
+    _set_table_style(table)
+
+    # Full LOO district detail
+    doc.add_paragraph()
+    _add_caption(doc,
+                 "Table S5b.  Full leave-one-district-out detail: \u03c4\u0302 "
+                 "and 95 % CI when each district is dropped.")
+
+    cols2 = ["pipeline", "metric", "dropped_district", "exposure",
+             "tau_loo", "se_loo", "p_loo",
+             "ci_lo", "ci_hi", "delta_pct"]
+    labs2 = ["Pipeline", "Metric", "Dropped", "Exposure",
+             "\u03c4\u0302 LOO", "SE", "p",
+             "CI\u2082.\u2085", "CI\u2089\u2087.\u2085", "\u0394 (%)"]
+    table2 = doc.add_table(rows=1, cols=len(cols2))
+    table2.style = "Light Grid Accent 1"
+    for i, lab in enumerate(labs2):
+        table2.rows[0].cells[i].text = lab
+    _style_header(table2.rows[0])
+
+    for _, r in jk_df.iterrows():
+        if r["note"] != "ok":
+            continue
+        row = table2.add_row().cells
+        for i, c in enumerate(cols2):
+            v = r[c]
+            if isinstance(v, float):
+                row[i].text = f"{v:+.3f}" if c == "tau_loo" else f"{v:.3f}"
+            else:
+                row[i].text = str(v)
+    _set_table_style(table2, font_size=9)
+
+    doc.add_paragraph()
+    note = doc.add_paragraph()
+    note.add_run(
+        "Notes. Verdict legend: stable (max |\u0394\u03c4| < 25 % AND no sign "
+        "flip), leverage (one district drives > 25 % of \u03c4\u0302), "
+        "fragile (some LOO flips the sign of \u03c4\u0302). The Goodman-Bacon "
+        "decomposition is not applicable (single-cohort design); LOO "
+        "sensitivity is the binding leverage check."
+    ).font.size = Pt(9)
+    doc.save(out_path)
+
+
+# ---------------------------------------------------------------------------
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", default="analysis/results")
@@ -219,9 +340,32 @@ def main() -> None:
 
     table_s1_did_static(static_df, out_dir / "Table_S1_did_static.docx")
     table_s2_pretrends (pre_df,    out_dir / "Table_S2_pretrends.docx")
-    table_s3_bulbul_stub(           out_dir / "Table_S3_bulbul_transferability.docx")
 
-    # Also write a consolidated CSV for the GitHub release attachment
+    # Bulbul S3: regenerated by Module 05b (skip stub if real run exists)
+    bulbul_csv = res_dir / "bulbul_transferability.csv"
+    if not (out_dir / "Table_S3_bulbul_transferability.docx").exists():
+        table_s3_bulbul_stub(out_dir / "Table_S3_bulbul_transferability.docx")
+
+    # Wild-cluster bootstrap (Table S4)
+    wcb_path = res_dir / "wild_bootstrap.csv"
+    if wcb_path.exists():
+        table_s4_wild_bootstrap(
+            pd.read_csv(wcb_path),
+            out_dir / "Table_S4_wild_bootstrap.docx",
+        )
+        print(f"wrote: {out_dir}/Table_S4_wild_bootstrap.docx")
+
+    # LOO sensitivity (Table S5)
+    jk_path = res_dir / "jackknife_district.csv"
+    vd_path = res_dir / "jackknife_verdicts.csv"
+    if jk_path.exists() and vd_path.exists():
+        table_s5_jackknife(
+            pd.read_csv(jk_path), pd.read_csv(vd_path),
+            out_dir / "Table_S5_jackknife.docx",
+        )
+        print(f"wrote: {out_dir}/Table_S5_jackknife.docx")
+
+    # Also write consolidated CSVs for the GitHub release attachment
     static_df.assign(table="S1").to_csv(
         out_dir / "Table_S1_did_static.csv", index=False
     )
@@ -231,7 +375,6 @@ def main() -> None:
 
     print(f"wrote: {out_dir}/Table_S1_did_static.docx")
     print(f"wrote: {out_dir}/Table_S2_pretrends.docx")
-    print(f"wrote: {out_dir}/Table_S3_bulbul_transferability.docx")
     print(f"wrote: {out_dir}/Table_S1_did_static.csv")
     print(f"wrote: {out_dir}/Table_S2_pretrends.csv")
 
