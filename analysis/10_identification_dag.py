@@ -236,15 +236,15 @@ def main():
     draw_panel_a_naive(ax_a)
     draw_panel_b_corrected(ax_b)
 
-    fig.subplots_adjust(hspace=0.18, top=0.97, bottom=0.03,
-                        left=0.02, right=0.98)
+    fig.subplots_adjust(hspace=0.22, top=0.94, bottom=0.06,
+                        left=0.03, right=0.97)
 
     out = Path(args.outdir)
     out.mkdir(parents=True, exist_ok=True)
     fig.savefig(out / "fig1b_identification_dag.pdf",
-                bbox_inches="tight", pad_inches=0.05)
+                bbox_inches="tight", pad_inches=0.35)
     fig.savefig(out / "fig1b_identification_dag.png",
-                bbox_inches="tight", pad_inches=0.05, dpi=300)
+                bbox_inches="tight", pad_inches=0.35, dpi=300)
     plt.close(fig)
     print(f"wrote {out}/fig1b_identification_dag.pdf, .png")
 
