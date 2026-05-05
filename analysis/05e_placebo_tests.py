@@ -259,14 +259,14 @@ def make_figure(perm_df: pd.DataFrame,
     fig.suptitle(
         "In-space placebo distributions (donor-swap, k=5 of G=8, "
         "C(8,5)=56 permutations)",
-        fontsize=10, y=1.005, x=0.02, ha="left",
+        fontsize=10, y=0.995, x=0.04, ha="left",
     )
-    fig.tight_layout()
+    fig.tight_layout(rect=[0, 0, 1, 0.96])
     outdir.mkdir(parents=True, exist_ok=True)
     fig.savefig(outdir / "fig6_placebo_distribution.pdf",
-                bbox_inches="tight", pad_inches=0.05)
+                bbox_inches="tight", pad_inches=0.35)
     fig.savefig(outdir / "fig6_placebo_distribution.png",
-                bbox_inches="tight", pad_inches=0.05, dpi=300)
+                bbox_inches="tight", pad_inches=0.35, dpi=300)
     plt.close(fig)
     print(f"wrote {outdir}/fig6_placebo_distribution.pdf, .png")
 
