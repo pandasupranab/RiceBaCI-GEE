@@ -148,6 +148,11 @@ python3 analysis/10_identification_dag.py
 require_file figures/fig1b_identification_dag.pdf
 require_file figures/fig1b_identification_dag.png
 
+say "Stage 02: Module 02 — saline-flood RF classifier baseline (feature importance + falsifiability)"
+python3 analysis/02_saline_flood_classifier.py --quick
+require_file analysis/results/rf_feature_importance.csv
+require_file analysis/results/rf_falsifiability_checks.csv
+
 say "Stage 11: Module 11 — pre-Kharif cyclone climatology (Note S2 / Table S8 / Fig S1)"
 python3 analysis/11_cyclone_climatology.py --quick
 require_file analysis/results/cyclone_climatology.csv
