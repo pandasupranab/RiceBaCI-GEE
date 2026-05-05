@@ -325,6 +325,55 @@ def table_s5_jackknife(jk_df: pd.DataFrame, verdict_df: pd.DataFrame,
 
 
 # ---------------------------------------------------------------------------
+def table_s6_mde(mde_df: pd.DataFrame, out_path: Path) -> None:
+    doc = Document()
+    style = doc.styles["Normal"]
+    style.font.name = "Arial"
+    style.font.size = Pt(10)
+
+    _add_caption(
+        doc,
+        "Table S6. Minimum detectable effect (MDE) at \u03b1 = 0.05, "
+        "power = 0.80, df = G\u22121 = 7. Cluster-robust SE recovered "
+        "from Module 05a (WCR). \u201cdetectable\u201d = yes when "
+        "|\u03c4\u0302| \u2265 MDE_2sided.",
+    )
+
+    cols = ["pipeline", "metric", "tau_hat_d", "se_d",
+            "MDE_2sided_d", "MDE_1sided_d", "tau_over_MDE", "detectable"]
+    headers = ["Pipeline", "Metric", "\u03c4\u0302 (d)", "SE (d)",
+               "MDE 2-sided", "MDE 1-sided", "|\u03c4\u0302|/MDE",
+               "Detectable"]
+
+    table = doc.add_table(rows=1, cols=len(cols))
+    table.style = "Light Grid Accent 1"
+    hdr = table.rows[0].cells
+    for i, h in enumerate(headers):
+        hdr[i].text = h
+
+    for _, r in mde_df.iterrows():
+        row = table.add_row().cells
+        for i, c in enumerate(cols):
+            v = r[c]
+            if isinstance(v, float):
+                row[i].text = f"{v:.3f}" if c not in ("tau_over_MDE",) else f"{v:.2f}"
+            else:
+                row[i].text = str(v)
+
+    _set_table_style(table, font_size=9)
+    _style_header(table.rows[0])
+
+    doc.add_paragraph().add_run(
+        "Notes. MDE = (t_{\u03b1/2,G\u22121} + t_{1\u2212\u03b2,G\u22121}) \u00d7 SE. "
+        "At G = 8, t_{0.025,7} = 2.365 and t_{0.80,7} = 0.896, so the "
+        "multiplier is 3.261. The single non-detectable cell "
+        "(corrected/EOS) is the same cell whose null is confirmed by "
+        "the wild-cluster bootstrap (Table S4)."
+    ).font.size = Pt(9)
+    doc.save(out_path)
+
+
+# ---------------------------------------------------------------------------
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", default="analysis/results")
@@ -364,6 +413,15 @@ def main() -> None:
             out_dir / "Table_S5_jackknife.docx",
         )
         print(f"wrote: {out_dir}/Table_S5_jackknife.docx")
+
+    # MDE / power (Table S6)
+    mde_path = res_dir / "power_mde.csv"
+    if mde_path.exists():
+        table_s6_mde(
+            pd.read_csv(mde_path),
+            out_dir / "Table_S6_mde.docx",
+        )
+        print(f"wrote: {out_dir}/Table_S6_mde.docx")
 
     # Also write consolidated CSVs for the GitHub release attachment
     static_df.assign(table="S1").to_csv(
