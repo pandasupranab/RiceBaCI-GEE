@@ -54,7 +54,7 @@ This manifest is the canonical reference for all data inputs. If a dataset is no
 
 | Dataset | URL | Access | Use |
 |---|---|---|---|
-| **PlanetScope NICFI Basemaps** | <https://www.planet.com/nicfi/> | Free for academic users worldwide (NICFI programme) | Visual reference labels for cyclone-flood vs agronomic-flood (60 sites × 8 years = 480 labels) |
+| **Sentinel-2 L2A high-resolution visual labels** | Copernicus / GEE | Free under Copernicus Open Data licence (CC-BY-4.0 redistribution) | Visual reference labels for cyclone-flood vs agronomic-flood (60 sites × 8 years = 480 labels) — binding configuration following §E5 fallback activation 2026-05-06 |
 
 NICFI is freely available to all academic users via the Norway's International Climate and Forest Initiative — registration is open and not country-restricted. Imagery cannot be redistributed, but derived label coordinates and class assignments are deposited on Mendeley Data.
 
@@ -109,7 +109,7 @@ A reviewer or external researcher should be able to reproduce the entire study b
 3. Downloading IBTrACS NI CSV (~5 MB, 30 seconds)
 4. Downloading ICRISAT VDSA Bhadrak panel (~50 MB, free registration)
 5. Downloading Odisha district yield CSV from data.gov.in (~1 MB, no account)
-6. Optionally signing up for free Planet NICFI academic access (~3 days approval)
+6. *(historical — closed 2026-05-06):* Sign-up to the Planet NICFI / Tropical Forest Observatory programme is no longer required; the workflow now uses Sentinel-2 visual labels exclusively (§E5 fallback path).
 7. Running GEE Modules 01 → 04 in order
 8. Running the R BACI script
 
@@ -130,7 +130,7 @@ verify the project's stated **"only freely-available data"** posture.
 |---|---|---|---|---|
 | 2026-05-04 | Planet Labs (NICFI / Education-and-Research Program) | Web form | Doctoral cyclone-saline flooding study, Odisha — request for free academic access | Initial ticket **#196369** opened by Paulina Brozek; request triaged to closed-loop status. **Closed without escalation.** No reply needed. |
 | 2026-05-05 | Planet Labs (Charlotte, Education & Research) | Email, ticket **RITM0034250** | Time-Frame-Offer (TFO) — angle 2: mangrove + paddy + brackish-water as ecosystem disturbance; PU-budget structured offer | **Declined** by us. Reason: 8-district AOI ≈ 29 000 km² ≈ 50 PlanetScope quads; one full mosaic ≈ 153 k PU = 2.2 months of the offered budget; ~16 time-points required ≈ 35 months × $180/mo ≈ $6.3 k full-AOI cost — incompatible with project's zero-vendor-cost binding. Polite reply sent asking 2 optional follow-ups (research-track expanded PU; Bhitarkanika sub-AOI as a fall-back). Door left open for sub-AOI offer. |
-| 2026-05-05 | KSAT (Kongsberg Satellite Services) | Email | High-resolution SAR ad-hoc tasking — academic enquiry | **Sent** ~17:56 IST; reply pending as of last working session. |
+| 2026-05-05 | KSAT (Kongsberg Satellite Services) | Email | High-resolution SAR ad-hoc tasking — academic enquiry | **Sent** ~17:56 IST. **Closed 2026-05-06 — no reply received within the project SLA.** No further follow-up. §E5 fallback path (Sentinel-2 visual labels) activated as binding configuration; see `docs/12_ksat_no_reply_decision_2026-05-06.md`. |
 
 **Why this matters**: PlanetScope NICFI imagery, where freely
 available, would have been an excellent qualitative validation
