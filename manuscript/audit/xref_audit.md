@@ -2,7 +2,7 @@
 
 - Manuscript: `manuscript/manuscript_text.md`
 - Supplement: `manuscript/supplement/Supplement_v0.3.0.docx`
-- Manuscript size: **14,102 words** (103,219 chars)
+- Manuscript size: **14,199 words** (103,874 chars)
 - Supplement targets audited: **15**
 
 ## 1. Forward audit — every supplement target referenced in manuscript?
