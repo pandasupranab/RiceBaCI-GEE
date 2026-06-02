@@ -157,9 +157,16 @@ def verdicts(loo_d: pd.DataFrame, df_full: pd.DataFrame) -> pd.DataFrame:
                 continue
             sign_full = np.sign(tau_full)
             sign_flip = (np.sign(sub["tau_loo"]) != sign_full).any()
-            max_abs_pct = sub["delta_pct"].abs().max()
-            most_lev = sub.iloc[sub["delta_pct"].abs().idxmax()
-                                if False else sub["delta_pct"].abs().argmax()]
+            # Guard against all-NaN delta_pct (occurs when tau_full ≈ 0
+            # makes percentage changes undefined; e.g. EOS on real data
+            # when most coastal districts don't reach NDVI > 0.4).
+            delta_abs = sub["delta_pct"].abs()
+            if delta_abs.notna().any():
+                max_abs_pct = float(delta_abs.max())
+                most_lev = sub.iloc[int(delta_abs.argmax())]
+            else:
+                max_abs_pct = np.nan
+                most_lev = sub.iloc[0]
 
             if sign_flip:
                 v = "fragile"
