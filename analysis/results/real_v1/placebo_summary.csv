@@ -1,0 +1,7 @@
+pipeline,metric,n_perm,tau_real_d,median_placebo_d,p05_placebo_d,p95_placebo_d,max_abs_placebo_d,n_extreme,p_permutation,verdict
+raw,SOS,56,15.2889,-1.138,-32.498,28.761,43.449,27,0.5,fails
+raw,POS,56,-3.5867,-0.28,-4.796,4.577,6.12,15,0.2857,fails
+raw,EOS,56,,,,,,0,0.0179,passes
+corrected,SOS,56,15.2889,-1.138,-32.498,28.761,43.449,27,0.5,fails
+corrected,POS,56,-3.5867,-0.28,-4.796,4.577,6.12,15,0.2857,fails
+corrected,EOS,56,,,,,,0,0.0179,passes
