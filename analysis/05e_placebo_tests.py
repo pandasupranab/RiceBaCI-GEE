@@ -232,14 +232,26 @@ def make_figure(perm_df: pd.DataFrame,
             ax = axes[i, j]
             sub = perm_df[(perm_df["pipeline"] == pipeline) &
                           (perm_df["metric"]   == metric)]
-            placebos = sub[~sub["is_real"]]["tau_hat_d"]
-            real = float(sub[sub["is_real"]]["tau_hat_d"].iloc[0])
+            placebos = sub[~sub["is_real"]]["tau_hat_d"].dropna()
+            real_series = sub[sub["is_real"]]["tau_hat_d"].dropna()
+            real = float(real_series.iloc[0]) if len(real_series) else np.nan
             row = summary_df[(summary_df["pipeline"] == pipeline) &
                              (summary_df["metric"]   == metric)].iloc[0]
 
-            ax.hist(placebos, bins=12, color=OK_GREY, alpha=0.7,
-                    edgecolor="white", linewidth=0.5)
-            ax.axvline(real, color=OK_RED, lw=1.6, zorder=10)
+            # Guard against all-NaN placebos (occurs when degenerate
+            # outcome — e.g. EOS on real v1 data — produces no finite
+            # tau estimates across permutations).
+            if len(placebos) >= 2 and np.isfinite(placebos).any():
+                ax.hist(placebos, bins=12, color=OK_GREY, alpha=0.7,
+                        edgecolor="white", linewidth=0.5)
+            else:
+                ax.text(0.5, 0.5,
+                        "insufficient finite placebo estimates\n"
+                        "(degenerate outcome on this metric)",
+                        ha="center", va="center", fontsize=8,
+                        color="0.4", transform=ax.transAxes)
+            if not np.isnan(real):
+                ax.axvline(real, color=OK_RED, lw=1.6, zorder=10)
             ax.axvline(0, color="0.3", lw=0.6, ls=":", zorder=0)
 
             title = f"{pipeline} / {metric}"
