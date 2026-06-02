@@ -286,18 +286,49 @@ def parallel_trends_check(df: pd.DataFrame) -> pd.DataFrame:
                 })
                 continue
             sub["year_c"] = sub["year"] - sub["year"].min()
-            model = smf.ols(
-                "median_doy ~ year_c * treat + C(district)", data=sub
-            ).fit(cov_type="cluster", cov_kwds={"groups": sub["district"]})
+            sub = sub.dropna(subset=["median_doy"]).copy()
+            n_pre_years   = sub["year"].nunique()
+            n_districts_p = sub["district"].nunique()
+            # Residual df after district FE + (year_c, treat, year_c:treat):
+            # roughly nobs - (n_districts + 3). Need >= 2 for any inference.
+            resid_df = len(sub) - (n_districts_p + 3)
+            if len(sub) < 6 or resid_df < 2:
+                rows.append({
+                    "pipeline": pipe, "metric": met,
+                    "interaction_coef": np.nan, "se": np.nan,
+                    "p_value": np.nan, "n_pre": len(sub),
+                    "note": (f"too few pre-period obs for inference "
+                             f"(n={len(sub)}, residual df={resid_df}); "
+                             f"only {n_pre_years} pre-cyclone years available"),
+                })
+                continue
+            try:
+                # Cluster SE is the principled choice if it works;
+                # otherwise fall back to HC1 robust SE on this tiny
+                # sub-sample (pre-trends is a diagnostic, not the headline).
+                model = smf.ols(
+                    "median_doy ~ year_c * treat + C(district)", data=sub
+                ).fit(cov_type="cluster",
+                      cov_kwds={"groups": sub["district"]})
+                se_kind = "cluster"
+            except (ZeroDivisionError, ValueError, np.linalg.LinAlgError):
+                model = smf.ols(
+                    "median_doy ~ year_c * treat + C(district)", data=sub
+                ).fit(cov_type="HC1")
+                se_kind = "HC1-fallback"
             key = "year_c:treat"
+            p_val = model.pvalues.get(key, np.nan)
+            note  = se_kind
+            if not pd.isna(p_val):
+                note += "; pre-trend " + (
+                    "OK" if p_val > 0.05 else "WARNING p<0.05")
             rows.append({
                 "pipeline": pipe, "metric": met,
                 "interaction_coef": round(model.params.get(key, np.nan), 3),
                 "se":               round(model.bse.get(key,    np.nan), 3),
-                "p_value":          round(model.pvalues.get(key, np.nan), 4),
+                "p_value":          round(p_val, 4) if not pd.isna(p_val) else np.nan,
                 "n_pre":            int(model.nobs),
-                "note":             "ok" if model.pvalues.get(key, 1) > 0.05
-                                          else "WARNING: pre-trend p<0.05",
+                "note":             note,
             })
     return pd.DataFrame(rows)
 
