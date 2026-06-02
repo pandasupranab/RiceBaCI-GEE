@@ -2,7 +2,7 @@
 
 - Manuscript: `manuscript/manuscript_text.md`
 - Supplement: `manuscript/supplement/Supplement_v0.3.0.docx`
-- Manuscript size: **14,199 words** (103,874 chars)
+- Manuscript size: **15,010 words** (108,752 chars)
 - Supplement targets audited: **15**
 
 ## 1. Forward audit — every supplement target referenced in manuscript?
@@ -15,7 +15,7 @@
 | S1 | note | 1 | ✅ | Note S1 |
 | S2 | note | 1 | ✅ | Supplementary Note S2 |
 | S3 | note | 2 | ✅ | Supplementary Note S3 |
-| Table S1 | table | 2 | ✅ | Table S1 |
+| Table S1 | table | 3 | ✅ | Table S1 |
 | Table S2 | table | 2 | ✅ | Table S2 |
 | Table S3 | table | 4 | ✅ | Table S3 |
 | Table S4 | table | 2 | ✅ | Table S4 |
@@ -30,7 +30,7 @@
 
 ## 2. Reverse audit — every manuscript reference resolves?
 
-**34** total Sx-style references found in manuscript.
+**35** total Sx-style references found in manuscript.
 **0** unresolved (target does not exist in supplement).
 
 All manuscript references resolve to a real supplement section.
