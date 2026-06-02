@@ -1,0 +1,12 @@
+RiceBaCI Module 05d - LOO district sensitivity
+======================================================================
+
+pipeline   metric  tau_full max|delta|%               driver  verdict
+raw        SOS       +15.29        76.1              Bhadrak  leverage
+raw        POS        -3.59        55.8              Cuttack  leverage
+raw        EOS        -0.00         nan                Angul  fragile
+corrected  SOS       +15.29        76.1              Bhadrak  leverage
+corrected  POS        -3.59        55.8              Cuttack  leverage
+corrected  EOS        -0.00         nan                Angul  fragile
+
+Verdicts: stable (no LOO shifts tau by >25 %), leverage (one district drives >25 %), fragile (some LOO flips sign).
