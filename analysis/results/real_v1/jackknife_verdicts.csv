@@ -1,0 +1,7 @@
+pipeline,metric,tau_full,max_abs_delta_pct,most_leveraging_district,verdict
+raw,SOS,15.289,76.1,Bhadrak,leverage
+raw,POS,-3.587,55.8,Cuttack,leverage
+raw,EOS,-0.0,,Angul,fragile
+corrected,SOS,15.289,76.1,Bhadrak,leverage
+corrected,POS,-3.587,55.8,Cuttack,leverage
+corrected,EOS,-0.0,,Angul,fragile
