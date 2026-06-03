@@ -306,7 +306,38 @@ try {
 }
 
 if (pts) {
-  var fc = ee.FeatureCollection(pts).map(function (f) {
+  // Robust handling: pts can be (a) a FeatureCollection (one Feature per click),
+  // (b) a single Feature/Geometry holding a MultiPoint (all clicks in one import),
+  // or (c) an Array of geometries. Normalise to a FeatureCollection where each
+  // Feature is a single Point.
+  var ptsFC;
+  try {
+    // Case (a): already a FeatureCollection from the FeatureCollection-import toggle.
+    ptsFC = ee.FeatureCollection(pts);
+    // If we got an FC with a single Feature whose geometry is MultiPoint,
+    // explode it into per-point Features.
+    var first = ee.Feature(ptsFC.first());
+    var geomType = first.geometry().type();
+    ptsFC = ee.Algorithms.If(
+      geomType.compareTo('MultiPoint').eq(0),
+      ee.FeatureCollection(first.geometry().coordinates().map(function (c) {
+        return ee.Feature(ee.Geometry.Point(c));
+      })),
+      ptsFC
+    );
+    ptsFC = ee.FeatureCollection(ptsFC);
+  } catch (e) {
+    // Case (b)/(c): wrap a raw geometry (likely a MultiPoint from
+    // Geometry-mode import) into per-point Features.
+    var geom = ee.Geometry(pts);
+    ptsFC = ee.FeatureCollection(
+      geom.coordinates().map(function (c) {
+        return ee.Feature(ee.Geometry.Point(c));
+      })
+    );
+  }
+
+  var fc = ee.FeatureCollection(ptsFC).map(function (f) {
     var coords = f.geometry().coordinates();
     return f.set({
       lon:          ee.Number(coords.get(0)),
