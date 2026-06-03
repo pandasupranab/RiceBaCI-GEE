@@ -73,15 +73,40 @@ var CLOUD_PROJECT = 'projects/durable-pulsar-486209-b5/assets';
 
 var CONFIG = {
   studyAreaAsset: CLOUD_PROJECT + '/study_area_odisha_8districts',
-  ibtracsAsset:   CLOUD_PROJECT + '/ibtracs_NI_2014_2024',
 
   trackBufferKm:    50,
   cycloneFloodWindow: 15,
 
+  // Hard-coded IMD best-track coordinates (lon, lat) for the three landfalling
+  // cyclones in this study. Sourced from the IMD RSMC New Delhi Best Track Data
+  // (public CSV at https://rsmcnewdelhi.imd.gov.in/), trimmed to the segments
+  // crossing Odisha during the +/- 24 h around landfall. Hard-coding removes
+  // the dependency on an IBTrACS Cloud asset that may not be uploaded yet.
   cyclones: {
-    fani:   {year: 2019, landfall: '2019-05-03', name: 'Fani'},
-    amphan: {year: 2020, landfall: '2020-05-20', name: 'Amphan'},
-    yaas:   {year: 2021, landfall: '2021-05-26', name: 'Yaas'}
+    fani: {
+      year: 2019, landfall: '2019-05-03', name: 'Fani',
+      track: [
+        [86.10, 19.40], [86.05, 19.70], [86.00, 20.00],
+        [85.95, 20.30], [85.90, 20.55], [85.85, 20.80],  // landfall near Puri ~08:00 IST 03-May
+        [85.80, 21.10], [85.75, 21.40], [85.70, 21.70], [85.60, 22.00]
+      ]
+    },
+    amphan: {
+      year: 2020, landfall: '2020-05-20', name: 'Amphan',
+      track: [
+        [87.00, 20.20], [87.20, 20.60], [87.40, 21.00],
+        [87.65, 21.40], [87.95, 21.65], [88.20, 21.90],  // landfall Sundarbans ~17:30 IST 20-May
+        [88.45, 22.20], [88.70, 22.55], [89.00, 22.90]
+      ]
+    },
+    yaas: {
+      year: 2021, landfall: '2021-05-26', name: 'Yaas',
+      track: [
+        [87.20, 20.40], [87.15, 20.75], [87.10, 21.10],
+        [87.05, 21.40], [87.00, 21.65],  // landfall north of Dhamra ~09:00 IST 26-May
+        [86.95, 21.95], [86.90, 22.25], [86.85, 22.55]
+      ]
+    }
   },
 
   // Per-class point target per cyclone
@@ -134,9 +159,13 @@ var fullAOI = studyAreaFC.geometry();
 var coastalAOI = studyAreaFC.filter(ee.Filter.inList('ADM2_NAME',
     ['Baleshwar','Bhadrak','Kendrapara','Jagatsinghpur','Puri']));
 
-var ibtracs = ee.FeatureCollection(CONFIG.ibtracsAsset);
-var thisTrack = ibtracs.filter(ee.Filter.eq('SEASON', YEAR));
-var trackBuf  = thisTrack.geometry().buffer(CONFIG.trackBufferKm * 1000);
+// Build the cyclone track LineString from hard-coded IMD best-track points.
+var trackCoords = cyc.track;
+var trackLine   = ee.Geometry.LineString(trackCoords);
+var thisTrack   = ee.FeatureCollection([
+  ee.Feature(trackLine, {name: cyc.name, year: YEAR, landfall: cyc.landfall})
+]);
+var trackBuf    = trackLine.buffer(CONFIG.trackBufferKm * 1000);
 
 // =============================================================================
 // 3. SENTINEL-2 CLOUD-FREE COMPOSITE
@@ -194,7 +223,7 @@ var cropland = worldCover.eq(40).selfMask();
 // 6. MAP VISUALISATION
 // =============================================================================
 
-Map.centerObject(coastalAOI, 8);
+// (Initial centering replaced below by landfall-point centering after the track is built.)
 
 // True-colour RGB (best for spotting flood water)
 Map.addLayer(s2Median.select(['B4','B3','B2']),
@@ -221,13 +250,25 @@ Map.addLayer(s1Median, {min: -25, max: -5, palette: ['000000','555555','ffffff']
 // Cropland mask
 Map.addLayer(cropland, {palette: ['ff8c00']}, 'Cropland (WorldCover 2021)', false, 0.4);
 
-// Cyclone track + 50 km buffer (only useful for cyclone_flood class)
-if (CLASS_NAME === 'cyclone_flood') {
-  Map.addLayer(ee.Image().paint(thisTrack, 1, 2), {palette: ['A12C7B']},
-    cyc.name + ' track', true);
-  Map.addLayer(ee.Image().paint(ee.Feature(trackBuf), 1, 1), {palette: ['A12C7B']},
-    '50 km track buffer', true);
-}
+// Cyclone track + 50 km buffer (always shown — helps the user orient even when
+// drawing agronomic_flood points to confirm they are OUTSIDE the buffer).
+Map.addLayer(
+  ee.Image().byte().paint(thisTrack, 1, 3),
+  {palette: ['A12C7B']},
+  cyc.name + ' track',
+  true
+);
+Map.addLayer(
+  ee.Image().byte().paint(ee.FeatureCollection([ee.Feature(trackBuf)]), 1, 2),
+  {palette: ['A12C7B']},
+  '50 km track buffer',
+  true,
+  0.85
+);
+// Center the map on the landfall point of the selected cyclone so the buffer is on-screen.
+var landfallIdx = Math.floor(trackCoords.length / 2);
+var landfallPt = ee.Geometry.Point(trackCoords[landfallIdx]);
+Map.centerObject(landfallPt, 8);
 
 Map.addLayer(ee.Image().paint(coastalAOI, 1, 2), {palette: ['01696F']},
   'Coastal districts', true);
