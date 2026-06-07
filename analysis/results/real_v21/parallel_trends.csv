@@ -1,0 +1,7 @@
+pipeline,metric,interaction_coef,se,p_value,n_pre,note
+raw,SOS,-63.6,67.077,0.343,16,cluster; pre-trend OK
+raw,POS,-2.4,19.665,0.9029,16,cluster; pre-trend OK
+raw,EOS,,,,11,"too few pre-period obs for inference (n=11, residual df=0); only 2 pre-cyclone years available"
+corrected,SOS,-63.6,67.077,0.343,16,cluster; pre-trend OK
+corrected,POS,-2.4,19.665,0.9029,16,cluster; pre-trend OK
+corrected,EOS,,,,11,"too few pre-period obs for inference (n=11, residual df=0); only 2 pre-cyclone years available"
