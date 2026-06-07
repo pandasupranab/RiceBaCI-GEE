@@ -1,0 +1,28 @@
+==============================================================================
+RiceBaCI Module 05 — DiD regression summary
+==============================================================================
+
+Static DiD (Treat × Post)
+------------------------------------------------------------------------------
+pipeline   metric  tau (d)     SE      t       p               CI95
+raw        SOS      +15.29  17.33  +0.88  0.3776 [-18.67,+49.25]
+raw        POS       -3.59   2.88  -1.25  0.2133 [ -9.23, +2.06]
+raw        EOS       -0.00   0.00  -2.04  0.0415 [ -0.00, -0.00]
+corrected  SOS      +15.22  17.34  +0.88  0.3801 [-18.76,+49.20]
+corrected  POS       -3.62   2.89  -1.25  0.2100 [ -9.29, +2.04]
+corrected  EOS       -0.10   0.06  -1.59  0.1120 [ -0.22, +0.02]
+
+Pre-trend test (interaction year × treat in pre-period)
+------------------------------------------------------------------------------
+pipeline   metric    coef     SE       p  note
+raw        SOS    -63.600 67.077  0.3430  cluster; pre-trend OK
+raw        POS     -2.400 19.665  0.9029  cluster; pre-trend OK
+raw        EOS       +nan    nan     nan  too few pre-period obs for inference (n=11, residual df=0); only 2 pre-cyclone years available
+corrected  SOS    -63.600 67.077  0.3430  cluster; pre-trend OK
+corrected  POS     -2.400 19.665  0.9029  cluster; pre-trend OK
+corrected  EOS       +nan    nan     nan  too few pre-period obs for inference (n=11, residual df=0); only 2 pre-cyclone years available
+
+Notes:
+  • SEs clustered at district level (n=8 clusters).
+  • Treatment cohort: coastal districts × 2019/2020/2021.
+  • Bulbul (2019, inland) and Hudhud (2014) excluded — transferability hold-outs.
