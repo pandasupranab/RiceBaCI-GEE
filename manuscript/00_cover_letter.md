@@ -40,7 +40,7 @@ I am pleased to submit our original research article entitled **"Decoupling Cycl
 
 We have no reviewers to exclude due to conflict of interest.
 
-**Reproducibility statement.** The submitted manuscript corresponds to GitHub release [`v1.0.0-submission`](https://github.com/pandasupranab/RiceBaCI-GEE/releases/tag/v1.0.0-submission), permanently archived on Zenodo under concept DOI [10.5281/zenodo.20024578](https://doi.org/10.5281/zenodo.20024578). Every numerical result in the manuscript and supplement can be reproduced from a single command (`python scripts/refresh_v21_from_module12.py`) operating on public Copernicus EMS, Sentinel-1, Sentinel-2, JRC, ERA5, and GADM inputs — no provisional or synthetic values remain anywhere in the submission artefacts.
+**Reproducibility statement.** The submitted manuscript corresponds to GitHub release [`v1.0.0-submission`](https://github.com/pandasupranab/RiceBaCI-GEE/releases/tag/v1.0.0-submission), permanently archived on Zenodo (this-version DOI [10.5281/zenodo.20585636](https://doi.org/10.5281/zenodo.20585636); concept DOI [10.5281/zenodo.20024578](https://doi.org/10.5281/zenodo.20024578)). Every numerical result in the manuscript and supplement can be reproduced from a single command (`python scripts/refresh_v21_from_module12.py`) operating on public Copernicus EMS, Sentinel-1, Sentinel-2, JRC, ERA5, and GADM inputs — no provisional or synthetic values remain anywhere in the submission artefacts.
 
 I thank the Editors and reviewers in advance for their consideration of our manuscript.
 
