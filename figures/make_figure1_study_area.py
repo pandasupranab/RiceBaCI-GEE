@@ -200,7 +200,7 @@ gpd.GeoSeries([BHITARKANIKA_POLY], crs="EPSG:4326").plot(
 ax_main.annotate(
     "Bhitarkanika\nmangrove",
     xy=BHITARKANIKA_CENTRE, xytext=(85.3, 21.7),
-    fontsize=6.5, color="#1b5e20", weight="bold",
+    fontsize=9, color="#1b5e20", weight="bold",
     arrowprops=dict(arrowstyle="-", color="#1b5e20", lw=0.5),
     transform=proj,
 )
@@ -238,36 +238,36 @@ for city, (lon, lat) in CITIES.items():
     if city == "Visakhapatnam":dx, dy = (0.20, -0.05)
     if city == "Kolkata":      dx, dy = (0.15, 0.10)
     if city == "Cuttack":      dx, dy = (-1.05, 0.18)
-    ax_main.text(lon + dx, lat + dy, city, fontsize=6,
+    ax_main.text(lon + dx, lat + dy, city, fontsize=8.5,
                  color="black", transform=proj,
-                 path_effects=None)
+                 path_effects=None, weight="bold")
 
 # Gridlines
 gl = ax_main.gridlines(draw_labels=True, linewidth=0.3, color="#bbbbbb",
                        linestyle=":", alpha=0.7)
 gl.top_labels = False
 gl.right_labels = False
-gl.xlabel_style = {"size": 6}
-gl.ylabel_style = {"size": 6}
+gl.xlabel_style = {"size": 8.5}
+gl.ylabel_style = {"size": 8.5}
 
 # Scale bar + N arrow
 ax_main.text(89.3, 18.2, "Bay of Bengal",
-             fontsize=8, style="italic", color="#234e6c",
-             ha="center", rotation=-65, transform=proj)
+             fontsize=11, style="italic", color="#234e6c",
+             ha="center", rotation=-65, transform=proj, weight="bold")
 # Approx scale 100 km at 20°N: 1° lon ~ 104.6 km, so 100 km ~ 0.96°
 sx, sy = 88.4, 17.2
 ax_main.plot([sx, sx + 0.96], [sy, sy], color="black", lw=1.5, transform=proj)
-ax_main.text(sx + 0.48, sy + 0.10, "100 km", ha="center", fontsize=6,
-             transform=proj)
+ax_main.text(sx + 0.48, sy + 0.10, "100 km", ha="center", fontsize=8.5,
+             transform=proj, weight="bold")
 # North arrow
 ax_main.annotate("N", xy=(89.7, 24.0), xytext=(89.7, 23.4),
-                 fontsize=9, weight="bold", ha="center",
+                 fontsize=12, weight="bold", ha="center",
                  arrowprops=dict(arrowstyle="->", color="black", lw=1.0),
                  transform=proj)
 
 ax_main.set_title("(b) Study area: 8 coastal–subcoastal districts of Odisha "
                   "with cyclone tracks 2014–2021",
-                  fontsize=8, loc="left")
+                  fontsize=11.5, loc="left", weight="bold")
 
 # --------------------------------------------------------------------------
 # 5b. INSET — India context map
@@ -290,7 +290,7 @@ rect = mpatches.Rectangle((81.5, 16.5), 9.0, 8.0,
                           linewidth=0.8, edgecolor="#d62728",
                           facecolor="none", transform=proj, zorder=4)
 ax_inset.add_patch(rect)
-ax_inset.set_title("(a) India", fontsize=8, loc="left")
+ax_inset.set_title("(a) India", fontsize=11.5, loc="left", weight="bold")
 
 # --------------------------------------------------------------------------
 # 5c. LEGEND PANEL
@@ -313,8 +313,8 @@ legend_elements = [
                markeredgecolor="black", markersize=9, label="Landfall point"),
 ]
 ax_legend.legend(handles=legend_elements, loc="center left",
-                 frameon=False, fontsize=6.4, handlelength=2.0,
-                 borderpad=0.3, labelspacing=0.55)
+                 frameon=False, fontsize=9.0, handlelength=2.0,
+                 borderpad=0.3, labelspacing=0.65)
 
 # --------------------------------------------------------------------------
 # 6. SAVE
