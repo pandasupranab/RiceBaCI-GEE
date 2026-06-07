@@ -304,10 +304,8 @@ def make_figure(fig_pdf: Path, fig_png: Path) -> None:
     axes[-1].set_xlabel("Day-of-year (DOY) — 30 d pre-onset to 70 d post-onset",
                         fontsize=10)
 
-    fig.suptitle("Figure S2. Canonical Sentinel-1 dual-polarisation backscatter "
-                 "signatures for the three inundation mechanisms.\nDifferentiable "
-                 "feature space exploited by the Module 02 random-forest classifier.",
-                 fontsize=10.5, y=0.995, x=0.5, ha="center")
+    # fig.suptitle removed (caption supplied below figure in DOCX/manuscript).
+    fig.suptitle("", fontsize=10.5, y=0.995, x=0.5, ha="center")
 
     fig.savefig(str(fig_pdf), dpi=300, bbox_inches="tight", pad_inches=0.35)
     fig.savefig(str(fig_png), dpi=200, bbox_inches="tight", pad_inches=0.35)
