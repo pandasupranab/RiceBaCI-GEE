@@ -249,9 +249,9 @@ def make_figure(fig_pdf: Path, fig_png: Path) -> None:
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    fig, axes = plt.subplots(3, 1, figsize=(9.6, 8.4), sharex=False)
-    fig.subplots_adjust(left=0.10, right=0.96, top=0.93, bottom=0.07,
-                        hspace=0.55)
+    fig, axes = plt.subplots(3, 1, figsize=(11.5, 10.5), sharex=False)
+    fig.subplots_adjust(left=0.10, right=0.96, top=0.94, bottom=0.06,
+                        hspace=0.60)
 
     keys = ["transplanting_flood", "saline_storm_surge", "freshwater_rainfall"]
     panel_titles = ["(A) Transplanting flood — agronomic, freshwater, controlled depth ~5-15 cm",
@@ -275,9 +275,9 @@ def make_figure(fig_pdf: Path, fig_png: Path) -> None:
 
         # Onset marker
         ax.axvline(p["onset_doy"], color="0.30", lw=0.8, ls=":")
-        ax.text(p["onset_doy"], -24.5, "onset", fontsize=8, color="0.30",
-                ha="center", va="bottom",
-                bbox=dict(boxstyle="round,pad=0.18", fc="white",
+        ax.text(p["onset_doy"], -24.5, "onset", fontsize=10.5, color="0.30",
+                ha="center", va="bottom", weight="bold",
+                bbox=dict(boxstyle="round,pad=0.22", fc="white",
                           ec="0.7", lw=0.5))
 
         # Annotate ΔVH (the headline discriminator) — place ABOVE the trough
@@ -286,23 +286,24 @@ def make_figure(fig_pdf: Path, fig_png: Path) -> None:
         ax.annotate(f"ΔVH = {delta_vh:+.1f} dB",
                     xy=(p["onset_doy"] + p["onset_rate_days"] + 1, p["vh_min_db"]),
                     xytext=(p["onset_doy"] + 18, -2.5),
-                    fontsize=9, color="#01696F", fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.25", fc="white",
+                    fontsize=11.5, color="#01696F", fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.30", fc="white",
                               ec="#01696F", lw=0.8),
-                    arrowprops=dict(arrowstyle="->", color="#01696F", lw=0.8,
+                    arrowprops=dict(arrowstyle="->", color="#01696F", lw=0.9,
                                     connectionstyle="arc3,rad=-0.2"))
 
         ax.set_ylim(-26, 1)
-        ax.set_ylabel("Backscatter (dB)", fontsize=10)
-        ax.set_title(ptitle, fontsize=10.5, loc="left", pad=4,
-                     color=p["color"])
+        ax.set_ylabel("Backscatter (dB)", fontsize=12.5)
+        ax.set_title(ptitle, fontsize=13, loc="left", pad=6,
+                     color=p["color"], weight="bold")
+        ax.tick_params(labelsize=10.5)
         ax.grid(True, ls=":", lw=0.5, color="0.85")
         # Legend in lower-left where curves are at baseline (clear of trough)
-        ax.legend(loc="lower left", fontsize=8, framealpha=0.92,
+        ax.legend(loc="lower left", fontsize=10.5, framealpha=0.92,
                   fancybox=False, edgecolor="0.7", ncol=3)
 
     axes[-1].set_xlabel("Day-of-year (DOY) — 30 d pre-onset to 70 d post-onset",
-                        fontsize=10)
+                        fontsize=12.5)
 
     # fig.suptitle removed (caption supplied below figure in DOCX/manuscript).
     fig.suptitle("", fontsize=10.5, y=0.995, x=0.5, ha="center")
