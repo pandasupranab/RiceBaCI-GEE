@@ -110,8 +110,7 @@ def fig_did_coefplot(static_df: pd.DataFrame, out_dir: Path) -> None:
     ax.set_yticklabels(y_lab)
     ax.invert_yaxis()
     ax.set_xlabel("DiD coefficient τ (days)")
-    ax.set_title("Treatment effect of pre-Kharif cyclones on rice phenology",
-                 loc="left")
+    # Top title removed (caption supplied below figure in DOCX/manuscript).
     ax.legend(title="Pipeline", loc="lower right", frameon=False)
     ax.grid(axis="x", alpha=0.25, lw=0.4)
 
@@ -151,7 +150,8 @@ def fig_event_study(es_df: pd.DataFrame, out_dir: Path) -> None:
         ax.grid(axis="y", alpha=0.25, lw=0.4)
 
     axes[0].set_ylabel("β (days, vs k = −1)")
-    fig.suptitle("Dynamic treatment effects on Start-of-Season",
+    # fig.suptitle removed (caption supplied below figure in DOCX/manuscript).
+    fig.suptitle("",
                  x=0.02, y=0.97, ha="left", fontsize=12)
 
     fig.text(0.01, 0.02,
@@ -218,7 +218,8 @@ def fig_district_panel(panel_df: pd.DataFrame, out_dir: Path,
                     ha="center", va="bottom", fontsize=8)
 
     axes[1].set_xlabel("Year")
-    fig.suptitle(f"District-level {metric} — {pipeline} pipeline",
+    # fig.suptitle removed (caption supplied below figure in DOCX/manuscript).
+    fig.suptitle("",
                  x=0.02, ha="left", fontsize=12)
     fig.tight_layout(rect=[0, 0, 1, 0.97])
 
