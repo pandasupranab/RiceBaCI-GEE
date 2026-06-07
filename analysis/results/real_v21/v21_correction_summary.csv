@@ -1,0 +1,36 @@
+district,year,cyclone,metric,f,delta_cyc,raw_doy,corrected_doy,correction_days,source
+Baleshwar,2020,Amphan,SOS,0.001671,14.0,167.0,166.98,-0.02,provisional_label_density × Module08 polygon-area
+Baleshwar,2020,Amphan,POS,0.001671,7.0,289.0,288.99,-0.01,provisional_label_density × Module08 polygon-area
+Baleshwar,2020,Amphan,EOS,0.001671,21.0,350.0,349.96,-0.04,provisional_label_density × Module08 polygon-area
+Baleshwar,2021,Yaas,SOS,0.002228,14.0,166.0,165.97,-0.03,provisional_label_density × Module08 polygon-area
+Baleshwar,2021,Yaas,POS,0.002228,7.0,288.0,287.98,-0.02,provisional_label_density × Module08 polygon-area
+Baleshwar,2021,Yaas,EOS,0.002228,21.0,349.0,348.95,-0.05,provisional_label_density × Module08 polygon-area
+Bhadrak,2020,Amphan,SOS,0.004591,14.0,259.0,258.94,-0.06,provisional_label_density × Module08 polygon-area
+Bhadrak,2020,Amphan,POS,0.004591,7.0,289.0,288.97,-0.03,provisional_label_density × Module08 polygon-area
+Bhadrak,2020,Amphan,EOS,0.004591,21.0,350.0,349.9,-0.1,provisional_label_density × Module08 polygon-area
+Bhadrak,2021,Yaas,SOS,0.022443,14.0,196.0,195.69,-0.31,provisional_label_density × Module08 polygon-area
+Bhadrak,2021,Yaas,POS,0.022443,7.0,288.0,287.84,-0.16,provisional_label_density × Module08 polygon-area
+Bhadrak,2021,Yaas,EOS,0.022443,21.0,349.0,348.53,-0.47,provisional_label_density × Module08 polygon-area
+Cuttack,2019,Fani,SOS,0.013112,14.0,196.0,195.82,-0.18,EMSR357_real
+Cuttack,2019,Fani,POS,0.013112,7.0,288.0,287.91,-0.09,EMSR357_real
+Cuttack,2019,Fani,EOS,0.013112,21.0,349.0,348.72,-0.28,EMSR357_real
+Jagatsinghpur,2019,Fani,SOS,0.002912,14.0,227.0,226.96,-0.04,EMSR357_real
+Jagatsinghpur,2019,Fani,POS,0.002912,7.0,319.0,318.98,-0.02,EMSR357_real
+Jagatsinghpur,2020,Amphan,SOS,0.009437,14.0,167.0,166.87,-0.13,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,2020,Amphan,POS,0.009437,7.0,289.0,288.93,-0.07,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,2021,Yaas,SOS,0.008239,14.0,166.0,165.88,-0.12,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,2021,Yaas,POS,0.008239,7.0,288.0,287.94,-0.06,provisional_label_density × Module08 polygon-area
+Kendrapara,2019,Fani,SOS,0.005352,14.0,196.0,195.93,-0.07,EMSR357_real
+Kendrapara,2019,Fani,POS,0.005352,7.0,319.0,318.96,-0.04,EMSR357_real
+Kendrapara,2019,Fani,EOS,0.005352,21.0,349.0,348.89,-0.11,EMSR357_real
+Kendrapara,2020,Amphan,SOS,0.004764,14.0,167.0,166.93,-0.07,provisional_label_density × Module08 polygon-area
+Kendrapara,2020,Amphan,POS,0.004764,7.0,289.0,288.97,-0.03,provisional_label_density × Module08 polygon-area
+Kendrapara,2020,Amphan,EOS,0.004764,21.0,350.0,349.9,-0.1,provisional_label_density × Module08 polygon-area
+Kendrapara,2021,Yaas,SOS,0.010535,14.0,166.0,165.85,-0.15,provisional_label_density × Module08 polygon-area
+Kendrapara,2021,Yaas,POS,0.010535,7.0,288.0,287.93,-0.07,provisional_label_density × Module08 polygon-area
+Puri,2019,Fani,SOS,0.025188,14.0,196.0,195.65,-0.35,EMSR357_real
+Puri,2019,Fani,POS,0.025188,7.0,288.0,287.82,-0.18,EMSR357_real
+Puri,2019,Fani,EOS,0.025188,21.0,349.0,348.47,-0.53,EMSR357_real
+Puri,2021,Yaas,SOS,0.001178,14.0,166.0,165.98,-0.02,provisional_label_density × Module08 polygon-area
+Puri,2021,Yaas,POS,0.001178,7.0,288.0,287.99,-0.01,provisional_label_density × Module08 polygon-area
+Puri,2021,Yaas,EOS,0.001178,21.0,349.0,348.98,-0.02,provisional_label_density × Module08 polygon-area
