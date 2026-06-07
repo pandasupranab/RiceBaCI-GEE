@@ -11,8 +11,8 @@
  *
  * How to use
  * ---------------------------------------------------------------------------
- *  1. Confirm Module 06 export task 'candidates_v1_export' has finished
- *     (Assets tab -> projects/durable-pulsar-486209-b5/assets/candidates_v1
+ *  1. Confirm Module 06 export task 'candidates_v2_export' has finished
+ *     (Assets tab -> projects/durable-pulsar-486209-b5/assets/candidates_v2
  *      should exist).
  *  2. Paste this entire file into a new Code Editor script named
  *     '07_active_learning_review'.  Save.
@@ -26,7 +26,7 @@
  */
 
 var CLOUD_PROJECT = 'projects/durable-pulsar-486209-b5/assets';
-var CANDIDATES = ee.FeatureCollection(CLOUD_PROJECT + '/candidates_v1');
+var CANDIDATES = ee.FeatureCollection(CLOUD_PROJECT + '/candidates_v2');
 
 // ---------------------------------------------------------------------------
 // State (lives in the Code Editor session)
