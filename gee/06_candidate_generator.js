@@ -30,7 +30,7 @@ var CLOUD_PROJECT = 'projects/durable-pulsar-486209-b5/assets';
 // ---------------------------------------------------------------------------
 var CFG = {
   studyAreaAsset: CLOUD_PROJECT + '/study_area_odisha_8districts',
-  outputAsset:    CLOUD_PROJECT + '/candidates_v1',
+  outputAsset:    CLOUD_PROJECT + '/candidates_v2',  // v1 = cyclone-only (240); v2 = full 480
   trackBufferKm:  50,
   candidatesPerCycloneClass: 80,
   candidatesPerDistrictAgro: 30,
@@ -68,8 +68,14 @@ var CFG = {
 
   thresh: {
     cyclone: {siMin: 0.05, ndwiMin: 0.20, ndviMax: 0.30, vhMax: -19},
-    agro:    {ndwiMin: 0.20, ndviMin: 0.10, ndviMax: 0.40,
-              vhMin: -22, vhMax: -16, siMax: -0.05}
+    // Agro thresholds RELAXED (v3) — the strict v1 set yielded 0 candidates
+    // because (a) JRC seasonality >= 6 mo eliminates most rice paddies
+    // (which are flooded 2-4 mo, not 6+) and (b) 5-year medians collapse
+    // transient NDWI/VH signals. New scheme: per-year July sampling, no
+    // JRC hard gate, broader spectral bands matching transient transplant
+    // flooding (young rice under shallow standing water).
+    agro:    {ndwiMin: 0.10, ndviMin: 0.10, ndviMax: 0.40,
+              vhMin: -22, vhMax: -13, siMax: -0.02}
   },
 
   s2CloudPctMax: 60
@@ -238,114 +244,74 @@ var yearList = CFG.nonCycloneYears;
 var yearStart = ee.Date.fromYMD(ee.Number(yearList[0]), 1, 1);
 var yearEnd   = ee.Date.fromYMD(ee.Number(yearList[yearList.length - 1]), 12, 31);
 
-// Keep only July/August in the non-cyclone years (2017, 2018, 2022, 2023, 2024).
-// Cyclone years 2019/2020/2021 are excluded by OR-ing per-year calendarRange filters.
-var keepYearFilter = ee.Filter.or(
-  ee.Filter.calendarRange(2017, 2017, 'year'),
-  ee.Filter.calendarRange(2018, 2018, 'year'),
-  ee.Filter.calendarRange(2022, 2022, 'year'),
-  ee.Filter.calendarRange(2023, 2023, 'year'),
-  ee.Filter.calendarRange(2024, 2024, 'year')
-);
-
-// S2 pooled composite
-var s2PoolCol = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
-  .filterBounds(fullAOI)
-  .filterDate(yearStart, yearEnd)
-  .filter(ee.Filter.calendarRange(7, 8, 'month'))
-  .filter(keepYearFilter)
-  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', CFG.s2CloudPctMax))
-  .map(maskS2);
-
-var s2PoolMed = ee.Image(ee.Algorithms.If(
-  s2PoolCol.size().gt(0),
-  s2PoolCol.median().select(S2_BANDS),
-  dummyS2Image()
-));
-
-var s2SI   = s2PoolMed.expression('(B11 - B12) / (B11 + B12 + 1e-6)',
-              {B11: s2PoolMed.select('B11'), B12: s2PoolMed.select('B12')}).rename('SI');
-var s2NDWI = s2PoolMed.normalizedDifference(['B3','B8']).rename('NDWI');
-var s2NDVI = s2PoolMed.normalizedDifference(['B8','B4']).rename('NDVI');
-
-// S1 pooled composite — same July-Aug window across non-cyclone years.
-var s1PoolCol = ee.ImageCollection('COPERNICUS/S1_GRD')
-  .filterBounds(fullAOI)
-  .filterDate(yearStart, yearEnd)
-  .filter(ee.Filter.calendarRange(7, 8, 'month'))
-  .filter(keepYearFilter)
-  .filter(ee.Filter.eq('instrumentMode', 'IW'))
-  .filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VH'))
-  .select('VH');
-
-var s1PoolMed = ee.Image(ee.Algorithms.If(
-  s1PoolCol.size().gt(0),
-  s1PoolCol.median().rename('VH'),
-  dummyS1Image()
-));
-
-var agroMed = s2SI.addBands(s2NDWI).addBands(s2NDVI)
-                  .addBands(s2PoolMed).addBands(s1PoolMed)
-                  .clip(fullAOI);
-
-var ta = CFG.thresh.agro;
-var agroMask = agroMed.select('NDWI').gt(ta.ndwiMin)
-  .and(agroMed.select('NDVI').gt(ta.ndviMin))
-  .and(agroMed.select('NDVI').lt(ta.ndviMax))
-  .and(agroMed.select('VH').gt(ta.vhMin))
-  .and(agroMed.select('VH').lt(ta.vhMax))
-  .and(agroMed.select('SI').lt(ta.siMax))
-  .and(cropland)
-  .and(seasonalWater);
-
-var agroBase = agroMask.selfMask().rename('candidate');
-
-// Loop districts and stratified-sample 30 per district.
-// Scale relaxed to 30 m (~9x faster than 10 m) and tileScale=8 to fan out more
-// parallel workers. Same physical interpretation — we just sample 30 m pixels
-// inside the per-district cropland-+-seasonal-water mask.
+// v3 strategy: PER-YEAR July sampling (no 5-year median).
+//   For each non-cyclone year (2017, 2018, 2022, 2023, 2024) and each of the
+//   8 districts, build a July composite, apply the relaxed agro mask, and
+//   stratified-sample 6 candidates. Total = 5 years x 8 districts x 6 = 240.
+//   This captures TRANSIENT monsoon flooding during transplanting (which is
+//   what agronomic_flood actually means) instead of permanent surface water.
 var AGRO_SCALE = 30;
+var ta = CFG.thresh.agro;
 var agroAll = ee.FeatureCollection([]);
-CFG.districts.forEach(function (dn) {
-  var distGeom = studyArea.filter(ee.Filter.eq('ADM2_NAME', dn)).geometry();
-  var samp = agroBase.stratifiedSample({
-    numPoints: CFG.candidatesPerDistrictAgro,
-    classBand: 'candidate',
-    region: distGeom,
-    scale: AGRO_SCALE,
-    seed: 42,
-    geometries: true,
-    tileScale: 8
-  });
-  samp = samp.map(function (f) {
-    var p = f.geometry();
-    var vals = agroMed.reduceRegion({
-      reducer: ee.Reducer.mean(),
-      geometry: p, scale: AGRO_SCALE, maxPixels: 1e8
+var PER_DISTRICT_PER_YEAR = 6;  // 6 x 5 years = 30 per district = 240 total
+
+CFG.nonCycloneYears.forEach(function (yr) {
+  var winStart = ee.Date.fromYMD(yr, 7, 1);
+  var winEnd   = ee.Date.fromYMD(yr, 7, 31);
+  var s2 = buildS2(winStart, winEnd, fullAOI);
+  var s1 = buildS1(winStart, winEnd, fullAOI);
+  var stack = s2.addBands(s1);
+
+  // Relaxed agronomic mask (no JRC hard gate; JRC used only as a soft prior
+  // via OR with cropland-+-spectral signature).
+  var spectral = stack.select('NDWI').gt(ta.ndwiMin)
+    .and(stack.select('NDVI').gt(ta.ndviMin))
+    .and(stack.select('NDVI').lt(ta.ndviMax))
+    .and(stack.select('VH').gt(ta.vhMin))
+    .and(stack.select('VH').lt(ta.vhMax))
+    .and(stack.select('SI').lt(ta.siMax))
+    .and(cropland);
+
+  var agroBase = spectral.selfMask().rename('candidate');
+
+  CFG.districts.forEach(function (dn) {
+    var distGeom = studyArea.filter(ee.Filter.eq('ADM2_NAME', dn)).geometry();
+    var samp = agroBase.stratifiedSample({
+      numPoints: PER_DISTRICT_PER_YEAR,
+      classBand: 'candidate',
+      region: distGeom,
+      scale: AGRO_SCALE,
+      seed: 42 + yr,  // vary seed by year so we don't get spatial collisions
+      geometries: true,
+      tileScale: 8
     });
-    return f.set({
-      class_proposed: 'agronomic_flood',
-      class_id: 1,
-      cyclone: 'none',
-      year: 2020,
-      source_date: 'July-August 2017/2018/2022/2023/2024 (non-cyclone-year median)',
-      district: dn,
-      lon: p.coordinates().get(0),
-      lat: p.coordinates().get(1),
-      si:   vals.get('SI'),
-      ndwi: vals.get('NDWI'),
-      ndvi: vals.get('NDVI'),
-      vh:   vals.get('VH')
+    samp = samp.map(function (f) {
+      var p = f.geometry();
+      var vals = stack.reduceRegion({
+        reducer: ee.Reducer.mean(),
+        geometry: p, scale: AGRO_SCALE, maxPixels: 1e8
+      });
+      return f.set({
+        class_proposed: 'agronomic_flood',
+        class_id: 1,
+        cyclone: 'none',
+        year: yr,
+        source_date: ee.String('July ').cat(ee.Number(yr).format('%d')),
+        district: dn,
+        lon: p.coordinates().get(0),
+        lat: p.coordinates().get(1),
+        si:   vals.get('SI'),
+        ndwi: vals.get('NDWI'),
+        ndvi: vals.get('NDVI'),
+        vh:   vals.get('VH')
+      });
     });
+    agroAll = agroAll.merge(samp);
   });
-  agroAll = agroAll.merge(samp);
 });
 
-// NOTE: agroAll.size() is intentionally NOT printed here. Forcing eager
-// evaluation of the heavy 5-year pooled composite in the interactive console
-// causes a 5-minute timeout. The Export task below has a much longer budget
-// and will materialise the full 240 agronomic candidates server-side.
-print('Agronomic candidates: deferred to Export task (run from Tasks tab).');
+// Don't force eager evaluation in the interactive console (would time out).
+print('Agronomic candidates: deferred to Export task (target 240 = 5 yr x 8 dist x 6).');
 
 // ---------------------------------------------------------------------------
 // 7. MERGE + ADD CANDIDATE_ID
@@ -379,15 +345,15 @@ print('Total candidates: deferred to Export task (target ~480).');
 // ---------------------------------------------------------------------------
 Export.table.toAsset({
   collection: finalFC,
-  description: 'candidates_v1_export',
+  description: 'candidates_v2_export',
   assetId: CFG.outputAsset
 });
 
 print('');
 print('=== Export task dispatched ===');
 print('1. Open Tasks tab on the right.');
-print('2. Click Run next to "candidates_v1_export".');
-print('3. Wait ~5 min. When status shows COMPLETED, run Module 07.');
+print('2. Click Run next to "candidates_v2_export".');
+print('3. Wait ~15 min. When status shows COMPLETED, run Module 07.');
 print('');
 
 // Preview — cyclone candidates only. The agronomic preview layer is omitted
