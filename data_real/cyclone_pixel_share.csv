@@ -7,19 +7,19 @@ Dhenkanal,2019,Fani,4479.37,0.0,0.0,EMSR357_real
 Jagatsinghpur,2019,Fani,1668.9,4.86,0.002912,EMSR357_real
 Kendrapara,2019,Fani,2479.77,13.2727,0.005352,EMSR357_real
 Puri,2019,Fani,3500.98,88.1824,0.025188,EMSR357_real
-Angul,2020,Amphan,6376.73,0.0,0.0,provisional_label_density × Module08 polygon-area
-Baleshwar,2020,Amphan,3702.22,6.1875,0.001671,provisional_label_density × Module08 polygon-area
-Bhadrak,2020,Amphan,2450.69,11.25,0.004591,provisional_label_density × Module08 polygon-area
-Cuttack,2020,Amphan,3943.39,0.0,0.0,provisional_label_density × Module08 polygon-area
-Dhenkanal,2020,Amphan,4479.37,0.0,0.0,provisional_label_density × Module08 polygon-area
-Jagatsinghpur,2020,Amphan,1668.9,15.75,0.009437,provisional_label_density × Module08 polygon-area
-Kendrapara,2020,Amphan,2479.77,11.8125,0.004764,provisional_label_density × Module08 polygon-area
-Puri,2020,Amphan,3500.98,0.0,0.0,provisional_label_density × Module08 polygon-area
-Angul,2021,Yaas,6376.73,0.0,0.0,provisional_label_density × Module08 polygon-area
-Baleshwar,2021,Yaas,3702.22,8.25,0.002228,provisional_label_density × Module08 polygon-area
-Bhadrak,2021,Yaas,2450.69,55.0,0.022443,provisional_label_density × Module08 polygon-area
-Cuttack,2021,Yaas,3943.39,2.75,0.000697,provisional_label_density × Module08 polygon-area
-Dhenkanal,2021,Yaas,4479.37,0.0,0.0,provisional_label_density × Module08 polygon-area
-Jagatsinghpur,2021,Yaas,1668.9,13.75,0.008239,provisional_label_density × Module08 polygon-area
-Kendrapara,2021,Yaas,2479.77,26.125,0.010535,provisional_label_density × Module08 polygon-area
-Puri,2021,Yaas,3500.98,4.125,0.001178,provisional_label_density × Module08 polygon-area
+Angul,2020,Amphan,6391.830313646586,0.0,0.0,Module12_GEE_polygon_intersection
+Baleshwar,2020,Amphan,3697.056730482441,12.3511434205473,0.0033408044076552,Module12_GEE_polygon_intersection
+Bhadrak,2020,Amphan,2454.2507276454426,19.26695423355122,0.0078504425063512,Module12_GEE_polygon_intersection
+Cuttack,2020,Amphan,3955.6007636385752,0.1826089877796155,4.61646659233734e-05,Module12_GEE_polygon_intersection
+Dhenkanal,2020,Amphan,4493.783243445319,0.0,0.0,Module12_GEE_polygon_intersection
+Jagatsinghpur,2020,Amphan,1691.3201877833696,32.490599122218725,0.0192102000300727,Module12_GEE_polygon_intersection
+Kendrapara,2020,Amphan,2481.5263199879205,19.614931906735613,0.0079043819719917,Module12_GEE_polygon_intersection
+Puri,2020,Amphan,3511.969251866753,1.3942239836238297,0.0003969920815459142,Module12_GEE_polygon_intersection
+Angul,2021,Yaas,6391.830313646586,0.0467928914081855,7.320734298637831e-06,Module12_GEE_polygon_intersection
+Baleshwar,2021,Yaas,3697.056730482441,19.56557874740086,0.0052922040892912,Module12_GEE_polygon_intersection
+Bhadrak,2021,Yaas,2454.2507276454426,177.01009938583206,0.0721238858735724,Module12_GEE_polygon_intersection
+Cuttack,2021,Yaas,3955.6007636385752,0.7006524268949402,0.00017712920710694834,Module12_GEE_polygon_intersection
+Dhenkanal,2021,Yaas,4493.783243445319,0.0486403292680795,1.0823915314346074e-05,Module12_GEE_polygon_intersection
+Jagatsinghpur,2021,Yaas,1691.3201877833696,55.06753884322753,0.0325589082664463,Module12_GEE_polygon_intersection
+Kendrapara,2021,Yaas,2481.5263199879205,72.05005771337494,0.0290345732515646,Module12_GEE_polygon_intersection
+Puri,2021,Yaas,3511.969251866753,14.680116793211669,0.0041800242941787,Module12_GEE_polygon_intersection
