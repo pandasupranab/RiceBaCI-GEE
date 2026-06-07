@@ -45,7 +45,7 @@ INK       = "#222222"
 
 
 def _box(ax, x, y, w, h, text, *,
-         dashed=False, fc="white", ec=INK, fontsize=8.5, weight="normal"):
+         dashed=False, fc="white", ec=INK, fontsize=10.5, weight="normal"):
     style = "round,pad=0.02,rounding_size=0.06"
     ls = (0, (4, 2)) if dashed else "-"
     p = FancyBboxPatch((x - w/2, y - h/2), w, h,
@@ -77,7 +77,7 @@ def _arrow(ax, src, dst, *,
     if label:
         mx, my = (sx + dx) / 2 + label_offset[0], (sy + dy) / 2 + label_offset[1]
         ax.text(mx, my, label,
-                fontsize=7.5, color=label_color or color,
+                fontsize=9.5, color=label_color or color,
                 ha="center", va="center", style="italic", zorder=5)
 
 
@@ -98,11 +98,11 @@ def draw_panel_a_naive(ax):
     # Title (above the working area)
     ax.text(0.15, 3.85,
             "(a) Naive pipeline (every prior cyclone-affected SAR rice study)",
-            fontsize=10.5, weight="bold", ha="left", color=INK)
+            fontsize=13, weight="bold", ha="left", color=INK)
     ax.text(0.15, 3.50,
             "saline storm-surge inundation is mis-read as transplanting "
             "flooding, biasing SOS",
-            fontsize=8.2, ha="left", color="#555555", style="italic")
+            fontsize=10.5, ha="left", color="#555555", style="italic")
 
     # Nodes
     cyclone     = _box(ax, 1.4, 2.4, 1.7, 0.85,
@@ -114,13 +114,13 @@ def draw_panel_a_naive(ax):
     surge       = _box(ax, 4.7, 2.4, 1.9, 1.0,
                        "Saline\nstorm-surge\ninundation",
                        fc="#FFC9B0", ec=OK_RED, weight="bold",
-                       dashed=True, fontsize=7.6)
+                       dashed=True, fontsize=9.5)
     flood       = _box(ax, 4.7, 0.6, 1.9, 0.85,
                        "Agronomic\nflooding",
                        fc="#FFFFFF", ec=INK)
     trough      = _box(ax, 8.0, 1.5, 2.0, 1.05,
                        "SAR backscatter\ntrough\n(VV/VH minimum)",
-                       fc="#E6F0F7", ec=OK_BLUE, fontsize=7.8)
+                       fc="#E6F0F7", ec=OK_BLUE, fontsize=9.8)
     sos         = _box(ax, 10.3, 1.5, 1.4, 1.05,
                        "Estimated\nSOS",
                        fc="#FFFFFF", ec=INK)
@@ -144,7 +144,7 @@ def draw_panel_a_naive(ax):
     ax.text(5.5, -0.15,
             "SOS bias from saline-surge confound (raw pipeline): +15.29 d "
             "(real v2.1 panel, p_WCB = 0.4000)",
-            fontsize=8.0, ha="center", color=OK_RED, weight="bold")
+            fontsize=10.5, ha="center", color=OK_RED, weight="bold")
 
 
 def draw_panel_b_corrected(ax):
@@ -157,18 +157,18 @@ def draw_panel_b_corrected(ax):
     # Title (above the classifier band, above the nodes)
     ax.text(0.15, 4.35,
             "(b) Corrected pipeline (this study)",
-            fontsize=10.5, weight="bold", ha="left", color=INK)
+            fontsize=13, weight="bold", ha="left", color=INK)
     ax.text(0.15, 4.05,
             "the saline-flood classifier (Module 02) breaks the "
             "storm-surge \u2192 trough arrow, restoring identification",
-            fontsize=8.2, ha="left", color="#555555", style="italic")
+            fontsize=10.5, ha="left", color="#555555", style="italic")
 
     # Classifier band sits at the very top — well clear of subtitle.
     # Place it OFFSET to the LEFT of the surge node so the masking arrow
     # comes in from the side rather than penetrating the surge box.
-    classifier  = _box(ax, 3.2, 3.55, 2.6, 0.45,
+    classifier  = _box(ax, 3.2, 3.55, 3.0, 0.50,
                        "Module 02 saline-flood classifier",
-                       fc="#D6F0E2", ec=OK_GREEN, fontsize=7.8,
+                       fc="#D6F0E2", ec=OK_GREEN, fontsize=10.0,
                        weight="bold")
 
     cyclone     = _box(ax, 1.4, 2.4, 1.7, 0.85,
@@ -180,13 +180,13 @@ def draw_panel_b_corrected(ax):
     surge       = _box(ax, 4.7, 2.4, 1.9, 1.0,
                        "Saline\nstorm-surge\ninundation",
                        fc="#FFC9B0", ec=OK_RED, weight="bold",
-                       dashed=True, fontsize=7.6)
+                       dashed=True, fontsize=9.5)
     flood       = _box(ax, 4.7, 0.6, 1.9, 0.85,
                        "Agronomic\nflooding",
                        fc="#FFFFFF", ec=INK)
     trough      = _box(ax, 8.0, 1.5, 2.0, 1.05,
                        "SAR backscatter\ntrough\n(VV/VH minimum)",
-                       fc="#E6F0F7", ec=OK_BLUE, fontsize=7.8)
+                       fc="#E6F0F7", ec=OK_BLUE, fontsize=9.8)
     sos         = _box(ax, 10.3, 1.5, 1.4, 1.05,
                        "Estimated\nSOS",
                        fc="#FFFFFF", ec=INK)
@@ -202,12 +202,17 @@ def draw_panel_b_corrected(ax):
 
     # Module 02 intercepts the surge -> trough arrow.
     # The arrow now comes from the LEFT (offset classifier) into the
-    # TOP-LEFT corner of the surge box; the 'masks' label sits ABOVE
-    # the surge box, not inside it.
-    _arrow(ax, classifier, surge, color=OK_GREEN, lw=1.4,
-           curve=-0.15,
-           label="masks", label_offset=(-0.10, 0.45),
-           label_color=OK_GREEN)
+    # TOP-LEFT corner of the surge box. The 'masks' label is placed
+    # OUTSIDE both boxes, in the empty space next to the green arrow,
+    # roughly midway between classifier and surge but offset upward so
+    # it never overlaps either rectangle.
+    _arrow(ax, classifier, surge, color=OK_GREEN, lw=1.6,
+           curve=-0.15)
+    # Free-standing label next to the green arrow midpoint.
+    ax.text(4.55, 3.30, "masks",
+            fontsize=11.0, color=OK_GREEN,
+            ha="center", va="center",
+            style="italic", weight="bold", zorder=6)
 
     # The broken arrow: surge -> trough is now crossed out
     midx = (surge[0] + trough[0]) / 2
@@ -223,7 +228,7 @@ def draw_panel_b_corrected(ax):
             "Residual SOS bias after correction: +15.11 d "
             "(p_WCB = 0.4065; \u0394 from raw \u2248 0.18 d, "
             "bounded by district pixel share)",
-            fontsize=8.0, ha="center", color=OK_GREEN, weight="bold")
+            fontsize=10.5, ha="center", color=OK_GREEN, weight="bold")
 
 
 def main():
@@ -234,12 +239,13 @@ def main():
     plt.rcParams.update({
         "font.family": "sans-serif",
         "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"],
-        "font.size": 9,
+        "font.size": 11,
     })
 
     # Widen figure slightly so the rightmost 'Estimated SOS' box border
-    # is never clipped by bbox_inches='tight'.
-    fig, (ax_a, ax_b) = plt.subplots(2, 1, figsize=(10.5, 8.4),
+    # is never clipped by bbox_inches='tight'. Enlarged to accommodate
+    # bigger fonts throughout.
+    fig, (ax_a, ax_b) = plt.subplots(2, 1, figsize=(12.5, 10.0),
                                       gridspec_kw={"height_ratios": [4.2, 4.7]})
     draw_panel_a_naive(ax_a)
     draw_panel_b_corrected(ax_b)
