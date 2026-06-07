@@ -30,7 +30,7 @@ var CLOUD_PROJECT = 'projects/durable-pulsar-486209-b5/assets';
 // ---------------------------------------------------------------------------
 var CFG = {
   studyAreaAsset: CLOUD_PROJECT + '/study_area_odisha_8districts',
-  outputAsset:    CLOUD_PROJECT + '/candidates_v2',  // v1 = cyclone-only (240); v2 = full 480
+  outputAsset:    CLOUD_PROJECT + '/candidates_v3',  // v1/v2 = cyclone-only; v3 = S1-only agro + cyclone
   trackBufferKm:  50,
   candidatesPerCycloneClass: 80,
   candidatesPerDistrictAgro: 30,
@@ -68,17 +68,18 @@ var CFG = {
 
   thresh: {
     cyclone: {siMin: 0.05, ndwiMin: 0.20, ndviMax: 0.30, vhMax: -19},
-    // Agro thresholds RELAXED (v3) — the strict v1 set yielded 0 candidates
-    // because (a) JRC seasonality >= 6 mo eliminates most rice paddies
-    // (which are flooded 2-4 mo, not 6+) and (b) 5-year medians collapse
-    // transient NDWI/VH signals. New scheme: per-year July sampling, no
-    // JRC hard gate, broader spectral bands matching transient transplant
-    // flooding (young rice under shallow standing water).
-    agro:    {ndwiMin: 0.10, ndviMin: 0.10, ndviMax: 0.40,
-              vhMin: -22, vhMax: -13, siMax: -0.02}
+    // Agro v4: S1-ONLY mask. Diagnostic confirmed S2 is essentially absent
+    // for coastal Odisha in July (0 scenes at CLOUD<60 in Jul 2018). Switch
+    // to a radar-only definition of agronomic_flood:
+    //   * inside ESA WorldCover cropland
+    //   * S1 VH between -22 and -17 dB  (smooth shallow water under emerging
+    //     canopy; below permanent open water and above dry land/canopy)
+    //   * JRC seasonality in [1, 5] months/year (transient seasonal flooding,
+    //     NOT permanent water bodies)
+    agro:    {vhMin: -22, vhMax: -17, jrcMin: 1, jrcMax: 5}
   },
 
-  s2CloudPctMax: 60
+  s2CloudPctMax: 80  // raise from 60 to 80 to give cyclone S2 path more headroom
 };
 
 // ---------------------------------------------------------------------------
@@ -244,35 +245,35 @@ var yearList = CFG.nonCycloneYears;
 var yearStart = ee.Date.fromYMD(ee.Number(yearList[0]), 1, 1);
 var yearEnd   = ee.Date.fromYMD(ee.Number(yearList[yearList.length - 1]), 12, 31);
 
-// v3 strategy: PER-YEAR July sampling (no 5-year median).
-//   For each non-cyclone year (2017, 2018, 2022, 2023, 2024) and each of the
-//   8 districts, build a July composite, apply the relaxed agro mask, and
-//   stratified-sample 6 candidates. Total = 5 years x 8 districts x 6 = 240.
-//   This captures TRANSIENT monsoon flooding during transplanting (which is
-//   what agronomic_flood actually means) instead of permanent surface water.
+// v4 strategy: S1-ONLY per-year July-August sampling.
+//   Diagnostic showed July 2018 has ZERO S2 scenes <60% cloud in coastal
+//   Odisha (the monsoon). S1 radar is unaffected by clouds. New mask:
+//     inside cropland
+//     + S1 VH in [-22, -17] dB  (smooth shallow water under emerging canopy)
+//     + JRC seasonality in [1, 5] months  (transient, not permanent water)
+//   For each non-cyclone year x district, sample 6 candidates.
+//   Total = 5 yrs x 8 dists x 6 = 240.
 var AGRO_SCALE = 30;
 var ta = CFG.thresh.agro;
 var agroAll = ee.FeatureCollection([]);
-var PER_DISTRICT_PER_YEAR = 6;  // 6 x 5 years = 30 per district = 240 total
+var PER_DISTRICT_PER_YEAR = 6;
+
+// JRC seasonality soft-prior layer (1-5 months/year flooded = transient)
+var jrcTransient = jrcGSW.gte(ta.jrcMin).and(jrcGSW.lte(ta.jrcMax));
 
 CFG.nonCycloneYears.forEach(function (yr) {
+  // July + August window (2 months of S1 scenes, more candidates)
   var winStart = ee.Date.fromYMD(yr, 7, 1);
-  var winEnd   = ee.Date.fromYMD(yr, 7, 31);
-  var s2 = buildS2(winStart, winEnd, fullAOI);
+  var winEnd   = ee.Date.fromYMD(yr, 8, 31);
   var s1 = buildS1(winStart, winEnd, fullAOI);
-  var stack = s2.addBands(s1);
 
-  // Relaxed agronomic mask (no JRC hard gate; JRC used only as a soft prior
-  // via OR with cropland-+-spectral signature).
-  var spectral = stack.select('NDWI').gt(ta.ndwiMin)
-    .and(stack.select('NDVI').gt(ta.ndviMin))
-    .and(stack.select('NDVI').lt(ta.ndviMax))
-    .and(stack.select('VH').gt(ta.vhMin))
-    .and(stack.select('VH').lt(ta.vhMax))
-    .and(stack.select('SI').lt(ta.siMax))
-    .and(cropland);
+  // S1-only agronomic mask.
+  var mask = s1.select('VH').gt(ta.vhMin)
+    .and(s1.select('VH').lt(ta.vhMax))
+    .and(cropland)
+    .and(jrcTransient);
 
-  var agroBase = spectral.selfMask().rename('candidate');
+  var agroBase = mask.selfMask().rename('candidate');
 
   CFG.districts.forEach(function (dn) {
     var distGeom = studyArea.filter(ee.Filter.eq('ADM2_NAME', dn)).geometry();
@@ -281,13 +282,13 @@ CFG.nonCycloneYears.forEach(function (yr) {
       classBand: 'candidate',
       region: distGeom,
       scale: AGRO_SCALE,
-      seed: 42 + yr,  // vary seed by year so we don't get spatial collisions
+      seed: 42 + yr,
       geometries: true,
       tileScale: 8
     });
     samp = samp.map(function (f) {
       var p = f.geometry();
-      var vals = stack.reduceRegion({
+      var vals = s1.reduceRegion({
         reducer: ee.Reducer.mean(),
         geometry: p, scale: AGRO_SCALE, maxPixels: 1e8
       });
@@ -296,13 +297,13 @@ CFG.nonCycloneYears.forEach(function (yr) {
         class_id: 1,
         cyclone: 'none',
         year: yr,
-        source_date: ee.String('July ').cat(ee.Number(yr).format('%d')),
+        source_date: ee.String('Jul-Aug ').cat(ee.Number(yr).format('%d')),
         district: dn,
         lon: p.coordinates().get(0),
         lat: p.coordinates().get(1),
-        si:   vals.get('SI'),
-        ndwi: vals.get('NDWI'),
-        ndvi: vals.get('NDVI'),
+        si:   null,    // not computed (S2 unavailable in monsoon)
+        ndwi: null,
+        ndvi: null,
         vh:   vals.get('VH')
       });
     });
@@ -310,8 +311,7 @@ CFG.nonCycloneYears.forEach(function (yr) {
   });
 });
 
-// Don't force eager evaluation in the interactive console (would time out).
-print('Agronomic candidates: deferred to Export task (target 240 = 5 yr x 8 dist x 6).');
+print('Agronomic candidates (v4 S1-only): deferred to Export task (target 240).');
 
 // ---------------------------------------------------------------------------
 // 7. MERGE + ADD CANDIDATE_ID
@@ -345,14 +345,14 @@ print('Total candidates: deferred to Export task (target ~480).');
 // ---------------------------------------------------------------------------
 Export.table.toAsset({
   collection: finalFC,
-  description: 'candidates_v2_export',
+  description: 'candidates_v3_export',
   assetId: CFG.outputAsset
 });
 
 print('');
 print('=== Export task dispatched ===');
 print('1. Open Tasks tab on the right.');
-print('2. Click Run next to "candidates_v2_export".');
+print('2. Click Run next to "candidates_v3_export".');
 print('3. Wait ~15 min. When status shows COMPLETED, run Module 07.');
 print('');
 
