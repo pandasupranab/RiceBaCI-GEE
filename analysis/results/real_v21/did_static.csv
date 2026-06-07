@@ -2,6 +2,6 @@ pipeline,metric,n_obs,n_districts,tau_days,se_days,t_stat,p_value,ci_lo_95,ci_hi
 raw,SOS,64,8,15.289,17.328,0.882,0.3776,-18.673,49.25,district,0.0133
 raw,POS,64,8,-3.587,2.882,-1.245,0.2133,-9.235,2.062,district,0.0109
 raw,EOS,44,8,-0.0,0.0,-2.038,0.0415,-0.0,-0.0,district,0.0
-corrected,SOS,64,8,15.218,17.337,0.878,0.3801,-18.762,49.197,district,0.0132
-corrected,POS,64,8,-3.623,2.891,-1.253,0.21,-9.289,2.042,district,0.0112
-corrected,EOS,44,8,-0.098,0.062,-1.589,0.112,-0.219,0.023,district,0.0588
+corrected,SOS,64,8,15.108,17.312,0.873,0.3828,-18.822,49.039,district,0.013
+corrected,POS,64,8,-3.677,2.897,-1.269,0.2045,-9.356,2.002,district,0.0115
+corrected,EOS,44,8,-0.239,0.169,-1.411,0.1582,-0.57,0.093,district,0.074
