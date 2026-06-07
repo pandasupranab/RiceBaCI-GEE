@@ -1,0 +1,4 @@
+class,n_test,user_accuracy,producer_accuracy
+agronomic_flood,48,0.9796,1.0
+cyclone_flood,48,1.0,0.9792
+OVERALL,96,0.9896,0.9896
