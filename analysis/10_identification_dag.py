@@ -140,10 +140,10 @@ def draw_panel_a_naive(ax):
            label_color=OK_RED)
     _arrow(ax, trough,     sos,        color=INK)
 
-    # Legend / verdict
+    # Legend / verdict (real v2.1 panel)
     ax.text(5.5, -0.15,
-            "SOS bias from saline-surge confound: +5.66 d "
-            "(synthetic-panel verification, p_perm = 0.018)",
+            "SOS bias from saline-surge confound (raw pipeline): +15.29 d "
+            "(real v2.1 panel, p_WCB = 0.4000)",
             fontsize=8.0, ha="center", color=OK_RED, weight="bold")
 
 
@@ -163,8 +163,10 @@ def draw_panel_b_corrected(ax):
             "storm-surge \u2192 trough arrow, restoring identification",
             fontsize=8.2, ha="left", color="#555555", style="italic")
 
-    # Classifier band sits at the very top — well clear of subtitle
-    classifier  = _box(ax, 4.7, 3.55, 3.0, 0.45,
+    # Classifier band sits at the very top — well clear of subtitle.
+    # Place it OFFSET to the LEFT of the surge node so the masking arrow
+    # comes in from the side rather than penetrating the surge box.
+    classifier  = _box(ax, 3.2, 3.55, 2.6, 0.45,
                        "Module 02 saline-flood classifier",
                        fc="#D6F0E2", ec=OK_GREEN, fontsize=7.8,
                        weight="bold")
@@ -198,9 +200,13 @@ def draw_panel_b_corrected(ax):
     _arrow(ax, flood,      trough,     color=INK,
            label="legitimate", label_offset=(0.0, 0.20))
 
-    # Module 02 intercepts the surge -> trough arrow
+    # Module 02 intercepts the surge -> trough arrow.
+    # The arrow now comes from the LEFT (offset classifier) into the
+    # TOP-LEFT corner of the surge box; the 'masks' label sits ABOVE
+    # the surge box, not inside it.
     _arrow(ax, classifier, surge, color=OK_GREEN, lw=1.4,
-           label="masks", label_offset=(0.55, 0.0),
+           curve=-0.15,
+           label="masks", label_offset=(-0.10, 0.45),
            label_color=OK_GREEN)
 
     # The broken arrow: surge -> trough is now crossed out
@@ -212,11 +218,11 @@ def draw_panel_b_corrected(ax):
 
     _arrow(ax, trough, sos, color=INK)
 
-    # Verdict
+    # Verdict (real v2.1 panel)
     ax.text(5.5, -0.15,
-            "Residual SOS bias after correction: +1.96 d "
-            "(p_perm = 0.054; corrected/EOS null at p = 0.27 \u2014 "
-            "mechanism-specific)",
+            "Residual SOS bias after correction: +15.11 d "
+            "(p_WCB = 0.4065; \u0394 from raw \u2248 0.18 d, "
+            "bounded by district pixel share)",
             fontsize=8.0, ha="center", color=OK_GREEN, weight="bold")
 
 
@@ -231,10 +237,16 @@ def main():
         "font.size": 9,
     })
 
-    fig, (ax_a, ax_b) = plt.subplots(2, 1, figsize=(9.5, 8.0),
+    # Widen figure slightly so the rightmost 'Estimated SOS' box border
+    # is never clipped by bbox_inches='tight'.
+    fig, (ax_a, ax_b) = plt.subplots(2, 1, figsize=(10.5, 8.4),
                                       gridspec_kw={"height_ratios": [4.2, 4.7]})
     draw_panel_a_naive(ax_a)
     draw_panel_b_corrected(ax_b)
+
+    # Extend x-axis slightly past the SOS box so its right border has room.
+    for ax in (ax_a, ax_b):
+        ax.set_xlim(-0.1, 11.4)
 
     fig.subplots_adjust(hspace=0.22, top=0.94, bottom=0.06,
                         left=0.03, right=0.97)
