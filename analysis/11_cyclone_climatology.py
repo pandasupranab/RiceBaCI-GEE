@@ -312,9 +312,9 @@ def make_figure(csv_path: Path, fig_pdf: Path, fig_png: Path) -> None:
 
     rows = list(csv.DictReader(csv_path.open()))
 
-    fig, axes = plt.subplots(1, 2, figsize=(12, 4.6),
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5.6),
                              gridspec_kw={"width_ratios": [1.0, 1.2]})
-    fig.subplots_adjust(left=0.07, right=0.97, top=0.90, bottom=0.13,
+    fig.subplots_adjust(left=0.07, right=0.97, top=0.90, bottom=0.15,
                         wspace=0.32)
 
     # ---- Panel A: schematic BoB landfall map ----
@@ -344,17 +344,18 @@ def make_figure(csv_path: Path, fig_pdf: Path, fig_png: Path) -> None:
                    marker="*", zorder=5, label=f"{n} ({st['season']})")
         ax.annotate(n, (float(st["landfall_lon"]), float(st["landfall_lat"])),
                     xytext=(8, 6), textcoords="offset points",
-                    fontsize=9, color=colours[n], fontweight="bold",
+                    fontsize=11.5, color=colours[n], fontweight="bold",
                     zorder=6)
 
     ax.set_xlim(83.5, 90.5)
     ax.set_ylim(18.5, 23.0)
-    ax.set_xlabel("Longitude (°E)", fontsize=10)
-    ax.set_ylabel("Latitude (°N)", fontsize=10)
+    ax.set_xlabel("Longitude (°E)", fontsize=12.5)
+    ax.set_ylabel("Latitude (°N)", fontsize=12.5)
     ax.set_title("(A) Bay of Bengal pre-Kharif landfalls",
-                 fontsize=11, loc="left", pad=8)
+                 fontsize=13.5, loc="left", pad=8, weight="bold")
+    ax.tick_params(labelsize=10.5)
     ax.grid(True, ls=":", lw=0.5, color="0.85", zorder=0)
-    ax.legend(loc="lower right", fontsize=8, framealpha=0.92,
+    ax.legend(loc="lower right", fontsize=10, framealpha=0.92,
               fancybox=False, edgecolor="0.7")
     ax.set_aspect("equal", adjustable="datalim")
 
@@ -380,17 +381,18 @@ def make_figure(csv_path: Path, fig_pdf: Path, fig_png: Path) -> None:
              (137, 175, "Cat 5", "#a13544")]
     for lo, hi, name, c in bands:
         ax.axhspan(lo, hi, color=c, alpha=0.16, zorder=1)
-        ax.text(167.5, (lo + hi) / 2, name, fontsize=7, color="0.30",
-                va="center", ha="left", zorder=2)
+        ax.text(167.5, (lo + hi) / 2, name, fontsize=9.5, color="0.30",
+                va="center", ha="left", zorder=2, weight="bold")
 
     ax.set_xlim(100, 170)
     ax.set_ylim(20, 175)
-    ax.set_xlabel("Landfall day-of-year (DOY)", fontsize=10)
-    ax.set_ylabel("Peak 1-min sustained wind, Vmax (kt)", fontsize=10)
+    ax.set_xlabel("Landfall day-of-year (DOY)", fontsize=12.5)
+    ax.set_ylabel("Peak 1-min sustained wind, Vmax (kt)", fontsize=12.5)
     ax.set_title("(B) Pre-Kharif landfall intensity vs. day-of-year",
-                 fontsize=11, loc="left", pad=8)
+                 fontsize=13.5, loc="left", pad=8, weight="bold")
+    ax.tick_params(labelsize=10.5)
     ax.grid(True, ls=":", lw=0.5, color="0.85", zorder=0)
-    ax.legend(loc="upper left", fontsize=7.5, framealpha=0.92,
+    ax.legend(loc="upper left", fontsize=9.5, framealpha=0.92,
               fancybox=False, edgecolor="0.7")
 
     # fig.suptitle removed (caption supplied below figure in DOCX/manuscript).
