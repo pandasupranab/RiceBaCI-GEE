@@ -7,32 +7,19 @@
  *           agronomic_flood) using strict physical rules, ready for batch
  *           Keep/Reject review in Module 07.
  *
- * Sampling logic
+ * v2 patch (2026-06-07):
+ *   - Empty-collection guard in buildS2 / buildS1 (returns dummy bands so
+ *     downstream .normalizedDifference cannot crash).
+ *   - Explicit .select() of B2/B3/B4/B8/B11/B12 before computing indices,
+ *     so band metadata is preserved.
+ *   - Agronomic composite now uses a SINGLE multi-year ImageCollection
+ *     with ee.Filter.calendarRange(7, 8, 'month') and a year-list filter,
+ *     so band metadata is never lost via JS-array reconstruction.
+ *
+ * Sampling logic (unchanged)
  * ---------------------------------------------------------------------------
- * cyclone_flood candidates (80 per cyclone x 3 cyclones = 240):
- *   - inside the cyclone's 50 km track buffer
- *   - inside ESA WorldCover 2021 cropland (class 40)
- *   - Sentinel-2 SI > +0.05  (salt-affected wet soil)
- *   - Sentinel-2 NDWI > +0.20  (wet pixel)
- *   - Sentinel-2 NDVI < 0.30  (vegetation crashed)
- *   - Sentinel-1 VH < -19 dB  (smooth water)
- *   - within +/- 15 days of landfall
- *
- * agronomic_flood candidates (30 per district x 8 districts = 240):
- *   - inside ESA WorldCover 2021 cropland (class 40)
- *   - JRC Global Surface Water seasonal layer >= 6 months/year
- *   - Sentinel-2 NDWI > +0.20  (wet pixel)
- *   - Sentinel-2 NDVI between 0.10 and 0.40  (young transplanted rice)
- *   - Sentinel-1 VH between -22 and -16 dB  (water under emerging canopy)
- *   - Sentinel-2 SI < -0.05  (NOT salt-affected)
- *   - in July or August of a non-cyclone year (2017, 2018, 2022, 2023, 2024)
- *   - outside all 50 km cyclone buffers
- *
- * Output: a single GEE Cloud asset table 'candidates_v1' with 480 features,
- *         each carrying:  lon, lat, class_proposed, cyclone, year, source_date,
- *                         si, ndvi, ndwi, vh, district, candidate_id
- *
- * Run this once. Then proceed to Module 07 (review app).
+ * cyclone_flood: 80 per cyclone x 3 = 240
+ * agronomic_flood: 30 per district x 8 = 240
  * ---------------------------------------------------------------------------
  */
 
@@ -79,7 +66,6 @@ var CFG = {
   districts: ['Baleshwar','Bhadrak','Kendrapara','Jagatsinghpur',
               'Puri','Cuttack','Dhenkanal','Angul'],
 
-  // Physical thresholds
   thresh: {
     cyclone: {siMin: 0.05, ndwiMin: 0.20, ndviMax: 0.30, vhMax: -19},
     agro:    {ndwiMin: 0.20, ndviMin: 0.10, ndviMax: 0.40,
@@ -104,9 +90,6 @@ var yaas   = CFG.cyclones.yaas;
 var bufFani   = trackBuffer(fani);
 var bufAmphan = trackBuffer(amphan);
 var bufYaas   = trackBuffer(yaas);
-var allBuffers = ee.Geometry.MultiPolygon([
-  bufFani.coordinates(), bufAmphan.coordinates(), bufYaas.coordinates()
-]);
 
 // ---------------------------------------------------------------------------
 // 3. ANCILLARY LAYERS
@@ -117,26 +100,56 @@ var jrcGSW     = ee.Image('JRC/GSW1_4/GlobalSurfaceWater').select('seasonality')
 var seasonalWater = jrcGSW.gte(6);   // pixels under water >=6 months/year
 
 // ---------------------------------------------------------------------------
-// 4. S2 + S1 COMPOSITES FOR A GIVEN WINDOW
+// 4. S2 + S1 COMPOSITES — with empty-collection guards
 // ---------------------------------------------------------------------------
+// Bands we always want to be present, in this order, so .normalizedDifference
+// cannot fail even when the input collection is empty.
+var S2_BANDS = ['B2','B3','B4','B8','B11','B12'];
+
+// A safe zero-image carrying the expected S2 bands. Used when a date window
+// has zero usable scenes inside the AOI.
+function dummyS2Image() {
+  var z = ee.Image.constant(0).rename(S2_BANDS[0]);
+  for (var i = 1; i < S2_BANDS.length; i++) {
+    z = z.addBands(ee.Image.constant(0).rename(S2_BANDS[i]));
+  }
+  return z.toFloat();
+}
+function dummyS1Image() {
+  return ee.Image.constant(-25).rename('VH').toFloat();  // very dry / no-data sentinel
+}
+
 function maskS2(image) {
   var scl = image.select('SCL');
   var bad = scl.eq(3).or(scl.eq(8)).or(scl.eq(9)).or(scl.eq(10)).or(scl.eq(11));
-  return image.updateMask(bad.not()).divide(10000);
+  return image.updateMask(bad.not()).divide(10000).select(S2_BANDS);
 }
 
+/**
+ * Build a guarded S2 composite for the given window+geom.
+ * Always returns an image with bands [SI, NDWI, NDVI, B2..B12], even when the
+ * underlying ImageCollection is empty for that AOI/window.
+ */
 function buildS2(startDate, endDate, geom) {
   var col = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
     .filterBounds(geom)
     .filterDate(startDate, endDate)
     .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', CFG.s2CloudPctMax))
     .map(maskS2);
-  var med = col.median().clip(geom);
-  var SI   = med.expression('(B11 - B12) / (B11 + B12)',
+
+  // Use ee.Algorithms.If so the guard runs server-side and band metadata is
+  // preserved regardless of collection size.
+  var med = ee.Image(ee.Algorithms.If(
+    col.size().gt(0),
+    col.median().select(S2_BANDS),
+    dummyS2Image()
+  ));
+
+  var SI   = med.expression('(B11 - B12) / (B11 + B12 + 1e-6)',
               {B11: med.select('B11'), B12: med.select('B12')}).rename('SI');
   var NDWI = med.normalizedDifference(['B3','B8']).rename('NDWI');
   var NDVI = med.normalizedDifference(['B8','B4']).rename('NDVI');
-  return SI.addBands(NDWI).addBands(NDVI).addBands(med);
+  return SI.addBands(NDWI).addBands(NDVI).addBands(med).clip(geom);
 }
 
 function buildS1(startDate, endDate, geom) {
@@ -146,7 +159,12 @@ function buildS1(startDate, endDate, geom) {
     .filter(ee.Filter.eq('instrumentMode', 'IW'))
     .filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VH'))
     .select('VH');
-  return col.median().clip(geom).rename('VH');
+  var med = ee.Image(ee.Algorithms.If(
+    col.size().gt(0),
+    col.median().rename('VH'),
+    dummyS1Image()
+  ));
+  return med.clip(geom);
 }
 
 // ---------------------------------------------------------------------------
@@ -210,18 +228,65 @@ print('  Amphan:', cycAmphan.size());
 print('  Yaas:',   cycYaas.size());
 
 // ---------------------------------------------------------------------------
-// 6. AGRONOMIC_FLOOD CANDIDATE MASK + SAMPLING
+// 6. AGRONOMIC_FLOOD CANDIDATE — single multi-year July-Aug composite
 // ---------------------------------------------------------------------------
-// Use a pooled July-August composite across non-cyclone years (the median
-// suppresses inter-year noise), then sample 30 candidates inside each district.
-var nonCycYears = CFG.nonCycloneYears;
-var agroComposites = nonCycYears.map(function (yr) {
-  var s = ee.Date.fromYMD(yr, 7, 1);
-  var e = ee.Date.fromYMD(yr, 8, 31);
-  return buildS2(s, e, fullAOI).addBands(buildS1(s, e, fullAOI))
-            .set('yr', yr);
-});
-var agroMed = ee.ImageCollection(agroComposites).median();
+// Build ONE ImageCollection that contains all July-August scenes from the
+// non-cyclone years, then take its median. This avoids any JS array of
+// per-year composites and preserves band metadata even if a single year is
+// patchy.
+var yearList = CFG.nonCycloneYears;
+var yearStart = ee.Date.fromYMD(ee.Number(yearList[0]), 1, 1);
+var yearEnd   = ee.Date.fromYMD(ee.Number(yearList[yearList.length - 1]), 12, 31);
+
+// Keep only July/August in the non-cyclone years (2017, 2018, 2022, 2023, 2024).
+// Cyclone years 2019/2020/2021 are excluded by OR-ing per-year calendarRange filters.
+var keepYearFilter = ee.Filter.or(
+  ee.Filter.calendarRange(2017, 2017, 'year'),
+  ee.Filter.calendarRange(2018, 2018, 'year'),
+  ee.Filter.calendarRange(2022, 2022, 'year'),
+  ee.Filter.calendarRange(2023, 2023, 'year'),
+  ee.Filter.calendarRange(2024, 2024, 'year')
+);
+
+// S2 pooled composite
+var s2PoolCol = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
+  .filterBounds(fullAOI)
+  .filterDate(yearStart, yearEnd)
+  .filter(ee.Filter.calendarRange(7, 8, 'month'))
+  .filter(keepYearFilter)
+  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', CFG.s2CloudPctMax))
+  .map(maskS2);
+
+var s2PoolMed = ee.Image(ee.Algorithms.If(
+  s2PoolCol.size().gt(0),
+  s2PoolCol.median().select(S2_BANDS),
+  dummyS2Image()
+));
+
+var s2SI   = s2PoolMed.expression('(B11 - B12) / (B11 + B12 + 1e-6)',
+              {B11: s2PoolMed.select('B11'), B12: s2PoolMed.select('B12')}).rename('SI');
+var s2NDWI = s2PoolMed.normalizedDifference(['B3','B8']).rename('NDWI');
+var s2NDVI = s2PoolMed.normalizedDifference(['B8','B4']).rename('NDVI');
+
+// S1 pooled composite — same July-Aug window across non-cyclone years.
+var s1PoolCol = ee.ImageCollection('COPERNICUS/S1_GRD')
+  .filterBounds(fullAOI)
+  .filterDate(yearStart, yearEnd)
+  .filter(ee.Filter.calendarRange(7, 8, 'month'))
+  .filter(keepYearFilter)
+  .filter(ee.Filter.eq('instrumentMode', 'IW'))
+  .filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VH'))
+  .select('VH');
+
+var s1PoolMed = ee.Image(ee.Algorithms.If(
+  s1PoolCol.size().gt(0),
+  s1PoolCol.median().rename('VH'),
+  dummyS1Image()
+));
+
+var agroMed = s2SI.addBands(s2NDWI).addBands(s2NDVI)
+                  .addBands(s2PoolMed).addBands(s1PoolMed)
+                  .clip(fullAOI);
 
 var ta = CFG.thresh.agro;
 var agroMask = agroMed.select('NDWI').gt(ta.ndwiMin)
@@ -231,7 +296,7 @@ var agroMask = agroMed.select('NDWI').gt(ta.ndwiMin)
   .and(agroMed.select('VH').lt(ta.vhMax))
   .and(agroMed.select('SI').lt(ta.siMax))
   .and(cropland)
-  .and(seasonalWater);  // also restrict to known-seasonal-flood pixels
+  .and(seasonalWater);
 
 var agroBase = agroMask.selfMask().rename('candidate');
 
@@ -258,8 +323,8 @@ CFG.districts.forEach(function (dn) {
       class_proposed: 'agronomic_flood',
       class_id: 1,
       cyclone: 'none',
-      year: 2020,  // representative non-cyclone year
-      source_date: 'July-August 2017-2024 (non-cyclone-year median)',
+      year: 2020,
+      source_date: 'July-August 2017/2018/2022/2023/2024 (non-cyclone-year median)',
       district: dn,
       lon: p.coordinates().get(0),
       lat: p.coordinates().get(1),
@@ -279,7 +344,6 @@ print('Agronomic candidate count (target 240):', agroAll.size());
 // ---------------------------------------------------------------------------
 var allCandidates = cycAll.merge(agroAll);
 
-// Add candidate_id as a stable integer.
 var withId = allCandidates.toList(allCandidates.size()).map(function (f, i) {
   return ee.Feature(f).set('candidate_id', i).set('reviewed', 0).set('decision', 'pending');
 });
@@ -288,7 +352,7 @@ var finalFC = ee.FeatureCollection(withId);
 print('Total candidates:', finalFC.size(), '  (target ~480)');
 
 // ---------------------------------------------------------------------------
-// 8. EXPORT TO CLOUD ASSET (used by Module 07 review app)
+// 8. EXPORT TO CLOUD ASSET
 // ---------------------------------------------------------------------------
 Export.table.toAsset({
   collection: finalFC,
@@ -303,7 +367,7 @@ print('2. Click Run next to "candidates_v1_export".');
 print('3. Wait ~5 min. When status shows COMPLETED, run Module 07.');
 print('');
 
-// Also map a preview
+// Preview
 Map.centerObject(studyArea, 7);
 Map.addLayer(ee.Image().paint(studyArea, 1, 2), {palette: ['01696F']}, '8 districts', true);
 Map.addLayer(cycAll, {color: 'A12C7B'}, 'cyclone candidates (preview)', true);
