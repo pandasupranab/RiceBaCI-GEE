@@ -1,0 +1,8 @@
+rank,feature,label,gini_importance
+1,ndwi_max_event_window,Sentinel-2 NDWI maximum over event window,0.4502
+2,lswi_min_event_window,Sentinel-2 LSWI minimum over event window,0.3399
+3,delta_vh_db,"ΔVH (event median − 30-day pre-baseline median, dB)",0.0734
+4,vv_min_event_window,VV minimum over event window (dB),0.072
+5,era5_3day_max_wind,ERA5-Land 3-day maximum hourly wind speed (m s⁻¹),0.0369
+6,jrc_water_permanence,JRC GSW occurrence (%),0.0152
+7,delta_cr_db,"ΔCR (cross-ratio change, dB)",0.0123
