@@ -270,11 +270,8 @@ def make_figure(perm_df: pd.DataFrame,
                 ax.set_ylabel("# permutations")
             ax.tick_params(labelsize=8)
 
-    fig.suptitle(
-        "In-space placebo distributions (donor-swap, k=5 of G=8, "
-        "C(8,5)=56 permutations)",
-        fontsize=10, y=0.995, x=0.04, ha="left",
-    )
+    # fig.suptitle removed (caption supplied below figure in DOCX/manuscript).
+    fig.suptitle("", fontsize=10, y=0.995, x=0.04, ha="left")
     fig.tight_layout(rect=[0, 0, 1, 0.96])
     outdir.mkdir(parents=True, exist_ok=True)
     fig.savefig(outdir / "fig6_placebo_distribution.pdf",
