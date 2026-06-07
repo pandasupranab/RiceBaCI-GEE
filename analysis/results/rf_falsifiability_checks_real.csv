@@ -1,0 +1,5 @@
+check,pre_registered_threshold,observed_value_db,status,rationale,observed_value_cyc,observed_value_agr,observed_value_pct
+delta_vh_median_gap_ge_3db,≥ 3 dB,5.062,PASS,Cyclone surge depolarises VH ≥ 3 dB more than agronomic flooding (Voigt et al. 2007; UN-SPIDER 2019).,,,
+vv_min_gap_ge_2db,≥ 2 dB,6.488,PASS,Smooth surge water reflects specularly → low VV.,,,
+delta_cr_opposite_sign,cyclone < 0 < agronomic,,PASS,Surge collapses cross-pol harder than co-pol (CR drops); agronomic shallow flooding inverts.,-0.309,0.418,
+cyclone_jrc_permanence_below_10pct,< 10%,,PASS,Cyclone-flooded pixels are by construction normally-dry land (JRC long-term occurrence low).,,,2.0
