@@ -393,10 +393,8 @@ def make_figure(csv_path: Path, fig_pdf: Path, fig_png: Path) -> None:
     ax.legend(loc="upper left", fontsize=7.5, framealpha=0.92,
               fancybox=False, edgecolor="0.7")
 
-    fig.suptitle("Figure S1. Pre-Kharif Bay-of-Bengal cyclone climatology, "
-                 "1981–2024, with the three identification cyclones "
-                 "(Fani 2019, Amphan 2020, Yaas 2021) highlighted.",
-                 fontsize=10.5, y=0.995, x=0.5, ha="center")
+    # fig.suptitle removed (caption supplied below figure in DOCX/manuscript).
+    fig.suptitle("", fontsize=10.5, y=0.995, x=0.5, ha="center")
 
     fig.savefig(str(fig_pdf), dpi=300, bbox_inches="tight",
                 pad_inches=0.35)
