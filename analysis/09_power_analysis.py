@@ -253,7 +253,8 @@ def make_figure(curves: pd.DataFrame,
 
     ax.set_xlabel("True tau (days)")
     ax.set_ylabel("Power (Pr reject H0 | tau)")
-    ax.set_title("Post-hoc power curves — DiD with cluster-robust SE",
+    # Top title removed (caption supplied below figure in DOCX/manuscript).
+    ax.set_title("",
                  fontsize=10, loc="left")
     ax.set_xlim(-0.2, 8.4)
     ax.set_ylim(0, 1.02)
