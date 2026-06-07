@@ -352,8 +352,21 @@ print('Agronomic candidates: deferred to Export task (run from Tasks tab).');
 // ---------------------------------------------------------------------------
 var allCandidates = cycAll.merge(agroAll);
 
-var withId = allCandidates.toList(allCandidates.size()).map(function (f, i) {
-  return ee.Feature(f).set('candidate_id', i).set('reviewed', 0).set('decision', 'pending');
+// Assign candidate_id 0..N-1 server-side.
+// IMPORTANT: ee.List.map's callback MUST be single-argument (the index `i`
+// parameter that some examples show is illegal and causes:
+//   "List.map: A mapped algorithm must take one argument."
+// So we zip a sequence of ids with the feature list and rebuild.
+var featList = allCandidates.toList(allCandidates.size());
+var idList   = ee.List.sequence(0, allCandidates.size().subtract(1));
+var zipped   = idList.zip(featList);  // [[0, f0], [1, f1], ...]
+var withId = zipped.map(function (pair) {
+  pair = ee.List(pair);
+  var id   = ee.Number(pair.get(0));
+  var feat = ee.Feature(pair.get(1));
+  return feat.set('candidate_id', id)
+             .set('reviewed', 0)
+             .set('decision', 'pending');
 });
 var finalFC = ee.FeatureCollection(withId);
 
