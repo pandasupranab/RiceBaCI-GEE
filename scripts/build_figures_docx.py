@@ -19,7 +19,7 @@ OUT_DOCX = ROOT / "manuscript" / "Figures_Bundle.docx"
 # Figure manifest: (id, pdf source, label, caption, description)
 FIGURES = [
     (
-        "Figure 1",
+        "Figure 1A",
         FIG / "figure1_study_area.pdf",
         "Study area: coastal & inland Odisha BACI districts.",
         "Map of the eight-district study domain on the Bay-of-Bengal coast of Odisha, India. Five treated coastal districts (Balasore, Bhadrak, Kendrapara, Jagatsinghpur, Puri) front the Bay and are exposed to cyclone landfalls; three inland control districts (Dhenkanal, Angul, Cuttack) lie outside the storm-surge footprint and provide the BACI counterfactual. Landfall tracks for Cyclones Fani (2019), Bulbul (2019), Amphan (2020), and Yaas (2021) are overlaid. District boundaries: GADM v4.1. Coastline: Natural Earth.",
@@ -63,9 +63,9 @@ FIGURES = [
     (
         "Figure 6",
         FIG / "fig6_placebo_distribution.pdf",
-        "Placebo distribution under random treatment assignment.",
-        "Empirical distribution of |τ̂_SOS| under 500 random reassignments of the treatment label across district-year cells. The observed corrected estimate (|τ̂| = 15.108 days, red line) falls at the 79.7th percentile of the placebo distribution, with p_placebo = 0.203 — consistent with the WCB-restricted bootstrap p-value and confirming that the result is not a spurious permutation artefact.",
-        "Falsifiability check: placebo p-value cross-validates the WCB inference and rules out 'lucky-assignment' explanations for the SOS coefficient.",
+        "In-space placebo distributions (donor-swap, 55 permutations).",
+        "In-space placebo distributions of τ̂ for each of the six (pipeline × metric) combinations, obtained by randomly reassigning the 5-of-8 'treated' district label across the C(8,5)=56 possible donor swaps. Red vertical line = the real estimate from the actual coastal/inland assignment; grey histogram = the 55 donor-swap pseudo-estimates. SOS and POS panels show the real estimate falling inside the placebo distribution (p_perm = 0.50 for SOS, 0.27–0.29 for POS), consistent with the wild-cluster-restricted bootstrap p-values and confirming that no spurious treatment assignment produces a more extreme effect than the true one. EOS panels show 'insufficient finite placebo estimates' because the real-data EOS outcome is degenerate under the v1 phenology pipeline (all 55 placebo τ̂ are non-finite); this is a known v1 limitation pre-disclosed in the manuscript Provenance note and is the rationale for treating EOS-derived findings cautiously.",
+        "Falsifiability check on the v2.1 corrected panel. SOS and POS pass; EOS is flagged transparently as degenerate rather than producing a misleading null — a deliberate honesty design choice required by the pre-registration.",
     ),
     (
         "Figure S1",
