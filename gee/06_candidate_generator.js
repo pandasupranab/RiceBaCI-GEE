@@ -301,6 +301,10 @@ var agroMask = agroMed.select('NDWI').gt(ta.ndwiMin)
 var agroBase = agroMask.selfMask().rename('candidate');
 
 // Loop districts and stratified-sample 30 per district.
+// Scale relaxed to 30 m (~9x faster than 10 m) and tileScale=8 to fan out more
+// parallel workers. Same physical interpretation — we just sample 30 m pixels
+// inside the per-district cropland-+-seasonal-water mask.
+var AGRO_SCALE = 30;
 var agroAll = ee.FeatureCollection([]);
 CFG.districts.forEach(function (dn) {
   var distGeom = studyArea.filter(ee.Filter.eq('ADM2_NAME', dn)).geometry();
@@ -308,16 +312,16 @@ CFG.districts.forEach(function (dn) {
     numPoints: CFG.candidatesPerDistrictAgro,
     classBand: 'candidate',
     region: distGeom,
-    scale: 10,
+    scale: AGRO_SCALE,
     seed: 42,
     geometries: true,
-    tileScale: 4
+    tileScale: 8
   });
   samp = samp.map(function (f) {
     var p = f.geometry();
     var vals = agroMed.reduceRegion({
       reducer: ee.Reducer.mean(),
-      geometry: p, scale: 10, maxPixels: 1e8
+      geometry: p, scale: AGRO_SCALE, maxPixels: 1e8
     });
     return f.set({
       class_proposed: 'agronomic_flood',
@@ -337,7 +341,11 @@ CFG.districts.forEach(function (dn) {
   agroAll = agroAll.merge(samp);
 });
 
-print('Agronomic candidate count (target 240):', agroAll.size());
+// NOTE: agroAll.size() is intentionally NOT printed here. Forcing eager
+// evaluation of the heavy 5-year pooled composite in the interactive console
+// causes a 5-minute timeout. The Export task below has a much longer budget
+// and will materialise the full 240 agronomic candidates server-side.
+print('Agronomic candidates: deferred to Export task (run from Tasks tab).');
 
 // ---------------------------------------------------------------------------
 // 7. MERGE + ADD CANDIDATE_ID
@@ -349,7 +357,9 @@ var withId = allCandidates.toList(allCandidates.size()).map(function (f, i) {
 });
 var finalFC = ee.FeatureCollection(withId);
 
-print('Total candidates:', finalFC.size(), '  (target ~480)');
+// Skip eager .size() print for the same reason — the Export task will
+// materialise all ~480 features.
+print('Total candidates: deferred to Export task (target ~480).');
 
 // ---------------------------------------------------------------------------
 // 8. EXPORT TO CLOUD ASSET
@@ -367,8 +377,10 @@ print('2. Click Run next to "candidates_v1_export".');
 print('3. Wait ~5 min. When status shows COMPLETED, run Module 07.');
 print('');
 
-// Preview
+// Preview — cyclone candidates only. The agronomic preview layer is omitted
+// because rendering it would force the heavy pooled composite to compute
+// interactively and hit the 5-min timeout. After Export completes, the
+// `candidates_v1` asset itself can be added as a layer if you want a preview.
 Map.centerObject(studyArea, 7);
 Map.addLayer(ee.Image().paint(studyArea, 1, 2), {palette: ['01696F']}, '8 districts', true);
 Map.addLayer(cycAll, {color: 'A12C7B'}, 'cyclone candidates (preview)', true);
-Map.addLayer(agroAll, {color: 'FFD700'}, 'agronomic candidates (preview)', true);
