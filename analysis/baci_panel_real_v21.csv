@@ -18,17 +18,17 @@ Angul,ang,2019,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,
 Angul,ang,2019,control,inland_control,,raw,EOS,,,,,,13458229,,,,
 Angul,ang,2019,control,inland_control,,corrected,EOS,,,,,,13458229,0.0,0.0,0.0,EMSR357_real
 Angul,ang,2020,control,inland_control,,raw,SOS,167.0,154.93,179.07,163.49,170.51,13450715,,,,
-Angul,ang,2020,control,inland_control,,corrected,SOS,167.0,154.93,179.07,163.49,170.51,13450715,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Angul,ang,2020,control,inland_control,,corrected,SOS,167.0,154.93,179.07,163.49,170.51,13450715,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Angul,ang,2020,control,inland_control,,raw,POS,289.0,284.28,293.72,287.63,290.37,13450715,,,,
-Angul,ang,2020,control,inland_control,,corrected,POS,289.0,284.28,293.72,287.63,290.37,13450715,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Angul,ang,2020,control,inland_control,,corrected,POS,289.0,284.28,293.72,287.63,290.37,13450715,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Angul,ang,2020,control,inland_control,,raw,EOS,350.0,345.28,354.72,348.63,351.37,13450715,,,,
-Angul,ang,2020,control,inland_control,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,13450715,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Angul,ang,2020,control,inland_control,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,13450715,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Angul,ang,2021,control,inland_control,,raw,SOS,166.0,161.28,170.72,164.63,167.37,13430526,,,,
-Angul,ang,2021,control,inland_control,,corrected,SOS,166.0,161.28,170.72,164.63,167.37,13430526,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Angul,ang,2021,control,inland_control,,corrected,SOS,166.0,161.28,170.72,164.63,167.37,13430526,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Angul,ang,2021,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,13430526,,,,
-Angul,ang,2021,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,13430526,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Angul,ang,2021,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,13430526,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Angul,ang,2021,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,13430526,,,,
-Angul,ang,2021,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,13430526,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Angul,ang,2021,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,13430526,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Angul,ang,2022,control,inland_control,,raw,SOS,166.0,154.32,177.68,162.61,169.39,13424451,,,,
 Angul,ang,2022,control,inland_control,,corrected,SOS,166.0,154.32,177.68,162.61,169.39,13424451,0.0,0.0,0.0,none
 Angul,ang,2022,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,13424451,,,,
@@ -66,17 +66,17 @@ Baleshwar,bls,2019,treatment,coastal_treatment,Fani,corrected,POS,288.0,276.55,2
 Baleshwar,bls,2019,treatment,coastal_treatment,Fani,raw,EOS,349.0,344.28,353.72,347.63,350.37,23320838,,,,
 Baleshwar,bls,2019,treatment,coastal_treatment,Fani,corrected,EOS,349.0,344.28,353.72,347.63,350.37,23320838,0.0,0.0,0.0,EMSR357_real
 Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,raw,SOS,167.0,140.05,193.95,159.17,174.83,23838537,,,,
-Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,corrected,SOS,166.98,140.05,193.95,159.17,174.83,23838537,0.001671,14.0,-0.02,provisional_label_density × Module08 polygon-area
+Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,corrected,SOS,166.95,140.05,193.95,159.17,174.83,23838537,0.003341,14.0,-0.05,Module12_GEE_polygon_intersection
 Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,raw,POS,289.0,284.28,293.72,287.63,290.37,23838537,,,,
-Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,corrected,POS,288.99,284.28,293.72,287.63,290.37,23838537,0.001671,7.0,-0.01,provisional_label_density × Module08 polygon-area
+Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,corrected,POS,288.98,284.28,293.72,287.63,290.37,23838537,0.003341,7.0,-0.02,Module12_GEE_polygon_intersection
 Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,raw,EOS,350.0,345.28,354.72,348.63,351.37,23838537,,,,
-Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,corrected,EOS,349.96,345.28,354.72,348.63,351.37,23838537,0.001671,21.0,-0.04,provisional_label_density × Module08 polygon-area
+Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,corrected,EOS,349.93,345.28,354.72,348.63,351.37,23838537,0.003341,21.0,-0.07,Module12_GEE_polygon_intersection
 Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,raw,SOS,166.0,156.95,175.05,163.37,168.63,23045480,,,,
-Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,corrected,SOS,165.97,156.95,175.05,163.37,168.63,23045480,0.002228,14.0,-0.03,provisional_label_density × Module08 polygon-area
+Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,corrected,SOS,165.93,156.95,175.05,163.37,168.63,23045480,0.005292,14.0,-0.07,Module12_GEE_polygon_intersection
 Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,raw,POS,288.0,283.28,292.72,286.63,289.37,23045480,,,,
-Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.98,283.28,292.72,286.63,289.37,23045480,0.002228,7.0,-0.02,provisional_label_density × Module08 polygon-area
+Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.96,283.28,292.72,286.63,289.37,23045480,0.005292,7.0,-0.04,Module12_GEE_polygon_intersection
 Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,raw,EOS,349.0,344.28,353.72,347.63,350.37,23045480,,,,
-Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,corrected,EOS,348.95,344.28,353.72,347.63,350.37,23045480,0.002228,21.0,-0.05,provisional_label_density × Module08 polygon-area
+Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,corrected,EOS,348.89,344.28,353.72,347.63,350.37,23045480,0.005292,21.0,-0.11,Module12_GEE_polygon_intersection
 Baleshwar,bls,2022,control,coastal_treatment,,raw,SOS,258.0,253.28,262.72,256.63,259.37,23928067,,,,
 Baleshwar,bls,2022,control,coastal_treatment,,corrected,SOS,258.0,253.28,262.72,256.63,259.37,23928067,0.0,0.0,0.0,none
 Baleshwar,bls,2022,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,23928067,,,,
@@ -114,17 +114,17 @@ Bhadrak,bha,2019,treatment,coastal_treatment,Fani,corrected,POS,288.0,276.55,299
 Bhadrak,bha,2019,treatment,coastal_treatment,Fani,raw,EOS,349.0,344.28,353.72,347.63,350.37,19202230,,,,
 Bhadrak,bha,2019,treatment,coastal_treatment,Fani,corrected,EOS,349.0,344.28,353.72,347.63,350.37,19202230,0.0,0.0,0.0,EMSR357_real
 Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,raw,SOS,259.0,232.05,285.95,251.17,266.83,19355962,,,,
-Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,corrected,SOS,258.94,232.05,285.95,251.17,266.83,19355962,0.004591,14.0,-0.06,provisional_label_density × Module08 polygon-area
+Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,corrected,SOS,258.89,232.05,285.95,251.17,266.83,19355962,0.00785,14.0,-0.11,Module12_GEE_polygon_intersection
 Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,raw,POS,289.0,284.28,293.72,287.63,290.37,19355962,,,,
-Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,corrected,POS,288.97,284.28,293.72,287.63,290.37,19355962,0.004591,7.0,-0.03,provisional_label_density × Module08 polygon-area
+Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,corrected,POS,288.95,284.28,293.72,287.63,290.37,19355962,0.00785,7.0,-0.05,Module12_GEE_polygon_intersection
 Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,raw,EOS,350.0,345.28,354.72,348.63,351.37,19355962,,,,
-Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,corrected,EOS,349.9,345.28,354.72,348.63,351.37,19355962,0.004591,21.0,-0.1,provisional_label_density × Module08 polygon-area
+Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,corrected,EOS,349.84,345.28,354.72,348.63,351.37,19355962,0.00785,21.0,-0.16,Module12_GEE_polygon_intersection
 Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,raw,SOS,196.0,186.95,205.05,193.37,198.63,18898032,,,,
-Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,corrected,SOS,195.69,186.95,205.05,193.37,198.63,18898032,0.022443,14.0,-0.31,provisional_label_density × Module08 polygon-area
+Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,corrected,SOS,194.99,186.95,205.05,193.37,198.63,18898032,0.072124,14.0,-1.01,Module12_GEE_polygon_intersection
 Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,raw,POS,288.0,283.28,292.72,286.63,289.37,18898032,,,,
-Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.84,283.28,292.72,286.63,289.37,18898032,0.022443,7.0,-0.16,provisional_label_density × Module08 polygon-area
+Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.5,283.28,292.72,286.63,289.37,18898032,0.072124,7.0,-0.5,Module12_GEE_polygon_intersection
 Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,raw,EOS,349.0,344.28,353.72,347.63,350.37,18898032,,,,
-Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,corrected,EOS,348.53,344.28,353.72,347.63,350.37,18898032,0.022443,21.0,-0.47,provisional_label_density × Module08 polygon-area
+Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,corrected,EOS,347.49,344.28,353.72,347.63,350.37,18898032,0.072124,21.0,-1.51,Module12_GEE_polygon_intersection
 Bhadrak,bha,2022,control,coastal_treatment,,raw,SOS,258.0,253.28,262.72,256.63,259.37,19500602,,,,
 Bhadrak,bha,2022,control,coastal_treatment,,corrected,SOS,258.0,253.28,262.72,256.63,259.37,19500602,0.0,0.0,0.0,none
 Bhadrak,bha,2022,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,19500602,,,,
@@ -162,17 +162,17 @@ Cuttack,ctk,2019,control,inland_control,,corrected,POS,287.91,283.28,292.72,286.
 Cuttack,ctk,2019,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,17900834,,,,
 Cuttack,ctk,2019,control,inland_control,,corrected,EOS,348.72,344.28,353.72,347.63,350.37,17900834,0.013112,21.0,-0.28,EMSR357_real
 Cuttack,ctk,2020,control,inland_control,,raw,SOS,136.0,123.93,148.07,132.49,139.51,17866548,,,,
-Cuttack,ctk,2020,control,inland_control,,corrected,SOS,136.0,123.93,148.07,132.49,139.51,17866548,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Cuttack,ctk,2020,control,inland_control,,corrected,SOS,136.0,123.93,148.07,132.49,139.51,17866548,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Cuttack,ctk,2020,control,inland_control,,raw,POS,289.0,284.28,293.72,287.63,290.37,17866548,,,,
-Cuttack,ctk,2020,control,inland_control,,corrected,POS,289.0,284.28,293.72,287.63,290.37,17866548,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Cuttack,ctk,2020,control,inland_control,,corrected,POS,289.0,284.28,293.72,287.63,290.37,17866548,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Cuttack,ctk,2020,control,inland_control,,raw,EOS,350.0,345.28,354.72,348.63,351.37,17866548,,,,
-Cuttack,ctk,2020,control,inland_control,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,17866548,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Cuttack,ctk,2020,control,inland_control,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,17866548,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Cuttack,ctk,2021,control,inland_control,,raw,SOS,166.0,161.28,170.72,164.63,167.37,17874406,,,,
-Cuttack,ctk,2021,control,inland_control,,corrected,SOS,166.0,161.28,170.72,164.63,167.37,17874406,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Cuttack,ctk,2021,control,inland_control,,corrected,SOS,166.0,161.28,170.72,164.63,167.37,17874406,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Cuttack,ctk,2021,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,17874406,,,,
-Cuttack,ctk,2021,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,17874406,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Cuttack,ctk,2021,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,17874406,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Cuttack,ctk,2021,control,inland_control,,raw,EOS,,,,,,17874406,,,,
-Cuttack,ctk,2021,control,inland_control,,corrected,EOS,,,,,,17874406,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Cuttack,ctk,2021,control,inland_control,,corrected,EOS,,,,,,17874406,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Cuttack,ctk,2022,control,inland_control,,raw,SOS,196.0,184.32,207.68,192.61,199.39,17920054,,,,
 Cuttack,ctk,2022,control,inland_control,,corrected,SOS,196.0,184.32,207.68,192.61,199.39,17920054,0.0,0.0,0.0,none
 Cuttack,ctk,2022,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,17920054,,,,
@@ -210,17 +210,17 @@ Dhenkanal,dhk,2019,control,inland_control,,corrected,POS,288.0,283.28,292.72,286
 Dhenkanal,dhk,2019,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,14384573,,,,
 Dhenkanal,dhk,2019,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,14384573,0.0,0.0,0.0,EMSR357_real
 Dhenkanal,dhk,2020,control,inland_control,,raw,SOS,136.0,123.93,148.07,132.49,139.51,14359852,,,,
-Dhenkanal,dhk,2020,control,inland_control,,corrected,SOS,136.0,123.93,148.07,132.49,139.51,14359852,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Dhenkanal,dhk,2020,control,inland_control,,corrected,SOS,136.0,123.93,148.07,132.49,139.51,14359852,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Dhenkanal,dhk,2020,control,inland_control,,raw,POS,289.0,284.28,293.72,287.63,290.37,14359852,,,,
-Dhenkanal,dhk,2020,control,inland_control,,corrected,POS,289.0,284.28,293.72,287.63,290.37,14359852,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Dhenkanal,dhk,2020,control,inland_control,,corrected,POS,289.0,284.28,293.72,287.63,290.37,14359852,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Dhenkanal,dhk,2020,control,inland_control,,raw,EOS,350.0,345.28,354.72,348.63,351.37,14359852,,,,
-Dhenkanal,dhk,2020,control,inland_control,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,14359852,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Dhenkanal,dhk,2020,control,inland_control,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,14359852,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Dhenkanal,dhk,2021,control,inland_control,,raw,SOS,166.0,161.28,170.72,164.63,167.37,14277067,,,,
-Dhenkanal,dhk,2021,control,inland_control,,corrected,SOS,166.0,161.28,170.72,164.63,167.37,14277067,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Dhenkanal,dhk,2021,control,inland_control,,corrected,SOS,166.0,161.28,170.72,164.63,167.37,14277067,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Dhenkanal,dhk,2021,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,14277067,,,,
-Dhenkanal,dhk,2021,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,14277067,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Dhenkanal,dhk,2021,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,14277067,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Dhenkanal,dhk,2021,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,14277067,,,,
-Dhenkanal,dhk,2021,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,14277067,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Dhenkanal,dhk,2021,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,14277067,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Dhenkanal,dhk,2022,control,inland_control,,raw,SOS,166.0,154.32,177.68,162.61,169.39,14357347,,,,
 Dhenkanal,dhk,2022,control,inland_control,,corrected,SOS,166.0,154.32,177.68,162.61,169.39,14357347,0.0,0.0,0.0,none
 Dhenkanal,dhk,2022,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,14357347,,,,
@@ -258,17 +258,17 @@ Jagatsinghpur,jgs,2019,treatment,coastal_treatment,Fani,corrected,POS,318.98,307
 Jagatsinghpur,jgs,2019,treatment,coastal_treatment,Fani,raw,EOS,,,,,,11340083,,,,
 Jagatsinghpur,jgs,2019,treatment,coastal_treatment,Fani,corrected,EOS,,,,,,11340083,0.0,0.0,0.0,EMSR357_real
 Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,raw,SOS,167.0,140.05,193.95,159.17,174.83,10848508,,,,
-Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,corrected,SOS,166.87,140.05,193.95,159.17,174.83,10848508,0.009437,14.0,-0.13,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,corrected,SOS,166.73,140.05,193.95,159.17,174.83,10848508,0.01921,14.0,-0.27,Module12_GEE_polygon_intersection
 Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,raw,POS,289.0,284.28,293.72,287.63,290.37,10848508,,,,
-Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,corrected,POS,288.93,284.28,293.72,287.63,290.37,10848508,0.009437,7.0,-0.07,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,corrected,POS,288.87,284.28,293.72,287.63,290.37,10848508,0.01921,7.0,-0.13,Module12_GEE_polygon_intersection
 Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,raw,EOS,,,,,,10848508,,,,
-Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,corrected,EOS,,,,,,10848508,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,corrected,EOS,,,,,,10848508,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,raw,SOS,166.0,156.95,175.05,163.37,168.63,10735035,,,,
-Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,corrected,SOS,165.88,156.95,175.05,163.37,168.63,10735035,0.008239,14.0,-0.12,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,corrected,SOS,165.54,156.95,175.05,163.37,168.63,10735035,0.032559,14.0,-0.46,Module12_GEE_polygon_intersection
 Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,raw,POS,288.0,283.28,292.72,286.63,289.37,10735035,,,,
-Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.94,283.28,292.72,286.63,289.37,10735035,0.008239,7.0,-0.06,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.77,283.28,292.72,286.63,289.37,10735035,0.032559,7.0,-0.23,Module12_GEE_polygon_intersection
 Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,raw,EOS,,,,,,10735035,,,,
-Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,corrected,EOS,,,,,,10735035,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,corrected,EOS,,,,,,10735035,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Jagatsinghpur,jgs,2022,control,coastal_treatment,,raw,SOS,258.0,253.28,262.72,256.63,259.37,11412558,,,,
 Jagatsinghpur,jgs,2022,control,coastal_treatment,,corrected,SOS,258.0,253.28,262.72,256.63,259.37,11412558,0.0,0.0,0.0,none
 Jagatsinghpur,jgs,2022,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,11412558,,,,
@@ -306,17 +306,17 @@ Kendrapara,kdp,2019,treatment,coastal_treatment,Fani,corrected,POS,318.96,307.55
 Kendrapara,kdp,2019,treatment,coastal_treatment,Fani,raw,EOS,349.0,344.28,353.72,347.63,350.37,17354265,,,,
 Kendrapara,kdp,2019,treatment,coastal_treatment,Fani,corrected,EOS,348.89,344.28,353.72,347.63,350.37,17354265,0.005352,21.0,-0.11,EMSR357_real
 Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,raw,SOS,167.0,140.05,193.95,159.17,174.83,16851732,,,,
-Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,corrected,SOS,166.93,140.05,193.95,159.17,174.83,16851732,0.004764,14.0,-0.07,provisional_label_density × Module08 polygon-area
+Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,corrected,SOS,166.89,140.05,193.95,159.17,174.83,16851732,0.007904,14.0,-0.11,Module12_GEE_polygon_intersection
 Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,raw,POS,289.0,284.28,293.72,287.63,290.37,16851732,,,,
-Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,corrected,POS,288.97,284.28,293.72,287.63,290.37,16851732,0.004764,7.0,-0.03,provisional_label_density × Module08 polygon-area
+Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,corrected,POS,288.94,284.28,293.72,287.63,290.37,16851732,0.007904,7.0,-0.06,Module12_GEE_polygon_intersection
 Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,raw,EOS,350.0,345.28,354.72,348.63,351.37,16851732,,,,
-Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,corrected,EOS,349.9,345.28,354.72,348.63,351.37,16851732,0.004764,21.0,-0.1,provisional_label_density × Module08 polygon-area
+Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,corrected,EOS,349.83,345.28,354.72,348.63,351.37,16851732,0.007904,21.0,-0.17,Module12_GEE_polygon_intersection
 Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,raw,SOS,166.0,156.95,175.05,163.37,168.63,16800623,,,,
-Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,corrected,SOS,165.85,156.95,175.05,163.37,168.63,16800623,0.010535,14.0,-0.15,provisional_label_density × Module08 polygon-area
+Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,corrected,SOS,165.59,156.95,175.05,163.37,168.63,16800623,0.029035,14.0,-0.41,Module12_GEE_polygon_intersection
 Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,raw,POS,288.0,283.28,292.72,286.63,289.37,16800623,,,,
-Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.93,283.28,292.72,286.63,289.37,16800623,0.010535,7.0,-0.07,provisional_label_density × Module08 polygon-area
+Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.8,283.28,292.72,286.63,289.37,16800623,0.029035,7.0,-0.2,Module12_GEE_polygon_intersection
 Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,raw,EOS,,,,,,16800623,,,,
-Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,corrected,EOS,,,,,,16800623,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,corrected,EOS,,,,,,16800623,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Kendrapara,kdp,2022,control,coastal_treatment,,raw,SOS,258.0,253.28,262.72,256.63,259.37,17387572,,,,
 Kendrapara,kdp,2022,control,coastal_treatment,,corrected,SOS,258.0,253.28,262.72,256.63,259.37,17387572,0.0,0.0,0.0,none
 Kendrapara,kdp,2022,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,17387572,,,,
@@ -354,17 +354,17 @@ Puri,pur,2019,treatment,coastal_treatment,Fani,corrected,POS,287.82,276.55,299.4
 Puri,pur,2019,treatment,coastal_treatment,Fani,raw,EOS,349.0,344.28,353.72,347.63,350.37,13868787,,,,
 Puri,pur,2019,treatment,coastal_treatment,Fani,corrected,EOS,348.47,344.28,353.72,347.63,350.37,13868787,0.025188,21.0,-0.53,EMSR357_real
 Puri,pur,2020,treatment,coastal_treatment,Amphan,raw,SOS,197.0,170.05,223.95,189.17,204.83,14196133,,,,
-Puri,pur,2020,treatment,coastal_treatment,Amphan,corrected,SOS,197.0,170.05,223.95,189.17,204.83,14196133,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Puri,pur,2020,treatment,coastal_treatment,Amphan,corrected,SOS,197.0,170.05,223.95,189.17,204.83,14196133,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Puri,pur,2020,treatment,coastal_treatment,Amphan,raw,POS,289.0,284.28,293.72,287.63,290.37,14196133,,,,
-Puri,pur,2020,treatment,coastal_treatment,Amphan,corrected,POS,289.0,284.28,293.72,287.63,290.37,14196133,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Puri,pur,2020,treatment,coastal_treatment,Amphan,corrected,POS,289.0,284.28,293.72,287.63,290.37,14196133,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Puri,pur,2020,treatment,coastal_treatment,Amphan,raw,EOS,350.0,345.28,354.72,348.63,351.37,14196133,,,,
-Puri,pur,2020,treatment,coastal_treatment,Amphan,corrected,EOS,350.0,345.28,354.72,348.63,351.37,14196133,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Puri,pur,2020,treatment,coastal_treatment,Amphan,corrected,EOS,350.0,345.28,354.72,348.63,351.37,14196133,0.0,0.0,0.0,Module12_GEE_polygon_intersection
 Puri,pur,2021,treatment,coastal_treatment,Yaas,raw,SOS,166.0,156.95,175.05,163.37,168.63,14560993,,,,
-Puri,pur,2021,treatment,coastal_treatment,Yaas,corrected,SOS,165.98,156.95,175.05,163.37,168.63,14560993,0.001178,14.0,-0.02,provisional_label_density × Module08 polygon-area
+Puri,pur,2021,treatment,coastal_treatment,Yaas,corrected,SOS,165.94,156.95,175.05,163.37,168.63,14560993,0.00418,14.0,-0.06,Module12_GEE_polygon_intersection
 Puri,pur,2021,treatment,coastal_treatment,Yaas,raw,POS,288.0,283.28,292.72,286.63,289.37,14560993,,,,
-Puri,pur,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.99,283.28,292.72,286.63,289.37,14560993,0.001178,7.0,-0.01,provisional_label_density × Module08 polygon-area
+Puri,pur,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.97,283.28,292.72,286.63,289.37,14560993,0.00418,7.0,-0.03,Module12_GEE_polygon_intersection
 Puri,pur,2021,treatment,coastal_treatment,Yaas,raw,EOS,349.0,344.28,353.72,347.63,350.37,14560993,,,,
-Puri,pur,2021,treatment,coastal_treatment,Yaas,corrected,EOS,348.98,344.28,353.72,347.63,350.37,14560993,0.001178,21.0,-0.02,provisional_label_density × Module08 polygon-area
+Puri,pur,2021,treatment,coastal_treatment,Yaas,corrected,EOS,348.91,344.28,353.72,347.63,350.37,14560993,0.00418,21.0,-0.09,Module12_GEE_polygon_intersection
 Puri,pur,2022,control,coastal_treatment,,raw,SOS,258.0,253.28,262.72,256.63,259.37,15123273,,,,
 Puri,pur,2022,control,coastal_treatment,,corrected,SOS,258.0,253.28,262.72,256.63,259.37,15123273,0.0,0.0,0.0,none
 Puri,pur,2022,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,15123273,,,,
