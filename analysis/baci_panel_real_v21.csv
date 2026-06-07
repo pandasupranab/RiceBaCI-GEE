@@ -1,0 +1,385 @@
+district,district_id,year,year_type,cyclone_exposure,cyclone_year_event,pipeline,metric,median_doy,p25_doy,p75_doy,boot_p025,boot_p975,n_pixels,v21_f,v21_delta_cyc,v21_correction_days,v21_share_source
+Angul,ang,2017,control,inland_control,,raw,SOS,288.0,283.28,292.72,286.63,289.37,10605746,,,,
+Angul,ang,2017,control,inland_control,,corrected,SOS,288.0,283.28,292.72,286.63,289.37,10605746,0.0,0.0,0.0,none
+Angul,ang,2017,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,10605746,,,,
+Angul,ang,2017,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,10605746,0.0,0.0,0.0,none
+Angul,ang,2017,control,inland_control,,raw,EOS,,,,,,10605746,,,,
+Angul,ang,2017,control,inland_control,,corrected,EOS,,,,,,10605746,0.0,0.0,0.0,none
+Angul,ang,2018,control,inland_control,,raw,SOS,258.0,246.32,269.68,251.88,264.12,30770,,,,
+Angul,ang,2018,control,inland_control,,corrected,SOS,258.0,246.32,269.68,251.88,264.12,30770,0.0,0.0,0.0,none
+Angul,ang,2018,control,inland_control,,raw,POS,258.0,246.32,269.68,251.88,264.12,30770,,,,
+Angul,ang,2018,control,inland_control,,corrected,POS,258.0,246.32,269.68,251.88,264.12,30770,0.0,0.0,0.0,none
+Angul,ang,2018,control,inland_control,,raw,EOS,349.0,344.28,353.72,346.53,351.47,30770,,,,
+Angul,ang,2018,control,inland_control,,corrected,EOS,349.0,344.28,353.72,346.53,351.47,30770,0.0,0.0,0.0,none
+Angul,ang,2019,control,inland_control,,raw,SOS,196.0,191.28,200.72,194.63,197.37,13458229,,,,
+Angul,ang,2019,control,inland_control,,corrected,SOS,196.0,191.28,200.72,194.63,197.37,13458229,0.0,0.0,0.0,EMSR357_real
+Angul,ang,2019,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,13458229,,,,
+Angul,ang,2019,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,13458229,0.0,0.0,0.0,EMSR357_real
+Angul,ang,2019,control,inland_control,,raw,EOS,,,,,,13458229,,,,
+Angul,ang,2019,control,inland_control,,corrected,EOS,,,,,,13458229,0.0,0.0,0.0,EMSR357_real
+Angul,ang,2020,control,inland_control,,raw,SOS,167.0,154.93,179.07,163.49,170.51,13450715,,,,
+Angul,ang,2020,control,inland_control,,corrected,SOS,167.0,154.93,179.07,163.49,170.51,13450715,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Angul,ang,2020,control,inland_control,,raw,POS,289.0,284.28,293.72,287.63,290.37,13450715,,,,
+Angul,ang,2020,control,inland_control,,corrected,POS,289.0,284.28,293.72,287.63,290.37,13450715,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Angul,ang,2020,control,inland_control,,raw,EOS,350.0,345.28,354.72,348.63,351.37,13450715,,,,
+Angul,ang,2020,control,inland_control,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,13450715,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Angul,ang,2021,control,inland_control,,raw,SOS,166.0,161.28,170.72,164.63,167.37,13430526,,,,
+Angul,ang,2021,control,inland_control,,corrected,SOS,166.0,161.28,170.72,164.63,167.37,13430526,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Angul,ang,2021,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,13430526,,,,
+Angul,ang,2021,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,13430526,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Angul,ang,2021,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,13430526,,,,
+Angul,ang,2021,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,13430526,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Angul,ang,2022,control,inland_control,,raw,SOS,166.0,154.32,177.68,162.61,169.39,13424451,,,,
+Angul,ang,2022,control,inland_control,,corrected,SOS,166.0,154.32,177.68,162.61,169.39,13424451,0.0,0.0,0.0,none
+Angul,ang,2022,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,13424451,,,,
+Angul,ang,2022,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,13424451,0.0,0.0,0.0,none
+Angul,ang,2022,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,13424451,,,,
+Angul,ang,2022,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,13424451,0.0,0.0,0.0,none
+Angul,ang,2023,control,inland_control,,raw,SOS,196.0,191.28,200.72,194.63,197.37,13488193,,,,
+Angul,ang,2023,control,inland_control,,corrected,SOS,196.0,191.28,200.72,194.63,197.37,13488193,0.0,0.0,0.0,none
+Angul,ang,2023,control,inland_control,,raw,POS,288.0,276.32,299.68,284.61,291.39,13488193,,,,
+Angul,ang,2023,control,inland_control,,corrected,POS,288.0,276.32,299.68,284.61,291.39,13488193,0.0,0.0,0.0,none
+Angul,ang,2023,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,13488193,,,,
+Angul,ang,2023,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,13488193,0.0,0.0,0.0,none
+Angul,ang,2024,control,inland_control,,raw,SOS,197.0,192.28,201.72,195.63,198.37,13198873,,,,
+Angul,ang,2024,control,inland_control,,corrected,SOS,197.0,192.28,201.72,195.63,198.37,13198873,0.0,0.0,0.0,none
+Angul,ang,2024,control,inland_control,,raw,POS,289.0,284.28,293.72,287.63,290.37,13198873,,,,
+Angul,ang,2024,control,inland_control,,corrected,POS,289.0,284.28,293.72,287.63,290.37,13198873,0.0,0.0,0.0,none
+Angul,ang,2024,control,inland_control,,raw,EOS,350.0,345.28,354.72,348.63,351.37,13198873,,,,
+Angul,ang,2024,control,inland_control,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,13198873,0.0,0.0,0.0,none
+Baleshwar,bls,2017,control,coastal_treatment,,raw,SOS,288.0,276.55,299.45,284.67,291.33,6830172,,,,
+Baleshwar,bls,2017,control,coastal_treatment,,corrected,SOS,288.0,276.55,299.45,284.67,291.33,6830172,0.0,0.0,0.0,none
+Baleshwar,bls,2017,control,coastal_treatment,,raw,POS,288.0,276.55,299.45,284.67,291.33,6830172,,,,
+Baleshwar,bls,2017,control,coastal_treatment,,corrected,POS,288.0,276.55,299.45,284.67,291.33,6830172,0.0,0.0,0.0,none
+Baleshwar,bls,2017,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,6830172,,,,
+Baleshwar,bls,2017,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,6830172,0.0,0.0,0.0,none
+Baleshwar,bls,2018,control,coastal_treatment,,raw,SOS,135.0,78.48,191.52,118.57,151.43,23813225,,,,
+Baleshwar,bls,2018,control,coastal_treatment,,corrected,SOS,135.0,78.48,191.52,118.57,151.43,23813225,0.0,0.0,0.0,none
+Baleshwar,bls,2018,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,23813225,,,,
+Baleshwar,bls,2018,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,23813225,0.0,0.0,0.0,none
+Baleshwar,bls,2018,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,23813225,,,,
+Baleshwar,bls,2018,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,23813225,0.0,0.0,0.0,none
+Baleshwar,bls,2019,treatment,coastal_treatment,Fani,raw,SOS,227.0,209.51,244.49,221.92,232.08,23320838,,,,
+Baleshwar,bls,2019,treatment,coastal_treatment,Fani,corrected,SOS,227.0,209.51,244.49,221.92,232.08,23320838,0.0,0.0,0.0,EMSR357_real
+Baleshwar,bls,2019,treatment,coastal_treatment,Fani,raw,POS,288.0,276.55,299.45,284.67,291.33,23320838,,,,
+Baleshwar,bls,2019,treatment,coastal_treatment,Fani,corrected,POS,288.0,276.55,299.45,284.67,291.33,23320838,0.0,0.0,0.0,EMSR357_real
+Baleshwar,bls,2019,treatment,coastal_treatment,Fani,raw,EOS,349.0,344.28,353.72,347.63,350.37,23320838,,,,
+Baleshwar,bls,2019,treatment,coastal_treatment,Fani,corrected,EOS,349.0,344.28,353.72,347.63,350.37,23320838,0.0,0.0,0.0,EMSR357_real
+Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,raw,SOS,167.0,140.05,193.95,159.17,174.83,23838537,,,,
+Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,corrected,SOS,166.98,140.05,193.95,159.17,174.83,23838537,0.001671,14.0,-0.02,provisional_label_density × Module08 polygon-area
+Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,raw,POS,289.0,284.28,293.72,287.63,290.37,23838537,,,,
+Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,corrected,POS,288.99,284.28,293.72,287.63,290.37,23838537,0.001671,7.0,-0.01,provisional_label_density × Module08 polygon-area
+Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,raw,EOS,350.0,345.28,354.72,348.63,351.37,23838537,,,,
+Baleshwar,bls,2020,treatment,coastal_treatment,Amphan,corrected,EOS,349.96,345.28,354.72,348.63,351.37,23838537,0.001671,21.0,-0.04,provisional_label_density × Module08 polygon-area
+Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,raw,SOS,166.0,156.95,175.05,163.37,168.63,23045480,,,,
+Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,corrected,SOS,165.97,156.95,175.05,163.37,168.63,23045480,0.002228,14.0,-0.03,provisional_label_density × Module08 polygon-area
+Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,raw,POS,288.0,283.28,292.72,286.63,289.37,23045480,,,,
+Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.98,283.28,292.72,286.63,289.37,23045480,0.002228,7.0,-0.02,provisional_label_density × Module08 polygon-area
+Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,raw,EOS,349.0,344.28,353.72,347.63,350.37,23045480,,,,
+Baleshwar,bls,2021,treatment,coastal_treatment,Yaas,corrected,EOS,348.95,344.28,353.72,347.63,350.37,23045480,0.002228,21.0,-0.05,provisional_label_density × Module08 polygon-area
+Baleshwar,bls,2022,control,coastal_treatment,,raw,SOS,258.0,253.28,262.72,256.63,259.37,23928067,,,,
+Baleshwar,bls,2022,control,coastal_treatment,,corrected,SOS,258.0,253.28,262.72,256.63,259.37,23928067,0.0,0.0,0.0,none
+Baleshwar,bls,2022,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,23928067,,,,
+Baleshwar,bls,2022,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,23928067,0.0,0.0,0.0,none
+Baleshwar,bls,2022,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,23928067,,,,
+Baleshwar,bls,2022,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,23928067,0.0,0.0,0.0,none
+Baleshwar,bls,2023,control,coastal_treatment,,raw,SOS,196.0,173.09,218.91,189.34,202.66,23940178,,,,
+Baleshwar,bls,2023,control,coastal_treatment,,corrected,SOS,196.0,173.09,218.91,189.34,202.66,23940178,0.0,0.0,0.0,none
+Baleshwar,bls,2023,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,23940178,,,,
+Baleshwar,bls,2023,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,23940178,0.0,0.0,0.0,none
+Baleshwar,bls,2023,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,23940178,,,,
+Baleshwar,bls,2023,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,23940178,0.0,0.0,0.0,none
+Baleshwar,bls,2024,control,coastal_treatment,,raw,SOS,167.0,155.92,178.08,163.78,170.22,23828402,,,,
+Baleshwar,bls,2024,control,coastal_treatment,,corrected,SOS,167.0,155.92,178.08,163.78,170.22,23828402,0.0,0.0,0.0,none
+Baleshwar,bls,2024,control,coastal_treatment,,raw,POS,289.0,279.65,298.35,286.28,291.72,23828402,,,,
+Baleshwar,bls,2024,control,coastal_treatment,,corrected,POS,289.0,279.65,298.35,286.28,291.72,23828402,0.0,0.0,0.0,none
+Baleshwar,bls,2024,control,coastal_treatment,,raw,EOS,350.0,345.28,354.72,348.63,351.37,23828402,,,,
+Baleshwar,bls,2024,control,coastal_treatment,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,23828402,0.0,0.0,0.0,none
+Bhadrak,bha,2017,control,coastal_treatment,,raw,SOS,319.0,307.55,330.45,315.67,322.33,19355601,,,,
+Bhadrak,bha,2017,control,coastal_treatment,,corrected,SOS,319.0,307.55,330.45,315.67,322.33,19355601,0.0,0.0,0.0,none
+Bhadrak,bha,2017,control,coastal_treatment,,raw,POS,319.0,307.55,330.45,315.67,322.33,19355601,,,,
+Bhadrak,bha,2017,control,coastal_treatment,,corrected,POS,319.0,307.55,330.45,315.67,322.33,19355601,0.0,0.0,0.0,none
+Bhadrak,bha,2017,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,19355601,,,,
+Bhadrak,bha,2017,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,19355601,0.0,0.0,0.0,none
+Bhadrak,bha,2018,control,coastal_treatment,,raw,SOS,135.0,78.48,191.52,118.57,151.43,19331033,,,,
+Bhadrak,bha,2018,control,coastal_treatment,,corrected,SOS,135.0,78.48,191.52,118.57,151.43,19331033,0.0,0.0,0.0,none
+Bhadrak,bha,2018,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,19331033,,,,
+Bhadrak,bha,2018,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,19331033,0.0,0.0,0.0,none
+Bhadrak,bha,2018,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,19331033,,,,
+Bhadrak,bha,2018,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,19331033,0.0,0.0,0.0,none
+Bhadrak,bha,2019,treatment,coastal_treatment,Fani,raw,SOS,258.0,240.51,275.49,252.92,263.08,19202230,,,,
+Bhadrak,bha,2019,treatment,coastal_treatment,Fani,corrected,SOS,258.0,240.51,275.49,252.92,263.08,19202230,0.0,0.0,0.0,EMSR357_real
+Bhadrak,bha,2019,treatment,coastal_treatment,Fani,raw,POS,288.0,276.55,299.45,284.67,291.33,19202230,,,,
+Bhadrak,bha,2019,treatment,coastal_treatment,Fani,corrected,POS,288.0,276.55,299.45,284.67,291.33,19202230,0.0,0.0,0.0,EMSR357_real
+Bhadrak,bha,2019,treatment,coastal_treatment,Fani,raw,EOS,349.0,344.28,353.72,347.63,350.37,19202230,,,,
+Bhadrak,bha,2019,treatment,coastal_treatment,Fani,corrected,EOS,349.0,344.28,353.72,347.63,350.37,19202230,0.0,0.0,0.0,EMSR357_real
+Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,raw,SOS,259.0,232.05,285.95,251.17,266.83,19355962,,,,
+Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,corrected,SOS,258.94,232.05,285.95,251.17,266.83,19355962,0.004591,14.0,-0.06,provisional_label_density × Module08 polygon-area
+Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,raw,POS,289.0,284.28,293.72,287.63,290.37,19355962,,,,
+Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,corrected,POS,288.97,284.28,293.72,287.63,290.37,19355962,0.004591,7.0,-0.03,provisional_label_density × Module08 polygon-area
+Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,raw,EOS,350.0,345.28,354.72,348.63,351.37,19355962,,,,
+Bhadrak,bha,2020,treatment,coastal_treatment,Amphan,corrected,EOS,349.9,345.28,354.72,348.63,351.37,19355962,0.004591,21.0,-0.1,provisional_label_density × Module08 polygon-area
+Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,raw,SOS,196.0,186.95,205.05,193.37,198.63,18898032,,,,
+Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,corrected,SOS,195.69,186.95,205.05,193.37,198.63,18898032,0.022443,14.0,-0.31,provisional_label_density × Module08 polygon-area
+Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,raw,POS,288.0,283.28,292.72,286.63,289.37,18898032,,,,
+Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.84,283.28,292.72,286.63,289.37,18898032,0.022443,7.0,-0.16,provisional_label_density × Module08 polygon-area
+Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,raw,EOS,349.0,344.28,353.72,347.63,350.37,18898032,,,,
+Bhadrak,bha,2021,treatment,coastal_treatment,Yaas,corrected,EOS,348.53,344.28,353.72,347.63,350.37,18898032,0.022443,21.0,-0.47,provisional_label_density × Module08 polygon-area
+Bhadrak,bha,2022,control,coastal_treatment,,raw,SOS,258.0,253.28,262.72,256.63,259.37,19500602,,,,
+Bhadrak,bha,2022,control,coastal_treatment,,corrected,SOS,258.0,253.28,262.72,256.63,259.37,19500602,0.0,0.0,0.0,none
+Bhadrak,bha,2022,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,19500602,,,,
+Bhadrak,bha,2022,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,19500602,0.0,0.0,0.0,none
+Bhadrak,bha,2022,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,19500602,,,,
+Bhadrak,bha,2022,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,19500602,0.0,0.0,0.0,none
+Bhadrak,bha,2023,control,coastal_treatment,,raw,SOS,258.0,235.09,280.91,251.34,264.66,19512985,,,,
+Bhadrak,bha,2023,control,coastal_treatment,,corrected,SOS,258.0,235.09,280.91,251.34,264.66,19512985,0.0,0.0,0.0,none
+Bhadrak,bha,2023,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,19512985,,,,
+Bhadrak,bha,2023,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,19512985,0.0,0.0,0.0,none
+Bhadrak,bha,2023,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,19512985,,,,
+Bhadrak,bha,2023,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,19512985,0.0,0.0,0.0,none
+Bhadrak,bha,2024,control,coastal_treatment,,raw,SOS,197.0,185.92,208.08,193.78,200.22,18596313,,,,
+Bhadrak,bha,2024,control,coastal_treatment,,corrected,SOS,197.0,185.92,208.08,193.78,200.22,18596313,0.0,0.0,0.0,none
+Bhadrak,bha,2024,control,coastal_treatment,,raw,POS,289.0,279.65,298.35,286.28,291.72,18596313,,,,
+Bhadrak,bha,2024,control,coastal_treatment,,corrected,POS,289.0,279.65,298.35,286.28,291.72,18596313,0.0,0.0,0.0,none
+Bhadrak,bha,2024,control,coastal_treatment,,raw,EOS,350.0,345.28,354.72,348.63,351.37,18596313,,,,
+Bhadrak,bha,2024,control,coastal_treatment,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,18596313,0.0,0.0,0.0,none
+Cuttack,ctk,2017,control,inland_control,,raw,SOS,288.0,283.28,292.72,286.63,289.37,4228414,,,,
+Cuttack,ctk,2017,control,inland_control,,corrected,SOS,288.0,283.28,292.72,286.63,289.37,4228414,0.0,0.0,0.0,none
+Cuttack,ctk,2017,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,4228414,,,,
+Cuttack,ctk,2017,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,4228414,0.0,0.0,0.0,none
+Cuttack,ctk,2017,control,inland_control,,raw,EOS,,,,,,4228414,,,,
+Cuttack,ctk,2017,control,inland_control,,corrected,EOS,,,,,,4228414,0.0,0.0,0.0,none
+Cuttack,ctk,2018,control,inland_control,,raw,SOS,288.0,276.32,299.68,284.61,291.39,6427424,,,,
+Cuttack,ctk,2018,control,inland_control,,corrected,SOS,288.0,276.32,299.68,284.61,291.39,6427424,0.0,0.0,0.0,none
+Cuttack,ctk,2018,control,inland_control,,raw,POS,288.0,276.32,299.68,284.61,291.39,6427424,,,,
+Cuttack,ctk,2018,control,inland_control,,corrected,POS,288.0,276.32,299.68,284.61,291.39,6427424,0.0,0.0,0.0,none
+Cuttack,ctk,2018,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,6427424,,,,
+Cuttack,ctk,2018,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,6427424,0.0,0.0,0.0,none
+Cuttack,ctk,2019,control,inland_control,,raw,SOS,196.0,191.28,200.72,194.63,197.37,17900834,,,,
+Cuttack,ctk,2019,control,inland_control,,corrected,SOS,195.82,191.28,200.72,194.63,197.37,17900834,0.013112,14.0,-0.18,EMSR357_real
+Cuttack,ctk,2019,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,17900834,,,,
+Cuttack,ctk,2019,control,inland_control,,corrected,POS,287.91,283.28,292.72,286.63,289.37,17900834,0.013112,7.0,-0.09,EMSR357_real
+Cuttack,ctk,2019,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,17900834,,,,
+Cuttack,ctk,2019,control,inland_control,,corrected,EOS,348.72,344.28,353.72,347.63,350.37,17900834,0.013112,21.0,-0.28,EMSR357_real
+Cuttack,ctk,2020,control,inland_control,,raw,SOS,136.0,123.93,148.07,132.49,139.51,17866548,,,,
+Cuttack,ctk,2020,control,inland_control,,corrected,SOS,136.0,123.93,148.07,132.49,139.51,17866548,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Cuttack,ctk,2020,control,inland_control,,raw,POS,289.0,284.28,293.72,287.63,290.37,17866548,,,,
+Cuttack,ctk,2020,control,inland_control,,corrected,POS,289.0,284.28,293.72,287.63,290.37,17866548,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Cuttack,ctk,2020,control,inland_control,,raw,EOS,350.0,345.28,354.72,348.63,351.37,17866548,,,,
+Cuttack,ctk,2020,control,inland_control,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,17866548,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Cuttack,ctk,2021,control,inland_control,,raw,SOS,166.0,161.28,170.72,164.63,167.37,17874406,,,,
+Cuttack,ctk,2021,control,inland_control,,corrected,SOS,166.0,161.28,170.72,164.63,167.37,17874406,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Cuttack,ctk,2021,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,17874406,,,,
+Cuttack,ctk,2021,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,17874406,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Cuttack,ctk,2021,control,inland_control,,raw,EOS,,,,,,17874406,,,,
+Cuttack,ctk,2021,control,inland_control,,corrected,EOS,,,,,,17874406,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Cuttack,ctk,2022,control,inland_control,,raw,SOS,196.0,184.32,207.68,192.61,199.39,17920054,,,,
+Cuttack,ctk,2022,control,inland_control,,corrected,SOS,196.0,184.32,207.68,192.61,199.39,17920054,0.0,0.0,0.0,none
+Cuttack,ctk,2022,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,17920054,,,,
+Cuttack,ctk,2022,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,17920054,0.0,0.0,0.0,none
+Cuttack,ctk,2022,control,inland_control,,raw,EOS,,,,,,17920054,,,,
+Cuttack,ctk,2022,control,inland_control,,corrected,EOS,,,,,,17920054,0.0,0.0,0.0,none
+Cuttack,ctk,2023,control,inland_control,,raw,SOS,196.0,191.28,200.72,194.63,197.37,18142041,,,,
+Cuttack,ctk,2023,control,inland_control,,corrected,SOS,196.0,191.28,200.72,194.63,197.37,18142041,0.0,0.0,0.0,none
+Cuttack,ctk,2023,control,inland_control,,raw,POS,288.0,276.32,299.68,284.61,291.39,18142041,,,,
+Cuttack,ctk,2023,control,inland_control,,corrected,POS,288.0,276.32,299.68,284.61,291.39,18142041,0.0,0.0,0.0,none
+Cuttack,ctk,2023,control,inland_control,,raw,EOS,,,,,,18142041,,,,
+Cuttack,ctk,2023,control,inland_control,,corrected,EOS,,,,,,18142041,0.0,0.0,0.0,none
+Cuttack,ctk,2024,control,inland_control,,raw,SOS,197.0,192.28,201.72,195.63,198.37,17506468,,,,
+Cuttack,ctk,2024,control,inland_control,,corrected,SOS,197.0,192.28,201.72,195.63,198.37,17506468,0.0,0.0,0.0,none
+Cuttack,ctk,2024,control,inland_control,,raw,POS,289.0,284.28,293.72,287.63,290.37,17506468,,,,
+Cuttack,ctk,2024,control,inland_control,,corrected,POS,289.0,284.28,293.72,287.63,290.37,17506468,0.0,0.0,0.0,none
+Cuttack,ctk,2024,control,inland_control,,raw,EOS,,,,,,17506468,,,,
+Cuttack,ctk,2024,control,inland_control,,corrected,EOS,,,,,,17506468,0.0,0.0,0.0,none
+Dhenkanal,dhk,2017,control,inland_control,,raw,SOS,288.0,283.28,292.72,286.63,289.37,121415,,,,
+Dhenkanal,dhk,2017,control,inland_control,,corrected,SOS,288.0,283.28,292.72,286.63,289.37,121415,0.0,0.0,0.0,none
+Dhenkanal,dhk,2017,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,121415,,,,
+Dhenkanal,dhk,2017,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,121415,0.0,0.0,0.0,none
+Dhenkanal,dhk,2017,control,inland_control,,raw,EOS,,,,,,121415,,,,
+Dhenkanal,dhk,2017,control,inland_control,,corrected,EOS,,,,,,121415,0.0,0.0,0.0,none
+Dhenkanal,dhk,2018,control,inland_control,,raw,SOS,288.0,276.32,299.68,284.61,291.39,11209440,,,,
+Dhenkanal,dhk,2018,control,inland_control,,corrected,SOS,288.0,276.32,299.68,284.61,291.39,11209440,0.0,0.0,0.0,none
+Dhenkanal,dhk,2018,control,inland_control,,raw,POS,288.0,276.32,299.68,284.61,291.39,11209440,,,,
+Dhenkanal,dhk,2018,control,inland_control,,corrected,POS,288.0,276.32,299.68,284.61,291.39,11209440,0.0,0.0,0.0,none
+Dhenkanal,dhk,2018,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,11209440,,,,
+Dhenkanal,dhk,2018,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,11209440,0.0,0.0,0.0,none
+Dhenkanal,dhk,2019,control,inland_control,,raw,SOS,196.0,191.28,200.72,194.63,197.37,14384573,,,,
+Dhenkanal,dhk,2019,control,inland_control,,corrected,SOS,196.0,191.28,200.72,194.63,197.37,14384573,0.0,0.0,0.0,EMSR357_real
+Dhenkanal,dhk,2019,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,14384573,,,,
+Dhenkanal,dhk,2019,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,14384573,0.0,0.0,0.0,EMSR357_real
+Dhenkanal,dhk,2019,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,14384573,,,,
+Dhenkanal,dhk,2019,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,14384573,0.0,0.0,0.0,EMSR357_real
+Dhenkanal,dhk,2020,control,inland_control,,raw,SOS,136.0,123.93,148.07,132.49,139.51,14359852,,,,
+Dhenkanal,dhk,2020,control,inland_control,,corrected,SOS,136.0,123.93,148.07,132.49,139.51,14359852,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Dhenkanal,dhk,2020,control,inland_control,,raw,POS,289.0,284.28,293.72,287.63,290.37,14359852,,,,
+Dhenkanal,dhk,2020,control,inland_control,,corrected,POS,289.0,284.28,293.72,287.63,290.37,14359852,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Dhenkanal,dhk,2020,control,inland_control,,raw,EOS,350.0,345.28,354.72,348.63,351.37,14359852,,,,
+Dhenkanal,dhk,2020,control,inland_control,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,14359852,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Dhenkanal,dhk,2021,control,inland_control,,raw,SOS,166.0,161.28,170.72,164.63,167.37,14277067,,,,
+Dhenkanal,dhk,2021,control,inland_control,,corrected,SOS,166.0,161.28,170.72,164.63,167.37,14277067,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Dhenkanal,dhk,2021,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,14277067,,,,
+Dhenkanal,dhk,2021,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,14277067,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Dhenkanal,dhk,2021,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,14277067,,,,
+Dhenkanal,dhk,2021,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,14277067,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Dhenkanal,dhk,2022,control,inland_control,,raw,SOS,166.0,154.32,177.68,162.61,169.39,14357347,,,,
+Dhenkanal,dhk,2022,control,inland_control,,corrected,SOS,166.0,154.32,177.68,162.61,169.39,14357347,0.0,0.0,0.0,none
+Dhenkanal,dhk,2022,control,inland_control,,raw,POS,288.0,283.28,292.72,286.63,289.37,14357347,,,,
+Dhenkanal,dhk,2022,control,inland_control,,corrected,POS,288.0,283.28,292.72,286.63,289.37,14357347,0.0,0.0,0.0,none
+Dhenkanal,dhk,2022,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,14357347,,,,
+Dhenkanal,dhk,2022,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,14357347,0.0,0.0,0.0,none
+Dhenkanal,dhk,2023,control,inland_control,,raw,SOS,196.0,191.28,200.72,194.63,197.37,5993858,,,,
+Dhenkanal,dhk,2023,control,inland_control,,corrected,SOS,196.0,191.28,200.72,194.63,197.37,5993858,0.0,0.0,0.0,none
+Dhenkanal,dhk,2023,control,inland_control,,raw,POS,258.0,246.32,269.68,254.61,261.39,5993858,,,,
+Dhenkanal,dhk,2023,control,inland_control,,corrected,POS,258.0,246.32,269.68,254.61,261.39,5993858,0.0,0.0,0.0,none
+Dhenkanal,dhk,2023,control,inland_control,,raw,EOS,349.0,344.28,353.72,347.63,350.37,5993858,,,,
+Dhenkanal,dhk,2023,control,inland_control,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,5993858,0.0,0.0,0.0,none
+Dhenkanal,dhk,2024,control,inland_control,,raw,SOS,197.0,192.28,201.72,195.63,198.37,13618119,,,,
+Dhenkanal,dhk,2024,control,inland_control,,corrected,SOS,197.0,192.28,201.72,195.63,198.37,13618119,0.0,0.0,0.0,none
+Dhenkanal,dhk,2024,control,inland_control,,raw,POS,289.0,284.28,293.72,287.63,290.37,13618119,,,,
+Dhenkanal,dhk,2024,control,inland_control,,corrected,POS,289.0,284.28,293.72,287.63,290.37,13618119,0.0,0.0,0.0,none
+Dhenkanal,dhk,2024,control,inland_control,,raw,EOS,350.0,345.28,354.72,348.63,351.37,13618119,,,,
+Dhenkanal,dhk,2024,control,inland_control,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,13618119,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2017,control,coastal_treatment,,raw,SOS,288.0,276.55,299.45,284.67,291.33,1013506,,,,
+Jagatsinghpur,jgs,2017,control,coastal_treatment,,corrected,SOS,288.0,276.55,299.45,284.67,291.33,1013506,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2017,control,coastal_treatment,,raw,POS,288.0,276.55,299.45,284.67,291.33,1013506,,,,
+Jagatsinghpur,jgs,2017,control,coastal_treatment,,corrected,POS,288.0,276.55,299.45,284.67,291.33,1013506,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2017,control,coastal_treatment,,raw,EOS,,,,,,1013506,,,,
+Jagatsinghpur,jgs,2017,control,coastal_treatment,,corrected,EOS,,,,,,1013506,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2018,control,coastal_treatment,,raw,SOS,288.0,231.48,344.52,271.57,304.43,11045337,,,,
+Jagatsinghpur,jgs,2018,control,coastal_treatment,,corrected,SOS,288.0,231.48,344.52,271.57,304.43,11045337,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2018,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,11045337,,,,
+Jagatsinghpur,jgs,2018,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,11045337,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2018,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,11045337,,,,
+Jagatsinghpur,jgs,2018,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,11045337,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2019,treatment,coastal_treatment,Fani,raw,SOS,227.0,209.51,244.49,221.92,232.08,11340083,,,,
+Jagatsinghpur,jgs,2019,treatment,coastal_treatment,Fani,corrected,SOS,226.96,209.51,244.49,221.92,232.08,11340083,0.002912,14.0,-0.04,EMSR357_real
+Jagatsinghpur,jgs,2019,treatment,coastal_treatment,Fani,raw,POS,319.0,307.55,330.45,315.67,322.33,11340083,,,,
+Jagatsinghpur,jgs,2019,treatment,coastal_treatment,Fani,corrected,POS,318.98,307.55,330.45,315.67,322.33,11340083,0.002912,7.0,-0.02,EMSR357_real
+Jagatsinghpur,jgs,2019,treatment,coastal_treatment,Fani,raw,EOS,,,,,,11340083,,,,
+Jagatsinghpur,jgs,2019,treatment,coastal_treatment,Fani,corrected,EOS,,,,,,11340083,0.0,0.0,0.0,EMSR357_real
+Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,raw,SOS,167.0,140.05,193.95,159.17,174.83,10848508,,,,
+Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,corrected,SOS,166.87,140.05,193.95,159.17,174.83,10848508,0.009437,14.0,-0.13,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,raw,POS,289.0,284.28,293.72,287.63,290.37,10848508,,,,
+Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,corrected,POS,288.93,284.28,293.72,287.63,290.37,10848508,0.009437,7.0,-0.07,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,raw,EOS,,,,,,10848508,,,,
+Jagatsinghpur,jgs,2020,treatment,coastal_treatment,Amphan,corrected,EOS,,,,,,10848508,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,raw,SOS,166.0,156.95,175.05,163.37,168.63,10735035,,,,
+Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,corrected,SOS,165.88,156.95,175.05,163.37,168.63,10735035,0.008239,14.0,-0.12,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,raw,POS,288.0,283.28,292.72,286.63,289.37,10735035,,,,
+Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.94,283.28,292.72,286.63,289.37,10735035,0.008239,7.0,-0.06,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,raw,EOS,,,,,,10735035,,,,
+Jagatsinghpur,jgs,2021,treatment,coastal_treatment,Yaas,corrected,EOS,,,,,,10735035,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Jagatsinghpur,jgs,2022,control,coastal_treatment,,raw,SOS,258.0,253.28,262.72,256.63,259.37,11412558,,,,
+Jagatsinghpur,jgs,2022,control,coastal_treatment,,corrected,SOS,258.0,253.28,262.72,256.63,259.37,11412558,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2022,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,11412558,,,,
+Jagatsinghpur,jgs,2022,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,11412558,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2022,control,coastal_treatment,,raw,EOS,,,,,,11412558,,,,
+Jagatsinghpur,jgs,2022,control,coastal_treatment,,corrected,EOS,,,,,,11412558,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2023,control,coastal_treatment,,raw,SOS,196.0,173.09,218.91,189.34,202.66,11502689,,,,
+Jagatsinghpur,jgs,2023,control,coastal_treatment,,corrected,SOS,196.0,173.09,218.91,189.34,202.66,11502689,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2023,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,11502689,,,,
+Jagatsinghpur,jgs,2023,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,11502689,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2023,control,coastal_treatment,,raw,EOS,,,,,,11502689,,,,
+Jagatsinghpur,jgs,2023,control,coastal_treatment,,corrected,EOS,,,,,,11502689,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2024,control,coastal_treatment,,raw,SOS,167.0,155.92,178.08,163.78,170.22,11492598,,,,
+Jagatsinghpur,jgs,2024,control,coastal_treatment,,corrected,SOS,167.0,155.92,178.08,163.78,170.22,11492598,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2024,control,coastal_treatment,,raw,POS,320.0,310.65,329.35,317.28,322.72,11492598,,,,
+Jagatsinghpur,jgs,2024,control,coastal_treatment,,corrected,POS,320.0,310.65,329.35,317.28,322.72,11492598,0.0,0.0,0.0,none
+Jagatsinghpur,jgs,2024,control,coastal_treatment,,raw,EOS,,,,,,11492598,,,,
+Jagatsinghpur,jgs,2024,control,coastal_treatment,,corrected,EOS,,,,,,11492598,0.0,0.0,0.0,none
+Kendrapara,kdp,2017,control,coastal_treatment,,raw,SOS,319.0,307.55,330.45,315.67,322.33,17241453,,,,
+Kendrapara,kdp,2017,control,coastal_treatment,,corrected,SOS,319.0,307.55,330.45,315.67,322.33,17241453,0.0,0.0,0.0,none
+Kendrapara,kdp,2017,control,coastal_treatment,,raw,POS,319.0,307.55,330.45,315.67,322.33,17241453,,,,
+Kendrapara,kdp,2017,control,coastal_treatment,,corrected,POS,319.0,307.55,330.45,315.67,322.33,17241453,0.0,0.0,0.0,none
+Kendrapara,kdp,2017,control,coastal_treatment,,raw,EOS,,,,,,17241453,,,,
+Kendrapara,kdp,2017,control,coastal_treatment,,corrected,EOS,,,,,,17241453,0.0,0.0,0.0,none
+Kendrapara,kdp,2018,control,coastal_treatment,,raw,SOS,288.0,231.48,344.52,271.57,304.43,16806975,,,,
+Kendrapara,kdp,2018,control,coastal_treatment,,corrected,SOS,288.0,231.48,344.52,271.57,304.43,16806975,0.0,0.0,0.0,none
+Kendrapara,kdp,2018,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,16806975,,,,
+Kendrapara,kdp,2018,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,16806975,0.0,0.0,0.0,none
+Kendrapara,kdp,2018,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,16806975,,,,
+Kendrapara,kdp,2018,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,16806975,0.0,0.0,0.0,none
+Kendrapara,kdp,2019,treatment,coastal_treatment,Fani,raw,SOS,196.0,178.51,213.49,190.92,201.08,17354265,,,,
+Kendrapara,kdp,2019,treatment,coastal_treatment,Fani,corrected,SOS,195.93,178.51,213.49,190.92,201.08,17354265,0.005352,14.0,-0.07,EMSR357_real
+Kendrapara,kdp,2019,treatment,coastal_treatment,Fani,raw,POS,319.0,307.55,330.45,315.67,322.33,17354265,,,,
+Kendrapara,kdp,2019,treatment,coastal_treatment,Fani,corrected,POS,318.96,307.55,330.45,315.67,322.33,17354265,0.005352,7.0,-0.04,EMSR357_real
+Kendrapara,kdp,2019,treatment,coastal_treatment,Fani,raw,EOS,349.0,344.28,353.72,347.63,350.37,17354265,,,,
+Kendrapara,kdp,2019,treatment,coastal_treatment,Fani,corrected,EOS,348.89,344.28,353.72,347.63,350.37,17354265,0.005352,21.0,-0.11,EMSR357_real
+Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,raw,SOS,167.0,140.05,193.95,159.17,174.83,16851732,,,,
+Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,corrected,SOS,166.93,140.05,193.95,159.17,174.83,16851732,0.004764,14.0,-0.07,provisional_label_density × Module08 polygon-area
+Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,raw,POS,289.0,284.28,293.72,287.63,290.37,16851732,,,,
+Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,corrected,POS,288.97,284.28,293.72,287.63,290.37,16851732,0.004764,7.0,-0.03,provisional_label_density × Module08 polygon-area
+Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,raw,EOS,350.0,345.28,354.72,348.63,351.37,16851732,,,,
+Kendrapara,kdp,2020,treatment,coastal_treatment,Amphan,corrected,EOS,349.9,345.28,354.72,348.63,351.37,16851732,0.004764,21.0,-0.1,provisional_label_density × Module08 polygon-area
+Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,raw,SOS,166.0,156.95,175.05,163.37,168.63,16800623,,,,
+Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,corrected,SOS,165.85,156.95,175.05,163.37,168.63,16800623,0.010535,14.0,-0.15,provisional_label_density × Module08 polygon-area
+Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,raw,POS,288.0,283.28,292.72,286.63,289.37,16800623,,,,
+Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.93,283.28,292.72,286.63,289.37,16800623,0.010535,7.0,-0.07,provisional_label_density × Module08 polygon-area
+Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,raw,EOS,,,,,,16800623,,,,
+Kendrapara,kdp,2021,treatment,coastal_treatment,Yaas,corrected,EOS,,,,,,16800623,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Kendrapara,kdp,2022,control,coastal_treatment,,raw,SOS,258.0,253.28,262.72,256.63,259.37,17387572,,,,
+Kendrapara,kdp,2022,control,coastal_treatment,,corrected,SOS,258.0,253.28,262.72,256.63,259.37,17387572,0.0,0.0,0.0,none
+Kendrapara,kdp,2022,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,17387572,,,,
+Kendrapara,kdp,2022,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,17387572,0.0,0.0,0.0,none
+Kendrapara,kdp,2022,control,coastal_treatment,,raw,EOS,,,,,,17387572,,,,
+Kendrapara,kdp,2022,control,coastal_treatment,,corrected,EOS,,,,,,17387572,0.0,0.0,0.0,none
+Kendrapara,kdp,2023,control,coastal_treatment,,raw,SOS,196.0,173.09,218.91,189.34,202.66,17390487,,,,
+Kendrapara,kdp,2023,control,coastal_treatment,,corrected,SOS,196.0,173.09,218.91,189.34,202.66,17390487,0.0,0.0,0.0,none
+Kendrapara,kdp,2023,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,17390487,,,,
+Kendrapara,kdp,2023,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,17390487,0.0,0.0,0.0,none
+Kendrapara,kdp,2023,control,coastal_treatment,,raw,EOS,,,,,,17390487,,,,
+Kendrapara,kdp,2023,control,coastal_treatment,,corrected,EOS,,,,,,17390487,0.0,0.0,0.0,none
+Kendrapara,kdp,2024,control,coastal_treatment,,raw,SOS,167.0,155.92,178.08,163.78,170.22,16706558,,,,
+Kendrapara,kdp,2024,control,coastal_treatment,,corrected,SOS,167.0,155.92,178.08,163.78,170.22,16706558,0.0,0.0,0.0,none
+Kendrapara,kdp,2024,control,coastal_treatment,,raw,POS,289.0,279.65,298.35,286.28,291.72,16706558,,,,
+Kendrapara,kdp,2024,control,coastal_treatment,,corrected,POS,289.0,279.65,298.35,286.28,291.72,16706558,0.0,0.0,0.0,none
+Kendrapara,kdp,2024,control,coastal_treatment,,raw,EOS,,,,,,16706558,,,,
+Kendrapara,kdp,2024,control,coastal_treatment,,corrected,EOS,,,,,,16706558,0.0,0.0,0.0,none
+Puri,pur,2017,control,coastal_treatment,,raw,SOS,288.0,276.55,299.45,284.67,291.33,3553935,,,,
+Puri,pur,2017,control,coastal_treatment,,corrected,SOS,288.0,276.55,299.45,284.67,291.33,3553935,0.0,0.0,0.0,none
+Puri,pur,2017,control,coastal_treatment,,raw,POS,288.0,276.55,299.45,284.67,291.33,3553935,,,,
+Puri,pur,2017,control,coastal_treatment,,corrected,POS,288.0,276.55,299.45,284.67,291.33,3553935,0.0,0.0,0.0,none
+Puri,pur,2017,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,3553935,,,,
+Puri,pur,2017,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,3553935,0.0,0.0,0.0,none
+Puri,pur,2018,control,coastal_treatment,,raw,SOS,288.0,231.48,344.52,271.57,304.43,5632721,,,,
+Puri,pur,2018,control,coastal_treatment,,corrected,SOS,288.0,231.48,344.52,271.57,304.43,5632721,0.0,0.0,0.0,none
+Puri,pur,2018,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,5632721,,,,
+Puri,pur,2018,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,5632721,0.0,0.0,0.0,none
+Puri,pur,2018,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,5632721,,,,
+Puri,pur,2018,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,5632721,0.0,0.0,0.0,none
+Puri,pur,2019,treatment,coastal_treatment,Fani,raw,SOS,196.0,178.51,213.49,190.92,201.08,13868787,,,,
+Puri,pur,2019,treatment,coastal_treatment,Fani,corrected,SOS,195.65,178.51,213.49,190.92,201.08,13868787,0.025188,14.0,-0.35,EMSR357_real
+Puri,pur,2019,treatment,coastal_treatment,Fani,raw,POS,288.0,276.55,299.45,284.67,291.33,13868787,,,,
+Puri,pur,2019,treatment,coastal_treatment,Fani,corrected,POS,287.82,276.55,299.45,284.67,291.33,13868787,0.025188,7.0,-0.18,EMSR357_real
+Puri,pur,2019,treatment,coastal_treatment,Fani,raw,EOS,349.0,344.28,353.72,347.63,350.37,13868787,,,,
+Puri,pur,2019,treatment,coastal_treatment,Fani,corrected,EOS,348.47,344.28,353.72,347.63,350.37,13868787,0.025188,21.0,-0.53,EMSR357_real
+Puri,pur,2020,treatment,coastal_treatment,Amphan,raw,SOS,197.0,170.05,223.95,189.17,204.83,14196133,,,,
+Puri,pur,2020,treatment,coastal_treatment,Amphan,corrected,SOS,197.0,170.05,223.95,189.17,204.83,14196133,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Puri,pur,2020,treatment,coastal_treatment,Amphan,raw,POS,289.0,284.28,293.72,287.63,290.37,14196133,,,,
+Puri,pur,2020,treatment,coastal_treatment,Amphan,corrected,POS,289.0,284.28,293.72,287.63,290.37,14196133,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Puri,pur,2020,treatment,coastal_treatment,Amphan,raw,EOS,350.0,345.28,354.72,348.63,351.37,14196133,,,,
+Puri,pur,2020,treatment,coastal_treatment,Amphan,corrected,EOS,350.0,345.28,354.72,348.63,351.37,14196133,0.0,0.0,0.0,provisional_label_density × Module08 polygon-area
+Puri,pur,2021,treatment,coastal_treatment,Yaas,raw,SOS,166.0,156.95,175.05,163.37,168.63,14560993,,,,
+Puri,pur,2021,treatment,coastal_treatment,Yaas,corrected,SOS,165.98,156.95,175.05,163.37,168.63,14560993,0.001178,14.0,-0.02,provisional_label_density × Module08 polygon-area
+Puri,pur,2021,treatment,coastal_treatment,Yaas,raw,POS,288.0,283.28,292.72,286.63,289.37,14560993,,,,
+Puri,pur,2021,treatment,coastal_treatment,Yaas,corrected,POS,287.99,283.28,292.72,286.63,289.37,14560993,0.001178,7.0,-0.01,provisional_label_density × Module08 polygon-area
+Puri,pur,2021,treatment,coastal_treatment,Yaas,raw,EOS,349.0,344.28,353.72,347.63,350.37,14560993,,,,
+Puri,pur,2021,treatment,coastal_treatment,Yaas,corrected,EOS,348.98,344.28,353.72,347.63,350.37,14560993,0.001178,21.0,-0.02,provisional_label_density × Module08 polygon-area
+Puri,pur,2022,control,coastal_treatment,,raw,SOS,258.0,253.28,262.72,256.63,259.37,15123273,,,,
+Puri,pur,2022,control,coastal_treatment,,corrected,SOS,258.0,253.28,262.72,256.63,259.37,15123273,0.0,0.0,0.0,none
+Puri,pur,2022,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,15123273,,,,
+Puri,pur,2022,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,15123273,0.0,0.0,0.0,none
+Puri,pur,2022,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,15123273,,,,
+Puri,pur,2022,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,15123273,0.0,0.0,0.0,none
+Puri,pur,2023,control,coastal_treatment,,raw,SOS,258.0,235.09,280.91,251.34,264.66,15301008,,,,
+Puri,pur,2023,control,coastal_treatment,,corrected,SOS,258.0,235.09,280.91,251.34,264.66,15301008,0.0,0.0,0.0,none
+Puri,pur,2023,control,coastal_treatment,,raw,POS,288.0,283.28,292.72,286.63,289.37,15301008,,,,
+Puri,pur,2023,control,coastal_treatment,,corrected,POS,288.0,283.28,292.72,286.63,289.37,15301008,0.0,0.0,0.0,none
+Puri,pur,2023,control,coastal_treatment,,raw,EOS,349.0,344.28,353.72,347.63,350.37,15301008,,,,
+Puri,pur,2023,control,coastal_treatment,,corrected,EOS,349.0,344.28,353.72,347.63,350.37,15301008,0.0,0.0,0.0,none
+Puri,pur,2024,control,coastal_treatment,,raw,SOS,197.0,185.92,208.08,193.78,200.22,13931775,,,,
+Puri,pur,2024,control,coastal_treatment,,corrected,SOS,197.0,185.92,208.08,193.78,200.22,13931775,0.0,0.0,0.0,none
+Puri,pur,2024,control,coastal_treatment,,raw,POS,289.0,279.65,298.35,286.28,291.72,13931775,,,,
+Puri,pur,2024,control,coastal_treatment,,corrected,POS,289.0,279.65,298.35,286.28,291.72,13931775,0.0,0.0,0.0,none
+Puri,pur,2024,control,coastal_treatment,,raw,EOS,350.0,345.28,354.72,348.63,351.37,13931775,,,,
+Puri,pur,2024,control,coastal_treatment,,corrected,EOS,350.0,345.28,354.72,348.63,351.37,13931775,0.0,0.0,0.0,none
