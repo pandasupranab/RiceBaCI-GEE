@@ -5,8 +5,8 @@ pipeline   metric  tau_full max|delta|%               driver  verdict
 raw        SOS       +15.29        76.1              Bhadrak  leverage
 raw        POS        -3.59        55.8              Cuttack  leverage
 raw        EOS        -0.00         nan                Angul  fragile
-corrected  SOS       +15.22        76.4              Bhadrak  leverage
-corrected  POS        -3.62        55.5              Cuttack  leverage
-corrected  EOS        -0.10        40.7            Baleshwar  leverage
+corrected  SOS       +15.11        76.7              Bhadrak  leverage
+corrected  POS        -3.68        54.7              Cuttack  leverage
+corrected  EOS        -0.24        60.2              Bhadrak  leverage
 
 Verdicts: stable (no LOO shifts tau by >25 %), leverage (one district drives >25 %), fragile (some LOO flips sign).
