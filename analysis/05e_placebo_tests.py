@@ -219,13 +219,13 @@ def make_figure(perm_df: pd.DataFrame,
     plt.rcParams.update({
         "font.family": "sans-serif",
         "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"],
-        "font.size": 9,
+        "font.size": 11,
         "axes.spines.top": False,
         "axes.spines.right": False,
         "axes.linewidth": 0.6,
     })
 
-    fig, axes = plt.subplots(2, 3, figsize=(7.5, 4.6),
+    fig, axes = plt.subplots(2, 3, figsize=(10.0, 6.2),
                              sharey=True)
     for i, pipeline in enumerate(PIPELINES):
         for j, metric in enumerate(METRICS):
@@ -248,27 +248,28 @@ def make_figure(perm_df: pd.DataFrame,
                 ax.text(0.5, 0.5,
                         "insufficient finite placebo estimates\n"
                         "(degenerate outcome on this metric)",
-                        ha="center", va="center", fontsize=8,
+                        ha="center", va="center", fontsize=10.5,
                         color="0.4", transform=ax.transAxes)
             if not np.isnan(real):
                 ax.axvline(real, color=OK_RED, lw=1.6, zorder=10)
             ax.axvline(0, color="0.3", lw=0.6, ls=":", zorder=0)
 
             title = f"{pipeline} / {metric}"
-            ax.set_title(title, fontsize=9.5, loc="left", pad=2)
+            ax.set_title(title, fontsize=12.5, loc="left", pad=4,
+                         weight="bold")
             ax.text(0.04, 0.95,
                     f"tau_real = {real:+.2f} d\np_perm = {row['p_permutation']:.3f}\n"
                     f"(n_extreme {row['n_extreme']}/{row['n_perm']-1})",
                     transform=ax.transAxes,
                     ha="left", va="top",
-                    fontsize=7.2, color="0.15",
+                    fontsize=9.5, color="0.15",
                     bbox=dict(facecolor="white", edgecolor="none",
-                              alpha=0.85, pad=2.0))
+                              alpha=0.85, pad=2.5))
             if i == 1:
-                ax.set_xlabel("Placebo tau (days)")
+                ax.set_xlabel("Placebo tau (days)", fontsize=11.5)
             if j == 0:
-                ax.set_ylabel("# permutations")
-            ax.tick_params(labelsize=8)
+                ax.set_ylabel("# permutations", fontsize=11.5)
+            ax.tick_params(labelsize=10)
 
     # fig.suptitle removed (caption supplied below figure in DOCX/manuscript).
     fig.suptitle("", fontsize=10, y=0.995, x=0.04, ha="left")
