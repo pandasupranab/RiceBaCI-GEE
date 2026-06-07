@@ -128,8 +128,8 @@ def fig_did_coefplot(static_df: pd.DataFrame, out_dir: Path) -> None:
 # Figure 3 — Event study (SOS only, raw vs corrected as facets)
 # ---------------------------------------------------------------------------
 def fig_event_study(es_df: pd.DataFrame, out_dir: Path) -> None:
-    fig, axes = plt.subplots(1, 2, figsize=(8.5, 4.0), sharey=True)
-    fig.subplots_adjust(top=0.82, bottom=0.18)
+    fig, axes = plt.subplots(1, 2, figsize=(10.0, 4.8), sharey=True)
+    fig.subplots_adjust(top=0.82, bottom=0.22)
 
     for ax, pipe in zip(axes, ["raw", "corrected"]):
         sub = (es_df.query("pipeline == @pipe and metric == 'SOS'")
@@ -140,16 +140,18 @@ def fig_event_study(es_df: pd.DataFrame, out_dir: Path) -> None:
             sub["event_k"], sub["beta"],
             yerr=[sub["beta"] - sub["ci_lo_95"], sub["ci_hi_95"] - sub["beta"]],
             fmt="o-", color=OKABE_ITO[pipe],
-            capsize=3, lw=1.2, markersize=5,
+            capsize=3, lw=1.4, markersize=6,
         )
         ax.axhline(0, color="black", lw=0.6, ls=":")
         ax.axvline(-0.5, color=OKABE_ITO["treatment"], lw=0.8, ls="--",
                    alpha=0.6)
-        ax.set_xlabel("Event time (years from first treatment)")
-        ax.set_title(f"SOS — {pipe}", loc="left", pad=8)
+        ax.set_xlabel("Event time (years from first treatment)", fontsize=12)
+        ax.set_title(f"SOS — {pipe}", loc="left", pad=8, fontsize=13.5,
+                     weight="bold")
+        ax.tick_params(labelsize=11)
         ax.grid(axis="y", alpha=0.25, lw=0.4)
 
-    axes[0].set_ylabel("β (days, vs k = −1)")
+    axes[0].set_ylabel("β (days, vs k = −1)", fontsize=12)
     # fig.suptitle removed (caption supplied below figure in DOCX/manuscript).
     fig.suptitle("",
                  x=0.02, y=0.97, ha="left", fontsize=12)
@@ -157,7 +159,7 @@ def fig_event_study(es_df: pd.DataFrame, out_dir: Path) -> None:
     fig.text(0.01, 0.02,
              "Reference period k = −1 (year before first treatment landfall, 2018). "
              "Whiskers: 95 % CI.",
-             fontsize=8, color="#444")
+             fontsize=10, color="#444")
 
     for ext in ("png", "pdf"):
         fig.savefig(out_dir / f"fig3_event_study.{ext}")
