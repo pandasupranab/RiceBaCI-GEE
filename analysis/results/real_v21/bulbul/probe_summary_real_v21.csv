@@ -1,0 +1,2 @@
+tau_hat_corrected_SOS_d,tau_SE_d,empirical_idio_SD_d,pi95_low_d,pi95_high_d,n_paddy_districts,n_in_95pi,mean_residual_d,min_residual_d,max_residual_d,verdict,districts_excluded,exclusion_reason
+15.108,17.312,19.88,-36.57,66.78,4,4,6.56,-8.11,22.49,PASS — residuals centred near zero and >=5/6 (proportionally) inside 95% PI,"Kandhamal, Mayurbhanj",AOI dominated by Eastern Ghats forest (April NDVI baseline > 0.40); not paddy-dominant at the 5 km centroid scale.
