@@ -1,0 +1,4 @@
+metric,n_cells_treated_postperiod,districts,years,beta_doy_per_unit_f,se_HC1,df_HC1,ci_95_lo,ci_95_hi,Delta_cyc_d_empirical,Delta_cyc_d_literature_singha_sun,agreement_with_literature
+SOS,15,"['Baleshwar', 'Bhadrak', 'Jagatsinghpur', 'Kendrapara', 'Puri']","[2019, 2020, 2021]",-569.8276358462172,285.6210469883325,8,-1228.4709513026553,88.81567961022097,-569.8276358462172,14.0,consistent
+POS,15,"['Baleshwar', 'Bhadrak', 'Jagatsinghpur', 'Kendrapara', 'Puri']","[2019, 2020, 2021]",-102.79588153418784,184.70552555876725,8,-528.7275872677639,323.13582419938814,-102.79588153418784,14.0,consistent
+EOS,15,"['Baleshwar', 'Bhadrak', 'Jagatsinghpur', 'Kendrapara', 'Puri']","[2019, 2020, 2021]",,,8,,,,14.0,inconsistent
