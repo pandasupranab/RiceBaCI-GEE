@@ -2,7 +2,7 @@
 
 *Manuscript: "Decoupling Cyclone-Induced Saline Inundation from Agronomic Flooding in Sentinel-1/2 Rice Phenology Retrieval", Panda 2026, target: Remote Sensing of Environment.*
 
-*Draft text — paste into the Methods chapter under the "Saline–flood vs agronomic-flood discrimination" subsection. All numerical values are placeholder for the v3 (label-refined) classifier; the v2 (heuristic-baseline) values are reported in §3.X.4 as required by the OSF pre-registration.*
+**Status (v1.0.1-submission, 2026-06-08): SUPERSEDED.** This file is the original baseline draft of §3.X (the saline-flood classifier subsection); it predates the v0.3.0 classifier retrain on the real label set (n = 96 expert-labelled pixels) and any numerical values it cites are out of date. The publication-version classifier description and results are in `manuscript/manuscript_text.md` §3.2 and §4.1; the publication-version model card is `analysis/RF_Model_Card_v0.3.0.json`. This file is retained as the planning record for traceability against the OSF pre-registration only.
 
 ---
 
