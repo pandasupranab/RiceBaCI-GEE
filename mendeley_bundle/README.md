@@ -26,14 +26,14 @@ Panda, Supranab; Sahu, Sarat Chandra (2026), *"RiceBaCI: District-scale BACI pan
 
 ### Classifier labels (n = 480)
 - `labels_panel_n480.csv` — 480 stratified labels (240 cyclone-flood + 240 agronomic-flood). Columns: `label_id, class_proposed, class_id, cyclone, event_date, source, district, lon, lat`.
-- `labels_features_n480.csv` — 480 labels × 8 features extracted at each label site. Columns: above plus `delta_vh_db, delta_cr_db, vv_min_event_window, era5_3day_max_wind, lswi_min_event_window, jrc_water_permanence, ndwi_max_event_window`.
+- `labels_features_n480.csv` — 480 labels × 7 features extracted at each label site (matching Note S3, §S3.5 and `analysis/02_saline_flood_classifier.py`). Columns: above plus `delta_vh_db, delta_cr_db, vv_min_event_window, era5_3day_max_wind, lswi_min_event_window, jrc_water_permanence, ndwi_max_event_window`.
 - `cyclone_labels_with_district.csv` — cyclone-flood labels enriched with GADM district assignment (post-hoc spatial join).
 
 ### Cyclone-flood pixel-share auxiliary
 - `cyclone_pixel_share_per_district_year.csv` — district × cyclone-year pixel-share statistic used to drive the BACI correction. Columns: `district, year, cyclone, district_area_km2, flood_area_km2, flood_share, source`.
 
 ### Random-forest model cards
-- `rf_model_card_v0.3.0_full.json` — full-feature classifier (Sentinel-1 + Sentinel-2 + ERA5; 8 features). OA = 0.990, F1 = 0.990, 5-fold CV OA = 0.996.
+- `rf_model_card_v0.3.0_full.json` — full-feature classifier (Sentinel-1 + Sentinel-2 + ERA5; 7 features). OA = 0.990, F1 = 0.990, 5-fold CV OA = 0.996.
 - `rf_model_card_v0.3.0_sar_only.json` — SAR-only robustness variant (drops optical features). OA = 0.844, CV OA = 0.831.
 
 ### TWFE-DiD analysis outputs (v21 = final corrected pipeline)
