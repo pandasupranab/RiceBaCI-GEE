@@ -8,6 +8,10 @@
 
 ---
 
+> **Note added during submission preparation (2026-06-08).** The pre-registered Bulbul transferability probe is reported here at the **v0.2.6-batch11 stage** of the analysis pipeline, in which the plug-in coefficient $\hat\tau_{\mathrm{corrected,SOS}}$ was the synthetic-panel-calibrated estimate (+1.96 d). In the v1.0.1-submission release the headline coefficient is the real-data v2.1 estimate $\hat\tau_{\mathrm{corrected,SOS}} = +15.108\,\mathrm{d}$ (WCR $p = 0.4065$; main text §4 and Table S1). The Bulbul probe re-run against this updated coefficient is computationally pending the Module 05b refresh on the v2.1 corrected panel; an interim placeholder is shown in Table S3 of this supplement and the falsification logic, probe-panel construction, and pre-registered pass / informative-fail criteria of §S1.1–S1.2 carry through unchanged. The numerical residuals in §S1.3 should be read as illustrative of the methodological apparatus, not as the v1.0.1-submission headline transferability result. The five other robustness instruments (WCR bootstrap §3.7.1, leave-one-out jackknife §3.7.3, in-space and in-time placebo §3.7.4, post-hoc MDE / power §3.7.5) have been refreshed against the v2.1 coefficient and are the basis of all numerical claims in the main text Discussion §5.
+
+---
+
 ## S1.1 Motivation and falsification logic
 
 The headline TWFE-DiD coefficient $\hat\tau_{\mathrm{corrected,SOS}}$ in Eq. (4) of the main text is identified from three pre-Kharif saline-surge cyclones (Fani, May 2019; Amphan, May 2020; Yaas, May 2021) striking five coastal-treatment districts during the rice-transplanting window. The corrected pipeline (§3.5) was designed to intercept the saline-surge confounding pathway by relabelling pixels classified as cyclone-induced inundation as missing prior to Whittaker smoothing, leaving the agronomic transplanting-flood pathway intact. A core concern with any data-driven correction operator of this form is *mechanism-specificity*: does the corrected pipeline encode a generic excess-water-pixel mask that would be triggered by *any* large-scale inundation event, or does it specifically suppress the saline storm-surge backscatter signature that misleads phenology retrieval in the pre-Kharif window?
@@ -39,40 +43,27 @@ The Kharif year denoted "2020" here is the season *immediately following* the No
 
 The plug-in prediction is the trained headline coefficient
 
-$$\Delta_{\mathrm{pred}} = \hat\tau_{\mathrm{corrected,SOS}} = +1.96 \text{ d}$$
+$$\Delta_{\mathrm{pred}} = \hat\tau_{\mathrm{corrected,SOS}}$$
 
-with the 95% prediction interval $[+0.86, +3.07]$ d derived from the TWFE-clustered standard error in Table S1. The transferability residual is
+with the 95% prediction interval $[\hat\tau_{\mathrm{corrected,SOS}} - 1.96 \cdot \mathrm{SE}(\hat\tau), \hat\tau_{\mathrm{corrected,SOS}} + 1.96 \cdot \mathrm{SE}(\hat\tau)]$ derived from the TWFE-clustered standard error in Table S1. In the v1.0.1-submission release the plug-in value is $\hat\tau_{\mathrm{corrected,SOS}} = +15.108\,\mathrm{d}$ with $\mathrm{SE}(\hat\tau) = 17.312\,\mathrm{d}$ (95% PI $[-18.82, +49.04]\,\mathrm{d}$). The transferability residual is
 
 $$r_d = \Delta_{\mathrm{obs},d} - \Delta_{\mathrm{pred}}.$$
 
-A district is recorded as "inside 95% PI" if $\Delta_{\mathrm{obs},d} \in [+0.86, +3.07]$ d.
+A district is recorded as "inside 95% PI" if $\Delta_{\mathrm{obs},d}$ lies in this interval.
 
 ## S1.3 Results
 
-| District   | Exposure          | $\Delta_{\mathrm{obs}}$ (d) | $\Delta_{\mathrm{pred}}$ (d) | Residual (d) | Inside 95% PI |
-|------------|-------------------|----------------------------:|-----------------------------:|-------------:|:-------------:|
-| Boudh      | inland rainfall   | −0.12                       | +1.96                        | −2.09        | no            |
-| Ganjam     | coastal rainfall  | −3.89                       | +1.96                        | −5.85        | no            |
-| Kandhamal  | inland rainfall   | +0.52                       | +1.96                        | −1.44        | no            |
-| Khordha    | coastal rainfall  | −1.06                       | +1.96                        | −3.02        | no            |
-| Mayurbhanj | coastal rainfall  | +1.58                       | +1.96                        | −0.39        | yes           |
-| Nayagarh   | inland rainfall   | +3.30                       | +1.96                        | +1.34        | no            |
+**Status (v1.0.1-submission, 2026-06-08):** The Bulbul probe re-run against the real-data v2.1 coefficient $\hat\tau_{\mathrm{corrected,SOS}} = +15.108\,\mathrm{d}$ is computationally pending the Module 05b refresh on the v2.1 corrected panel and is therefore reported in Table S3 as a placeholder; per-district residuals will be appended to a versioned update of this Note in a subsequent release. The earlier v0.2.6-batch11 probe (using the synthetic-panel coefficient $\hat\tau = +1.96\,\mathrm{d}$) returned five negative residuals from six districts, with mean residual $\bar{r} = -1.91\,\mathrm{d}$ (range $[-5.85, +1.34]\,\mathrm{d}$); these numbers are reported in the v0.2.6-batch11 archive at `analysis/results/bulbul_transferability.csv` but should not be interpreted as the v1.0.1-submission probe result. The pre-registered pass / informative-fail criteria of §S1.1 are independent of the specific coefficient value and apply unchanged to the pending v2.1 refresh.
 
-(Source: `analysis/results/bulbul_transferability.csv`; full rendering in Table S3.)
+## S1.4 Interpretation (apparatus-level, pending v2.1 refresh)
 
-Five of the six probe districts produce *negative* residuals (mean residual $\bar{r} = -1.91$ d, range $[-5.85, +1.34]$ d). One district (Mayurbhanj) lies inside the 95% PI; the rest fall below the lower bound. The two coastal-rainfall districts where Bulbul-era rainfall was heaviest (Ganjam, Khordha) produce the most negative residuals (−5.85, −3.02 d) — the opposite tail from where a generic flood-mask correction would deposit them.
+The falsification posture of this probe is independent of the specific coefficient value. The probe is designed to be *able to fail* in a direction that would refute the headline mechanistic interpretation (saline-surge-specific suppression), and a null transfer is the result that strengthens the substantive claim. Three mutually independent interpretation channels carry through unchanged from the v0.2.6 description, and we record them here as apparatus-level expectations against which the v2.1 refresh will be evaluated:
 
-## S1.4 Interpretation
+- **Generic-mask falsification.** If the correction over-generalises to a generic excess-water mask, the Bulbul-rainfall probe would produce *positive* residuals across the panel as Bulbul-rainfall pixels are silently relabelled missing, inflating the next-season SOS shift.
+- **Calendar-window specificity.** The plug-in prediction is calibrated to a transplanting-window SOS shift; applying it to a post-monsoon event with no transplanting overlap should produce residuals centred well below the prediction if the correction is window-specific.
+- **Mechanism-class specificity.** Coastal Odisha districts that received Bulbul *rainfall* without saline ingress should not behave as if they had received Bulbul *surge* if the correction is mechanism-class-specific.
 
-The signature in §S1.3 is the pre-registered falsification-survival pattern: the corrected pipeline does *not* transfer to the post-monsoon freshwater-rainfall context. Five of six districts shift *less* than the headline prediction (or in the opposite direction), and the over-shoot at Nayagarh (+1.34 d residual) is plausibly explained by the post-2019 expansion of rabi pulse area in inland Odisha pulling the agronomic SOS later for unrelated cropping-system reasons, not by a Bulbul-era saline-surge effect.
-
-We interpret this pattern as evidence that the trained correction operator is *mechanism-specific* to the saline storm-surge backscatter signature in the pre-Kharif window:
-
-- The correction does not over-generalise to a generic excess-water mask. Generic masking would have produced positive residuals across the probe panel as Bulbul-rainfall pixels were silently relabelled missing.
-- The correction is calendar-window-specific. The plug-in prediction is calibrated to a transplanting-window SOS shift; applying it to a post-monsoon event with no transplanting overlap produces residuals centred well below the prediction.
-- The correction is mechanism-class-specific. Coastal Odisha districts that received Bulbul *rainfall* without saline ingress did not behave as if they had received Bulbul *surge*.
-
-The pattern is consistent with the SUTVA / no-interference assumption invoked in §3.6 and with the WCR-confirmed null at the corrected-EOS cell (the same pattern of mechanism-specificity, manifesting at a different phenometric).
+These expectations are consistent with the SUTVA / no-interference assumption invoked in §3.6 and with the WCR-confirmed null at the corrected-EOS cell (the same pattern of mechanism-specificity, manifesting at a different phenometric).
 
 ## S1.5 Limitations
 
