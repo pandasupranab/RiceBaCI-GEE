@@ -18,9 +18,10 @@ OUT_DOCX = ROOT / "manuscript" / "Figures_Bundle.docx"
 
 # Figure manifest: (id, pdf source, label, caption, description, abbreviations)
 # `abbreviations` lists every non-trivial abbreviation, symbol, and unit that
-# physically appears in *that* figure or its caption — including units (km, dB,
-# DOY, kt, °N, °E, n, CI, SE, p, %, days, months) when present, per reviewer
-# request to expand universally understood units as well.
+# physically appears in *that* figure or its caption — OR is implicit in the
+# quantities shown (e.g. SE underlying the error bars in Figs 2, 3, 5) —
+# including units (km, dB, DOY, kt, °N, °E, n, CI, SE, p, %, days, months) when
+# present, per reviewer request to expand universally understood units.
 FIGURES = [
     (
         "Figure 1A",
@@ -44,7 +45,7 @@ FIGURES = [
         "TWFE-DiD coefficients (raw vs. classifier-corrected panel).",
         "Two-way fixed-effects difference-in-differences estimates for τ_SOS, τ_POS, and τ_EOS on the raw phenology panel (blue) and the classifier-corrected panel (orange). Error bars are 95% wild-cluster restricted bootstrap intervals with district clustering and B = 4 999 draws. The corrected estimates show small but pre-registered attenuation (τ_SOS: +15.289 → +15.108 days; τ_EOS: 0.000 → −0.239 days), consistent with the bounded district-aggregated cyclone-flood pixel share (Fani 0.04–2.5 %, Amphan 0.005–1.9 %, Yaas 0.018–7.2 %).",
         "Headline DiD result on the v2.1 corrected panel; transparently reports the WCB-restricted CI inclusive of zero rather than over-claiming the SOS effect, while confirming the pre-registered direction τ_raw > τ_corrected > 0.",
-        "TWFE = two-way fixed effects; DiD = difference-in-differences; τ = DiD treatment-effect estimate (days); τ_SOS / τ_POS / τ_EOS = τ on the start, peak, and end of the rice-cropping season; SOS / POS / EOS = start, peak, and end of season; WCB = wild-cluster (restricted) bootstrap; B = number of bootstrap draws; CI = confidence interval; days = calendar days (effect-size unit); % = per-cent (district-aggregated pixel-share unit); v2.1 = panel after applying the Module 02 classifier-attenuation correction.",
+        "TWFE = two-way fixed effects; DiD = difference-in-differences; τ = DiD treatment-effect estimate (days); τ_SOS / τ_POS / τ_EOS = τ on the start, peak, and end of the rice-cropping season; SOS / POS / EOS = start, peak, and end of season; WCB = wild-cluster (restricted) bootstrap; B = number of bootstrap draws; CI = confidence interval (95 % WCB-restricted, district-clustered); SE = standard error of τ̂ (district-clustered; the half-width of the displayed error bars is derived from SE · t-critical); days = calendar days (effect-size unit); % = per-cent (district-aggregated pixel-share unit); v2.1 = panel after applying the Module 02 classifier-attenuation correction.",
     ),
     (
         "Figure 3",
@@ -52,7 +53,7 @@ FIGURES = [
         "Event-study plot, raw vs. corrected (Kharif 2017–2024).",
         "Year-by-relative-cyclone event-study coefficients for SOS in coastal vs. inland districts. Pre-treatment placebo years (k = −2, −1) are statistically indistinguishable from zero in both raw and corrected pipelines (pre-trends test p = 0.41), supporting the parallel-trends assumption. Post-treatment years (k = 0, +1, +2) show the cyclone effect peaking at k = 0 and attenuating thereafter; the corrected curve sits inside the raw curve at every post-treatment lag, as predicted by Module 11.",
         "Dynamic causal effect with explicit pre-trends test; pre-period coefficients on or near zero are the strongest visual evidence for BACI identification on the v2.1 corrected panel.",
-        "SOS = start of season; β = event-study coefficient (days, relative to reference period k = −1); k = event time in years from first treatment landfall (k = 0 is the cyclone year); BACI = Before–After / Control–Impact design; Kharif = post-monsoon rice cropping season (≈ Jun–Nov); p = pre-trends-test p-value (Wald test on pre-period coefficients); days = calendar days (effect-size unit); v2.1 = classifier-corrected phenology panel; Module 11 = cyclone-climatology + pixel-share attenuation model.",
+        "SOS = start of season; β = event-study coefficient (days, relative to reference period k = −1); k = event time in years from first treatment landfall (k = 0 is the cyclone year); BACI = Before–After / Control–Impact design; Kharif = post-monsoon rice cropping season (≈ Jun–Nov); p = pre-trends-test p-value (Wald test on pre-period coefficients); SE = district-clustered standard error of β (the shaded ribbon / whisker half-width on each event-time coefficient); days = calendar days (effect-size unit); v2.1 = classifier-corrected phenology panel; Module 11 = cyclone-climatology + pixel-share attenuation model.",
     ),
     (
         "Figure 4",
@@ -68,7 +69,7 @@ FIGURES = [
         "Post-hoc minimum detectable effect (MDE) curves.",
         "Statistical power as a function of the true τ_SOS effect size for the v2.1 corrected panel, computed under district clustering with N_clusters = 8 and N_periods = 8. At the realised |τ̂| ≈ 15 days, post-hoc power is 0.18, and the MDE_80 % is approximately 35 days. Curves are shown for one-sided α = 0.05 and two-sided α = 0.05.",
         "Honest power audit: the study is under-powered to reject H₀ at the realised effect size, which the manuscript reports transparently rather than concealing.",
-        "MDE = minimum detectable effect (smallest τ detectable at a given power); MDE_80 % = MDE at 80 % statistical power; τ_SOS = DiD treatment effect on start of season; τ̂ = estimated τ from the realised data; H₀ = null hypothesis of no treatment effect; α = type-I (false-positive) error rate; N_clusters = number of district clusters used for inference; N_periods = number of time periods (Kharif seasons) in the panel; days = calendar days (effect-size unit); % = per-cent (statistical-power unit on the y-axis); v2.1 = classifier-corrected phenology panel.",
+        "MDE = minimum detectable effect (smallest τ detectable at a given power); MDE_80 % = MDE at 80 % statistical power; τ_SOS = DiD treatment effect on start of season; τ̂ = estimated τ from the realised data; H₀ = null hypothesis of no treatment effect; α = type-I (false-positive) error rate; SE = district-clustered standard error of τ̂ used as the noise input to the power calculation; N_clusters = number of district clusters used for inference; N_periods = number of time periods (Kharif seasons) in the panel; days = calendar days (effect-size unit); % = per-cent (statistical-power unit on the y-axis); v2.1 = classifier-corrected phenology panel.",
     ),
     (
         "Figure 6",
@@ -195,8 +196,10 @@ for fid, pdf_path, label, caption, description, abbreviations in FIGURES:
 
     # Abbreviations footer (regular, smaller, dark-grey). Lists every
     # non-trivial acronym, symbol, and unit that physically appears in this
-    # figure or its caption — including universally understood units (km, dB,
-    # DOY, kt, °N, °E, n, CI, SE, p, %, days, months) per reviewer request.
+    # figure or its caption (or is implicit in the displayed quantities, e.g.
+    # SE underlying error bars) — including universally understood units
+    # (km, dB, DOY, kt, °N, °E, n, CI, SE, p, %, days, months) per reviewer
+    # request to expand universally understood units.
     if abbreviations:
         p_abbr = doc.add_paragraph()
         p_abbr.paragraph_format.left_indent = Cm(0.5)
