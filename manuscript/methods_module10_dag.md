@@ -26,9 +26,14 @@ as the transplanting flooding anchor:
    read as an early SOS — biasing the recovered phenology by days
    to weeks.
 
-In our synthetic-panel verification this confound produces a
-**+5.66 d** SOS bias (raw / SOS), with permutation p_perm = 0.018
-(the floor on a C(8,5) = 56 permutation design).
+On the real v2.1 panel this confound produces a **+15.289 d** SOS
+coefficient (raw / SOS, SE 17.328, WCR p = 0.400), attenuating only
+fractionally to **+15.108 d** under the corrected pipeline (WCR p =
+0.4065). The point estimates fall within the bulk of the C(8,5) = 56
+placebo distribution at p_perm = 0.500 (Table S7), reflecting the
+small-G null regime rather than absence of effect; the formal
+falsification anchor is the parallel-trends F-test (Table S2,
+p = 0.343 for SOS) rather than the placebo p-value.
 
 ## Panel (b) — Corrected pipeline (this study)
 
