@@ -1,0 +1,14 @@
+metric,value,source
+Training cohort (n cyclones),"3 (Fani 2019, Amphan 2020, Yaas 2021)",v0.3.0 model card
+Training labels (n),480,v0.3.0 model card
+"Hold-out OA (in-distribution, Odisha)",0.9896,v0.3.0 model card
+"5-fold CV OA (in-distribution, Odisha)",0.9958,v0.3.0 model card
+Cyclone Hudhud (Oct 2014) landfall,"Pudimadaka, ~50 km from Visakhapatnam",NDMA 2014; Red Cross AAR 2015
+Hudhud worst-hit districts,"Visakhapatnam, Vizianagaram, Srikakulam, East Godavari",NDMA 2014; IFRC Oct 2014
+Copernicus EMS Hudhud activation,EMSR104 (14 Oct 2014); 9 reference + 9 delineation maps,Copernicus EMS; gisresources.com 2014
+Visakhapatnam pre-Hudhud water (4 Oct 2014),176.27 km²,ISPRS Annals II-2-W2 (2015)
+Visakhapatnam pre-Hudhud cropland+sparse veg,275.01 km²,ISPRS Annals II-2-W2 (2015)
+Damage assessment (Andhra Pradesh),"₹13,263 crore (~USD 2.16 B); 7,52,540 ag households",World Bank rapid assessment; NDMA 2014
+Andhra-Odisha cropping calendar offset,~10–15 d lag (Andhra coastal kharif onset),IMD agromet bulletins; ICAR-CRIDA
+Expected OA penalty under domain shift,"≤6 pp (label-source variance, training cohort size)",v0.3.0 model card limitations §; this study
+Recommended transferability protocol,5 % stratified Hudhud labels from EMSR104 + retrain v0.4 in Stage 2,"this study, §4.6 limitations"
