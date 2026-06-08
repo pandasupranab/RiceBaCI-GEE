@@ -128,12 +128,12 @@ def build_mde_table(did_static_csv: Path,
 def simulate_power(true_tau: float,
                    G: int,
                    T: int = 8,
-                   sigma_u: float = 1.5,        # district FE noise
-                   sigma_t: float = 1.0,        # year FE noise
-                   sigma_e: float = 2.5,        # idio noise (in days)
+                   sigma_u: float = 13.06,      # district FE noise (real v2.1 SOS panel)
+                   sigma_t: float = 41.75,      # year FE noise (real v2.1 SOS panel)
+                   sigma_e: float = 31.28,      # idio noise (real v2.1 SOS panel; days)
                    alpha: float = 0.05,
                    reps: int = 999,
-                   seed: int = 20260505) -> float:
+                   seed: int = 20260605) -> float:
     """
     Empirical rejection rate of H0: τ=0 under DGP
 
@@ -141,6 +141,11 @@ def simulate_power(true_tau: float,
 
     where D_{it}=1 for treated districts in post-period (t ≥ 4),
     α_i ~ N(0, σ_u²),  δ_t ~ N(0, σ_t²),  ε_{it} ~ N(0, σ_e²).
+
+    Defaults are EMPIRICAL variance components estimated from the real v2.1
+    BACI panel SOS series (analysis/baci_panel_real_v21.csv) via two-way FE
+    decomposition; see analysis/17_estimate_panel_variance_components.py and
+    analysis/results/real_v21/variance_components_real_v21.csv.
 
     Test = OLS τ̂ with cluster-robust SE (G clusters), t-test on
     df = G-1 (matches Donald-Lang and our WCR posture).
@@ -198,7 +203,7 @@ def simulate_power(true_tau: float,
     return rejects / reps
 
 
-def build_power_curves(taus=(0, 1, 2, 3, 4, 5, 6, 7, 8),
+def build_power_curves(taus=(0, 5, 10, 15, 20, 30, 40, 60, 80, 100),
                        Gs=(4, 6, 8, 12),
                        reps: int = 999) -> pd.DataFrame:
     rows = []
