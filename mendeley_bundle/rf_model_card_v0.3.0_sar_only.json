@@ -1,0 +1,41 @@
+{
+  "version": "v0.3.0-sar-only",
+  "description": "Robustness variant of v0.3.0 with Sentinel-2 features dropped (NDWI, LSWI) because 102/480 values required median imputation from monsoon cloud cover. Demonstrates the SAR-only signal is sufficient for the binary classification task.",
+  "features": [
+    "delta_vh_db",
+    "delta_cr_db",
+    "vv_min_event_window",
+    "era5_3day_max_wind",
+    "jrc_water_permanence"
+  ],
+  "metrics_holdout": {
+    "overall_accuracy": 0.8438,
+    "f1_macro": 0.8436
+  },
+  "metrics_cv5": {
+    "overall_accuracy": 0.8313,
+    "f1_macro": 0.8312
+  },
+  "feature_importance": [
+    {
+      "feature": "delta_vh_db",
+      "gini": 0.266
+    },
+    {
+      "feature": "era5_3day_max_wind",
+      "gini": 0.2546
+    },
+    {
+      "feature": "vv_min_event_window",
+      "gini": 0.246
+    },
+    {
+      "feature": "delta_cr_db",
+      "gini": 0.1371
+    },
+    {
+      "feature": "jrc_water_permanence",
+      "gini": 0.0963
+    }
+  ]
+}
