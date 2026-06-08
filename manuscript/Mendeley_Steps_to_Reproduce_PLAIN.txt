@@ -1,0 +1,89 @@
+STEPS TO REPRODUCE
+
+Every numerical result and every CSV in this deposit can be regenerated end-to-end from public Copernicus, NASA, JRC, ECMWF, and GADM inputs using the openly-licensed RiceBaCI-GEE pipeline. No proprietary data, no paid API, and no institutional sign-in is required at any step.
+
+1. SOFTWARE ENVIRONMENT
+- Google Earth Engine JavaScript Code Editor (web-based; free account at code.earthengine.google.com, signed in with any Google account).
+- Python 3.11 with packages pinned in requirements.txt on the companion repository. Key libraries: geopandas 0.14, rasterio 1.3, scikit-learn 1.4, statsmodels 0.14, linearmodels 5.4 (two-way fixed-effects TWFE), wildboottest 0.2 (wild-cluster restricted bootstrap), xarray 2024.2, numpy 1.26, pandas 2.2.
+- Operating system: tested on Ubuntu 22.04 LTS and macOS 14; no platform-specific dependencies.
+- Source code: github.com/pandasupranab/RiceBaCI-GEE, release tag v1.0.1-submission, archived on Zenodo at DOI 10.5281/zenodo.20587316 (concept DOI 10.5281/zenodo.20024578).
+
+2. INPUT DATA (all public, no permission required)
+- Sentinel-1 GRD VV+VH IW mode, Google Earth Engine asset COPERNICUS/S1_GRD, 10 m, 6-12 day revisit.
+- Sentinel-2 L2A surface reflectance, COPERNICUS/S2_SR_HARMONIZED, 10-20 m, 5 day revisit.
+- JRC Global Surface Water, JRC/GSW1_4/GlobalSurfaceWater, 30 m monthly history.
+- ERA5-Land hourly single-levels, ECMWF/ERA5_LAND/HOURLY, 0.1 degree hourly.
+- MODIS Land-Surface Phenology, MODIS/061/MCD12Q2, 500 m annual.
+- Cyclone Fani EMSR357 flood footprint vector, Copernicus Emergency Management Service, emergency.copernicus.eu/mapping/list-of-components/EMSR357 (freely downloadable shapefile).
+- Administrative boundaries, GADM v4.1 India level-2, gadm.org/download_country.html.
+- Cyclone tracks and intensity, IMD RSMC New Delhi annual reports, rsmcnewdelhi.imd.gov.in (freely downloadable PDFs).
+
+3. END-TO-END PIPELINE (twelve modules)
+The pipeline runs as twelve numbered modules. Modules 1-10 execute in Google Earth Engine (JavaScript). Modules 11-12 and the statistical analysis execute in Python.
+
+Module 01 - Study-area definition. Load GADM Odisha district boundaries; tag five coastal districts (Balasore, Bhadrak, Kendrapara, Jagatsinghpur, Puri) as treated and three inland districts (Dhenkanal, Angul, Cuttack) as controls. Optionally add Andhra Pradesh districts (Srikakulam, Vizianagaram, Visakhapatnam) for the Hudhud transferability test.
+
+Module 02 - Saline-flood classifier training. Ingest the n=480 stratified label set: 240 cyclone-induced saline-inundation labels sampled from the Copernicus EMS EMSR357 Fani master delineation, plus Amphan and Yaas Sentinel-1 pre-and-post change detections at greater-than-or-equal-to 3 dB drop; and 240 agronomic-transplanting-flood labels sampled from Sentinel-1 VH between -22 and -17 dB intersected with ESA WorldCover cropland and JRC GSW seasonal water (1-5 months per year) during non-cyclone windows. Extract eight features per label point: delta-VH (dB), delta-CR cross-ratio (dB), VV minimum in the event window, ERA5 3-day maximum wind speed, LSWI minimum in the event window, JRC water-permanence, NDWI maximum in the event window, and the 10 m Sentinel-2 NDVI baseline. Train a RandomForestClassifier with n_estimators=500, max_depth=12, class_weight="balanced", random_state=17, using a stratified 80/20 hold-out and 5-fold stratified cross-validation. Output: rf_model_card_v0.3.0_full.json with overall accuracy 0.990 and 5-fold CV overall accuracy 0.996. Repeat without optical features to produce the SAR-only robustness variant rf_model_card_v0.3.0_sar_only.json with overall accuracy 0.844 and CV overall accuracy 0.831.
+
+Module 03 - Sentinel-1 backscatter time series. For each district crossed with each Kharif season (1 June to 30 November, 2017-2024), build a 6-day median composite of Sentinel-1 VV and VH backscatter restricted to a 10 m rice mask defined as the intersection of ESA WorldCover 2021 cropland with the Mondal et al. 2022 rice mask and the Singha et al. 2019 paddy-rice mask.
+
+Module 04 - Sentinel-2 NDVI/EVI/LSWI time series. Cloud-mask Sentinel-2 using QA60 and Scene Classification Layer; build 10-day median composites of NDVI, EVI, and LSWI on the same rice mask.
+
+Module 05 - Whittaker smoothing and double-logistic curve fit. Smooth each 10 m pixel's NDVI time series with a Whittaker smoother (lambda = 1000) and fit a four-parameter double-logistic curve to extract Start-of-Season (SOS), Peak-of-Season (POS), and End-of-Season (EOS) dates per pixel.
+
+Module 06 - District aggregation (raw pipeline). Aggregate per-pixel SOS/POS/EOS to district medians; export as district_panel_n384_BACI.csv rows with pipeline = "raw".
+
+Module 07 - Cyclone-flood mask application. Apply the trained classifier from Module 02 to the cyclone-window Sentinel-1, Sentinel-2, and ERA5 feature stack; emit a binary 10 m cyclone-saline-flood mask per cyclone event.
+
+Module 08 - Per-district cyclone-flood pixel-share. Intersect the cyclone-flood mask with each district polygon to compute flood_share = flood_area_km2 / district_area_km2 - exported as cyclone_pixel_share_per_district_year.csv.
+
+Module 09 - Corrected phenology extraction. Re-run Modules 03-05 on pixels filtered to exclude cyclone-saline-flood-classified pixels; district-aggregate to produce the corrected panel rows (pipeline = "corrected").
+
+Module 10 - Identification DAG validation. Verify the assumed identifying restrictions: no spillovers (inland controls have flood_share approximately zero), exclusion (cyclone affects phenology only via the saline-inundation pathway), and monotonicity (SOS bias is non-negative under saline inundation).
+
+Module 11 - Cyclone climatology. Compile the cyclone-event climatology table from IMD RSMC New Delhi annual reports, capturing ESCS/VSCS classification, peak wind, and landfall date and location.
+
+Module 12 - Backscatter signature characterisation. Compute the mean delta-VH and delta-CR signature per cyclone event from the labelled set, exported as the supplementary backscatter table.
+
+4. STATISTICAL ANALYSIS (single-command refresh)
+After the GEE modules have populated data_real/bacI_panel_real.csv, the entire downstream statistical layer regenerates with one command:
+
+    git clone https://github.com/pandasupranab/RiceBaCI-GEE.git
+    cd RiceBaCI-GEE
+    git checkout v1.0.1-submission
+    pip install -r requirements.txt
+    python scripts/refresh_v21_from_module12.py
+
+This script executes, in order:
+(i) Two-way fixed-effects difference-in-differences using linearmodels.PanelOLS, with district and year fixed effects and district-clustered standard errors - outputs v21_did_static.csv.
+(ii) Event-study leads-and-lags (k = -3 to +3 around treatment) - outputs v21_event_study.csv.
+(iii) Pre-treatment parallel-trends test - outputs v21_parallel_trends.csv.
+(iv) Wild-cluster restricted bootstrap using wildboottest with B = 9,999 and restricted null H0: tau = 0 - outputs v21_wild_bootstrap.csv. This is required because J = 8 clusters is below the asymptotic threshold for standard inference.
+(v) Leave-one-out jackknife at the district level and at the year level - outputs v21_jackknife_district.csv and v21_jackknife_year.csv.
+(vi) In-space placebo (1,000 random reassignments of treatment status across districts) - outputs v21_placebo_in_space.csv and v21_placebo_summary.csv.
+(vii) In-time placebo (treatment shifted to non-cyclone years) - outputs v21_placebo_in_time.csv.
+
+Runtime: approximately 6 minutes on a 2024-vintage laptop (8-core, 16 GB RAM). No GPU required.
+
+5. VALIDATION STRATEGY
+Five mutually independent reference sources are used to validate the corrected phenology and the classifier:
+(i) NASA MODIS MCD12Q2 Land Surface Phenology - methodologically independent (different sensor, different algorithm).
+(ii) ICRISAT VDSA microdata - Bhadrak benchmark site, ground-survey transplanting dates.
+(iii) District-level Kharif rice yield records from data.gov.in - outcome-side concordance check.
+(iv) Sentinel-2 high-resolution visual interpretation at 60 stratified sites - the openly-redistributable fallback to PlanetScope NICFI, activated under the pre-registered Section E5 path after the Tropical Forest Observatory programme restricted eligibility to forest-domain users.
+(v) Two existing rice-mask products - Mondal et al. 2022 (Odisha rice-fallow Sentinel-1) and Singha et al. 2019 (South Asia Sentinel-1 paddy rice). Transferability is additionally tested on the Andhra Pradesh coast under Cyclone Hudhud (October 2014).
+
+6. PRE-REGISTRATION AND IDENTIFIERS
+- Pre-registration: osf.io/c4mp8 (DOI 10.17605/OSF.IO/C4MP8) - all hypotheses, analysis decisions, and inference criteria registered prior to data analysis.
+- Code archive (this version): Zenodo DOI 10.5281/zenodo.20587316 (v1.0.1-submission).
+- Concept (always-latest) DOI: 10.5281/zenodo.20024578.
+- Author ORCIDs: Supranab Panda 0009-0009-6496-6545; Sarat Chandra Sahu 0000-0002-8048-1910.
+
+7. EXPECTED REPRODUCTION OUTCOME
+Running the single-command refresh on the inputs above will exactly reproduce these headline numbers, reported in the manuscript abstract:
+- tau_SOS raw = +15.289 days, corrected = +15.108 days.
+- tau_EOS corrected = -0.239 days.
+- Maximum absolute correction |Delta| = 1.510 days; mean |Delta| = 0.223 days.
+- Random-forest overall accuracy 0.990 on the full feature set, 0.844 on the SAR-only variant; 5-fold cross-validation overall accuracy 0.996 and 0.831 respectively.
+
+Any reproducer whose run produces these numbers exactly has achieved bit-level reproduction. Any deviation indicates an environment difference (most commonly a Sentinel-1 GRD asset-version mismatch) and is documented in the troubleshooting section of the GitHub README.
