@@ -345,7 +345,7 @@ A quantitative summary of raw vs. corrected MAE and RMSE for SOS, POS, and EOS b
 
 ### 4.4 Difference-in-Differences Estimates and Robustness
 
-**Headline DiD coefficients.** The TWFE-DiD specification (Eq. 4) returns the average treatment effect on the treated, \(\hat\tau\), separately for each (pipeline × phenometric) cell (Table S1; Figure 2). For the raw pipeline, \(\hat\tau_{\text{raw,SOS}}\) = +15.289 d, CR1 SE = 17.328, WCR-restricted *p* = 0.400, WCR 95 % CI [−54.02, +84.60], B = 999, indicating that coastal-treated districts experienced an SOS shift of +15.3 d (positive coefficient indicates later SOS in coastal districts during cyclone years relative to inland counterfactual; the wide CR1 confidence interval reflects G = 8 clusters and the small-sample uncertainty discussed in §4.4.3) in cyclone years relative to the inland-control counterfactual. The companion POS and EOS coefficients were \(\hat\tau_{\text{raw,POS}}\) = −3.587 d (WCR *p* = 0.2293, WCR 95 % CI [−15.11, +7.94]) and \(\hat\tau_{\text{raw,EOS}}\) ≈ 0 d (right-censored: 20 of the 64 district-year EOS cells fall in the post-cyclone window and are right-censored by the season-end harvest cutoff, leaving n = 44 estimable EOS rows; WCR *p* = 0.2047). In the v2.1 classifier-corrected pipeline the SOS coefficient attenuates to \(\hat\tau_{\text{corrected,SOS}}\) = +15.108 d (CR1 SE = 17.312, WCR *p* = 0.4065), a Δτ̂ = −0.181 d shift corresponding to a 1.2 % reduction in absolute magnitude relative to the raw pipeline — small but directionally consistent with the pre-registered prediction \(\tau_{\text{SOS, raw}} > \tau_{\text{SOS, corrected}} > 0\) (§3.6, OSF c4mp8). The corrected/POS coefficient was −3.677 d (WCR *p* = 0.2293, Δτ̂ = −0.090 d), and the corrected/EOS coefficient moved from the degenerate raw value to \(\hat\tau_{\text{corrected,EOS}}\) = −0.239 d (CR1 SE = 0.169, WCR *p* = 0.2035), consistent with the pre-registered prediction that the saline-surge correction is mechanism-specific to the early-season anchor while the end-of-season DiD coefficient remains statistically indistinguishable from zero.
+**Headline DiD coefficients.** The TWFE-DiD specification (Eq. 4) returns the average treatment effect on the treated, \(\hat\tau\), separately for each (pipeline × phenometric) cell (Table S1; Figure 2). For the raw pipeline, \(\hat\tau_{\text{raw,SOS}}\) = +15.289 d, CR1 SE = 17.328, WCR-restricted *p* = 0.400, WCR 95 % CI [−54.02, +84.60], B = 999, indicating that coastal-treated districts experienced an SOS shift of +15.3 d (positive coefficient indicates later SOS in coastal districts during cyclone years relative to inland counterfactual; the wide CR1 confidence interval reflects G = 8 clusters and the small-sample uncertainty discussed throughout §4.4) in cyclone years relative to the inland-control counterfactual. The companion POS and EOS coefficients were \(\hat\tau_{\text{raw,POS}}\) = −3.587 d (WCR *p* = 0.2293, WCR 95 % CI [−15.11, +7.94]) and \(\hat\tau_{\text{raw,EOS}}\) ≈ 0 d (right-censored: 20 of the 64 district-year EOS cells fall in the post-cyclone window and are right-censored by the season-end harvest cutoff, leaving n = 44 estimable EOS rows; WCR *p* = 0.2047). In the v2.1 classifier-corrected pipeline the SOS coefficient attenuates to \(\hat\tau_{\text{corrected,SOS}}\) = +15.108 d (CR1 SE = 17.312, WCR *p* = 0.4065), a Δτ̂ = −0.181 d shift corresponding to a 1.2 % reduction in absolute magnitude relative to the raw pipeline — small but directionally consistent with the pre-registered prediction \(\tau_{\text{SOS, raw}} > \tau_{\text{SOS, corrected}} > 0\) (§3.6, OSF c4mp8). The corrected/POS coefficient was −3.677 d (WCR *p* = 0.2293, Δτ̂ = −0.090 d), and the corrected/EOS coefficient moved from the degenerate raw value to \(\hat\tau_{\text{corrected,EOS}}\) = −0.239 d (CR1 SE = 0.169, WCR *p* = 0.2035), consistent with the pre-registered prediction that the saline-surge correction is mechanism-specific to the early-season anchor while the end-of-season DiD coefficient remains statistically indistinguishable from zero.
 
 **Event-study dynamics and pre-trends.** Event-study coefficients (Eq. 5; Figure 3) place pre-treatment leads (\(k = -2\)) within \([−2, +2]\) d of zero with confidence intervals straddling zero, supporting the no-anticipation assumption. The treatment-year leads (\(k \in \{0, 1, 2\}\)) trace the dynamic effect for each phenometric and confirm that \(\hat\tau\) is not driven by a single year. The pre-trend regression coefficient \(\beta_2\) (§3.6, Table S2) was non-significant for the SOS and POS cells (β = −63.6 d, *p* = 0.343 for SOS; β = −2.4 d, *p* = 0.903 for POS), supporting parallel trends; the EOS pre-trend test is degenerate because only n = 44 EOS rows (vs. n = 64 SOS/POS rows) are estimable after right-censoring, leaving residual df = 0 once the two-year pre-period is partitioned by district fixed effects.
 
@@ -415,21 +415,23 @@ The RiceBaCI-GEE framework resolves this through a multi-feature random-forest c
 
 ## CRediT Author Contribution Statement
 
-| Contribution | Supranab Panda (Lead) | Sarat Chandra Sahu | Sarat Chandra Sahu |
-|---|---|---|---|
-| Conceptualisation | Lead | Supporting | Supporting |
-| Methodology | Lead | Supporting | [placeholder] |
-| Software (GEE code) | Lead | [placeholder] | [placeholder] |
-| Formal analysis | Lead | [placeholder] | [placeholder] |
-| Investigation | Lead | [placeholder] | [placeholder] |
-| Resources | [placeholder] | [placeholder] | Lead |
-| Data curation | Lead | [placeholder] | [placeholder] |
-| Writing – original draft | Lead | [placeholder] | [placeholder] |
-| Writing – review & editing | Supporting | [placeholder] | Lead |
-| Visualisation | Lead | [placeholder] | Supporting |
-| Supervision | [placeholder] | [placeholder] | Lead |
-| Project administration | Lead | [placeholder] | Supporting |
-| Funding acquisition | [placeholder] | [placeholder] | [placeholder] |
+| Contribution (CRediT taxonomy) | Supranab Panda | Sarat Chandra Sahu |
+|---|---|---|
+| Conceptualisation | Lead | Supporting |
+| Methodology | Lead | Supporting |
+| Software (GEE code, Python analysis) | Lead | — |
+| Formal analysis | Lead | — |
+| Investigation | Lead | Supporting |
+| Resources | Supporting | Lead |
+| Data curation | Lead | — |
+| Writing — original draft | Lead | — |
+| Writing — review & editing | Lead | Supporting |
+| Visualisation | Lead | Supporting |
+| Supervision | — | Lead |
+| Project administration | Lead | Supporting |
+| Funding acquisition | — | Lead |
+
+*Author affiliations and full contact details are listed in the title block; additional contributors, if any, will be reflected in this matrix prior to journal submission.*
 
 ---
 
