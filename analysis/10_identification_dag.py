@@ -208,7 +208,7 @@ def draw_panel_b_corrected(ax):
     # neither overlaps the line nor drifts away from it.
     _arrow(ax, classifier, surge, color=OK_GREEN, lw=1.6,
            curve=-0.15)
-    ax.text(3.75, 3.12, "masks",
+    ax.text(4.00, 3.12, "masks",
             fontsize=11.0, color=OK_GREEN,
             ha="left", va="center",
             style="italic", weight="bold", zorder=6)
