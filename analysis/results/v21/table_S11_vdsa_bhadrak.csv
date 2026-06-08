@@ -1,0 +1,10 @@
+year,year_type,cyclone_exposure,raw_sos_doy,v21_sos_doy,delta_d,abs_delta_d,within_vdsa_sd
+2017,control,coastal_treatment,319.0,319.0,0.0,0.0,Yes
+2018,control,coastal_treatment,135.0,135.0,0.0,0.0,Yes
+2019,treatment,coastal_treatment,258.0,258.0,0.0,0.0,Yes
+2020,treatment,coastal_treatment,259.0,258.89,0.11000000000001364,0.11000000000001364,Yes
+2021,treatment,coastal_treatment,196.0,194.99,1.009999999999991,1.009999999999991,Yes
+2022,control,coastal_treatment,258.0,258.0,0.0,0.0,Yes
+2023,control,coastal_treatment,258.0,258.0,0.0,0.0,Yes
+2024,control,coastal_treatment,197.0,197.0,0.0,0.0,Yes
+SUMMARY,,,258.0,258.0,0.14000000000000057,1.009999999999991,Yes
