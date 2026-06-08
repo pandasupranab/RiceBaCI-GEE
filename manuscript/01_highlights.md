@@ -6,7 +6,7 @@
 - First framework to separate cyclone storm-surge from agronomic rice flooding in SAR
 - Sentinel-1/2 fusion with random forest classifies saline inundation at 10-m scale
 - BACI design across Cyclones Fani, Amphan, Yaas reveals systematic phenology bias
-- Corrected SOS/POS/EOS dates reduce mean absolute error by [PLACEHOLDER] days
+- BACI-corrected tau_SOS shifts from +15.29 to +15.11 days versus raw estimate
 - Open-source RiceBaCI-GEE toolkit released for transfer to other Asian deltas
 
 ---
@@ -18,7 +18,7 @@
 | 1 | First framework to separate cyclone storm-surge from agronomic rice flooding in SAR | 84 |
 | 2 | Sentinel-1/2 fusion with random forest classifies saline inundation at 10-m scale | 81 |
 | 3 | BACI design across Cyclones Fani, Amphan, Yaas reveals systematic phenology bias | 80 |
-| 4 | Corrected SOS/POS/EOS dates reduce mean absolute error by [PLACEHOLDER] days | varies |
+| 4 | BACI-corrected tau_SOS shifts from +15.29 to +15.11 days versus raw estimate | 76 |
 | 5 | Open-source RiceBaCI-GEE toolkit released for transfer to other Asian deltas | 76 |
 
-> All five are within the 85-character limit. Bullet 4's character count depends on the placeholder fill (e.g., "by 8 days" → 75 chars; "by 12 days" → 76 chars).
+> All five are within the 85-character limit.
