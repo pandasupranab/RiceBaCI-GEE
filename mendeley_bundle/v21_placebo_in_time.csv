@@ -1,0 +1,7 @@
+pipeline,metric,fake_post,tau_pseudo_d,se_pseudo_d
+raw,SOS,2018,-76.5,38.31
+raw,POS,2018,2.85,10.163
+raw,EOS,2018,,
+corrected,SOS,2018,-76.5,38.31
+corrected,POS,2018,2.85,10.163
+corrected,EOS,2018,,
