@@ -5,6 +5,7 @@ Bundle order:
   Note S1 — Bulbul transferability  (methods_module05b_bulbul.md)
   Note S2 — Cyclone climatology     (methods_module11_climatology.md)
   Note S3 — Backscatter physics     (methods_module12_backscatter.md)
+  Note S4 — Power / MDE simulator   (methods_module09_power.md)
   Tables S1–S9 (existing standalone docx)
   Figure 1B (identification DAG, panel B)
   Figure S1 (cyclone climatology)
@@ -30,6 +31,7 @@ from docx.shared import Cm, Pt, RGBColor, Inches
 
 ROOT = Path("/home/user/workspace/RiceBaCI-GEE")
 SUPPL = ROOT / "manuscript/supplement"
+MS = ROOT / "manuscript"
 FIGS = ROOT / "figures"
 OUT = SUPPL / "Supplement_v0.3.0.docx"
 TMP = Path(tempfile.mkdtemp(prefix="suppl_"))
@@ -278,6 +280,7 @@ toc_entries = [
     ("Note S1", "Bulbul (2019) transferability probe", "S1"),
     ("Note S2", "Pre-Kharif Bay-of-Bengal cyclone climatology", "S2"),
     ("Note S3", "Sentinel-1 dual-polarisation backscatter signatures", "S3"),
+    ("Note S4", "Small-G power / minimum detectable effect simulator", "S4"),
     ("Table S1", "Static TWFE-DiD point estimates (SOS, POS, EOS)", "T1"),
     ("Table S2", "Pre-trend tests on the BACI panel", "T2"),
     ("Table S3", "Bulbul transferability — district-level residuals", "T3"),
@@ -309,6 +312,8 @@ note_specs = [
      SUPPL / "methods_module11_climatology.md"),
     ("S3", "Note S3 — Sentinel-1 dual-polarisation backscatter signatures",
      SUPPL / "methods_module12_backscatter.md"),
+    ("S4", "Note S4 — Small-G power / minimum detectable effect simulator",
+     MS / "methods_module09_power.md"),
 ]
 for sid, heading_text, md_path in note_specs:
     _heading(doc, heading_text, level=1,
