@@ -1,0 +1,32 @@
+All numerical results and CSVs are reproducible from public Copernicus, NASA, JRC, ECMWF, and GADM inputs using the MIT-licensed RiceBaCI-GEE pipeline. No proprietary data.
+
+ENVIRONMENT
+Google Earth Engine JavaScript Code Editor; Python 3.11 with geopandas, rasterio, scikit-learn, statsmodels, linearmodels (TWFE), wildboottest. Code: github.com/pandasupranab/RiceBaCI-GEE tag v1.0.1-submission. Zenodo DOI 10.5281/zenodo.20587316 (concept 10.5281/zenodo.20024578).
+
+INPUTS (all public)
+Sentinel-1 GRD (COPERNICUS/S1_GRD); Sentinel-2 L2A (COPERNICUS/S2_SR_HARMONIZED); JRC Global Surface Water; ERA5-Land hourly; MODIS MCD12Q2; Copernicus EMS EMSR357 (Fani footprint); GADM v4.1 India L2; IMD RSMC New Delhi reports.
+
+PIPELINE (12 modules)
+01 Study area: 5 treated coastal Odisha districts (Balasore, Bhadrak, Kendrapara, Jagatsinghpur, Puri), 3 inland controls (Dhenkanal, Angul, Cuttack); +AP for Hudhud transferability.
+02 Classifier (n=480: 240 cyclone-flood from EMSR357 / S1 change >=3 dB; 240 agronomic-flood from S1 VH -22 to -17 dB ∩ WorldCover cropland ∩ JRC GSW). 8 features: dVH, dCR, VV_min, ERA5 3-day wind, LSWI_min, JRC water-permanence, NDWI_max, NDVI baseline. RandomForest (n_estimators=500, max_depth=12, balanced, seed=17). OA=0.990 full / 0.844 SAR-only.
+03-04 Sentinel-1 6-day VV/VH and Sentinel-2 10-day NDVI/EVI/LSWI composites on rice mask (WorldCover ∩ Mondal 2022 ∩ Singha 2019), 2017-2024 Kharif.
+05 Whittaker smoothing (lambda=1000) + 4-parameter double-logistic fit -> SOS/POS/EOS per pixel.
+06 District-median aggregation -> raw panel (n=384).
+07-08 Apply classifier in cyclone windows; intersect with districts -> flood_share.
+09 Re-run 03-05 excluding cyclone-flood pixels -> corrected panel.
+10 Identification DAG checks (no spillovers, exclusion, monotonicity).
+11-12 Cyclone climatology and backscatter signatures.
+
+STATISTICAL REFRESH (one command, ~6 min)
+  git clone https://github.com/pandasupranab/RiceBaCI-GEE.git
+  cd RiceBaCI-GEE && git checkout v1.0.1-submission
+  pip install -r requirements.txt
+  python scripts/refresh_v21_from_module12.py
+
+Executes: TWFE-DiD (district+year FE, clustered SE); event-study k=-3..+3; parallel-trends; wild-cluster restricted bootstrap (B=9999, J=8 clusters); LOO jackknife (district and year); in-space placebo (1000 draws); in-time placebo.
+
+VALIDATION
+MODIS MCD12Q2, ICRISAT VDSA (Bhadrak), data.gov.in yields, Sentinel-2 visual labels (60 sites), Mondal 2022 + Singha 2019 rice masks. Pre-registration: osf.io/c4mp8 (DOI 10.17605/OSF.IO/C4MP8).
+
+EXPECTED HEADLINE NUMBERS
+tau_SOS raw +15.289 d -> corrected +15.108 d; tau_EOS corrected -0.239 d; max |Delta|=1.510 d. Classifier OA 0.990 / 0.844; CV OA 0.996 / 0.831. Deviations usually indicate S1 GRD asset-version mismatch (see GitHub README).
