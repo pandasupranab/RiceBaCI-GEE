@@ -1,0 +1,13 @@
+district,phase,delta_VH_dB,delta_VV_dB,delta_CR_lin
+Boudh,Agronomic transplanting (Jun-early Aug),1.25,1.51,-0.013
+Boudh,Peak canopy (mid-Aug-late Sep),1.39,1.89,-0.024
+Boudh,Bulbul event window (Nov 1-21),1.41,1.46,-0.001
+Ganjam,Agronomic transplanting (Jun-early Aug),0.07,0.09,-0.002
+Ganjam,Peak canopy (mid-Aug-late Sep),-0.02,0.46,-0.022
+Ganjam,Bulbul event window (Nov 1-21),0.06,-0.42,0.028
+Khordha,Agronomic transplanting (Jun-early Aug),0.81,1.28,-0.022
+Khordha,Peak canopy (mid-Aug-late Sep),0.78,1.43,-0.029
+Khordha,Bulbul event window (Nov 1-21),1.63,1.37,0.017
+Nayagarh,Agronomic transplanting (Jun-early Aug),-0.03,0.38,-0.021
+Nayagarh,Peak canopy (mid-Aug-late Sep),0.01,0.77,-0.036
+Nayagarh,Bulbul event window (Nov 1-21),0.23,0.36,-0.006
