@@ -293,77 +293,93 @@ def make_supplement_table(csv_path: Path, out_docx: Path) -> None:
 
 
 def make_figure(csv_path: Path, fig_pdf: Path, fig_png: Path) -> None:
-    """Two-panel figure: (A) BoB track sketch, (B) intensity vs DOY scatter
-    with the three identification cyclones highlighted against the
-    1981–2018 climatological cloud."""
+    """Two-panel figure: (A) BoB track map with real Natural Earth coastline
+    and real IBTrACS 1981–2018 pre-Kharif landfall points, (B) intensity vs
+    DOY scatter with the three identification cyclones highlighted against
+    the real IBTrACS 1981–2018 climatological cloud.
+
+    The 1981–2018 climatological cloud is read from
+    `data/ibtracs/ibtracs_NI_preKharif_landfalls_1981_2018.csv`, produced by
+    `analysis/11b_ibtracs_landfalls.py` from IBTrACS NI v04r01 (Knapp et al.
+    2010). No synthetic draws are used.
+    """
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from matplotlib.patches import Rectangle
+    import cartopy.crs as ccrs
+    import cartopy.feature as cfeature
 
-    rng = np.random.default_rng(2026)
-    # Climatological cloud: 19 historical pre-Kharif BoB landfalls
-    n_hist = 19
-    hist_doy = rng.uniform(105, 166, size=n_hist)
-    # Build vmax to roughly match the published quantiles (p10=35, p50=65,
-    # p90=115). Use a lognormal-ish.
-    hist_vmax = np.clip(rng.lognormal(mean=4.2, sigma=0.45, size=n_hist),
-                        25, 140)
+    # Real IBTrACS pre-Kharif BoB landfalls 1981–2018
+    ibtracs_csv = (Path(__file__).resolve().parents[1]
+                   / "data/ibtracs/ibtracs_NI_preKharif_landfalls_1981_2018.csv")
+    if not ibtracs_csv.exists():
+        # Build it now if missing
+        import subprocess
+        subprocess.run(["python3", str(Path(__file__).resolve().parent
+                                       / "11b_ibtracs_landfalls.py")], check=True)
+    hist_rows = list(csv.DictReader(ibtracs_csv.open()))
+    hist_lat = np.array([float(r["lat"]) for r in hist_rows])
+    hist_lon = np.array([float(r["lon"]) for r in hist_rows])
+    hist_doy = np.array([int(r["doy"]) for r in hist_rows])
+    hist_vmax = np.array([float(r["vmax_kt_lifetime"])
+                          if r["vmax_kt_lifetime"] not in ("", "nan") else np.nan
+                          for r in hist_rows])
+    n_hist = len(hist_rows)
 
     rows = list(csv.DictReader(csv_path.open()))
 
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5.6),
-                             gridspec_kw={"width_ratios": [1.0, 1.2]})
-    fig.subplots_adjust(left=0.07, right=0.97, top=0.90, bottom=0.15,
-                        wspace=0.32)
+    fig = plt.figure(figsize=(14, 5.6))
+    gs = fig.add_gridspec(1, 2, width_ratios=[1.0, 1.2], wspace=0.28,
+                          left=0.06, right=0.97, top=0.90, bottom=0.15)
 
-    # ---- Panel A: schematic BoB landfall map ----
-    ax = axes[0]
-    # Coastline schematic: Odisha + WB + Bangladesh
-    coast_lon = np.array([85.0, 85.8, 86.5, 87.1, 87.7, 88.3, 89.5, 90.0])
-    coast_lat = np.array([19.0, 19.8, 20.5, 21.5, 21.7, 21.7, 22.0, 22.4])
-    ax.plot(coast_lon, coast_lat, color="0.35", lw=2.0, zorder=2)
-    ax.fill_between(coast_lon, coast_lat, 18.5, color="#e6e2d8", zorder=1)
+    # ---- Panel A: real Natural Earth BoB landfall map ----
+    proj = ccrs.PlateCarree()
+    ax = fig.add_subplot(gs[0, 0], projection=proj)
+    ax.set_extent([83.0, 93.0, 17.5, 23.5], crs=proj)
+    ax.add_feature(cfeature.LAND.with_scale("50m"),
+                   facecolor="#e6e2d8", edgecolor="none", zorder=1)
+    ax.add_feature(cfeature.OCEAN.with_scale("50m"),
+                   facecolor="#dfeff3", edgecolor="none", zorder=0)
+    ax.add_feature(cfeature.COASTLINE.with_scale("50m"),
+                   edgecolor="0.35", linewidth=0.9, zorder=2)
+    ax.add_feature(cfeature.BORDERS.with_scale("50m"),
+                   edgecolor="0.45", linewidth=0.5, linestyle=":", zorder=2)
+    gl = ax.gridlines(crs=proj, draw_labels=True, linewidth=0.4,
+                      color="0.85", linestyle=":", zorder=0)
+    gl.top_labels = False
+    gl.right_labels = False
+    gl.xlabel_style = {"size": 10.5}
+    gl.ylabel_style = {"size": 10.5}
 
-    # 50-km coast buffer (rough)
-    ax.fill_between(coast_lon, coast_lat - 0.45, coast_lat + 0.05,
-                    color="#bce2e7", alpha=0.55, zorder=1.5,
-                    label="50-km coast buffer")
-
-    # Hand a small set of plausible historical landfall points
-    hist_lat = rng.uniform(19.0, 22.4, size=n_hist) - 0.05
-    hist_lon = np.interp(hist_lat, coast_lat, coast_lon) - rng.uniform(0, 0.4, size=n_hist)
-    ax.scatter(hist_lon, hist_lat, s=18, c="0.55", alpha=0.75,
-               label="1981–2018 (n=19)", zorder=3)
+    # Real IBTrACS landfall points
+    ax.scatter(hist_lon, hist_lat, s=22, c="0.45", alpha=0.75,
+               edgecolor="0.25", lw=0.5, transform=proj,
+               label=f"IBTrACS 1981–2018 (n={n_hist})", zorder=3)
 
     colours = {"Fani": "#01696F", "Amphan": "#A12C7B", "Yaas": "#DA7101"}
     for st in rows:
         n = st["name"]
         ax.scatter(float(st["landfall_lon"]), float(st["landfall_lat"]),
                    s=180, c=colours[n], edgecolor="white", lw=1.5,
-                   marker="*", zorder=5, label=f"{n} ({st['season']})")
+                   marker="*", transform=proj, zorder=5,
+                   label=f"{n} ({st['season']})")
         ax.annotate(n, (float(st["landfall_lon"]), float(st["landfall_lat"])),
                     xytext=(8, 6), textcoords="offset points",
                     fontsize=11.5, color=colours[n], fontweight="bold",
                     zorder=6)
 
-    ax.set_xlim(83.5, 90.5)
-    ax.set_ylim(18.5, 23.0)
-    ax.set_xlabel("Longitude (°E)", fontsize=12.5)
-    ax.set_ylabel("Latitude (°N)", fontsize=12.5)
     ax.set_title("(A) Bay of Bengal pre-Kharif landfalls",
                  fontsize=13.5, loc="left", pad=8, weight="bold")
-    ax.tick_params(labelsize=10.5)
-    ax.grid(True, ls=":", lw=0.5, color="0.85", zorder=0)
-    ax.legend(loc="lower right", fontsize=10, framealpha=0.92,
+    ax.legend(loc="lower right", fontsize=9.5, framealpha=0.92,
               fancybox=False, edgecolor="0.7")
-    ax.set_aspect("equal", adjustable="datalim")
 
     # ---- Panel B: intensity vs DOY ----
-    ax = axes[1]
-    ax.scatter(hist_doy, hist_vmax, s=42, c="0.55", alpha=0.75,
-               edgecolor="0.35", lw=0.6,
-               label="1981–2018 (n=19)", zorder=3)
+    ax = fig.add_subplot(gs[0, 1])
+    # mask NaN Vmax
+    m = np.isfinite(hist_vmax)
+    ax.scatter(hist_doy[m], hist_vmax[m], s=42, c="0.45", alpha=0.75,
+               edgecolor="0.25", lw=0.6,
+               label=f"IBTrACS 1981–2018 (n={int(m.sum())})", zorder=3)
 
     for st in rows:
         n = st["name"]
