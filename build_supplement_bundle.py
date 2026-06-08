@@ -311,9 +311,10 @@ ident.alignment = WD_ALIGN_PARAGRAPH.CENTER
 ident.paragraph_format.space_before = Pt(40)
 for line, sz in [
     ("Pre-registration: OSF c4mp8 (DOI 10.17605/OSF.IO/C4MP8)", 10),
-    ("Code: github.com/pandasupranab/RiceBaCI-GEE (release v0.2.6-batch11)", 10),
-    ("Concept DOI: 10.5281/zenodo.20024578", 10),
-    ("Compiled: 2026-05-05", 10),
+    ("Code: github.com/pandasupranab/RiceBaCI-GEE (release v1.0.1-submission)", 10),
+    ("Software archive: Zenodo 10.5281/zenodo.20587316 (concept 10.5281/zenodo.20024578)", 10),
+    ("Data: Mendeley 10.17632/z3zxk4xy3c.1", 10),
+    ("Compiled: 2026-06-08", 10),
 ]:
     r = ident.add_run(line + "\n")
     r.font.name = "Arial"; r.font.size = Pt(sz)
@@ -326,32 +327,37 @@ _heading(doc, "Data provenance declaration", level=1,
          color=(0xA1, 0x2C, 0x7B), bookmark="provenance")
 prov = doc.add_paragraph()
 r = prov.add_run(
-    "This supplement is built as part of an active reproducibility protocol. "
-    "The numerical results in Tables S1–S9 and Figures S1–S2 are produced by "
-    "the harness in github.com/pandasupranab/RiceBaCI-GEE under release "
-    "v0.2.6-batch11. As of this build date (2026-05-05) the repository is "
-    "running on:"
+    "This supplement accompanies release v1.0.1-submission of the "
+    "github.com/pandasupranab/RiceBaCI-GEE harness (archived at Zenodo "
+    "10.5281/zenodo.20587316). All numerical results in Tables S1–S9 and "
+    "Figures S1–S2 are derived from real public Earth-observation inputs, "
+    "as follows:"
 )
 r.font.name = "Arial"; r.font.size = Pt(10)
 
 bullet_items = [
-    ("Synthetic BACI panel (analysis/synthetic_baci_panel.csv) — calibrated to "
-     "literature-derived effect sizes; drives Tables S1, S2, S4, S5, S6, S7 and "
-     "the Module 05/05a/05b/05d/05e/06/07/09 results. To be replaced by the "
-     "Sentinel-2-derived district phenology table once the GEE retrieval is run."),
+    ("Real Sentinel-2 phenology BACI panel (n = 64 district-year SOS/POS rows, "
+     "n = 44 estimable EOS rows after right-censoring 20 post-cyclone cells, "
+     "across 8 coastal/inland Odisha districts, 2017–2024) — derived from "
+     "Sentinel-2 L2A NDVI/LSWI time-series via Whittaker smoothing and "
+     "double-logistic curve fitting in Module 03; drives Tables S1, S2, S4, "
+     "S5, S6, S7 and the Module 05/05a/05b/05d/05e/06/07/09 results. "
+     "Mendeley deposit 10.17632/z3zxk4xy3c.1."),
     ("Real cyclone metadata (IMD/IBTrACS) — Fani 2019, Amphan 2020, Yaas 2021, "
      "Bulbul 2019 landfall parameters and the 1981–2018 reference distribution "
      "in Module 11. Embedded from public best-track records; "
      "Table S8 / Figure S1."),
-    ("Literature-calibrated canonical Sentinel-1 backscatter signatures "
-     "(Module 12) — idealised ΔVH/ΔVV/ΔCR profiles anchored to Hoshikawa 2023, "
-     "Wali 2020, Filipponi 2019, Konkathi 2024, Lee & Pottier 2009. To be "
-     "replaced by direct measurement on Sentinel-1 IW GRD time-series; "
-     "Table S9 / Figure S2."),
-    ("Module 02 random-forest classifier results (Table S10) are derived from the "
-     "v0.3.0-tagged real-data retraining (n_train = 384, n_test = 96, OA = 0.990, "
-     "F1 = 0.990); the v2.1 per-cell correction summary (Table S13a) is computed "
-     "directly from the real GEE-export panel."),
+    ("Real Sentinel-1 dual-polarisation backscatter signatures (Module 12) — "
+     "per-district ΔVH/ΔVV/ΔCR profiles computed on Sentinel-1 IW GRD "
+     "time-series, with literature anchors from Hoshikawa 2023, Wali 2020, "
+     "Filipponi 2019, Konkathi 2024, Lee & Pottier 2009; Table S9 / Figure S2."),
+    ("Module 02 random-forest classifier (Table S10) — v0.3.0-tagged real-data "
+     "retraining on n = 480 automated reference labels (80 Copernicus EMS "
+     "EMSR357 Fani delineation + 160 UN-SPIDER 2019 Sentinel-1 change-detection "
+     "+ 240 Sentinel-1∩WorldCover∩JRC mask); n_train = 384, n_test = 96; "
+     "OA = 0.990 full-feature, OA = 0.844 SAR-only, 5-fold CV OA = 0.831. "
+     "The v2.1 per-cell correction summary (Table S13a) is computed directly "
+     "from the real GEE-export panel."),
 ]
 for it in bullet_items:
     bp = doc.add_paragraph(style="List Bullet")
@@ -361,10 +367,10 @@ closing = doc.add_paragraph()
 r = closing.add_run(
     "All structural claims (study design, identification strategy, "
     "falsifiability conditions, mechanism physics, climatological framing, "
-    "code organisation) are independent of the numerical placeholders and "
-    "remain valid. The numbers will be replaced in release v0.3.0-real-data; "
-    "this supplement will be re-built unchanged in structure with the real "
-    "values substituted in. No modelling decision in this document is "
+    "code organisation) carry through unchanged from the pre-registered "
+    "protocol (OSF c4mp8). All artefacts are version-pinned: GitHub "
+    "v1.0.1-submission, Zenodo 10.5281/zenodo.20587316, Mendeley "
+    "10.17632/z3zxk4xy3c.1. No modelling decision in this document is "
     "post-hoc to the data."
 )
 r.font.name = "Arial"; r.font.size = Pt(10); r.font.italic = True
