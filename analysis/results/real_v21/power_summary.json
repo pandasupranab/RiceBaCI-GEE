@@ -1,0 +1,12 @@
+{
+  "G": 8,
+  "df_clusters": 7,
+  "alpha": 0.05,
+  "MDE_80_2sided_range_d": [
+    0.0,
+    56.501
+  ],
+  "tau_for_power_0_80_at_G8_d": 60.0,
+  "n_detectable_cells": 1,
+  "n_total_cells": 6
+}
