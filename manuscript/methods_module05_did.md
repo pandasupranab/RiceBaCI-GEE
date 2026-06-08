@@ -1,10 +1,6 @@
 # Methods — Section 3.Y: Difference-in-differences identification
 
-> **Status:** baseline draft, pending real GEE export from Module 04.
-> Numbers in tables 3.Y.1 / 3.Y.2 are placeholders generated from a
-> synthetic panel that hard-codes a known ATT (≤1.5 d recovery error
-> under district-clustered SEs). Replace with `analysis/results/did_static.csv`
-> once Module 04 finishes the real export.
+> **Status (v1.0.1-submission, 2026-06-08): SUPERSEDED.** This file is the original baseline draft of §3.Y; the numerical values it carries are from the synthetic-panel verification harness and **are not used in any submission artefact.** The publication-version §3 text (with the real v2.1 panel numbers) is in `manuscript/manuscript_text.md`; the publication-version §4 numerical results are at `analysis/results/real_v21/did_static.csv` and rendered in `manuscript/supplement/Table_S1_DiD_Static.docx`. This file is retained as the planning record for traceability against the OSF pre-registration only.
 
 ## 3.Y.1 Estimating equation
 
