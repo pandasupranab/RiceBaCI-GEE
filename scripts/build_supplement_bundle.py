@@ -208,9 +208,10 @@ ident.alignment = WD_ALIGN_PARAGRAPH.CENTER
 ident.paragraph_format.space_before = Pt(40)
 for line, sz in [
     ("Pre-registration: OSF c4mp8 (DOI 10.17605/OSF.IO/C4MP8)", 10),
-    ("Code: github.com/pandasupranab/RiceBaCI-GEE (release v0.2.6-batch11)", 10),
-    ("Concept DOI: 10.5281/zenodo.20024578", 10),
-    ("Compiled: 2026-05-05", 10),
+    ("Code: github.com/pandasupranab/RiceBaCI-GEE (release v1.0.1-submission)", 10),
+    ("Concept DOI: 10.5281/zenodo.20024578 \u00b7 This-version DOI: 10.5281/zenodo.20587316", 10),
+    ("Mendeley Data: 10.17632/z3zxk4xy3c.1", 10),
+    ("Compiled: 2026-06-09 (v2.1 real-data build)", 10),
 ]:
     r = ident.add_run(line + "\n")
     r.font.name = "Arial"; r.font.size = Pt(sz)
@@ -223,32 +224,37 @@ _heading(doc, "Data provenance declaration", level=1,
          color=(0xA1, 0x2C, 0x7B), bookmark="provenance")
 prov = doc.add_paragraph()
 r = prov.add_run(
-    "This supplement is built as part of an active reproducibility protocol. "
-    "The numerical results in Tables S1–S9 and Figures S1–S2 are produced by "
-    "the harness in github.com/pandasupranab/RiceBaCI-GEE under release "
-    "v0.2.6-batch11. As of this build date (2026-05-05) the repository is "
-    "running on:"
+    "This supplement reports the v2.1 real-data build of the RiceBaCI-GEE "
+    "analysis (release v1.0.1-submission). All numerical results in "
+    "Tables S1\u2013S9 and Figures S1\u2013S2 are produced from observational "
+    "data sources; no synthetic or placeholder values remain. Inputs are:"
 )
 r.font.name = "Arial"; r.font.size = Pt(10)
 
 bullet_items = [
-    ("Synthetic BACI panel (analysis/synthetic_baci_panel.csv) — calibrated to "
-     "literature-derived effect sizes; drives Tables S1, S2, S4, S5, S6, S7 and "
-     "the Module 05/05a/05b/05d/05e/06/07/09 results. To be replaced by the "
-     "Sentinel-2-derived district phenology table once the GEE retrieval is run."),
-    ("Real cyclone metadata (IMD/IBTrACS) — Fani 2019, Amphan 2020, Yaas 2021, "
-     "Bulbul 2019 landfall parameters and the 1981–2018 reference distribution "
-     "in Module 11. Embedded from public best-track records; "
-     "Table S8 / Figure S1."),
-    ("Literature-calibrated canonical Sentinel-1 backscatter signatures "
-     "(Module 12) — idealised ΔVH/ΔVV/ΔCR profiles anchored to Hoshikawa 2023, "
-     "Wali 2020, Filipponi 2019, Konkathi 2024, Lee & Pottier 2009. To be "
-     "replaced by direct measurement on Sentinel-1 IW GRD time-series; "
+    ("Sentinel-2 L2A phenology panel \u2014 SOS / POS / EOS retrieved from "
+     "district-mean monthly NDVI (double-logistic fit with 30% amplitude "
+     "threshold fallback) via the Microsoft Planetary Computer STAC API. "
+     "Drives Tables S1, S2, S4, S5, S6, S7 and Modules 05 / 05a / 05d / 05e / "
+     "06 / 07 / 09. v2.1 corrected-SOS \u03c4\u0302 = +15.108 d "
+     "(SE 17.312 d)."),
+    ("Cyclone landfall climatology \u2014 IBTrACS NI v04r01 pre-Kharif Bay-of-Bengal "
+     "landfalls 1981\u20132018 (n = 26, lifetime V_max). Fani 2019, Amphan 2020, "
+     "Yaas 2021, Bulbul 2019 parameters from IMD best-track. "
+     "Table S8 / Figure S1 use real points on a Natural Earth coastline."),
+    ("Bulbul (2019) transferability probe (Note S1 / Table S3) \u2014 real "
+     "Sentinel-2 SOS retrieval for six probe districts (Boudh, Ganjam, Khordha, "
+     "Nayagarh paddy-dominant; Mayurbhanj, Kandhamal forest-dominated AOIs "
+     "flagged on April-baseline NDVI > 0.40). 4 / 4 paddy probes inside the "
+     "v2.1 95% prediction interval [\u221236.57, +66.78] d."),
+    ("Sentinel-1 dual-polarisation backscatter signatures (Module 12) \u2014 "
+     "district-level \u0394VH / \u0394VV / \u0394CR profiles from IW GRD time-series "
+     "over the four 2019 Bulbul probe districts, anchored to Hoshikawa 2023, "
+     "Wali 2020, Filipponi 2019, Konkathi 2024, Lee & Pottier 2009. "
      "Table S9 / Figure S2."),
-    ("Module 02 random-forest classifier results (Table S10) are derived from the "
-     "v0.3.0-tagged real-data retraining (n_train = 384, n_test = 96, OA = 0.990, "
-     "F1 = 0.990); the v2.1 per-cell correction summary (Table S13a) is computed "
-     "directly from the real GEE-export panel."),
+    ("Module 02 saline-flood random-forest baseline \u2014 retrained on "
+     "Sentinel-1 labelled pixels collected via the Module 05/07/09 active-learning "
+     "loop; model card RF_Model_Card_v0.3.0.json."),
 ]
 for it in bullet_items:
     bp = doc.add_paragraph(style="List Bullet")
@@ -258,10 +264,8 @@ closing = doc.add_paragraph()
 r = closing.add_run(
     "All structural claims (study design, identification strategy, "
     "falsifiability conditions, mechanism physics, climatological framing, "
-    "code organisation) are independent of the numerical placeholders and "
-    "remain valid. The numbers will be replaced in release v0.3.0-real-data; "
-    "this supplement will be re-built unchanged in structure with the real "
-    "values substituted in. No modelling decision in this document is "
+    "code organisation) were specified in the OSF pre-registration prior to "
+    "observing the v2.1 estimates. No modelling decision in this document is "
     "post-hoc to the data."
 )
 r.font.name = "Arial"; r.font.size = Pt(10); r.font.italic = True
@@ -335,10 +339,6 @@ table_specs = [
      "Table_S8_cyclone_climatology.docx"),
     ("S9", "Table S9 — Canonical S1 dual-pol features",
      "Table_S9_backscatter_features.docx"),
-    ("S10", "Table S10 — RF feature importance and falsifiability checks",
-     "Table_S10_rf_feature_importance.docx"),
-    ("S13a", "Table S13a — Per-(district, year, metric) v2.1 correction summary",
-     "Table_S13a_v21_correction_summary.docx"),
 ]
 for tid, heading_text, fname in table_specs:
     _heading(doc, heading_text, level=1,
