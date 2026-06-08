@@ -203,15 +203,16 @@ def draw_panel_b_corrected(ax):
     # Module 02 intercepts the surge -> trough arrow.
     # The arrow now comes from the LEFT (offset classifier) into the
     # TOP-LEFT corner of the surge box. The 'masks' label is placed
-    # OUTSIDE both boxes, in the empty space next to the green arrow,
-    # roughly midway between classifier and surge but offset upward so
-    # it never overlaps either rectangle.
+    # OUTSIDE both boxes, in the vertical gap between classifier-bottom
+    # (y = 3.30) and surge-top (y = 2.90), and shifted to the RIGHT of the
+    # arrow so it cannot ride along the classifier box's lower edge.
     _arrow(ax, classifier, surge, color=OK_GREEN, lw=1.6,
            curve=-0.15)
-    # Free-standing label next to the green arrow midpoint.
-    ax.text(4.55, 3.30, "masks",
+    # Free-standing label, clearly below the classifier box and above the
+    # surge box, beside the green arrow midpoint.
+    ax.text(5.30, 3.07, "masks",
             fontsize=11.0, color=OK_GREEN,
-            ha="center", va="center",
+            ha="left", va="center",
             style="italic", weight="bold", zorder=6)
 
     # The broken arrow: surge -> trough is now crossed out
