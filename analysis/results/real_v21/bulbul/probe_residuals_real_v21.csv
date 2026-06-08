@@ -1,0 +1,7 @@
+district,exposure,sos_2017,sos_2018,sos_baseline,sos_2020,delta_obs_d,exclude_flag,exclude_reason,tau_hat_d,residual_d,in_95pi
+Boudh,inland_rainfall,183.4,155.5,169.4,176.4,7.0,False,,15.108,-8.11,True
+Ganjam,coastal_rainfall,162.6,206.1,184.4,198.3,14.0,False,,15.108,-1.11,True
+Kandhamal,inland_rainfall,160.8,141.1,151.0,206.4,55.5,True,AOI dominated by Eastern Ghats forest (April NDVI baseline > 0.40); not paddy-dominant at the 5 km centroid scale.,15.108,40.39,True
+Khordha,coastal_rainfall,165.9,117.5,141.7,179.3,37.6,False,,15.108,22.49,True
+Mayurbhanj,coastal_rainfall,131.5,121.5,126.5,121.0,-5.5,True,AOI dominated by Eastern Ghats forest (April NDVI baseline > 0.40); not paddy-dominant at the 5 km centroid scale.,15.108,-20.61,True
+Nayagarh,inland_rainfall,165.4,128.6,147.0,175.1,28.1,False,,15.108,12.99,True
