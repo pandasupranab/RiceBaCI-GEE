@@ -1,0 +1,74 @@
+[
+  {
+    "metric": "SOS",
+    "n_cells_treated_postperiod": 15,
+    "districts": [
+      "Baleshwar",
+      "Bhadrak",
+      "Jagatsinghpur",
+      "Kendrapara",
+      "Puri"
+    ],
+    "years": [
+      2019,
+      2020,
+      2021
+    ],
+    "beta_doy_per_unit_f": -569.8276358462172,
+    "se_HC1": 285.6210469883325,
+    "df_HC1": 8,
+    "ci_95_lo": -1228.4709513026553,
+    "ci_95_hi": 88.81567961022097,
+    "Delta_cyc_d_empirical": -569.8276358462172,
+    "Delta_cyc_d_literature_singha_sun": 14.0,
+    "agreement_with_literature": "consistent"
+  },
+  {
+    "metric": "POS",
+    "n_cells_treated_postperiod": 15,
+    "districts": [
+      "Baleshwar",
+      "Bhadrak",
+      "Jagatsinghpur",
+      "Kendrapara",
+      "Puri"
+    ],
+    "years": [
+      2019,
+      2020,
+      2021
+    ],
+    "beta_doy_per_unit_f": -102.79588153418784,
+    "se_HC1": 184.70552555876725,
+    "df_HC1": 8,
+    "ci_95_lo": -528.7275872677639,
+    "ci_95_hi": 323.13582419938814,
+    "Delta_cyc_d_empirical": -102.79588153418784,
+    "Delta_cyc_d_literature_singha_sun": 14.0,
+    "agreement_with_literature": "consistent"
+  },
+  {
+    "metric": "EOS",
+    "n_cells_treated_postperiod": 15,
+    "districts": [
+      "Baleshwar",
+      "Bhadrak",
+      "Jagatsinghpur",
+      "Kendrapara",
+      "Puri"
+    ],
+    "years": [
+      2019,
+      2020,
+      2021
+    ],
+    "beta_doy_per_unit_f": NaN,
+    "se_HC1": NaN,
+    "df_HC1": 8,
+    "ci_95_lo": NaN,
+    "ci_95_hi": NaN,
+    "Delta_cyc_d_empirical": NaN,
+    "Delta_cyc_d_literature_singha_sun": 14.0,
+    "agreement_with_literature": "inconsistent"
+  }
+]
