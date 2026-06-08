@@ -58,7 +58,7 @@ For each (G, τ) grid point we run R = 999 replications and report the
 empirical rejection rate. Grid: τ ∈ {0, 5, 10, 15, 20, 30, 40, 60, 80, 100} d,
 G ∈ {4, 6, 8, 12}.
 Results in `analysis/results/power_curves.csv`; visualisation in
-**Figure S1** (`figures/fig5_power_curves.pdf`).
+**Figure 5** (`figures/fig5_power_curves.pdf`).
 
 Findings (real-σ simulator):
 - **At G = 8 (this study)**: power 0.80 is **not** reached until
