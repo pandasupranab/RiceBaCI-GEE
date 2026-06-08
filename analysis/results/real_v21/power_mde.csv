@@ -1,0 +1,7 @@
+pipeline,metric,tau_hat_d,se_d,df_clusters,alpha,power_target,MDE_2sided_d,MDE_1sided_d,tau_over_MDE,detectable
+raw,SOS,15.289,17.328,7,0.05,0.8,56.501,48.356,0.27,no
+raw,POS,-3.587,2.882,7,0.05,0.8,9.397,8.043,0.38,no
+raw,EOS,-0.0,0.0,7,0.05,0.8,0.0,0.0,0.0,no
+corrected,SOS,15.108,17.312,7,0.05,0.8,56.448,48.311,0.27,no
+corrected,POS,-3.677,2.897,7,0.05,0.8,9.446,8.084,0.39,no
+corrected,EOS,-0.239,0.169,7,0.05,0.8,0.551,0.472,0.43,no
