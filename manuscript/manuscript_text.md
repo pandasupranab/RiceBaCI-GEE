@@ -162,7 +162,7 @@ Validation for phenological date retrieval relies on three complementary data so
 
 **Saline-flood classifier reference labels — automated multi-source provenance:** A reference-label set of n = 480 binary labels (cyclone-flood vs. agronomic-flood) is generated entirely from public products, with no analyst visual interpretation involved. The label set is partitioned as follows. (i) **80 cyclone-flood labels for Fani (3 May 2019)** are sampled from the Copernicus Emergency Management Service master delineation EMSR357 (`emergency.copernicus.eu/mapping/list-of-components/EMSR357`), the operational reference for the Fani landfall footprint. (ii) **80 cyclone-flood labels each for Amphan (20 May 2020) and Yaas (26 May 2021)** are generated automatically by Sentinel-1 SAR pre/post change-detection following the methodology of Voigt et al. (2007) and Twele et al. (2016), as standardised by the UN-SPIDER (2019) Recommended Practice for SAR-based flood mapping (Module 08, `gee/08_S1_flood_detection.js`): pre-event median VH (3 weeks before landfall) minus post-event median VH (within 7 days of landfall), with the empirical −3 dB threshold for inundated cropland anchored to the IBTrACS landfall buffer. (iii) **240 agronomic-flood negative labels** are sampled from the intersection of (Sentinel-1 VH detected flooding) ∩ (ESA WorldCover 2021 cropland class) ∩ (JRC Global Surface Water seasonal-water mask), restricted to non-cyclone weeks of control years (2017, 2018, 2022, 2023, 2024), i.e. weeks 6–10 of the Kharif season when transplanting flooding is the dominant inundation mechanism and no IBTrACS cyclone track lies within 200 km. This three-source, fully programmatic provenance replaces the originally pre-registered Sentinel-2 visual-interpretation fallback (OSF c4mp8 §E5, activated 2026-05-06 after the Tropical Forest Observatory programme — administered jointly by Planet Labs and Kongsberg Satellite Services — restricted PlanetScope NICFI eligibility to forest-domain users and a second-line academic appeal received no reply within the project SLA); the team chose to forgo the visual-labelling fallback in favour of the present automated, reproducible, and analyst-independent label provenance. The full label-set coordinates, dates, cyclone-event provenance fields, and SHA-256 checksums are deposited in the Mendeley Data record under CC-BY-4.0 (file: `labels_panel_n480.csv`).
 
-**Cross-product rice-mask validation:** The Mondal et al. (2022) South Asian paddy rice product (Qadir et al., 2022) and the Singha et al. (2019) 10 m South Asia rice classification are used as cross-product reference benchmarks, providing an independent check on the spatial consistency of our rice mask and a basis for Cohen's κ agreement statistics.
+**Cross-product rice-mask validation:** The Qadir et al. (2022) South Asian paddy rice product and the Singha et al. (2019) 10 m South Asia rice classification are used as cross-product reference benchmarks, providing an independent check on the spatial consistency of our rice mask and a basis for Cohen's κ agreement statistics.
 
 **Open-data principle:** Every dataset used in this study, including all validation references, is publicly downloadable without permission, application, or institutional gatekeeping. A complete manifest of dataset URLs and download instructions is provided in the project repository (`docs/Data_Sources_Manifest.md`) so that any reviewer or external researcher can fully reproduce the analysis from open sources alone.
 
@@ -309,7 +309,7 @@ where \(\widehat{SE}(\hat\tau)\) is the cluster-robust standard error from §3.6
 
 **Secondary validation — saline-flood classifier:** Against the n = 480 automated reference labels (§2.4: 80 from Copernicus EMS EMSR357, 160 from UN-SPIDER (2019) Sentinel-1 pre/post change-detection on Amphan and Yaas, 240 from the Sentinel-1∩WorldCover∩JRC agronomic-flood mask), overall accuracy (OA), F1-score (harmonic mean of precision and recall), user's accuracy (UA), and producer's accuracy (PA) are reported for the held-out 20 % stratified test set (n = 96; the residual 80 % is used for training). Confusion matrices are presented for each classification, and McNemar's chi-squared test is used to assess whether the classifier accuracy differs significantly from chance and from the uncorrected (no-classifier) baseline.
 
-**Tertiary validation — cross-product agreement:** Agreement between the RiceBaCI-GEE rice classification and the Mondal et al. (2022) (Qadir et al., 2022) paddy product and the Singha et al. (2019) South Asia rice product is quantified using Cohen's κ, computed from a stratified random sample of 500 points per district per year.
+**Tertiary validation — cross-product agreement:** Agreement between the RiceBaCI-GEE rice classification and the Qadir et al. (2022) paddy product and the Singha et al. (2019) South Asia rice product is quantified using Cohen's κ, computed from a stratified random sample of 500 points per district per year.
 
 **Transferability validation — Andhra Pradesh / Cyclone Hudhud 2014:** The full classifier and phenology pipeline are re-run without modification on coastal Andhra Pradesh districts (Srikakulam, Vizianagaram, Visakhapatnam) for 2014–2016, using the LISS-III and Sentinel-1 data available for that period. Cyclone Hudhud made landfall near Visakhapatnam on 12 October 2014. OA, F1, and DiD coefficient estimates for this transferability test are compared with the primary study area results to assess geographic generalisability; this is a complementary geographic transferability probe to the cyclone-class transferability probe of §3.7.2 (Bulbul).
 
@@ -493,11 +493,13 @@ Filipponi, F., 2019. Sentinel-1 GRD preprocessing workflow. *Multidisciplinary D
 
 Fikriyah, V.N., Darvishzadeh, R., Laborte, A., Khan, N.I., Nelson, A., 2019. Discriminating transplanted and direct seeded rice using Sentinel-1 intensity data. *International Journal of Applied Earth Observation and Geoinformation* 76, 143–153. https://doi.org/10.1016/J.JAG.2018.11.007
 
+Friedl, M.A., Sulla-Menashe, D., Tan, B., Schneider, A., Ramankutty, N., Sibley, A., Huang, X., 2010. MODIS Collection 5 global land cover: algorithm refinements and characterization of new datasets. *Remote Sensing of Environment* 114, 168–182. https://doi.org/10.1016/j.rse.2009.08.016
+
 Goodman-Bacon, A., 2021. Difference-in-differences with variation in treatment timing. *Journal of Econometrics* 225, 254–277. https://doi.org/10.1016/j.jeconom.2021.03.014
 
 Gorelick, N., Hancher, M., Dixon, M., Ilyushchenko, S., Thau, D., Moore, R., 2017. Google Earth Engine: Planetary-scale geospatial analysis for everyone. *Remote Sensing of Environment* 202, 18–27. https://doi.org/10.1016/j.rse.2017.06.031
 
-Haldar, K., Mandal, S., Bhadra, S., Pati, R., Mitra, A., Mabuchi, M., 2016. Assessment of the impact of cyclones on rice productivity using remote sensing and crop simulation model in coastal Odisha. *Plant Production Science* 19, 320–330. https://doi.org/10.1007/s10333-015-0514-y
+Gray, J., Sulla-Menashe, D., Friedl, M.A., 2019. *User Guide to Collection 6 MODIS Land Cover Dynamics (MCD12Q2) Product*, Version 6.0. NASA EOSDIS Land Processes Distributed Active Archive Center, Sioux Falls, SD. https://lpdaac.usgs.gov/documents/465/MCD12Q2_User_Guide_V6.pdf
 
 Hoshikawa, K., Hayashi, M., Yamamoto, T., Watanabe, R., 2023. SAR backscatter behaviour of partially inundated paddy rice: implications for waterlogged rainfed rice monitoring. *European Journal of Remote Sensing* 56. https://doi.org/10.1080/22797254.2023.2269305
 
@@ -517,10 +519,6 @@ Konkathi, P., Shetty, A., Rawal, S., 2024. Kharif rice mapping using multi-polar
 
 Lee, J.-S., Pottier, E., 2009. *Polarimetric Radar Imaging: From Basics to Applications*. CRC Press, Boca Raton, FL.
 
-Li, G., Zhang, X., Dong, J., Yang, J., Liu, R., 2023. Separating rice and water hyacinth in South Asian inland waters using Sentinel-1 SAR phenological features. *Proceedings of the IGARSS 2023 IEEE International Geoscience and Remote Sensing Symposium*, 2903–2906. https://doi.org/10.1109/IGARSS52108.2023.10282909
-
-Li, X., et al., 2026. Automated rice mapping under diverse cropping patterns and establishment methods by integrating phenological knowledge and synergy of optical and SAR imagery. *Remote Sensing of Environment* 335, 115255. https://doi.org/10.1016/j.rse.2026.115255
-
 Lobert, F., Löw, J., Schwieder, M., Gocht, A., Schlund, M., Hostert, P., Erasmi, S., 2024. A deep learning approach for deriving winter wheat phenology from optical and SAR time series at field level. *Remote Sensing of Environment* 298, 113800. https://doi.org/10.1016/j.rse.2023.113800
 
 Manikandan, G., et al., 2025. Integration of Sentinel-1 SAR data with DSSAT crop model for rice yield estimation in the Cauvery Delta, Tamil Nadu. *Pharma Science Trends* [in press]. https://doi.org/10.14719/pst.7442
@@ -530,6 +528,8 @@ Meroni, M., D'Andrimont, R., Vrieling, A., Fasbender, D., Lemoine, G., Rembold, 
 Minasny, B., Fiantis, D., Mulyanto, B., Sulaeman, Y., Widyatmanti, W., 2022. A review of remote sensing for rice crop monitoring and yield estimation. *Remote Sensing* 14, 1875. https://doi.org/10.3390/rs14081875
 
 Mohite, J.D., Sawant, S.A., Pandit, A.U., Pappula, S., 2019. Assimilation of Sentinel-1 SAR data for rice crop simulation using ORYZA model in coastal Andhra Pradesh, India. *Proceedings of the 8th International Conference on Agro-Geoinformatics*, 1–5. https://doi.org/10.1109/Agro-Geoinformatics.2019.8820245
+
+Pandey, V.L., 2018. *Smallholders' Dairy Farming and Markets: Productivity and Performance in India—ICRISAT Village Dynamics in South Asia (VDSA) Bulletin Series*. International Crops Research Institute for the Semi-Arid Tropics (ICRISAT), Patancheru, India. http://vdsa.icrisat.org
 
 Pearl, J., 2009. *Causality: Models, Reasoning and Inference*, 2nd ed. Cambridge University Press, Cambridge. https://doi.org/10.1017/CBO9780511803161
 
@@ -541,8 +541,6 @@ Qadir, A., Mondal, P., Huete, A., 2022. Evaluating a paddy rice extent and plant
 
 R Core Team, 2024. *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing, Vienna, Austria. https://www.r-project.org
 
-Ramadhani, F., Pullanagari, R., Kereszturi, G., Procter, J., 2020. Automatic mapping of rice growth stages using the integration of SENTINEL-2, MOD13Q1, and SENTINEL-1. *Remote Sensing* 12, 3613. https://doi.org/10.3390/rs12213613
-
 Rangasamy, A., Pande, C.B., Rajaram, R., Gopinath, G., 2025. Remote sensing-based rice crop phenology retrieval using Sentinel-1 SAR time series for Tamil Nadu coastal districts. *Scientific Reports* 15. https://doi.org/10.1038/s41598-025-91655-z
 
 Shen, Y., Liao, X., 2025. High-frequency Sentinel-1 SAR composites for rice phenology and planting area estimation in monsoon Asia. *Remote Sensing* 17, 1033. https://doi.org/10.3390/rs17061033
@@ -553,29 +551,23 @@ Singha, M., Dong, J., Zhang, G., Xiao, X., 2019. High resolution paddy rice maps
 
 Smith, E.P., 2002. BACI design. In: El-Shaarawi, A.H., Piegorsch, W.W. (Eds.), *Encyclopedia of Environmetrics*, vol. 1. John Wiley & Sons, Chichester, pp. 141–148.
 
+Twele, A., Cao, W., Plank, S., Martinis, S., 2016. Sentinel-1-based flood mapping: a fully automated processing chain. *International Journal of Remote Sensing* 37, 2990–3004. https://doi.org/10.1080/01431161.2016.1192304
+
+UN-SPIDER, 2019. *Recommended Practice: Flood Mapping and Damage Assessment Using Sentinel-1 SAR Data in Google Earth Engine*. United Nations Platform for Space-based Information for Disaster Management and Emergency Response, Vienna. https://www.un-spider.org/advisory-support/recommended-practices/recommended-practice-google-earth-engine-flood-mapping
+
+Voigt, S., Kemper, T., Riedlinger, T., Kiefl, R., Scholte, K., Mehl, H., 2007. Satellite image analysis for disaster and crisis-management support. *IEEE Transactions on Geoscience and Remote Sensing* 45, 1520–1528. https://doi.org/10.1109/TGRS.2007.895830
+
 Wali, E., Tasumi, M., Moriyama, M., 2020. Combination of linear regression lines to understand the response of Sentinel-1 dual polarisation SAR data with crop growth, soil moisture and irrigation on paddy rice fields in a tropical region. *Remote Sensing* 12, 189. https://doi.org/10.3390/rs12010189
 
 Wang, J., Wang, M., Shi, L., Zhou, Y., 2024. Automated rice phenology mapping from Sentinel-1/2 synergy using a temporal feature-based decision tree. *International Journal of Digital Earth* 17. https://doi.org/10.1080/17538947.2024.2445639
 
 Wassmann, R., Jagadish, S.V.K., Heuer, S., Ismail, A., Redona, E., Serraj, R., Singh, R.K., Howell, G., Pathak, H., Sumfleth, K., 2009. Climate change affecting rice production: the physiological and agronomic basis for possible adaptation strategies. *Advances in Agronomy* 101, 59–122. https://doi.org/10.1016/S0065-2113(08)00802-X
 
-Wickham, H., 2016. *ggplot2: Elegant Graphics for Data Analysis*, 2nd edn. Springer, New York. https://doi.org/10.1007/978-3-319-24277-4
-
-Wu, Q., 2020. geemap: A Python package for interactive mapping with Google Earth Engine. *Journal of Open Source Software* 5, 2272. https://doi.org/10.21105/joss.02272
-
 Xu, S., Zhu, X., Chen, J., Zhu, X., Duan, M., Qiu, B., Wan, L., Tan, X., Xu, Y.N., Cao, R., 2023. A robust index to extract paddy fields in cloudy regions from SAR time series. *Remote Sensing of Environment* 285, 113374. https://doi.org/10.1016/j.rse.2022.113374
 
 Xu, Y., Gong, W., Chen, J., Song, J., Wang, Y., 2024. Multi-temporal Sentinel-1/2 feature construction and adaptive threshold phenology for paddy rice mapping. *Agriculture* 14, 1282. https://doi.org/10.3390/agriculture14081282
 
-Yang, J., Hu, Q., Li, W., Song, Q., Cai, Z., Zhang, X., Wei, H., Wu, W., 2024. An automated sample generation method by integrating phenology domain optical-SAR features in rice cropping pattern mapping. *Remote Sensing of Environment* 314, 114387. https://doi.org/10.1016/j.rse.2024.114387
-
-Yang, S., 2025. Rice-SamPheno: semantic-aware multi-phase phenology recognition from Sentinel-1/2 time series. *IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing* [early access]. https://doi.org/10.1109/JSTARS.2025.3599728
-
 Zanaga, D., Van De Kerchove, R., Daems, D., De Keersmaecker, W., Brockmann, C., Kirches, G., Wevers, J., Cartus, O., Santoro, M., Fritz, S., Lesiv, M., Herold, M., Tsendbazar, N.-E., Xu, P., Ramoino, F., Arino, O., 2022. ESA WorldCover 10 m 2021 v200. *Zenodo*. https://doi.org/10.5281/zenodo.7254221
-
-Zhao, W., Qu, Y., Zhang, L., Li, K., 2022. Spatial-aware SAR-optical time-series deep integration for crop phenology tracking. *Remote Sensing of Environment* 276, 113046. https://doi.org/10.1016/j.rse.2022.113046
-
-Zhao, Z., Dong, J., Zhang, G., Yang, J., Liu, R., Wu, B., Xiao, X., 2024. Improved phenology-based rice mapping algorithm by integrating optical and radar data. *Remote Sensing of Environment* 315, 114460. https://doi.org/10.1016/j.rse.2024.114460
 
 ---
 
