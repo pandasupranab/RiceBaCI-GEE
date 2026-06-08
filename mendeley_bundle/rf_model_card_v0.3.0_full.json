@@ -1,0 +1,50 @@
+{
+  "version": "v0.3.0",
+  "supersedes": "v0.2.5 (3-class synthetic baseline)",
+  "task": "binary classification: cyclone_flood vs agronomic_flood",
+  "n_total_labels": 480,
+  "n_train": 384,
+  "n_test_holdout": 96,
+  "test_split": "stratified 80/20 (random_state=17)",
+  "cv": "5-fold stratified",
+  "model": {
+    "type": "RandomForestClassifier",
+    "n_estimators": 500,
+    "max_depth": 12,
+    "class_weight": "balanced",
+    "random_state": 17
+  },
+  "metrics_holdout": {
+    "overall_accuracy": 0.9896,
+    "f1_macro": 0.9896,
+    "f1_weighted": 0.9896
+  },
+  "metrics_cv5": {
+    "overall_accuracy": 0.9958,
+    "f1_macro": 0.9958
+  },
+  "per_class": {
+    "agronomic_flood": {
+      "producer_accuracy": 1.0,
+      "user_accuracy": 0.9796
+    },
+    "cyclone_flood": {
+      "producer_accuracy": 0.9792,
+      "user_accuracy": 1.0
+    }
+  },
+  "label_sources": {
+    "cyclone_flood": {
+      "Fani_2019": "Copernicus EMS EMSR357 master delineation (80)",
+      "Amphan_2020": "Sentinel-1 SAR pre/post change detection, \u22653dB drop (80)",
+      "Yaas_2021": "Sentinel-1 SAR pre/post change detection, \u22653dB drop (80)"
+    },
+    "agronomic_flood": "Sentinel-1 VH (\u221222 to \u221217 dB) \u2229 ESA WorldCover cropland \u2229 JRC GSW seasonal water (1\u20135 months/yr), non-cyclone windows (240)"
+  },
+  "methodology_references": [
+    "Voigt et al. 2007, IEEE TGRS \u2014 SAR rapid flood mapping",
+    "Twele et al. 2016, IJRS \u2014 TerraSAR-X flood mapping operational",
+    "UN-SPIDER 2019 Recommended Practice \u2014 Flood mapping with Sentinel-1",
+    "Copernicus EMS EMSR357 \u2014 Cyclone Fani Odisha mapping product"
+  ]
+}
