@@ -1,0 +1,481 @@
+label_id,class_proposed,class_id,cyclone,event_date,source,district,lon,lat
+0.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.8972218778581,20.403839290084548
+1.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.89021501864197,20.390364560822754
+2.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.87674028938017,19.850027917424864
+3.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.53987205783535,19.725521419045897
+4.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.9408800006663,19.909855715347224
+5.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.7560067151945,19.928989830898967
+6.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,86.75448415349335,20.52322539134403
+7.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.7597796393878,19.918749036660007
+8.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.74711339388172,20.421625932710114
+9.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.84224498246998,20.529693261389692
+10.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.86757747348216,19.91389813412576
+11.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.913122058387,20.03490120289666
+12.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.35931068572732,19.631198314213346
+13.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.74926935056361,20.422164921880587
+14.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.49244101083384,19.720401021926417
+15.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.57463685933078,19.945429000598356
+16.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.58110472937643,19.948123946450714
+17.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.9077321666823,19.948123946450714
+18.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.52963126359639,19.940308603478876
+19.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.87970472981776,19.84760246615774
+20.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.5980828882463,19.867275570879958
+21.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.77514083074625,20.45827719630219
+22.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.89614389951716,20.405995246766434
+23.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.88401664318154,20.41030716013021
+24.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.87727927855065,19.845177014890616
+25.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.29436249068549,19.637935678844244
+26.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.70615021692588,19.989626112577035
+27.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.91204408004607,20.3847051745328
+28.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.90827115585276,19.90608279115392
+29.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.89991682371046,19.985044704628027
+30.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.62179841174705,19.76756257434269
+31.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.96486501875229,20.283914199654593
+32.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,86.94043541730609,20.646384416796817
+33.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.40620274355837,19.65437484854363
+34.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.92632729306357,19.908238747835806
+35.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.47384588445256,19.717706076074055
+36.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.96432602958183,20.30412629354728
+37.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.88213018108489,19.99582448803746
+38.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.965673502508,20.291460048041195
+39.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.95462422451334,20.33215373041181
+40.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.8904845132272,19.857034776640994
+41.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.70615021692588,19.978846329167602
+42.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.9160864988246,20.356947232253507
+43.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.28358270727605,19.629581346701933
+44.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.75088631807502,20.423512394806764
+45.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.94626989237102,20.412463116812095
+46.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.86838595723786,19.845177014890616
+47.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.9160864988246,20.374733874879073
+48.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.30595075785062,19.58754019140514
+49.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.67111592084521,19.955130805666847
+50.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.94303595734819,19.91066419910293
+51.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.903959242489,20.5162185321279
+52.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.79858685966177,20.04783694298798
+53.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.77190689572342,20.51406257544601
+54.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.92147639052932,20.377698315316668
+55.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.71019263570442,19.983966726287083
+56.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.91069660711989,19.86970102214708
+57.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.74360996427366,20.511367629593654
+58.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.85464173339084,19.95351383815543
+59.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.58918956693351,19.98477521004279
+60.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.66195310494719,19.97237845912194
+61.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.2636401079686,19.61987954163344
+62.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.8791657406473,20.094998495404255
+63.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.93387314145018,19.890182610625004
+64.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.7627440798254,20.45773820713172
+65.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.96971592128654,20.00902972271402
+66.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.6808177259137,20.005256798520715
+67.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.8619180871922,19.841943079867786
+68.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.89587440493192,19.977229361656185
+69.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.27253342928138,19.5729874838024
+70.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.85491122797606,20.525650842611153
+71.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.76786447694488,19.923330444609014
+72.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.90368974790375,20.378776293657612
+73.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.75654570436498,20.046219975476564
+74.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.93683758188777,20.332423224997044
+75.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.26606555923571,19.619610047048205
+76.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.94788685988243,20.316253549882894
+77.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.94141898983678,20.450192358745113
+78.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.95704967578045,20.33404019250846
+79.0,cyclone_flood,2,Fani,2019-05-03,Copernicus EMS EMSR357,NA,85.64740039734446,19.889374126869296
+80.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.76876736651086,20.556642719913278
+81.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.46235202309768,20.24753243064775
+82.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.89165689737841,20.871142900883523
+83.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.95013722237458,20.758494164254934
+84.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.56368198714637,20.275829362097515
+85.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.82563072399562,20.580897232584505
+86.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.5736532868001,20.243220517283977
+87.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.41465148151094,20.172343441366948
+88.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.72753469496976,20.860632612059323
+89.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.53188162608853,20.230823766363127
+90.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.79948974922775,20.78463513902281
+91.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.80002873839821,20.56230210620323
+92.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.6690543699736,20.555025752401864
+93.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.87413974933807,20.939055536362957
+94.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.9223792800953,20.71780048188432
+95.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.64345238437618,20.867100482104984
+96.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.91294696961204,20.843654453189465
+97.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,87.32742964170478,21.598239291849865
+98.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,87.01697187951308,21.464030988402406
+99.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,87.04095689759907,21.56401347952491
+100.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.418154911119,20.1817757518502
+101.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.50196772712735,20.208186221203317
+102.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.42731772701703,20.107934235495577
+103.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.82886465901845,20.60380427232955
+104.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.98059011050624,20.745827918748848
+105.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.51840689682675,20.221121961294635
+106.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.50466267297972,20.201179361987183
+107.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,87.05685707812799,21.585303551758543
+108.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.94043541730609,20.646384416796817
+109.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.65072873817755,20.38955607706705
+110.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.70408866605425,20.81347105964305
+111.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.92561321511812,20.718069976469558
+112.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.95687458700549,20.800535319551727
+113.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,87.01912783619497,21.514965465011983
+114.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.50142873795689,20.189591094822042
+115.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.44240942379024,20.17396040887836
+116.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.49361339498505,20.198484416134825
+117.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,87.10940852224898,21.526553732177124
+118.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.39201393635113,20.084757701165294
+119.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.45884859348962,20.24699344147728
+120.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.8630904713434,20.9506438035281
+121.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.9005502186912,20.85578170952508
+122.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.29607386400716,20.164528098395106
+123.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,87.05281465934945,21.60147322687269
+124.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.41599895443711,20.18393170853209
+125.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.79814227630156,20.556912214498514
+126.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.63348108472245,20.869795427957342
+127.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.79005743874448,20.573351384197903
+128.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,87.06359444275888,21.657797595186988
+129.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.90405364829925,20.885426113901023
+130.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.70732260107708,20.86332755791168
+131.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.83344606696745,20.853895247428426
+132.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.78601501996594,20.574159867953608
+133.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,87.36273343237069,21.611983515696892
+134.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.84988523666685,21.005620698916214
+135.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,87.00673108527411,21.51065355164821
+136.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.59575184278944,20.29684993974591
+137.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.4383670050117,20.08448820658006
+138.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.87872115728709,20.868986944201634
+139.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.97978162675054,20.746097413334084
+140.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.29930779902999,20.527806799293042
+141.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.82266628355802,20.69381546379833
+142.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.37341880996985,20.113863116370766
+143.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.41950238404519,20.099579903353266
+144.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.4782522036266,20.355869253912566
+145.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,87.03421953296818,21.493405898193114
+146.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.81323397307477,20.614045066568515
+147.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.42300581365325,20.169917990099822
+148.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.69654281766765,20.839073045240454
+149.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.93154209599331,20.811315102961164
+150.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.418154911119,20.18258423560591
+151.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.35563216734428,20.082062755312936
+152.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.39093595801019,20.08044578780152
+153.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.43728902667075,20.155634777082323
+154.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.78978794415926,20.57469885712408
+155.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.65045924359231,20.399527376720773
+156.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.79113541708543,20.797301384528897
+157.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.51382548887773,20.25939019239813
+158.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.91860635590199,20.827484778075313
+159.0,cyclone_flood,2,Amphan,2020-05-20,Sentinel-1 SAR change detection (Module 08),NA,86.40575816019816,20.07451690692633
+160.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.73831447837921,20.877071781758712
+161.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.72807368414024,21.163544525864427
+162.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.74774678886246,20.98055770248928
+163.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.91968433424293,20.833144164365265
+164.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.78089462284647,21.030414200757914
+165.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.81458144600094,20.57793279214691
+166.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.62458776340966,20.652582792257242
+167.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.76876736651086,20.556642719913278
+168.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.46235202309768,20.24753243064775
+169.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.89165689737841,20.871142900883523
+170.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.66177801617222,21.02340734154178
+171.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.78278108494312,20.56876997624889
+172.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.60033325073844,20.889738027264798
+173.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,87.09620328757242,21.541106439779863
+174.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.95013722237458,20.758494164254934
+175.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.56368198714637,20.275829362097515
+176.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.82563072399562,20.580897232584505
+177.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,87.30991249366446,21.619529364083498
+178.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.31413000121796,19.966988567417225
+179.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.5736532868001,20.243220517283977
+180.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.41465148151094,20.172343441366948
+181.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.72753469496976,20.860632612059323
+182.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.66932386455882,21.04038550041164
+183.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.53188162608853,20.230823766363127
+184.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.49954227586024,20.36206762937299
+185.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.79948974922775,20.78463513902281
+186.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.65827458656415,20.543167990651487
+187.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.73750599462349,20.863597052496917
+188.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.62620473092109,20.84338495860423
+189.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.80002873839821,20.56230210620323
+190.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,87.1034796413738,21.56805589830345
+191.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,85.85167729295324,20.547749398600494
+192.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.6690543699736,20.555025752401864
+193.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.62350978506873,20.847966366553237
+194.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.87413974933807,20.939055536362957
+195.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.67660021836019,21.20504669199075
+196.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.69438686098576,20.562571600788466
+197.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.95121520071552,20.82263387554107
+198.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.73588902711208,21.108298135891076
+199.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.59871628322703,20.897822864821872
+200.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.41680743819282,20.16318062546893
+201.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.83102061570034,21.067604453520463
+202.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.63375057930769,20.761997593863
+203.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.57338379221486,20.916687485788383
+204.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.9223792800953,20.71780048188432
+205.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.80703559761434,20.83098820768338
+206.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.69384787181528,20.846079904456587
+207.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.5984467886418,20.923424850419277
+208.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.64345238437618,20.867100482104984
+209.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.59575184278944,20.76846546390866
+210.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.91294696961204,20.843654453189465
+211.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,87.32742964170478,21.598239291849865
+212.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,85.86407404387408,20.55125282820856
+213.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.31925039833745,19.95674777317826
+214.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,87.01697187951308,21.464030988402406
+215.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.69627332308241,20.83233568060956
+216.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.75125021847052,21.081618171952726
+217.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.71163451444086,20.879227738440598
+218.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.70705310649184,20.81023712462022
+219.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.418154911119,20.1817757518502
+220.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.50223722171259,20.67737629409894
+221.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.6563881244675,20.92719777461258
+222.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.72834317872548,21.03391763036598
+223.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.64749480315471,20.919921420811214
+224.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.50196772712735,20.208186221203317
+225.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.59332639152231,20.87895824385536
+226.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.73993144589062,20.78086221482951
+227.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,85.49244101083384,19.720401021926417
+228.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.74586032676581,20.559337665765636
+229.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.71136501985562,20.879227738440598
+230.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.74666881052151,20.843115464018993
+231.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.5887449835733,20.89997882150376
+232.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.42731772701703,20.107934235495577
+233.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.68630202342868,21.02664127656461
+234.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.78709299830689,20.837725572314277
+235.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.71459895487845,21.03391763036598
+236.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.82886465901845,20.60380427232955
+237.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.6458778356433,20.565805535811297
+238.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.98059011050624,20.745827918748848
+239.0,cyclone_flood,2,Yaas,2021-05-26,Sentinel-1 SAR change detection (Module 08),NA,86.41545996526665,20.165875571321287
+240.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.09945210957278,21.52805595459826
+241.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.17140716383079,21.577373463696418
+242.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.32205463697761,21.592734655054862
+243.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.0393548170652,21.577642958281658
+244.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.08058748860628,21.580337904134012
+245.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.40263351796312,21.598394041344818
+246.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.77066871558503,21.034880863616642
+247.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.62325517746103,20.838958300150175
+248.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.75422954588566,20.95753591765395
+249.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.82429813804697,21.126509022596828
+250.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.62514163955768,20.90336750602154
+251.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.78441293943206,20.80284602572857
+252.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.48662142274645,20.45546750535955
+253.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.33759091711102,20.592640249244603
+254.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.42194272228983,20.535507397174598
+255.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.69709669381564,20.526344581276582
+256.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.41709181975563,20.551677072288747
+257.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.6652963327578,20.579974003738513
+258.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.39984416630051,20.07035974305751
+259.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.42032575477845,20.098926169092508
+260.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.2416508447671,20.09515324489921
+261.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.38771690996492,20.16522183706053
+262.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.39068135040247,20.0048725588452
+263.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.52003875131572,20.230978515858084
+264.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.7061651039034,20.039367865755388
+265.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.61049452614469,19.9410023421443
+266.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.7646454288996,19.83536046473185
+267.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.68406654791409,19.87066425539774
+268.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.58597051888825,19.961753425207462
+269.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,86.14867521286072,19.939115880047652
+270.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.17858911182185,20.648964617558896
+271.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.02848062784551,20.22397165664195
+272.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.12630716228614,20.09380577197303
+273.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.06189795641473,20.133151981417463
+274.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,85.80587810044068,20.47999151261601
+275.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.08426600698931,20.392136277829124
+276.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.69888875010207,20.675914076082478
+277.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.7646454288996,20.902559022265834
+278.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.60753008570708,20.81093086328564
+279.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.28413658342407,20.971549636086216
+280.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.29222142098115,21.086623823981924
+281.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.61157250448565,21.119232668795462
+282.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.1251347781349,21.434002344350944
+283.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,84.99820282848884,21.40651389665689
+284.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.03754903793327,21.333211369472735
+285.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.11758892974831,21.119232668795462
+286.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.15477918251088,21.25963934770334
+287.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.0410524675413,21.331055412790846
+288.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.09244525035666,21.56120378858227
+289.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,86.68038802953106,21.22649151371933
+290.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.34469218213741,21.583032849986374
+291.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.39293171289466,21.61321624353279
+292.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.03908532247999,21.556083391462785
+293.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.10645896878896,21.588692236276323
+294.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.65963694646786,20.807157939092342
+295.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.74371925706146,20.955110466386827
+296.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.63538243379668,20.81120035787088
+297.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.78576041235829,20.857553426531446
+298.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.63268748794428,21.038923282395174
+299.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.35537755973661,21.177174004621172
+300.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.95365553896022,20.734663895663893
+301.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.40388658507908,20.491849274366388
+302.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.42868008692074,20.550868588533042
+303.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.50467755995726,20.67860902193484
+304.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.53054904013993,20.68292093529861
+305.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.58525644094277,20.524727613765165
+306.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.38771690996492,20.085720934415953
+307.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.35941997851512,20.089493858609252
+308.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.4515871266658,20.22774458083525
+309.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.39634073669242,20.06658681886421
+310.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.44484976203489,20.155250537406808
+311.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.38690842620917,19.99867418338478
+312.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.67759867786845,19.877671114613875
+313.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,86.11256293843911,20.007567504697555
+314.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.3083910960953,19.658572016817118
+315.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.56387196289887,19.88467797383001
+316.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,86.0982797254216,19.953668587650384
+317.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.56737539250696,19.941810825900006
+318.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.02039579028843,20.1972916927036
+319.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,85.70454813639202,20.48026100720125
+320.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,85.58624001347346,20.456545483700495
+321.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,85.81072900297494,20.52311064625375
+322.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,85.75736907509821,20.429057036006434
+323.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,85.86166347958454,20.53793284844172
+324.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.56414145748414,20.650851079655546
+325.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.5474327931995,20.692083751196634
+326.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.29222142098115,21.068567686771125
+327.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.25206672778103,20.91010487065244
+328.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.86058550124358,20.88989277675975
+329.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.86031600665831,20.76107436501701
+330.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.09872430878181,21.27419205530608
+331.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.07096636650249,21.435888806447593
+332.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.00871311731305,21.399507037440756
+333.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.0324286408138,21.401393499537406
+334.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,84.67534831537625,20.896899635975885
+335.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.08093766615622,21.42133609884486
+336.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.05983640554314,21.616719673140857
+337.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.028844528241,21.496794582710898
+338.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.28998478133457,21.621840070260333
+339.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.18245644182542,21.54880703766142
+340.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.36786871646768,21.6110602868509
+341.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,86.92293315624329,21.45825685702217
+342.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.77713658563073,20.800959563631913
+343.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.88709037640695,20.815512271234653
+344.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.7520735892038,21.08365938354433
+345.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.69844416674187,20.84812111604819
+346.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.7596194375904,20.962656314773433
+347.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.92104669414664,20.811469852456113
+348.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.46209741549,20.515564797867142
+349.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.5318965130661,20.662978335991156
+350.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.47530265016655,20.62659656698432
+351.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.69574922088947,20.718494220549744
+352.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.69467124254857,20.561648371942475
+353.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.47368568265512,20.624171115717196
+354.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.4071205201019,20.090032847779725
+355.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.36858279441316,20.177079598810906
+356.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.29474127805855,20.166838804571945
+357.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.38097954533401,20.17007273959478
+358.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.47557214475177,20.200256133141195
+359.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.41143243346568,20.162796385793406
+360.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.38816149332513,19.643480320043906
+361.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.64930174641864,19.863118407011143
+362.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.57680770299021,19.912435916109303
+363.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.67786817245366,19.920790248251606
+364.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,86.11930030306996,19.958519490184628
+365.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.70481763097723,19.849104688578876
+366.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.1502921803721,20.533081945907476
+367.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.14813622369024,20.53335144049271
+368.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.12064777599619,20.191362811828412
+369.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,84.9491548139759,20.551138083118275
+370.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.13088857023513,20.14959115111685
+371.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.02228225238508,20.247417685557465
+372.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.36336799148341,20.642766242098467
+373.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.52048333467593,20.72981299312965
+374.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.81881384053202,20.72846552020347
+375.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.28413658342407,21.074496567646314
+376.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.90963351575647,20.895282668464468
+377.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.21029506706947,20.712565339674555
+378.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.09926329795229,21.30545342719344
+379.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.24425138480916,20.86833320994088
+380.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.03269813539902,21.395195124076977
+381.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.03000318954668,21.402740972463583
+382.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.06476799104206,21.36069981716679
+383.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.11031257594692,20.77401010510833
+384.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,86.92535860751042,21.359352344240612
+385.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.3406497633589,21.59462111715151
+386.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.14634416740381,21.543686640541935
+387.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,86.71757828229357,21.185528336763483
+388.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.1207421818064,21.53048140586538
+389.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.329330990779,21.5930041496401
+390.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.82214218136511,21.134593860153906
+391.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.83130499726315,20.89770811973159
+392.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.70356456386133,20.814703787478948
+393.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.72404615233927,20.86078736155428
+394.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.69386275879282,20.981790430325177
+395.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.71919524980501,20.81497328206418
+396.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.6283755745805,20.60207255972785
+397.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.70760698263985,20.369498732669314
+398.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.93559940174941,20.734933390249132
+399.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.69925265049756,20.527153065032287
+400.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.62783658541002,20.761882848772714
+401.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.32869759579825,20.58967580880701
+402.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.45616853461479,20.113209382110014
+403.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.51545734336668,20.211035916550628
+404.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.40523405800525,20.150130140287324
+405.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.43919037574494,20.09111082612067
+406.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.30848550190558,20.213730862402983
+407.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.1427463319855,20.220737721619116
+408.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.64930174641864,19.99005035665722
+409.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.6835275587436,19.952051620138974
+410.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.81611889467968,19.83320450804996
+411.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.68756997752217,19.9275276128825
+412.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.609686042389,19.78900739607127
+413.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,86.00530409351524,19.999482667140484
+414.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,85.74847575378544,20.423936638886957
+415.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.1548735883211,20.561378877357242
+416.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.20014867864074,20.530387000055114
+417.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.1907163681575,20.642766242098467
+418.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.15514308290636,20.561378877357242
+419.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.21119795663543,20.576740068715687
+420.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.86732286587448,20.8917792388564
+421.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.60025373190575,20.687502343247623
+422.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.28440607800928,21.07395757847584
+423.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.5256037317954,20.741401260294793
+424.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.21029506706947,20.712295845089322
+425.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.96892232450836,20.755684473312293
+426.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.06018658309307,21.36743718179769
+427.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.08875300912808,21.287936279153108
+428.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.0663849585535,21.29682960046589
+429.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.0332371245695,21.393578156565567
+430.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.08659705244617,21.426725990549578
+431.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.0068266552164,21.40166299412264
+432.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.1280185356078,21.543147651371463
+433.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.04393622501419,21.542069673030525
+434.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.1207421818064,21.6072873626576
+435.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,86.67472864324111,21.177712993791644
+436.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,86.96497431154012,21.397620575344106
+437.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Baleshwar,87.37568405943955,21.603783933049534
+438.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.71946474439022,21.01143483470112
+439.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.70706799346937,21.01763321016155
+440.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.77821456397163,21.035689347372347
+441.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.91996871580574,20.834376892201163
+442.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.8372338781383,20.797725628609086
+443.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Bhadrak,86.7019475963499,20.812817325382298
+444.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.63619091755237,20.54628718058403
+445.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.47503315558134,20.56083988818677
+446.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.81998622468319,20.656779960530734
+447.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.81513532214899,20.617703245671535
+448.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.93667738009032,20.73439440107866
+449.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Kendrapara,86.91053640532249,20.71552978011215
+450.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.42302070063079,20.17222869627666
+451.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.40577304717573,20.162257396622934
+452.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.46479236134235,20.270863714472988
+453.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.4071205201019,20.112939887524774
+454.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.43460896779595,20.10350757704152
+455.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Jagatsinghpur,86.51195391375865,20.22181569996006
+456.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.57572972464925,19.909740970256934
+457.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.6172318907756,19.835899453902314
+458.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.74524181876262,19.871203244568207
+459.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.72206528443235,19.852338623601696
+460.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.6107640207299,19.941541331314767
+461.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Puri,85.61426745033799,19.961753425207462
+462.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.1982622165441,20.625518588643374
+463.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.1462497615936,20.532812451322236
+464.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,85.77111329894524,20.513947830355733
+465.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.00719055561188,20.213730862402983
+466.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.15083116954258,20.057154508380954
+467.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Cuttack,86.02982810077168,20.222354689130533
+468.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.67220878616371,20.99445667583126
+469.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.90963351575647,20.895282668464468
+470.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.31081654736244,21.103332488266545
+471.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.68568351542547,20.878304509594606
+472.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.44340788329845,20.737358841516254
+473.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Dhenkanal,85.56306347914318,20.64950360672937
+474.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.0777037311334,21.272844582379903
+475.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.06988838816159,21.43561931186236
+476.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.05614416431456,21.348033571660707
+477.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.1324111319363,21.44154819273755
+478.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,85.10222773838984,21.334558842398913
+479.0,agronomic_flood,1,none,,Sentinel-1 cropland + JRC transient water (Module 06 v4),Angul,84.9965858609774,21.13135992513108
