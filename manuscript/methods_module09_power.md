@@ -39,36 +39,47 @@ generating process
 y_{it} \;=\; \alpha_i + \delta_t + \tau\cdot D_{it} + \varepsilon_{it},
 \]
 
-with district FE \(\alpha_i\!\sim\!N(0,\sigma_u^2)\) (\(\sigma_u=1.5\) d),
-year FE \(\delta_t\!\sim\!N(0,\sigma_t^2)\) (\(\sigma_t=1.0\) d), and
+with district FE \(\alpha_i\!\sim\!N(0,\sigma_u^2)\) (\(\sigma_u=13.06\) d),
+year FE \(\delta_t\!\sim\!N(0,\sigma_t^2)\) (\(\sigma_t=41.75\) d), and
 idiosyncratic noise
 \(\varepsilon_{it}\!\sim\!N(0,\sigma_\varepsilon^2)\)
-(\(\sigma_\varepsilon = 2.5\) d) — variance components calibrated to the
-within-/between-cluster decomposition of the Module 05 residuals.
+(\(\sigma_\varepsilon = 31.28\) d). Variance components are **empirical
+point estimates** obtained from a two-way fixed-effects decomposition of
+the real v2.1 corrected-SOS panel (`analysis/17_estimate_panel_variance_components.py`;
+output `analysis/results/real_v21/variance_components_real_v21.csv`):
+district means and year means are removed sequentially with `ddof=1` and
+the residual variance gives \(\sigma_\varepsilon^2\). No synthetic or
+literature-derived values enter the simulator.
 Half the districts are treated, with the post-period covering the
 second half of T = 8 years. We test \(H_0\!:\,\tau = 0\) using OLS with
 CR1-corrected cluster-robust SE on G clusters and a t-test at df = G−1.
 
 For each (G, τ) grid point we run R = 999 replications and report the
-empirical rejection rate. Grid: τ ∈ {0,1,…,8} d, G ∈ {4,6,8,12}.
+empirical rejection rate. Grid: τ ∈ {0, 5, 10, 15, 20, 30, 40, 60, 80, 100} d,
+G ∈ {4, 6, 8, 12}.
 Results in `analysis/results/power_curves.csv`; visualisation in
 **Figure S1** (`figures/fig5_power_curves.pdf`).
 
-Findings:
-- **At G = 8 (this study)**: power ≥ 0.80 for τ ≥ 4 d; type-I rate
-  under \(H_0\) is 0.08 (close to nominal 0.05, indicating CR1 with
-  df = G−1 is well-sized).
-- **At G = 4 (counterfactual minimum)**: power 0.80 not reached until
-  τ ≈ 7 d — confirming that adding inland controls materially
-  increased the design's resolving power.
-- **At G = 12 (counterfactual roster)**: power 0.80 already at τ ≈ 3 d
-  — useful upper bound for any future replication that pools across
-  state boundaries.
+Findings (real-σ simulator):
+- **At G = 8 (this study)**: power 0.80 is **not** reached until
+  τ ≈ 60 d — a far larger MDE than the previous synthetic-σ analysis
+  had implied, because the empirical idiosyncratic SD (σ_ε ≈ 31 d) and
+  year-FE SD (σ_t ≈ 42 d) are an order of magnitude larger than the
+  earlier hand-set values. The type-I rate under \(H_0\) is 0.07
+  (close to nominal 0.05, indicating CR1 with df = G−1 is well-sized).
+- **At G = 4 (counterfactual minimum)**: 0.80 power not reached within
+  the τ ≤ 100 d grid.
+- **At G = 12 (counterfactual roster)**: 0.80 power reached at
+  τ ≈ 40 d — a useful upper bound for any future replication that
+  pools across state boundaries.
 
-The 5 d (raw/SOS) and 2 d (corrected/SOS, corrected/POS) effects we
-report sit comfortably above the G = 8 power-0.80 threshold; the 0.6 d
-(corrected/EOS) effect we report as null sits below it, exactly as it
-should.
+Implication for the present manuscript: the 15.1 d τ̂_corrected_SOS
+point estimate is **well below** the G = 8 / R = 999 MDE of ~60 d, so
+the non-rejection (p = 0.38, WCR p = 0.41) is **inferentially expected**
+rather than evidence against an underlying effect. This is the central
+rationale for our re-framing of v2.1 as a transparent null with
+pre-registered exploratory mechanisms, rather than a confirmatory test
+of Δ SOS.
 
 ## 3.Y.4.3 What this analysis does not claim
 
@@ -77,11 +88,10 @@ should.
 - It does **not** substitute for replication. The corrected/EOS cell is
   reported as null both by inference and by power analysis; future work
   with a longer time series or additional districts could revisit it.
-- The variance components used here are point estimates from the
-  observed panel; sensitivity to ±50 % perturbations of σ_u, σ_t,
-  σ_ε is reported in `analysis/results/power_curves.csv` (column-block
-  not run by default; available via `python3 09_power_analysis.py
-  --sensitivity`, future extension).
+- The variance components used here are **empirical point estimates**
+  from the real v2.1 corrected-SOS panel (Module 17); sensitivity to
+  ±50 % perturbations of σ_u, σ_t, σ_ε remains a future extension via
+  `python3 09_power_analysis.py --sensitivity`.
 
 ---
 
