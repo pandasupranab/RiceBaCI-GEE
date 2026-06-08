@@ -1,0 +1,17 @@
+district,phase,n_dekads,mean_VH_dB,mean_VV_dB,mean_CR_lin
+Boudh,Pre-transplant baseline (May),3,-15.18,-8.83,0.239
+Boudh,Agronomic transplanting (Jun-early Aug),5,-13.93,-7.32,0.226
+Boudh,Peak canopy (mid-Aug-late Sep),4,-13.79,-6.94,0.215
+Boudh,Bulbul event window (Nov 1-21),3,-13.77,-7.37,0.238
+Ganjam,Pre-transplant baseline (May),3,-13.63,-7.13,0.232
+Ganjam,Agronomic transplanting (Jun-early Aug),5,-13.56,-7.04,0.23
+Ganjam,Peak canopy (mid-Aug-late Sep),4,-13.65,-6.67,0.21
+Ganjam,Bulbul event window (Nov 1-21),3,-13.57,-7.55,0.26
+Khordha,Pre-transplant baseline (May),4,-15.05,-8.75,0.245
+Khordha,Agronomic transplanting (Jun-early Aug),5,-14.24,-7.47,0.223
+Khordha,Peak canopy (mid-Aug-late Sep),4,-14.27,-7.32,0.216
+Khordha,Bulbul event window (Nov 1-21),3,-13.42,-7.38,0.262
+Nayagarh,Pre-transplant baseline (May),1,-13.43,-7.12,0.241
+Nayagarh,Agronomic transplanting (Jun-early Aug),4,-13.46,-6.74,0.22
+Nayagarh,Peak canopy (mid-Aug-late Sep),3,-13.42,-6.35,0.205
+Nayagarh,Bulbul event window (Nov 1-21),3,-13.2,-6.76,0.235
