@@ -245,8 +245,10 @@ bullet_items = [
      "Wali 2020, Filipponi 2019, Konkathi 2024, Lee & Pottier 2009. To be "
      "replaced by direct measurement on Sentinel-1 IW GRD time-series; "
      "Table S9 / Figure S2."),
-    ("Indicative Module 02 random-forest baseline numbers (Tables S10/S11 "
-     "to be added) — pending direct retraining on Sentinel-1 labelled pixels."),
+    ("Module 02 random-forest classifier results (Table S10) are derived from the "
+     "v0.3.0-tagged real-data retraining (n_train = 384, n_test = 96, OA = 0.990, "
+     "F1 = 0.990); the v2.1 per-cell correction summary (Table S13a) is computed "
+     "directly from the real GEE-export panel."),
 ]
 for it in bullet_items:
     bp = doc.add_paragraph(style="List Bullet")
@@ -333,6 +335,10 @@ table_specs = [
      "Table_S8_cyclone_climatology.docx"),
     ("S9", "Table S9 — Canonical S1 dual-pol features",
      "Table_S9_backscatter_features.docx"),
+    ("S10", "Table S10 — RF feature importance and falsifiability checks",
+     "Table_S10_rf_feature_importance.docx"),
+    ("S13a", "Table S13a — Per-(district, year, metric) v2.1 correction summary",
+     "Table_S13a_v21_correction_summary.docx"),
 ]
 for tid, heading_text, fname in table_specs:
     _heading(doc, heading_text, level=1,
