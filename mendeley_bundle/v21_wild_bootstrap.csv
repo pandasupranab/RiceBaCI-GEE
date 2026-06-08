@@ -1,0 +1,7 @@
+pipeline,metric,tau_hat,t_obs,B,p_wcb_2sided,ci_lo_95_wcb,ci_hi_95_wcb,B_ci
+raw,SOS,15.289,0.882,9999,0.4,,,0
+raw,POS,-3.587,-1.245,9999,0.2293,,,0
+raw,EOS,0.0,1.029,9999,0.2047,,,0
+corrected,SOS,15.108,0.873,9999,0.4065,,,0
+corrected,POS,-3.677,-1.269,9999,0.2293,,,0
+corrected,EOS,-0.239,-1.411,9999,0.2035,,,0
