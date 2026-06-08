@@ -83,11 +83,11 @@ Tropical cyclones disrupt Kharif rice cultivation along the Bay of Bengal coast,
 
 ## Highlights
 
-- First SAR–optical framework to decouple cyclone surge from agronomic flooding in rice
-- Random-forest classifier fuses 8 features; validated over 5 Bay-of-Bengal districts
-- Uncorrected SOS biased ≥7 d in cyclone years; TWFE-DiD quantifies the shift
-- Open GEE toolkit covers 8 Kharif seasons (2017–2024) at 10 m resolution
-- Framework transferable to any cyclone-exposed Asian delta; tested on Andhra Pradesh
+- First framework to separate cyclone storm-surge from agronomic rice flooding in SAR
+- Sentinel-1/2 fusion with random forest classifies saline inundation at 10-m scale
+- BACI design across Cyclones Fani, Amphan, Yaas reveals systematic phenology bias
+- BACI-corrected tau_SOS shifts from +15.29 to +15.11 days versus raw estimate
+- Open-source RiceBaCI-GEE toolkit released for transfer to other Asian deltas
 
 ---
 
@@ -190,16 +190,15 @@ Monthly median composites are computed for each (year, month) combination spanni
 
 ### 3.3 Saline-Flood Classifier
 
-**Feature set:** The random-forest classifier operates on an eight-feature input vector computed at pixel level for each monthly observation in the May–August window (encompassing both pre-Kharif cyclone surge and the Kharif transplanting period):
+**Feature set:** The random-forest classifier operates on a seven-feature input vector computed at pixel level for each candidate event window (the cyclone-event window for surge labels; the transplanting weeks 6–10 window for agronomic-flood labels), per the canonical specification in Supplementary Note S3, §S3.5:
 
-1. VH backscatter (dB), monthly median
-2. VV backscatter (dB), monthly median
-3. Cross-ratio CR = VH − VV (dB), monthly median
-4. NDWI (Sentinel-2 monthly median)
-5. LSWI (Sentinel-2 monthly median)
-6. JRC GSW water permanence fraction (percentage of months with surface water detected, 1984–2020)
-7. ERA5 maximum 10-m wind speed (scalar: sqrt(u² + v²)), monthly maximum in dB-analogue scaling
-8. Days since nearest IBTrACS-recorded cyclone landfall within 200 km radius (categorical: ≤30, 31–60, >60 days, encoded as ordinal integer)
+1. ΔVH (dB): change in VH backscatter between the event window minimum and the 30-day pre-event baseline
+2. ΔCR (dB): change in cross-ratio (CR = VH − VV) between the event window minimum and the 30-day pre-event baseline
+3. VV minimum (dB) within the event window
+4. ERA5-Land 3-day maximum 10-m wind speed (scalar: sqrt(u² + v²)) within the event window — the cyclonic-event filter for surge labels
+5. LSWI minimum within the event window (Sentinel-2 monthly composite)
+6. JRC GSW water permanence (percentage of months with surface water detected, 1984–2020)
+7. NDWI maximum within the event window (Sentinel-2 monthly composite)
 
 The combination of SAR-derived water signal, optical water signal, water permanence prior, and meteorological features is designed to exploit the physical differences between the two flood types: cyclone-induced inundation is characterised by high wind speeds in the days preceding the SAR backscatter decrease, low JRC water permanence (ephemeral water in normally dry areas), and geometric coincidence with IBTrACS cyclone tracks; agronomic transplanting flooding is characterised by no elevated wind signal, moderate-to-high JRC permanence in known paddy areas, and temporal alignment with the normal transplanting calendar.
 
@@ -331,7 +330,7 @@ McNemar's chi-squared test against the naive no-classifier baseline (assigning a
 
 Visual and quantitative comparison of the SAR backscatter temporal profiles for cyclone-flood and agronomic-flood pixels reveals the nature of the confound (Figure S2). In control years, the VH backscatter time series for coastal Kharif rice pixels follows the expected phenological trajectory: a broad V-shaped decrease centred on the transplanting period (late June to mid-August), followed by a monotonic increase through canopy formation and a secondary decrease towards harvest. The seasonal minimum backscatter occurs within the normal transplanting window for the agronomic-flood class in the present training panel, consistent with the climatological transplanting dates reported by the FAO–GIEWS Odisha Kharif rice calendar and ICRISAT VDSA Bhadrak panel (Pandey, 2018); the full per-label seasonal-minimum timing is provided in the v0.3.0-classifier-tagged label set released on Mendeley (DOI 10.17632/z3zxk4xy3c.1).
 
-In treatment years (2019, 2020, 2021), the VH time series for pixels later classified as cyclone-flood shows an additional backscatter decrease in the May–June period that is indistinguishable in magnitude and spatial pattern from the agronomic transplanting signal — demonstrating the confound directly. Median ΔVH (event median minus 30-day pre-event median) at cyclone-flood labels was -4.97 dB (interquartile range from the 240 cyclone labels), compared with 0.09 dB at agronomic-flood labels — a gap of 5.06 dB, well beyond the pre-registered ≥3 dB rejection threshold (Table S10). The companion VV-minimum signal showed an analogous separation (-19.06 dB cyclone vs. -12.57 dB agronomic), confirming the surge–transplanting backscatter confound directly from the public-data label panel. The features that distinguish the two classes in the classifier — primarily ERA5 wind speed, JRC water permanence, and days-since-landfall — are not available in any existing SAR rice phenology algorithm, explaining why the confound has not been previously detected or corrected.
+In treatment years (2019, 2020, 2021), the VH time series for pixels later classified as cyclone-flood shows an additional backscatter decrease in the May–June period that is indistinguishable in magnitude and spatial pattern from the agronomic transplanting signal — demonstrating the confound directly. Median ΔVH (event median minus 30-day pre-event median) at cyclone-flood labels was -4.97 dB (interquartile range from the 240 cyclone labels), compared with 0.09 dB at agronomic-flood labels — a gap of 5.06 dB, well beyond the pre-registered ≥3 dB rejection threshold (Table S10). The companion VV-minimum signal showed an analogous separation (-19.06 dB cyclone vs. -12.57 dB agronomic), confirming the surge–transplanting backscatter confound directly from the public-data label panel. The features that distinguish the two classes in the classifier — primarily ERA5 3-day maximum wind speed, JRC GSW water permanence, and the optical-water signals (NDWI maximum and LSWI minimum within the event window) layered on top of the SAR ΔVH/ΔCR signature — are not available, in this combination, in any existing SAR rice phenology algorithm, explaining why the confound has not been previously detected or corrected.
 
 ### 4.3 Raw vs. Corrected Phenological Dates
 
@@ -383,7 +382,7 @@ The v2.1 correction framework shifts the district-aggregated SOS DiD coefficient
 
 The present study addresses a gap that is conspicuously absent from all prior SAR rice phenology literature. Meroni et al. (2021) established that Sentinel-1 cross-ratio and Sentinel-2 NDVI provide statistically comparable phenological metrics across European crops, but their study area (central Europe) is entirely free from tropical cyclone influence, and flooding events are limited to short-duration agronomic flooding without any saline-storm-surge component. Hu et al. (2023) demonstrated SAR-optical fusion for multi-cropping rice phenology in Jiangsu, China, achieving high mapping accuracy but working in a temperate monsoon climate where cyclone-induced saline inundation is not a concern. Singha et al. (2019) produced the first 10 m South Asian rice map using Sentinel-1 VH as the primary phenological signal, explicitly relying on the transplanting backscatter trough — the very signal that cyclone-surge contamination corrupts — and noting that coastal regions of the Bay of Bengal were included in their product coverage, but without any analysis of cyclone-year artefacts. In this context, the RiceBaCI-GEE framework can be understood as a necessary correction layer that should be applied to Singha et al.'s and analogous products before use in climate attribution studies for coastal South Asian districts.
 
-Rangasamy et al. (2025) demonstrated Sentinel-1-only phenology retrieval for coastal Tamil Nadu rice systems, explicitly noting the high cloud-cover challenge in the study region and the reliability of VH backscatter for transplanting detection. Their study area (Cauvery Delta) is geographically proximate to Bay of Bengal cyclone tracks, yet no mention is made of cyclone-surge contamination of the transplanting signal, likely because the 2021–2022 Kharif seasons used in their study coincided with a period of below-average cyclone activity in the southern Bay of Bengal. Our results suggest that any replication of the Rangasamy et al. (2025) approach during a cyclone-active year (e.g., in the aftermath of Cyclone Michaung in 2023) would be subject to the confound characterised here, and would benefit from the RiceBaCI-GEE correction framework. Xu et al. (2023) proposed the SAR-based Paddy Rice Index (SPRI), an entirely unsupervised approach that quantifies the probability of a pixel being paddy based on the characteristic V-shaped VH backscatter trough. Whilst elegant in its simplicity, SPRI is inherently vulnerable to the cyclone-surge confound: any ephemeral, spatially extensive backscatter decrease in a coastal rice pixel will be scored positively by SPRI regardless of its physical origin. The multi-feature classifier proposed here, which explicitly conditions on ERA5 wind speed and IBTrACS cyclone proximity, provides a principled approach to discriminating between the two sources of backscatter troughs that a single-feature SPRI-type index cannot resolve.
+Rangasamy et al. (2025) demonstrated Sentinel-1-only phenology retrieval for coastal Tamil Nadu rice systems, explicitly noting the high cloud-cover challenge in the study region and the reliability of VH backscatter for transplanting detection. Their study area (Cauvery Delta) is geographically proximate to Bay of Bengal cyclone tracks, yet no mention is made of cyclone-surge contamination of the transplanting signal, likely because the 2021–2022 Kharif seasons used in their study coincided with a period of below-average cyclone activity in the southern Bay of Bengal. Our results suggest that any replication of the Rangasamy et al. (2025) approach during a cyclone-active year (e.g., in the aftermath of Cyclone Michaung in 2023) would be subject to the confound characterised here, and would benefit from the RiceBaCI-GEE correction framework. Xu et al. (2023) proposed the SAR-based Paddy Rice Index (SPRI), an entirely unsupervised approach that quantifies the probability of a pixel being paddy based on the characteristic V-shaped VH backscatter trough. Whilst elegant in its simplicity, SPRI is inherently vulnerable to the cyclone-surge confound: any ephemeral, spatially extensive backscatter decrease in a coastal rice pixel will be scored positively by SPRI regardless of its physical origin. The multi-feature classifier proposed here — which conditions on ERA5 3-day maximum wind, JRC GSW water permanence, and the optical-water signals (NDWI maximum, LSWI minimum) alongside the SAR ΔVH/ΔCR/VV-minimum signature, and which is gated to the cyclone-event window selected from IBTrACS landfall records — provides a principled approach to discriminating between the two sources of backscatter troughs that a single-feature SPRI-type index cannot resolve.
 
 ### 5.3 Implications for Climate-Vulnerability Assessment
 
