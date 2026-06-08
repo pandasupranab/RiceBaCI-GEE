@@ -16,7 +16,10 @@ OUT_JPG = FIG / "jpg_1000dpi"
 OUT_JPG.mkdir(exist_ok=True)
 OUT_DOCX = ROOT / "manuscript" / "Figures_Bundle.docx"
 
-# Figure manifest: (id, pdf source, label, caption, description)
+# Figure manifest: (id, pdf source, label, caption, description, abbreviations)
+# `abbreviations` is a single string listing only the non-trivial abbreviations
+# that physically appear in *that* figure or its caption. Universally understood
+# units (km, dB, DOY, kt, °N, °E, n, CI, SE, p) are deliberately omitted.
 FIGURES = [
     (
         "Figure 1A",
@@ -24,6 +27,7 @@ FIGURES = [
         "Study area: coastal & inland Odisha BACI districts.",
         "Map of the eight-district study domain on the Bay-of-Bengal coast of Odisha, India. Five treated coastal districts (Balasore, Bhadrak, Kendrapara, Jagatsinghpur, Puri) front the Bay and are exposed to cyclone landfalls; three inland control districts (Dhenkanal, Angul, Cuttack) lie outside the storm-surge footprint and provide the BACI counterfactual. Landfall tracks for Cyclones Fani (2019), Bulbul (2019), Amphan (2020), and Yaas (2021) are overlaid. District boundaries: GADM v4.1. Coastline: Natural Earth.",
         "Compact study-area locator establishing the BACI treatment/control geography and the four natural-experiment cyclone events used in the difference-in-differences design.",
+        "BACI = Before–After / Control–Impact (quasi-experimental design); GADM = Database of Global Administrative Areas (district-boundary source).",
     ),
     (
         "Figure 1B",
@@ -31,6 +35,7 @@ FIGURES = [
         "Causal identification DAG for the saline-flood / agronomic-flood decoupling.",
         "Directed acyclic graph showing the identification strategy: the cyclone landfall (treatment) propagates through storm-surge saline inundation, which contaminates the SAR backscatter trough used as the phenology anchor, producing biased SOS/POS/EOS estimates. The random-forest classifier severs the back-door path by separating cyclone-induced from agronomic flooding, allowing the corrected pipeline to recover the causal effect on rice phenology.",
         "Visual statement of the identification assumption: classifier acts as a back-door adjustment on the surge-confounded pixel pool, restoring exchangeability between treated and control districts conditional on cyclone-flood pixel share.",
+        "DAG = directed acyclic graph; SAR = synthetic aperture radar; VV = vertical-transmit, vertical-receive co-polarisation channel; VH = vertical-transmit, horizontal-receive cross-polarisation channel; SOS = start of season; POS = peak of season; EOS = end of season; p_WCB = wild-cluster bootstrap p-value; Module 02 = saline-flood random-forest classifier (v0.3.0).",
     ),
     (
         "Figure 2",
@@ -38,6 +43,7 @@ FIGURES = [
         "TWFE-DiD coefficients (raw vs. classifier-corrected panel).",
         "Two-way fixed-effects difference-in-differences estimates for τ_SOS, τ_POS, and τ_EOS on the raw phenology panel (blue) and the classifier-corrected panel (orange). Error bars are 95% wild-cluster restricted bootstrap intervals with district clustering and B = 4 999 draws. The corrected estimates show small but pre-registered attenuation (τ_SOS: +15.289 → +15.108 days; τ_EOS: 0.000 → −0.239 days), consistent with the bounded district-aggregated cyclone-flood pixel share (Fani 0.04–2.5 %, Amphan 0.005–1.9 %, Yaas 0.018–7.2 %).",
         "Headline DiD result on the v2.1 corrected panel; transparently reports the WCB-restricted CI inclusive of zero rather than over-claiming the SOS effect, while confirming the pre-registered direction τ_raw > τ_corrected > 0.",
+        "TWFE = two-way fixed effects; DiD = difference-in-differences; τ = DiD treatment-effect estimate (days); τ_SOS / τ_POS / τ_EOS = τ on the start, peak, and end of the rice-cropping season; SOS / POS / EOS = start, peak, and end of season; WCB = wild-cluster (restricted) bootstrap; B = number of bootstrap draws; v2.1 = panel after applying the Module 02 classifier-attenuation correction.",
     ),
     (
         "Figure 3",
@@ -45,6 +51,7 @@ FIGURES = [
         "Event-study plot, raw vs. corrected (Kharif 2017–2024).",
         "Year-by-relative-cyclone event-study coefficients for SOS in coastal vs. inland districts. Pre-treatment placebo years (k = −2, −1) are statistically indistinguishable from zero in both raw and corrected pipelines (pre-trends test p = 0.41), supporting the parallel-trends assumption. Post-treatment years (k = 0, +1, +2) show the cyclone effect peaking at k = 0 and attenuating thereafter; the corrected curve sits inside the raw curve at every post-treatment lag, as predicted by Module 11.",
         "Dynamic causal effect with explicit pre-trends test; pre-period coefficients on or near zero are the strongest visual evidence for BACI identification on the v2.1 corrected panel.",
+        "SOS = start of season; β = event-study coefficient (days, relative to reference period k = −1); k = event time in years from first treatment landfall (k = 0 is the cyclone year); BACI = Before–After / Control–Impact design; Kharif = post-monsoon rice cropping season (≈ Jun–Nov); v2.1 = classifier-corrected phenology panel; Module 11 = cyclone-climatology + pixel-share attenuation model.",
     ),
     (
         "Figure 4",
@@ -52,6 +59,7 @@ FIGURES = [
         "District-level SOS trajectories, raw vs. corrected (2017–2024).",
         "Small-multiple panel of mean Kharif SOS (DOY) for the five treated coastal districts and three inland controls, comparing the raw and classifier-corrected pipelines. The largest correction is at Bhadrak in 2021 (Yaas EOS, |Δ| = 1.51 days, consistent with the 7.21 % cyclone-flood pixel share in that district-year). Inland controls show negligible correction (|Δ| < 0.05 days), as expected when no surge inundation is present.",
         "District-disaggregated transparency check: shows where the classifier matters (Bhadrak-Yaas-2021) and where it doesn't (inland controls), exactly as pre-registered in §M11.",
+        "SOS = start of season (day-of-year, DOY); EOS = end of season; Δ = corrected − raw SOS in days; Kharif = post-monsoon rice cropping season; §M11 = Methods Module 11 (cyclone climatology and pixel-share attenuation).",
     ),
     (
         "Figure 5",
@@ -59,6 +67,7 @@ FIGURES = [
         "Post-hoc minimum detectable effect (MDE) curves.",
         "Statistical power as a function of the true τ_SOS effect size for the v2.1 corrected panel, computed under district clustering with N_clusters = 8 and N_periods = 8. At the realised |τ̂| ≈ 15 days, post-hoc power is 0.18, and the MDE_80 % is approximately 35 days. Curves are shown for one-sided α = 0.05 and two-sided α = 0.05.",
         "Honest power audit: the study is under-powered to reject H₀ at the realised effect size, which the manuscript reports transparently rather than concealing.",
+        "MDE = minimum detectable effect (smallest τ detectable at a given power); MDE_80 % = MDE at 80 % power; τ_SOS = DiD treatment effect on start of season; τ̂ = estimated τ from the realised data; H₀ = null hypothesis of no treatment effect; α = type-I error rate; v2.1 = classifier-corrected phenology panel.",
     ),
     (
         "Figure 6",
@@ -66,6 +75,7 @@ FIGURES = [
         "In-space placebo distributions (donor-swap, 55 permutations).",
         "In-space placebo distributions of τ̂ for each of the six (pipeline × metric) combinations, obtained by randomly reassigning the 5-of-8 'treated' district label across the C(8,5)=56 possible donor swaps. Red vertical line = the real estimate from the actual coastal/inland assignment; grey histogram = the 55 donor-swap pseudo-estimates. SOS and POS panels show the real estimate falling inside the placebo distribution (p_perm = 0.50 for SOS, 0.27–0.29 for POS), consistent with the wild-cluster-restricted bootstrap p-values and confirming that no spurious treatment assignment produces a more extreme effect than the true one. EOS panels show 'insufficient finite placebo estimates' because the real-data EOS outcome is degenerate under the v1 phenology pipeline (all 55 placebo τ̂ are non-finite); this is a known v1 limitation pre-disclosed in the manuscript Provenance note and is the rationale for treating EOS-derived findings cautiously.",
         "Falsifiability check on the v2.1 corrected panel. SOS and POS pass; EOS is flagged transparently as degenerate rather than producing a misleading null — a deliberate honesty design choice required by the pre-registration.",
+        "τ̂ = estimated DiD treatment effect (days); tau_real = τ̂ from the real coastal/inland assignment; SOS / POS / EOS = start, peak, and end of season; DiD = difference-in-differences; p_perm = permutation (donor-swap) p-value; n_extreme = count of donor-swap permutations with |τ̂_placebo| ≥ |τ̂_real|; C(8, 5) = binomial coefficient (number of ways to choose 5 treated districts from 8); v1 = pre-classifier phenology pipeline; v2.1 = classifier-corrected pipeline.",
     ),
     (
         "Figure S1",
@@ -73,6 +83,7 @@ FIGURES = [
         "Bay-of-Bengal cyclone climatology, 1990–2024 (Supplement).",
         "Annual count of severe and very severe cyclonic storms making landfall in Odisha and northern Andhra Pradesh, 1990–2024, from the IMD Best-Track dataset. The four study events (Fani, Bulbul, Amphan, Yaas) are highlighted; their inter-arrival times (12, 6, 12 months) bracket the typical Bay-of-Bengal post-monsoon return period. This supports the use of the four events as quasi-independent natural experiments rather than a single composite shock.",
         "Climatological context for treatment timing; demonstrates that the four cyclones span enough of the cyclone-return-period distribution to support a multi-event BACI design.",
+        "IMD = India Meteorological Department; BoB = Bay of Bengal; Vmax = peak 1-min sustained wind speed (knots); Cat 1–5 = Saffir–Simpson hurricane wind-scale categories; pre-Kharif = pre-monsoon window (≈ Apr–Jun), preceding the Kharif rice season; BACI = Before–After / Control–Impact design.",
     ),
     (
         "Figure S2",
@@ -80,6 +91,7 @@ FIGURES = [
         "Sentinel-1 backscatter signatures: surge vs. agronomic flooding (Supplement).",
         "Mean σ⁰_VV and σ⁰_VH (dB) time-series for hand-labelled surge-inundated pixels (n = 96) vs. agronomic-flood pixels (n = 96) over the 60-day window centred on the cyclone landfall date. Surge pixels show a faster, deeper trough and a slower recovery than agronomic flooding — the physical basis for the classifier's separability and the OA = 0.844 SAR-only robustness variant.",
         "Mechanistic backscatter evidence underlying classifier identifiability; required by reviewers as a physical-realism check on the v0.3.0 random-forest model.",
+        "SAR = synthetic aperture radar; σ⁰ = normalised radar backscatter coefficient (linear power form, displayed in dB); VV = vertical-transmit, vertical-receive co-polarisation channel; VH = vertical-transmit, horizontal-receive cross-polarisation channel; CR = cross-polarisation ratio (VH − VV in dB); ΔVH = post-onset minus pre-onset σ⁰_VH; OA = overall accuracy; v0.3.0 = released version of the Module 02 random-forest classifier.",
     ),
 ]
 
@@ -144,7 +156,7 @@ doc.add_page_break()
 # Figure usable width = page width - margins = 21 - 4 = 17 cm
 FIG_WIDTH_CM = 17.0
 
-for fid, pdf_path, label, caption, description in FIGURES:
+for fid, pdf_path, label, caption, description, abbreviations in FIGURES:
     jpg = jpg_paths.get(fid)
     if jpg is None or not jpg.exists():
         continue
@@ -179,6 +191,21 @@ for fid, pdf_path, label, caption, description in FIGURES:
     r2 = p_desc.add_run(description)
     r2.font.name = 'Arial'; r2.font.size = Pt(9); r2.italic = True
     r2.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
+
+    # Abbreviations footer (regular, smaller, dark-grey). Only non-trivial
+    # acronyms that physically appear in this figure or its caption are listed;
+    # universally understood units (km, dB, DOY, kt, °N, °E, n, CI, SE, p) are
+    # not expanded.
+    if abbreviations:
+        p_abbr = doc.add_paragraph()
+        p_abbr.paragraph_format.left_indent = Cm(0.5)
+        p_abbr.paragraph_format.space_after = Pt(4)
+        r1 = p_abbr.add_run("Abbreviations. ")
+        r1.font.name = 'Arial'; r1.font.size = Pt(9); r1.bold = True; r1.italic = True
+        r1.font.color.rgb = RGBColor(0x33, 0x33, 0x33)
+        r2 = p_abbr.add_run(abbreviations)
+        r2.font.name = 'Arial'; r2.font.size = Pt(9)
+        r2.font.color.rgb = RGBColor(0x33, 0x33, 0x33)
 
     # Page break between figures so each starts on its own page
     doc.add_page_break()
