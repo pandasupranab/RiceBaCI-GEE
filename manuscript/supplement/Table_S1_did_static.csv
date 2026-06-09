@@ -1,0 +1,7 @@
+pipeline,metric,n_obs,n_districts,tau_days,se_days,t_stat,p_value,ci_lo_95,ci_hi_95,cluster_var,r2_within,table
+raw,SOS,64,8,15.289,17.328,0.882,0.3776,-18.673,49.25,district,0.0133,S1
+raw,POS,64,8,-3.587,2.882,-1.245,0.2133,-9.235,2.062,district,0.0109,S1
+raw,EOS,44,8,-0.0,0.0,-2.038,0.0415,-0.0,-0.0,district,0.0,S1
+corrected,SOS,64,8,15.108,17.312,0.873,0.3828,-18.822,49.039,district,0.013,S1
+corrected,POS,64,8,-3.677,2.897,-1.269,0.2045,-9.356,2.002,district,0.0115,S1
+corrected,EOS,44,8,-0.239,0.169,-1.411,0.1582,-0.57,0.093,district,0.074,S1
