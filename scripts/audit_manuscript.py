@@ -799,6 +799,130 @@ def check_category_S():
     return issues
 
 
+# ---------------------------------------------------------------------------
+# T_figure_data_correspondence
+#   Verify that each figure PNG's headline annotated values match the
+#   corresponding source CSV in analysis/results/real_v21/. We don't OCR the
+#   image; instead we verify that the figure was built from the current CSV
+#   AND that the CSV currently contains the expected values that the figure
+#   should be showing (per the figure's design spec).
+# ---------------------------------------------------------------------------
+def check_category_T():
+    import csv
+    issues = []
+    results_dir = ROOT / "analysis" / "results" / "real_v21"
+    figures_dir = ROOT / "figures"
+
+    # 1. did_static.csv must contain the v2.1 τ values that fig2/fig1b cite.
+    expected_static = {
+        ("raw", "SOS"): 15.289,
+        ("raw", "POS"): -3.587,
+        ("raw", "EOS"): 0.0,
+        ("corrected", "SOS"): 15.108,
+        ("corrected", "POS"): -3.677,
+        ("corrected", "EOS"): -0.239,
+    }
+    static_path = results_dir / "did_static.csv"
+    if static_path.exists():
+        seen = {}
+        with static_path.open() as f:
+            for row in csv.DictReader(f):
+                seen[(row["pipeline"], row["metric"])] = float(row["tau_days"])
+        for key, exp in expected_static.items():
+            got = seen.get(key)
+            if got is None:
+                issues.append({"check": "T_did_static_row_missing", "cell": key})
+            elif abs(got - exp) > 0.01:
+                issues.append({
+                    "check": "T_did_static_value_mismatch",
+                    "cell": key, "expected": exp, "got": got,
+                })
+    else:
+        issues.append({"check": "T_did_static_missing",
+                       "path": str(static_path)})
+
+    # 2. Fig 2/3 freshness vs did_static.csv & event_study.csv
+    for fig_name, src_name in [
+        ("fig2_did_coefplot.png", "did_static.csv"),
+        ("fig3_event_study.png",  "event_study.csv"),
+    ]:
+        fig_path = figures_dir / fig_name
+        src_path = results_dir / src_name
+        if not fig_path.exists():
+            issues.append({"check": "T_figure_missing", "file": fig_name})
+            continue
+        if not src_path.exists():
+            issues.append({"check": "T_source_csv_missing", "file": src_name})
+            continue
+        if fig_path.stat().st_mtime < src_path.stat().st_mtime:
+            issues.append({
+                "check": "T_figure_older_than_source_csv",
+                "figure": fig_name, "source": src_name,
+            })
+
+    # 3. Event study must have rows for SOS, POS AND EOS (regression catcher
+    #    — prior Fig 3 only plotted SOS panels).
+    es_path = results_dir / "event_study.csv"
+    if es_path.exists():
+        seen_metrics = set()
+        with es_path.open() as f:
+            for row in csv.DictReader(f):
+                seen_metrics.add(row["metric"])
+        for m in ("SOS", "POS", "EOS"):
+            if m not in seen_metrics:
+                issues.append({
+                    "check": "T_event_study_missing_metric", "metric": m,
+                })
+
+    # 4. Fig 5 expected to extend power curves to tau >= 60 d (so the 0.80
+    #    crossing for G=8 is visible). Encode by requiring power_curves.csv
+    #    rows for true_tau_d >= 60.
+    pc_path = results_dir / "power_curves.csv"
+    if pc_path.exists():
+        has_tau60 = False
+        with pc_path.open() as f:
+            for row in csv.DictReader(f):
+                try:
+                    if float(row["true_tau_d"]) >= 60:
+                        has_tau60 = True
+                        break
+                except (KeyError, ValueError):
+                    pass
+        if not has_tau60:
+            issues.append({
+                "check": "T_power_curves_short",
+                "detail": "power_curves.csv lacks rows with true_tau_d>=60",
+            })
+
+    # 5. Source code guard: scripts that previously produced wrong figures
+    #    must not have regressed. Tripwires for the Pass-20 bug fixes.
+    fig_src = (ROOT / "analysis" / "06_figures.py").read_text(
+        encoding="utf-8", errors="ignore"
+    )
+    if "metric == 'SOS'" in fig_src:
+        # Allowed in fig_district_panel; only flag if appears in fig_event_study scope.
+        # crude scope check: split file at "def fig_event_study" and check next 60 lines
+        if "def fig_event_study" in fig_src:
+            body = fig_src.split("def fig_event_study", 1)[1]
+            head = body[:3000]
+            if "metric == 'SOS'" in head:
+                issues.append({
+                    "check": "T_fig3_only_sos_regression",
+                    "detail": "fig_event_study hardcodes metric == 'SOS'",
+                })
+
+    power_src = (ROOT / "analysis" / "09_power_analysis.py").read_text(
+        encoding="utf-8", errors="ignore"
+    )
+    if "ax.set_xlim(-0.2, 8.4)" in power_src:
+        issues.append({
+            "check": "T_fig5_xlim_regression",
+            "detail": "power figure x-axis truncated at 8.4 d",
+        })
+
+    return issues
+
+
 CATEGORIES = [
     ("A_md_forbidden", check_category_A),
     ("B_pdf_forbidden", check_category_B),
@@ -819,6 +943,7 @@ CATEGORIES = [
     ("Q_internal_stale_numerics", check_category_Q),
     ("R_internal_anchors", check_category_R),
     ("S_submission_package", check_category_S),
+    ("T_figure_data_correspondence", check_category_T),
 ]
 
 

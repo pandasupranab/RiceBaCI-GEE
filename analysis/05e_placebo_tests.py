@@ -215,7 +215,15 @@ def in_time_placebo(panel_full: pd.DataFrame,
 # =====================================================================
 def make_figure(perm_df: pd.DataFrame,
                 summary_df: pd.DataFrame,
-                outdir: Path) -> None:
+                outdir: Path,
+                static_df: pd.DataFrame | None = None) -> None:
+    # Build a fallback {(pipeline,metric): tau_real} from did_static.csv so that
+    # degenerate cells (where the placebo replay records tau as NaN) still
+    # display the manuscript-reported real τ value in the annotation.
+    real_fallback = {}
+    if static_df is not None:
+        for _, r in static_df.iterrows():
+            real_fallback[(r["pipeline"], r["metric"])] = float(r["tau_days"])
     plt.rcParams.update({
         "font.family": "sans-serif",
         "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"],
@@ -235,6 +243,12 @@ def make_figure(perm_df: pd.DataFrame,
             placebos = sub[~sub["is_real"]]["tau_hat_d"].dropna()
             real_series = sub[sub["is_real"]]["tau_hat_d"].dropna()
             real = float(real_series.iloc[0]) if len(real_series) else np.nan
+            # Fallback to did_static.csv when the placebo replay records NaN
+            # for the real cell (occurs on degenerate outcomes).
+            real_is_fallback = False
+            if (not np.isfinite(real)) and (pipeline, metric) in real_fallback:
+                real = real_fallback[(pipeline, metric)]
+                real_is_fallback = True
             row = summary_df[(summary_df["pipeline"] == pipeline) &
                              (summary_df["metric"]   == metric)].iloc[0]
 
@@ -257,12 +271,22 @@ def make_figure(perm_df: pd.DataFrame,
             title = f"{pipeline} / {metric}"
             ax.set_title(title, fontsize=12.5, loc="left", pad=4,
                          weight="bold")
+            tau_lbl = f"{real:+.2f} d" if np.isfinite(real) else "unavailable"
+            tau_lbl += " (from did_static.csv)" if real_is_fallback else ""
+            # When p_permutation is computed from zero finite placebos
+            # (degenerate cell), the value is uninformative — flag it.
+            if row["n_extreme"] == 0 and not (
+                len(placebos) >= 2 and np.isfinite(placebos).any()
+            ):
+                p_lbl = f"{row['p_permutation']:.3f} (uninformative, 0 finite placebos)"
+            else:
+                p_lbl = f"{row['p_permutation']:.3f}"
             ax.text(0.04, 0.95,
-                    f"tau_real = {real:+.2f} d\np_perm = {row['p_permutation']:.3f}\n"
+                    f"tau_real = {tau_lbl}\np_perm = {p_lbl}\n"
                     f"(n_extreme {row['n_extreme']}/{row['n_perm']-1})",
                     transform=ax.transAxes,
                     ha="left", va="top",
-                    fontsize=9.5, color="0.15",
+                    fontsize=9.0, color="0.15",
                     bbox=dict(facecolor="white", edgecolor="none",
                               alpha=0.85, pad=2.5))
             if i == 1:
@@ -442,7 +466,11 @@ def main():
     print(f"wrote {out}/placebo_in_time.csv")
 
     print("\n=== Figure 6 ===")
-    make_figure(perm_df, summary_df, fig)
+    # Load did_static.csv (if available alongside results) so the figure can
+    # back-fill real τ for degenerate cells where the placebo replay logs NaN.
+    static_path = out / "did_static.csv"
+    static_df = pd.read_csv(static_path) if static_path.exists() else None
+    make_figure(perm_df, summary_df, fig, static_df=static_df)
 
     print("\n=== Table S7 ===")
     write_table_s7(summary_df, in_time_df, tab / "Table_S7_placebo.docx")

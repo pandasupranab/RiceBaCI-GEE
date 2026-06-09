@@ -92,13 +92,21 @@ def fig_did_coefplot(static_df: pd.DataFrame, out_dir: Path) -> None:
                 capsize=3, markersize=6, lw=1.4,
                 label=pipe if yi < 2 else None,
             )
-            # Annotate p-value
+            # Annotate p-value — suppress significance star for degenerate
+            # zero-variance cells (SE==0), which produce p<0.05 spuriously.
             star = ""
-            if r["p_value"] < 0.001:    star = "***"
-            elif r["p_value"] < 0.01:   star = "**"
-            elif r["p_value"] < 0.05:   star = "*"
+            se_val = r.get("se_days", float("nan"))
+            is_degenerate = (
+                pd.isna(se_val) or float(se_val) == 0.0
+                or (float(r["ci_hi_95"]) - float(r["ci_lo_95"])) == 0.0
+            )
+            if not is_degenerate:
+                if r["p_value"] < 0.001:    star = "***"
+                elif r["p_value"] < 0.01:   star = "**"
+                elif r["p_value"] < 0.05:   star = "*"
+            label_suffix = " †" if is_degenerate else (f" {star}" if star else "")
             ax.text(r["ci_hi_95"] + 0.3, yi,
-                    f"{r['tau_days']:+.2f} {star}",
+                    f"{r['tau_days']:+.2f}{label_suffix}",
                     va="center", fontsize=8.5, color=OKABE_ITO[pipe])
             y_pos.append(yi)
             y_lab.append(f"{met} ({pipe})")
@@ -116,6 +124,7 @@ def fig_did_coefplot(static_df: pd.DataFrame, out_dir: Path) -> None:
 
     fig.text(0.01, -0.03,
              "*** p<0.001 · ** p<0.01 · * p<0.05.  "
+             "† degenerate cell (SE=0; significance suppressed).  "
              "Whiskers: 95 % CI, district-clustered SEs (n=8).",
              fontsize=8, color="#444")
 
@@ -125,41 +134,64 @@ def fig_did_coefplot(static_df: pd.DataFrame, out_dir: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Figure 3 — Event study (SOS only, raw vs corrected as facets)
+# Figure 3 — Event study (SOS, POS, EOS × raw vs corrected, 3×2 grid)
 # ---------------------------------------------------------------------------
 def fig_event_study(es_df: pd.DataFrame, out_dir: Path) -> None:
-    fig, axes = plt.subplots(1, 2, figsize=(10.0, 4.8), sharey=True)
-    fig.subplots_adjust(top=0.82, bottom=0.22)
+    metrics = ["SOS", "POS", "EOS"]
+    pipelines = ["raw", "corrected"]
 
-    for ax, pipe in zip(axes, ["raw", "corrected"]):
-        sub = (es_df.query("pipeline == @pipe and metric == 'SOS'")
-                    .sort_values("event_k"))
-        if sub.empty:
-            continue
-        ax.errorbar(
-            sub["event_k"], sub["beta"],
-            yerr=[sub["beta"] - sub["ci_lo_95"], sub["ci_hi_95"] - sub["beta"]],
-            fmt="o-", color=OKABE_ITO[pipe],
-            capsize=3, lw=1.4, markersize=6,
-        )
-        ax.axhline(0, color="black", lw=0.6, ls=":")
-        ax.axvline(-0.5, color=OKABE_ITO["treatment"], lw=0.8, ls="--",
-                   alpha=0.6)
-        ax.set_xlabel("Event time (years from first treatment)", fontsize=12)
-        ax.set_title(f"SOS — {pipe}", loc="left", pad=8, fontsize=13.5,
-                     weight="bold")
-        ax.tick_params(labelsize=11)
-        ax.grid(axis="y", alpha=0.25, lw=0.4)
+    fig, axes = plt.subplots(3, 2, figsize=(10.0, 10.0), sharex=True)
+    fig.subplots_adjust(top=0.93, bottom=0.10, hspace=0.30, wspace=0.20)
 
-    axes[0].set_ylabel("β (days, vs k = −1)", fontsize=12)
-    # fig.suptitle removed (caption supplied below figure in DOCX/manuscript).
-    fig.suptitle("",
-                 x=0.02, y=0.97, ha="left", fontsize=12)
+    for r_idx, met in enumerate(metrics):
+        for c_idx, pipe in enumerate(pipelines):
+            ax = axes[r_idx, c_idx]
+            sub = (es_df.query("pipeline == @pipe and metric == @met")
+                        .sort_values("event_k"))
+            if sub.empty:
+                ax.text(0.5, 0.5,
+                        "no event-study estimates available",
+                        ha="center", va="center", transform=ax.transAxes,
+                        color="#888", fontsize=10)
+                ax.set_title(f"{met} — {pipe}", loc="left", pad=6,
+                             fontsize=12.5, weight="bold")
+                continue
 
-    fig.text(0.01, 0.02,
+            # Detect degenerate (all-zero SE / collapsed CI) panels
+            ci_widths = (sub["ci_hi_95"] - sub["ci_lo_95"]).abs()
+            is_degenerate = (ci_widths.max() == 0.0)
+
+            ax.errorbar(
+                sub["event_k"], sub["beta"],
+                yerr=[sub["beta"] - sub["ci_lo_95"],
+                      sub["ci_hi_95"] - sub["beta"]],
+                fmt="o-", color=OKABE_ITO[pipe],
+                capsize=3, lw=1.4, markersize=5.5,
+            )
+            ax.axhline(0, color="black", lw=0.6, ls=":")
+            ax.axvline(-0.5, color=OKABE_ITO["treatment"], lw=0.8, ls="--",
+                       alpha=0.6)
+            ax.set_title(f"{met} — {pipe}", loc="left", pad=6,
+                         fontsize=12.5, weight="bold")
+            ax.tick_params(labelsize=10)
+            ax.grid(axis="y", alpha=0.25, lw=0.4)
+            if is_degenerate:
+                ax.text(0.98, 0.04,
+                        "degenerate panel (SE=0 across all k)",
+                        transform=ax.transAxes, ha="right", va="bottom",
+                        fontsize=8.5, color="#a05a00", style="italic")
+
+        axes[r_idx, 0].set_ylabel(f"β (days, vs k = −1)\n[{met}]",
+                                  fontsize=10.5)
+
+    for c_idx in range(2):
+        axes[-1, c_idx].set_xlabel("Event time (years from first treatment)",
+                                   fontsize=11)
+
+    fig.text(0.01, 0.015,
              "Reference period k = −1 (year before first treatment landfall, 2018). "
-             "Whiskers: 95 % CI.",
-             fontsize=10, color="#444")
+             "Whiskers: 95 % CI, district-clustered SEs.",
+             fontsize=9, color="#444")
 
     for ext in ("png", "pdf"):
         fig.savefig(out_dir / f"fig3_event_study.{ext}")

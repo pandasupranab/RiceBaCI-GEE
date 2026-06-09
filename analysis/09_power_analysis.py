@@ -244,26 +244,59 @@ def make_figure(curves: pd.DataFrame,
 
     # 0.80 power reference
     ax.axhline(0.80, color="0.4", lw=0.6, ls=":", zorder=0)
-    ax.text(8.05, 0.81, "power = 0.80", fontsize=7.5,
+    tau_max = float(curves["true_tau_d"].max())
+    ax.text(tau_max * 0.99, 0.81, "power = 0.80", fontsize=7.5,
             color="0.3", ha="right", va="bottom")
 
-    # MDE markers — observed |τ| for the 4 strong cells
-    strong = mde[mde["detectable"] == "yes"].copy()
-    for _, r in strong.iterrows():
-        ax.axvline(r["tau_hat_d"], color="0.7", lw=0.4, alpha=0.5)
-    ax.text(0.05, 0.05,
-            f"Observed |tau-hat| range (strong cells): "
-            f"{strong['tau_hat_d'].min():.1f}-{strong['tau_hat_d'].max():.1f} d",
-            transform=ax.transAxes, fontsize=7.5, color="0.3")
+    # MDE markers — observed |τ| for non-degenerate cells
+    # (skip rows where SE==0 or tau_hat==0, which collapse to spurious
+    #  "detectable" status because MDE_2sided_d resolves to 0).
+    strong_all = mde[mde["detectable"] == "yes"].copy()
+    strong = strong_all[
+        (strong_all["se_d"].astype(float) > 0)
+        & (strong_all["tau_hat_d"].astype(float).abs() > 0)
+    ].copy()
+    if not strong.empty:
+        for _, r in strong.iterrows():
+            ax.axvline(abs(float(r["tau_hat_d"])),
+                       color="0.7", lw=0.4, alpha=0.5)
+        annot = (
+            "Observed |tau-hat| (detectable cells, non-degenerate): "
+            f"{abs(strong['tau_hat_d']).min():.1f}-"
+            f"{abs(strong['tau_hat_d']).max():.1f} d"
+        )
+    else:
+        # All cells under-powered; report the observed |tau-hat| range across
+        # all non-degenerate rows so the reader still sees the effect-size
+        # universe relative to the curves.
+        nondeg = mde[
+            (mde["se_d"].astype(float) > 0)
+            & (mde["tau_hat_d"].astype(float).abs() > 0)
+        ]
+        if not nondeg.empty:
+            annot = (
+                "All non-degenerate cells under-powered at 0.80 "
+                f"(observed |tau-hat|: {abs(nondeg['tau_hat_d']).min():.1f}-"
+                f"{abs(nondeg['tau_hat_d']).max():.1f} d)"
+            )
+        else:
+            annot = "No non-degenerate cells available."
+    ax.text(0.02, 0.97, annot,
+            transform=ax.transAxes, fontsize=7.5, color="0.3",
+            ha="left", va="top",
+            bbox=dict(facecolor="white", edgecolor="none", alpha=0.7, pad=2))
 
     ax.set_xlabel("True tau (days)")
     ax.set_ylabel("Power (Pr reject H0 | tau)")
     # Top title removed (caption supplied below figure in DOCX/manuscript).
     ax.set_title("",
                  fontsize=10, loc="left")
-    ax.set_xlim(-0.2, 8.4)
+    # Extend x-axis to cover the full simulated tau grid so the 0.80-power
+    # crossing is visible.
+    ax.set_xlim(-1.0, tau_max + 2.0)
     ax.set_ylim(0, 1.02)
-    ax.set_xticks(range(0, 9))
+    xtick_step = 10 if tau_max <= 100 else 20
+    ax.set_xticks(range(0, int(tau_max) + 1, xtick_step))
     ax.set_yticks([0, 0.25, 0.5, 0.75, 1.0])
     ax.legend(frameon=False, loc="lower right", fontsize=8)
     ax.grid(axis="y", lw=0.3, alpha=0.5)
