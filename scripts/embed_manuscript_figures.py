@@ -39,25 +39,35 @@ from build_figures_bundle import FIGURES as BUNDLE_FIGURES  # noqa: E402
 _BUNDLE_CAPTIONS = {fname: (label, caption)
                     for label, fname, caption in BUNDLE_FIGURES}
 
-# Map of figure number → (file, search regex for callout sentence)
-# Each entry: figure-name, file, callout regex.
-# Regex picks the *first* paragraph containing this callout in normal manuscript prose;
-# Figure 1 is the umbrella callout (Figure 1) and 1A/1B are matched by their explicit subletters.
+# Figure embed order: ALWAYS serial (1, 1B, 2, 3, 4, 5, 6, S1, S2). Each
+# figure is embedded after the first paragraph whose text matches the callout
+# regex AND whose paragraph index is strictly greater than the previous
+# figure's anchor index. This guarantees the inline figures appear in serial
+# order regardless of where each figure is first textually cited in the
+# manuscript (Pass 21c fix: prior versions anchored to the FIRST callout
+# globally, producing out-of-order embedding 1 -> 2 -> 1B -> 3 -> 6 -> 5 -> 4
+# because Figure 6 is cited in section 3.7.4 before Figure 4/5 callouts).
+# The callout regexes are deliberately broad so each figure can find SOME
+# downstream callout to anchor against.
 FIGURES = [
     ("Figure 1",   FIGDIR / "figure1_study_area.png",
-     re.compile(r"\(Figure\s+1\)")),
+     re.compile(r"\bFigure\s+1\b(?!B)")),
     ("Figure 1B",  FIGDIR / "fig1b_identification_dag.png",
-     re.compile(r"Figure\s+1B")),
+     re.compile(r"\bFigure\s+1B\b")),
     ("Figure 2",   FIGDIR / "fig2_did_coefplot.png",
-     re.compile(r"\(Figure\s+2\)")),
+     re.compile(r"\bFigure\s+2\b")),
     ("Figure 3",   FIGDIR / "fig3_event_study.png",
-     re.compile(r"in\s+Figure\s+3\b")),
+     re.compile(r"\bFigure\s+3\b")),
     ("Figure 4",   FIGDIR / "fig4_district_sos_panel.png",
-     re.compile(r"plotted\s+in\s+Figure\s+4\b")),
+     re.compile(r"\bFigure\s+4\b")),
     ("Figure 5",   FIGDIR / "fig5_power_curves.png",
-     re.compile(r"reported\s+in\s+Figure\s+5\b")),
+     re.compile(r"\bFigure\s+5\b")),
     ("Figure 6",   FIGDIR / "fig6_placebo_distribution.png",
-     re.compile(r"Table\s+S7,\s+Figure\s+6")),
+     re.compile(r"\bFigure\s+6\b")),
+    ("Figure S1",  FIGDIR / "figS1_cyclone_climatology.png",
+     re.compile(r"\bFigure\s+S1\b")),
+    ("Figure S2",  FIGDIR / "figS2_backscatter_signatures.png",
+     re.compile(r"\bFigure\s+S2\b")),
 ]
 
 
@@ -73,6 +83,57 @@ def insert_paragraph_after(paragraph, doc):
     return Paragraph(new_p, paragraph._parent)
 
 
+def _resolve_anchors(paragraphs, figures):
+    """Return a list of (fig_name, fig_path, anchor_idx, err) in serial order.
+
+    Strategy: pick each figure's natural first-callout paragraph, then enforce
+    serial-order monotonicity by promoting any out-of-order anchor to
+    max(natural_first_callout, prev_anchor + 1). This guarantees the inline
+    figures appear in the order 1, 1B, 2, 3, 4, 5, 6, S1, S2 while still
+    placing each figure as close to its natural textual context as possible.
+    Figures with no callout anywhere fall back to (prev_anchor + 1) so they
+    are still embedded immediately after the previous figure in serial order.
+    """
+    # First pass: each figure's natural first-callout index (independent).
+    naturals = []
+    for fig_name, fig_path, callout_re in figures:
+        if not fig_path.exists():
+            naturals.append((fig_name, fig_path, None, "figure file does not exist"))
+            continue
+        first = None
+        for i, p in enumerate(paragraphs):
+            if callout_re.search(p.text):
+                first = i
+                break
+        naturals.append((fig_name, fig_path, first, None))
+
+    # Second pass: enforce monotonicity by promoting out-of-order anchors.
+    anchors = []
+    prev_idx = -1
+    last_valid_p = len(paragraphs) - 1
+    for fig_name, fig_path, natural, err in naturals:
+        if err == "figure file does not exist":
+            anchors.append((fig_name, fig_path, None, err))
+            continue
+        if natural is None:
+            # No callout anywhere: embed immediately after the previous figure
+            # so serial order is preserved.
+            chosen = min(prev_idx + 1, last_valid_p) if prev_idx >= 0 else 0
+            note = "no callout found; placed after previous figure"
+            anchors.append((fig_name, fig_path, chosen, note))
+            prev_idx = chosen
+            continue
+        # Promote natural anchor to prev_idx + 1 if it would otherwise break
+        # serial order.
+        chosen = max(natural, prev_idx + 1)
+        note = None if chosen == natural else (
+            f"natural callout at idx={natural} promoted to {chosen} "
+            f"to preserve serial order")
+        anchors.append((fig_name, fig_path, chosen, note))
+        prev_idx = chosen
+    return anchors
+
+
 def main():
     if not DOCX.exists():
         print(f"FAIL: {DOCX} does not exist")
@@ -83,35 +144,31 @@ def main():
     embedded = []
     missing = []
 
-    # snapshot paragraphs since we'll mutate
-    paragraphs = list(doc.paragraphs)
+    # Resolve monotonic anchors from the snapshot BEFORE any edits, then walk
+    # the figures in REVERSE order so each insertion does not perturb the
+    # paragraph indices of figures yet to be inserted.
+    snapshot = list(doc.paragraphs)
+    anchors = _resolve_anchors(snapshot, FIGURES)
 
-    for fig_name, fig_path, callout_re in FIGURES:
-        if not fig_path.exists():
-            missing.append((fig_name, fig_path))
+    # Print resolution table for diagnostics.
+    print("Anchor resolution (paragraph index in pandoc snapshot):")
+    for fig_name, fig_path, idx, err in anchors:
+        status = err if err else "OK"
+        print(f"  {fig_name:11} -> idx={idx} ({status})")
+
+    # Cache each anchor's paragraph element so reverse iteration can find it
+    # after later (earlier-in-document) reverse insertions have added new
+    # paragraphs.
+    anchor_pairs = []
+    for fig_name, fig_path, idx, err in anchors:
+        if idx is None:
+            missing.append((fig_name, fig_path, err or "no anchor"))
             continue
-        # find first paragraph whose text matches the callout
-        target_idx = None
-        for i, p in enumerate(paragraphs):
-            if callout_re.search(p.text):
-                target_idx = i
-                break
-        if target_idx is None:
-            missing.append((fig_name, fig_path, "callout sentence not found in manuscript"))
-            continue
-        # Re-locate by traversing current doc paragraphs (paragraphs list may be stale after inserts)
-        live_paragraphs = list(doc.paragraphs)
-        live_target = None
-        match_count = 0
-        for p in live_paragraphs:
-            if callout_re.search(p.text):
-                match_count += 1
-                if match_count == 1:  # first occurrence
-                    live_target = p
-                    break
-        if live_target is None:
-            missing.append((fig_name, fig_path, "callout sentence vanished after edits"))
-            continue
+        anchor_pairs.append((fig_name, fig_path, snapshot[idx]))
+
+    # Reverse iteration so we never invalidate the paragraph references for
+    # figures inserted later in the document.
+    for fig_name, fig_path, live_target in reversed(anchor_pairs):
         # create new paragraph after the callout and add image
         img_p = insert_paragraph_after(live_target, doc)
         run = img_p.add_run()
@@ -137,7 +194,7 @@ def main():
                   f"(figure embedded without caption)")
 
         embedded.append(fig_name)
-        print(f"  OK: embedded {fig_name} ({fig_path.name}) after first callout")
+        print(f"  OK: embedded {fig_name} ({fig_path.name}) at chosen anchor")
 
     doc.save(str(DOCX))
     print()

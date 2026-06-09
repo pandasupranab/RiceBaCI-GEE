@@ -1,0 +1,90 @@
+{
+  "timestamp": "2026-06-09T04:30:58.052501",
+  "categories": {
+    "A_md_forbidden": {
+      "count": 0,
+      "issues": []
+    },
+    "B_pdf_forbidden": {
+      "count": 0,
+      "issues": []
+    },
+    "C_cross_refs": {
+      "count": 0,
+      "issues": []
+    },
+    "D_identifiers": {
+      "count": 0,
+      "issues": []
+    },
+    "E_numerics": {
+      "count": 0,
+      "issues": []
+    },
+    "F_artifacts": {
+      "count": 0,
+      "issues": []
+    },
+    "G_result_csvs": {
+      "count": 0,
+      "issues": []
+    },
+    "H_pdf_freshness": {
+      "count": 0,
+      "issues": []
+    },
+    "I_broken_links": {
+      "count": 0,
+      "issues": []
+    },
+    "J_page_counts": {
+      "count": 0,
+      "issues": []
+    },
+    "K_manuscript_citations": {
+      "count": 0,
+      "issues": []
+    },
+    "L_figure_files": {
+      "count": 0,
+      "issues": []
+    },
+    "M_table_content": {
+      "count": 0,
+      "issues": []
+    },
+    "N_figure_freshness": {
+      "count": 0,
+      "issues": []
+    },
+    "O_bundle_refs": {
+      "count": 0,
+      "issues": []
+    },
+    "P_internal_content": {
+      "count": 0,
+      "issues": []
+    },
+    "Q_internal_stale_numerics": {
+      "count": 0,
+      "issues": []
+    },
+    "R_internal_anchors": {
+      "count": 0,
+      "issues": []
+    },
+    "S_submission_package": {
+      "count": 0,
+      "issues": []
+    },
+    "T_figure_data_correspondence": {
+      "count": 0,
+      "issues": []
+    },
+    "U_caption_correctness": {
+      "count": 0,
+      "issues": []
+    }
+  },
+  "total_issues": 0
+}

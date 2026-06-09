@@ -1050,8 +1050,9 @@ def check_category_U():
                 inline_pics += len(p._p.findall(
                     ".//{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}inline"
                 ))
-            # 7 figures embedded inline; expect >= 7 captions matching the pattern.
-            EXPECTED_INLINE_FIGS = 7
+            # 9 figures embedded inline (1, 1B, 2, 3, 4, 5, 6, S1, S2);
+            # expect >= 9 captions matching the pattern.
+            EXPECTED_INLINE_FIGS = 9
             if inline_pics < EXPECTED_INLINE_FIGS:
                 issues.append({
                     "check": "U_manuscript_inline_figs_missing",
@@ -1066,6 +1067,27 @@ def check_category_U():
                                f"'Figure N. ...' caption paragraphs in "
                                f"Manuscript.docx, found "
                                f"{len(caption_paras)}"),
+                })
+
+            # 6. Serial-order check: the bold "Figure N." caption paragraphs
+            #    must appear in the document in the exact serial order
+            #    [1, 1B, 2, 3, 4, 5, 6, S1, S2]. Pass 21c regression check.
+            EXPECTED_SERIAL = ["1", "1B", "2", "3", "4", "5", "6", "S1", "S2"]
+            serial_order = []
+            label_re = re.compile(r"^Figure\s+(1B|[1-6]|S[12])\.")
+            for p in doc.paragraphs:
+                if not p.runs:
+                    continue
+                first = p.runs[0]
+                txt = (first.text or "").strip()
+                if first.bold and label_re.match(txt):
+                    m = label_re.match(txt)
+                    serial_order.append(m.group(1))
+            if serial_order != EXPECTED_SERIAL:
+                issues.append({
+                    "check": "U_manuscript_inline_captions_out_of_order",
+                    "detail": (f"expected inline caption order "
+                               f"{EXPECTED_SERIAL}, found {serial_order}"),
                 })
         except Exception as e:
             issues.append({
