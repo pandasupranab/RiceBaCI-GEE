@@ -176,14 +176,19 @@ Intermediate artefacts (in `analysis/results/real_v21/`):
 
 - Filipponi, F. (2019). Sentinel-1 GRD pre-processing workflow.
   *Proceedings* 18:11.
-- Hoshikawa, K., Nagano, T., Kotera, A., et al. (2023). Quantifying
-  flood-induced rice loss in the Mekong Delta using SAR. *Remote
-  Sensing* 15(8):2102.
-- Konkathi, P., Vasundhara, R., Anandh, K., et al. (2024). Sentinel-1
-  C-band SAR for cyclone-induced inundation mapping over Indian east
-  coast. *International Journal of Remote Sensing* 45(3):947–971.
+- Hoshikawa, K., Hayashi, M., Yamamoto, T., Watanabe, R. (2023). SAR
+  backscatter behaviour of partially inundated paddy rice:
+  implications for waterlogged rainfed rice monitoring. *European
+  Journal of Remote Sensing* 56. https://doi.org/10.1080/22797254.2023.2269305
+- Konkathi, P., Shetty, A., Rawal, S. (2024). Kharif rice mapping using
+  multi-polarisation Sentinel-1 SAR in coastal Andhra Pradesh.
+  *Proceedings of the IGARSS 2024 IEEE International Geoscience and
+  Remote Sensing Symposium*, 1014–1017.
+  https://doi.org/10.1109/InGARSS61818.2024.10984185
 - Lee, J. S., Pottier, E. (2009). *Polarimetric Radar Imaging: From
   Basics to Applications.* CRC Press.
-- Wali, E., Jain, M., Mondal, P. (2020). Detecting flooded rice with
-  synthetic aperture radar in cyclone-affected coastal Bangladesh.
-  *Remote Sensing of Environment* 251:112063.
+- Wali, E., Tasumi, M., Moriyama, M. (2020). Combination of linear
+  regression lines to understand the response of Sentinel-1 dual
+  polarisation SAR data with crop growth, soil moisture and irrigation
+  on paddy rice fields in a tropical region. *Remote Sensing* 12, 189.
+  https://doi.org/10.3390/rs12010189
