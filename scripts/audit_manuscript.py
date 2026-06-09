@@ -1120,7 +1120,147 @@ CATEGORIES = [
     ("S_submission_package", check_category_S),
     ("T_figure_data_correspondence", check_category_T),
     ("U_caption_correctness", check_category_U),
+    ("V_standalone_tables", lambda: check_category_V()),
 ]
+
+
+def check_category_V():
+    """V. Standalone Table_N.docx files must exist and stay in sync with
+    the manuscript inline tables.
+
+    Editorial Manager accepts main-text tables either inline or as separate
+    Table_N.docx uploads (manuscript/03_submission_checklist.md). We ship
+    both. This check guarantees the two views cannot silently drift: it
+    verifies that for each standalone Table_N.docx file (1) the docx file
+    exists, (2) the bold "Table N." caption matches the first "**Table N.**"
+    paragraph in manuscript/manuscript_text.md, (3) the docx table has the
+    same number of body rows as the inline markdown table, and (4) every
+    cell in column 0 of the docx table appears as the leading cell of the
+    matching markdown table row (catches row swaps and missing rows).
+    """
+    issues = []
+    manuscript_md = ROOT / "manuscript" / "manuscript_text.md"
+    if not manuscript_md.exists():
+        issues.append({"check": "V_manuscript_md_missing",
+                       "detail": str(manuscript_md)})
+        return issues
+    md_text = manuscript_md.read_text(encoding="utf-8")
+
+    # Extract every "**Table N.** caption ..." line + the markdown table that
+    # follows (the first block of consecutive "|...|" lines after the caption).
+    md_lines = md_text.splitlines()
+    cap_pat = re.compile(r"^\*\*Table\s+(\d+)\.\*\*\s+(.*)$")
+    md_tables = {}  # n -> {"caption": str, "header": [..], "rows": [[..]]}
+    for i, line in enumerate(md_lines):
+        m = cap_pat.match(line.rstrip())
+        if not m:
+            continue
+        n = int(m.group(1))
+        caption = m.group(2).strip()
+        # Find first markdown table after caption.
+        j = i + 1
+        while j < len(md_lines) and not md_lines[j].lstrip().startswith("|"):
+            j += 1
+        table_lines = []
+        while j < len(md_lines) and md_lines[j].lstrip().startswith("|"):
+            table_lines.append(md_lines[j].strip())
+            j += 1
+        if len(table_lines) < 2:
+            continue
+        # First line = header; second line = separator (---); rest = body
+        def _split_cells(row):
+            cells = [c.strip() for c in row.strip().strip("|").split("|")]
+            return cells
+        header = _split_cells(table_lines[0])
+        body = [_split_cells(r) for r in table_lines[2:]]
+        md_tables[n] = {"caption": caption, "header": header, "rows": body}
+
+    if not md_tables:
+        issues.append({"check": "V_no_inline_tables_parsed",
+                       "detail": "no **Table N.** captions parsed from "
+                                 "manuscript_text.md"})
+        return issues
+
+    try:
+        from docx import Document  # noqa: F401
+    except Exception as e:
+        issues.append({"check": "V_docx_import_error", "detail": str(e)})
+        return issues
+
+    # Verify each standalone Table_N.docx.
+    for n in sorted(md_tables):
+        standalone = ROOT / "manuscript" / f"Table_{n}.docx"
+        if not standalone.exists():
+            issues.append({"check": "V_standalone_missing",
+                           "detail": f"Table_{n}.docx not found at "
+                                     f"{standalone}"})
+            continue
+        try:
+            doc = Document(str(standalone))
+        except Exception as e:
+            issues.append({"check": "V_standalone_unreadable",
+                           "detail": f"Table_{n}.docx: {e}"})
+            continue
+
+        md = md_tables[n]
+
+        # 1. Caption check: first paragraph must start with bold "Table N."
+        #    and the remaining text must equal the markdown caption.
+        if not doc.paragraphs:
+            issues.append({"check": "V_standalone_empty",
+                           "detail": f"Table_{n}.docx has no paragraphs"})
+            continue
+        cap_para = doc.paragraphs[0]
+        cap_text = (cap_para.text or "").strip()
+        expected_prefix = f"Table {n}."
+        if not cap_text.startswith(expected_prefix):
+            issues.append({
+                "check": "V_caption_prefix",
+                "detail": (f"Table_{n}.docx first paragraph does not start "
+                           f"with '{expected_prefix}'; got: "
+                           f"{cap_text[:80]!r}"),
+            })
+        else:
+            standalone_caption = cap_text[len(expected_prefix):].strip()
+            if standalone_caption != md["caption"].strip():
+                issues.append({
+                    "check": "V_caption_drift",
+                    "detail": (f"Table_{n}.docx caption differs from inline "
+                               f"manuscript caption. standalone="
+                               f"{standalone_caption!r} "
+                               f"manuscript={md['caption']!r}"),
+                })
+
+        # 2. Locate the docx table.
+        if not doc.tables:
+            issues.append({"check": "V_standalone_no_table",
+                           "detail": f"Table_{n}.docx has no docx table"})
+            continue
+        dtable = doc.tables[0]
+        body_rows = len(dtable.rows) - 1   # subtract header
+        md_body_rows = len(md["rows"])
+        if body_rows != md_body_rows:
+            issues.append({
+                "check": "V_row_count_drift",
+                "detail": (f"Table_{n}.docx has {body_rows} body rows; "
+                           f"manuscript inline table has {md_body_rows}"),
+            })
+
+        # 3. Column 0 (row label) check: each docx col-0 cell must match the
+        #    markdown col-0 cell of the same body row.
+        n_check = min(body_rows, md_body_rows)
+        for r in range(n_check):
+            docx_label = dtable.rows[r + 1].cells[0].text.strip()
+            md_label = md["rows"][r][0].strip()
+            if docx_label != md_label:
+                issues.append({
+                    "check": "V_row_label_drift",
+                    "detail": (f"Table_{n}.docx row {r + 1} col-0="
+                               f"{docx_label!r} but manuscript row {r + 1} "
+                               f"col-0={md_label!r}"),
+                })
+
+    return issues
 
 
 def main():

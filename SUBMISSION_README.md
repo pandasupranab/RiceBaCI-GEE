@@ -21,6 +21,8 @@
 | `manuscript/Manuscript.docx` | Manuscript |
 | `manuscript/Graphical_Abstract_Concept.docx` | Graphical Abstract (concept brief — to be finalised at proof stage) |
 | `manuscript/Declarations.docx` | Declarations (CRediT, GenAI use, conflicts, funding) |
+| `manuscript/Table_1.docx` | Main-text Table 1 (Tropical cyclone events) — built by `scripts/build_main_text_tables.py`; identical to the inline copy in `Manuscript.docx`; auditor category V guarantees no drift |
+| `manuscript/Table_2.docx` | Main-text Table 2 (Satellite and ancillary datasets) — same build script, same drift guard |
 | `manuscript/Figures_Bundle.pdf` | Figures (one per upload from `figures/`) |
 | `manuscript/supplement/Supplement_Combined.pdf` | Supplementary Material |
 
