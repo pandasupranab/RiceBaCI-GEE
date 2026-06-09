@@ -46,13 +46,20 @@ I thank the Editors and reviewers in advance for their consideration of our manu
 
 Yours sincerely,
 
-**Supranab Panda**
+**Supranab Panda** (corresponding author)
 PhD Researcher, Agricultural Meteorology
 Center for Environment and Climate
 Siksha 'O' Anusandhan (Deemed to be) University, Bhubaneswar, Odisha, India
 ORCID: 0009-0009-6496-6545
 Email: pandasupranab@gmail.com
 GitHub: https://github.com/pandasupranab
+
+on behalf of:
+
+**Sarat Chandra Sahu** (co-author, supervisor)
+Center for Environment and Climate
+Siksha 'O' Anusandhan (Deemed to be) University, Bhubaneswar, Odisha, India
+ORCID: 0000-0002-8048-1910
 
 ---
 

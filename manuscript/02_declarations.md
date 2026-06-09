@@ -40,7 +40,7 @@ During the preparation of this work the authors used Perplexity Computer (built 
 
 *(Place: end of manuscript, before Funding.)*
 
-| Role (CRediT) | Supranab Panda | Sarat Chandra Sahu |
+| Role (CRediT) | Supranab Panda (ORCID 0009-0009-6496-6545) | Sarat Chandra Sahu (ORCID 0000-0002-8048-1910) |
 |---|---|---|
 | Conceptualization | Lead | Supporting |
 | Methodology | Lead | Supporting |

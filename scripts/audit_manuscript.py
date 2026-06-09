@@ -696,6 +696,109 @@ def check_category_R():
     return issues
 
 
+# ----- SUBMISSION PACKAGE (the files actually uploaded to Editorial Manager) -----
+SUBMISSION_DOCX = {
+    "manuscript/Manuscript.docx":              {"min_media": 7, "required_text": ["v1.0.1-submission", "10.5281/zenodo.20587316", "10.17632/z3zxk4xy3c.1", "c4mp8", "0009-0009-6496-6545", "0000-0002-8048-1910"]},
+    "manuscript/Cover_Letter.docx":            {"min_media": 0, "required_text": ["v1.0.1-submission", "10.5281/zenodo.20587316", "10.17632/z3zxk4xy3c.1", "0009-0009-6496-6545", "0000-0002-8048-1910"]},
+    "manuscript/Highlights.docx":              {"min_media": 0, "required_text": []},
+    "manuscript/Declarations.docx":            {"min_media": 0, "required_text": ["0009-0009-6496-6545", "0000-0002-8048-1910", "10.17632/z3zxk4xy3c.1", "10.5281/zenodo.20024578"]},
+    "manuscript/Figures_Bundle.docx":          {"min_media": 9, "required_text": []},
+    "manuscript/supplement/Supplement_Combined.docx": {"min_media": 2, "required_text": ["v1.0.1-submission", "10.5281/zenodo.20587316", "10.17632/z3zxk4xy3c.1", "56.501", "0.551", "0.239"]},
+}
+# Stale numeric markers that MUST NOT appear in any submission docx (full text + tables).
+# Patterns are matched with word-boundary regex on the full text to avoid false hits
+# on legitimate values like '+22.49 d' (Khordha Bulbul residual) or '0.844' (SAR-only OA).
+import re as _re_submission
+SUBMISSION_STALE_PATTERNS = [
+    ("old_synth_tau_5.662",  _re_submission.compile(r"(?<![\d.])5\.662(?![\d])")),
+    ("old_synth_MDE_2.491",  _re_submission.compile(r"(?<![\d.])2\.491(?![\d])")),
+    ("old_MDE_1.04d",        _re_submission.compile(r"(?<![\d.])1\.04\s*d\b")),
+    ("old_MDE_2.49d",        _re_submission.compile(r"(?<![\d.])2\.49\s*d\b")),
+    ("old_MDE_1.31d",        _re_submission.compile(r"(?<![\d.])1\.31\s*d\b")),
+    ("old_tau_abs_0.56",     _re_submission.compile(r"\|τ̂\|\s*=\s*0\.56")),
+    ("placeholder_marker",   _re_submission.compile(r"\[PLACEHOLDER")),
+    ("doi_pending",          _re_submission.compile(r"DOI:?\s*pending", _re_submission.I)),
+    ("tbd_word",             _re_submission.compile(r"\bTBD\b")),
+    ("todo_word",            _re_submission.compile(r"\bTODO\b")),
+    ("fixme_word",           _re_submission.compile(r"\bFIXME\b")),
+    ("forthcoming_word",     _re_submission.compile(r"forthcoming", _re_submission.I)),
+    ("to_be_added",          _re_submission.compile(r"to\s+be\s+added", _re_submission.I)),
+    ("to_be_released",       _re_submission.compile(r"to\s+be\s+released", _re_submission.I)),
+    ("fabricated_results",   _re_submission.compile(r"fabricated\s+results", _re_submission.I)),
+    ("illustrative_caveat",  _re_submission.compile(r"ILLUSTRATIVE\s*—\s*REPLACE", _re_submission.I)),
+]
+
+
+def _docx_full_text(path):
+    """Return full text of a DOCX including paragraphs and table cells."""
+    from docx import Document
+    d = Document(str(path))
+    parts = []
+    for p in d.paragraphs:
+        parts.append(p.text)
+    for t in d.tables:
+        for row in t.rows:
+            for cell in row.cells:
+                parts.append(cell.text)
+    return "\n".join(parts)
+
+
+def _docx_media_count(path):
+    """Return the number of embedded media (image) files in a DOCX."""
+    import zipfile
+    with zipfile.ZipFile(str(path)) as z:
+        return len([n for n in z.namelist() if n.startswith("word/media/")])
+
+
+def check_category_S():
+    """Deep content check on each Editorial-Manager submission DOCX:
+       - file must exist
+       - must contain at least the expected number of embedded images
+       - must contain every required identifier / anchor
+       - must contain none of the stale numeric or scaffold markers
+       - matching .pdf must exist and be newer than the .docx
+    """
+    issues = []
+    for rel, spec in SUBMISSION_DOCX.items():
+        fp = ROOT / rel
+        if not fp.exists():
+            issues.append({"check": "submission_pkg", "file": rel, "note": "submission file missing"})
+            continue
+        try:
+            n_media = _docx_media_count(fp)
+        except Exception as exc:
+            issues.append({"check": "submission_pkg", "file": rel, "note": f"cannot read docx: {exc}"})
+            continue
+        if n_media < spec["min_media"]:
+            issues.append({"check": "submission_pkg", "file": rel,
+                           "note": f"embedded-media count {n_media} < required {spec['min_media']}"})
+        try:
+            text = _docx_full_text(fp)
+        except Exception as exc:
+            issues.append({"check": "submission_pkg", "file": rel, "note": f"cannot read docx text: {exc}"})
+            continue
+        for needle in spec["required_text"]:
+            if needle not in text:
+                issues.append({"check": "submission_pkg", "file": rel,
+                               "missing": needle, "note": "required anchor not present"})
+        for label, pat in SUBMISSION_STALE_PATTERNS:
+            m = pat.search(text)
+            if m:
+                snippet = text[max(0, m.start()-40):m.end()+40].replace("\n", " ")
+                issues.append({"check": "submission_pkg", "file": rel,
+                               "stale": label, "snippet": snippet,
+                               "note": "stale or scaffold marker present"})
+        # matching PDF must exist and be at least as new as the docx
+        pdf = fp.with_suffix(".pdf")
+        if not pdf.exists():
+            issues.append({"check": "submission_pkg", "file": rel,
+                           "note": f"matching PDF {pdf.name} missing"})
+        elif pdf.stat().st_mtime + 1 < fp.stat().st_mtime:
+            issues.append({"check": "submission_pkg", "file": rel,
+                           "note": f"PDF {pdf.name} older than DOCX (PDF mtime {pdf.stat().st_mtime:.0f} < DOCX mtime {fp.stat().st_mtime:.0f})"})
+    return issues
+
+
 CATEGORIES = [
     ("A_md_forbidden", check_category_A),
     ("B_pdf_forbidden", check_category_B),
@@ -715,6 +818,7 @@ CATEGORIES = [
     ("P_internal_content", check_category_P),
     ("Q_internal_stale_numerics", check_category_Q),
     ("R_internal_anchors", check_category_R),
+    ("S_submission_package", check_category_S),
 ]
 
 
