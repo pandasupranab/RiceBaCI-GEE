@@ -1,0 +1,105 @@
+======================================================================
+(1) IDENTIFICATION CHECK
+======================================================================
+Cells contributing to did_lag1=1 (coastal-treatment in {2020,2021,2022}):
+     district  year  did  did_lag1  median_doy
+    Baleshwar  2020    1         1      166.95
+    Baleshwar  2021    1         1      165.93
+    Baleshwar  2022    0         1      258.00
+      Bhadrak  2020    1         1      258.89
+      Bhadrak  2021    1         1      194.99
+      Bhadrak  2022    0         1      258.00
+Jagatsinghpur  2020    1         1      166.73
+Jagatsinghpur  2021    1         1      165.54
+Jagatsinghpur  2022    0         1      258.00
+   Kendrapara  2020    1         1      166.89
+   Kendrapara  2021    1         1      165.59
+   Kendrapara  2022    0         1      258.00
+         Puri  2020    1         1      197.00
+         Puri  2021    1         1      165.94
+         Puri  2022    0         1      258.00
+
+Of which: did=1 AND did_lag1=1 (collinear -> not identifying lag):  10 cells
+           did=0 AND did_lag1=1 (PURE LAG identification cells):     5 cells
+
+=> did_lag1 is identified primarily off the 2022 coastal-treatment-vs-inland-control gap (5 cells).
+
+======================================================================
+(2) DROP-2022 SENSITIVITY (rerun lag spec with 2022 dropped)
+======================================================================
+corrected SOS, 2022 dropped:
+  did_tau     = +32.768  (SE 21.653, p=0.1302, CI=[-9.67, +75.21])
+  did_lag1_tau= +0.510  (SE 11.615, p=0.9650, CI=[-22.26, +23.28])
+
+For comparison, full-panel lag spec (corrected SOS):
+  did_tau     = -7.909  (CI=[-40.44, +24.62])
+  did_lag1_tau= +49.323  (CI=[+36.84, +61.80])
+
+======================================================================
+(3) PRE-2022-ONLY SUB-PANEL (S1B-clean era)
+======================================================================
+corrected SOS, 2017-2021 only (S1B-clean):
+  did_tau     = +44.168  (CI=[-21.26, +109.59])
+  did_lag1_tau= +0.510  (CI=[-23.27, +24.29])
+=> On the clean pre-S1B-failure era, lag1 is identified off 2020 and 2021 lag-overlap-with-treatment (collinear)
+
+======================================================================
+(4) RAW SOS VALUES BY DISTRICT-YEAR (corrected pipeline)
+======================================================================
+year            2017   2018   2019   2020   2021   2022   2023   2024
+district                                                             
+Angul          288.0  258.0  196.0  167.0  166.0  166.0  196.0  197.0
+Baleshwar      288.0  135.0  227.0  167.0  165.9  258.0  196.0  167.0
+Bhadrak        319.0  135.0  258.0  258.9  195.0  258.0  258.0  197.0
+Cuttack        288.0  288.0  195.8  136.0  166.0  196.0  196.0  197.0
+Dhenkanal      288.0  288.0  196.0  136.0  166.0  166.0  196.0  197.0
+Jagatsinghpur  288.0  288.0  227.0  166.7  165.5  258.0  196.0  167.0
+Kendrapara     319.0  288.0  195.9  166.9  165.6  258.0  196.0  167.0
+Puri           288.0  288.0  195.6  197.0  165.9  258.0  258.0  197.0
+
+Coastal mean by year:
+year
+2017    300.40
+2018    226.80
+2019    220.71
+2020    191.29
+2021    171.60
+2022    258.00
+2023    220.80
+2024    179.00
+
+Inland mean by year:
+year
+2017    288.00
+2018    278.00
+2019    195.94
+2020    146.33
+2021    166.00
+2022    176.00
+2023    196.00
+2024    197.00
+
+Coastal-minus-inland mean by year:
+year
+2017    12.40
+2018   -51.20
+2019    24.77
+2020    44.96
+2021     5.60
+2022    82.00
+2023    24.80
+2024   -18.00
+
+======================================================================
+(5) LEAVE-ONE-OUT DISTRICT JACKKNIFE ON LAG SPECIFICATION
+======================================================================
+  Dropped district     did_tau    did_lag1_tau    lag1_p
+------------------------------------------------------------
+             Angul      -1.908         +50.294    0.0000
+         Baleshwar     -11.869         +46.936    0.0000
+           Bhadrak     -18.778         +47.777    0.0000
+           Cuttack     -14.343         +52.949    0.0000
+         Dhenkanal      -7.476         +44.726    0.0000
+     Jagatsinghpur      -6.613         +52.182    0.0000
+        Kendrapara      -1.337         +49.701    0.0000
+              Puri      -0.950         +50.018    0.0000
