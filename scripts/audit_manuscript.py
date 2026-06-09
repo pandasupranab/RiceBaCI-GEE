@@ -1028,6 +1028,51 @@ def check_category_U():
                 "detail": str(e),
             })
 
+    # 5. The inline-embedded figures in Manuscript.docx must each carry a
+    #    "Figure N. ..." caption paragraph (Pass 21 fix: prior versions
+    #    embedded images with no caption at all). We require that the count
+    #    of paragraphs starting with a bold "Figure N." run be at least the
+    #    number of embedded inline images.
+    manuscript_docx = ROOT / "manuscript" / "Manuscript.docx"
+    if manuscript_docx.exists():
+        try:
+            from docx import Document  # noqa: F401
+            doc = Document(str(manuscript_docx))
+            cap_pat = re.compile(
+                r"^Figure\s+(1B|[1-6]|S[12])\.\s+\S"
+            )
+            caption_paras = [p for p in doc.paragraphs
+                             if cap_pat.search((p.text or "").strip())]
+            # Count inline images (drawings/inline pics in body).
+            from docx.oxml.ns import qn  # noqa: F401
+            inline_pics = 0
+            for p in doc.paragraphs:
+                inline_pics += len(p._p.findall(
+                    ".//{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}inline"
+                ))
+            # 7 figures embedded inline; expect >= 7 captions matching the pattern.
+            EXPECTED_INLINE_FIGS = 7
+            if inline_pics < EXPECTED_INLINE_FIGS:
+                issues.append({
+                    "check": "U_manuscript_inline_figs_missing",
+                    "detail": (f"expected >= {EXPECTED_INLINE_FIGS} inline "
+                               f"images in Manuscript.docx, found "
+                               f"{inline_pics}"),
+                })
+            if len(caption_paras) < EXPECTED_INLINE_FIGS:
+                issues.append({
+                    "check": "U_manuscript_inline_captions_missing",
+                    "detail": (f"expected >= {EXPECTED_INLINE_FIGS} "
+                               f"'Figure N. ...' caption paragraphs in "
+                               f"Manuscript.docx, found "
+                               f"{len(caption_paras)}"),
+                })
+        except Exception as e:
+            issues.append({
+                "check": "U_manuscript_inspect_error",
+                "detail": str(e),
+            })
+
     return issues
 
 
