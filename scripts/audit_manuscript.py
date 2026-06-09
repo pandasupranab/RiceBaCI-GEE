@@ -423,6 +423,149 @@ def check_category_L():
     return issues
 
 
+def _read_docx_text(path: Path) -> str:
+    """Concatenate all paragraph + table-cell text from a .docx."""
+    try:
+        from docx import Document
+        d = Document(str(path))
+        chunks = []
+        for p in d.paragraphs:
+            chunks.append(p.text)
+        for t in d.tables:
+            for r in t.rows:
+                for c in r.cells:
+                    chunks.append(c.text)
+        return "\n".join(chunks)
+    except Exception as e:
+        return f"<<DOCX_READ_ERROR: {e}>>"
+
+
+def check_category_M():
+    """Supplement table DOCX content sanity — each table must carry real v2.1 numbers."""
+    issues = []
+    # Each entry: filename, list of (label, expected_substring) tuples.
+    # If ANY expected substring is missing, the table is stale.
+    table_checks = {
+        "Table_S1_did_static.docx": [
+            ("tau_raw_SOS", "15.289"),
+            ("tau_corrected_SOS", "15.108"),
+            ("SE_corrected_SOS", "17.312"),
+        ],
+        "Table_S2_pretrends.docx": [
+            ("beta_pre_SOS", "-63.6"),
+            ("p_pre_SOS", "0.343"),
+        ],
+        "Table_S3_bulbul_transferability.docx": [
+            ("Boudh residual", "-8.11"),
+            ("Ganjam residual", "-1.11"),
+            ("Khordha residual", "+22.49"),
+            ("Nayagarh residual", "+12.99"),
+            ("tau_plug_in", "15.108"),
+        ],
+        "Table_S4_wild_bootstrap.docx": [
+            ("WCR p raw SOS", "0.4000"),
+            ("WCR p corrected SOS", "0.4065"),
+        ],
+        "Table_S5_jackknife.docx": [
+            ("Bhadrak driver", "Bhadrak"),
+            ("max_dtau", "76."),
+        ],
+        "Table_S6_mde.docx": [
+            ("raw_SOS_MDE", "56.50"),
+            ("raw_SOS_tau", "15.289"),
+            ("corrected_EOS_MDE", "0.551"),
+        ],
+        "Table_S7_placebo.docx": [
+            ("raw_SOS_tau", "15.29"),
+            ("corrected_SOS_tau", "15.11"),
+            ("p_perm_SOS", "0.5000"),
+        ],
+        "Table_S8_cyclone_climatology.docx": [
+            ("IBTrACS", "IBTrACS"),
+        ],
+        "Table_S9_backscatter_signatures.docx": [
+            ("Planetary Computer", "Planetary Computer"),
+            ("Boudh peak canopy VH", "-13.79"),
+            ("Boudh event window VH", "-13.77"),
+            ("Khordha event window VH", "-13.42"),
+        ],
+    }
+    # Normalisation: unicode minus, en-dash, math minus all become ASCII '-'
+    def norm(s: str) -> str:
+        return s.replace("\u2212", "-").replace("\u2013", "-")
+    for fname, checks in table_checks.items():
+        p = SUP / fname
+        if not p.exists():
+            issues.append({"check": "table_content", "missing_file": fname})
+            continue
+        txt = norm(_read_docx_text(p))
+        for label, expected in checks:
+            if norm(expected) not in txt:
+                issues.append({"check": "table_content",
+                               "file": fname,
+                               "missing": label,
+                               "expected": expected,
+                               "note": "value not found in DOCX (possibly stale)"})
+    return issues
+
+
+def check_category_N():
+    """Figure freshness — figures must be newer than the result CSV that feeds them."""
+    issues = []
+    pairs = [
+        ("figures/fig2_did_coefplot.png", "analysis/results/real_v21/did_static.csv"),
+        ("figures/fig3_event_study.png", "analysis/results/real_v21/event_study.csv"),
+        ("figures/fig4_district_sos_panel.png", "analysis/results/real_v21/v21_correction_summary.csv"),
+        ("figures/fig5_power_curves.png", "analysis/results/real_v21/power_curves.csv"),
+        ("figures/fig6_placebo_distribution.png", "analysis/results/real_v21/placebo_in_space.csv"),
+        ("figures/figS2_backscatter_signatures.png", "analysis/results/real_v21/s1_backscatter_phase_means.csv"),
+    ]
+    for fig_rel, csv_rel in pairs:
+        fig = ROOT / fig_rel
+        csv = ROOT / csv_rel
+        if not fig.exists() or not csv.exists():
+            continue
+        if csv.stat().st_mtime > fig.stat().st_mtime + 1:
+            issues.append({"check": "figure_freshness",
+                           "stale_figure": fig_rel,
+                           "newer_source": csv_rel,
+                           "fig_mtime": datetime.fromtimestamp(fig.stat().st_mtime).isoformat(),
+                           "src_mtime": datetime.fromtimestamp(csv.stat().st_mtime).isoformat()})
+    return issues
+
+
+def check_category_O():
+    """Supplement bundle must NOT reference any archived/stale table file."""
+    issues = []
+    build = ROOT / "scripts/build_supplement_bundle.py"
+    if not build.exists():
+        return issues
+    text = build.read_text()
+    # any docx filename mentioned must exist (and not be in _archived_stale_synth/)
+    docx_refs = re.findall(r"[\"\']([A-Za-z0-9_/-]+\.docx)[\"\']", text)
+    for ref in set(docx_refs):
+        # search for it in the supplement dir
+        candidates = list((SUP).glob(ref))
+        if not candidates:
+            # also try as-is from project root (some refs are relative)
+            ext = ROOT / ref
+            if ext.exists():
+                continue
+            issues.append({"check": "bundle_ref",
+                           "missing_docx": ref,
+                           "note": "build_supplement_bundle.py references a docx that doesn't exist in supplement/"})
+    # also flag any docx files in _archived_stale_synth/ as stale
+    arch = SUP / "_archived_stale_synth"
+    if arch.exists():
+        for f in arch.iterdir():
+            if f.suffix == ".docx":
+                if f.name in text:
+                    issues.append({"check": "bundle_ref",
+                                   "file": f.name,
+                                   "note": "archived stale file is still referenced in build script"})
+    return issues
+
+
 CATEGORIES = [
     ("A_md_forbidden", check_category_A),
     ("B_pdf_forbidden", check_category_B),
@@ -436,6 +579,9 @@ CATEGORIES = [
     ("J_page_counts", check_category_J),
     ("K_manuscript_citations", check_category_K),
     ("L_figure_files", check_category_L),
+    ("M_table_content", check_category_M),
+    ("N_figure_freshness", check_category_N),
+    ("O_bundle_refs", check_category_O),
 ]
 
 

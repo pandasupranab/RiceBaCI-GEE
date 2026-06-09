@@ -1,0 +1,81 @@
+{
+  "timestamp": "2026-06-09T00:12:17.135503",
+  "categories": {
+    "A_md_forbidden": {
+      "count": 0,
+      "issues": []
+    },
+    "B_pdf_forbidden": {
+      "count": 0,
+      "issues": []
+    },
+    "C_cross_refs": {
+      "count": 0,
+      "issues": []
+    },
+    "D_identifiers": {
+      "count": 0,
+      "issues": []
+    },
+    "E_numerics": {
+      "count": 0,
+      "issues": []
+    },
+    "F_artifacts": {
+      "count": 0,
+      "issues": []
+    },
+    "G_result_csvs": {
+      "count": 0,
+      "issues": []
+    },
+    "H_pdf_freshness": {
+      "count": 0,
+      "issues": []
+    },
+    "I_broken_links": {
+      "count": 0,
+      "issues": []
+    },
+    "J_page_counts": {
+      "count": 0,
+      "issues": []
+    },
+    "K_manuscript_citations": {
+      "count": 0,
+      "issues": []
+    },
+    "L_figure_files": {
+      "count": 0,
+      "issues": []
+    },
+    "M_table_content": {
+      "count": 2,
+      "issues": [
+        {
+          "check": "table_content",
+          "file": "Table_S9_backscatter_signatures.docx",
+          "missing": "VH peak",
+          "expected": "-13.78",
+          "note": "value not found in DOCX (possibly stale)"
+        },
+        {
+          "check": "table_content",
+          "file": "Table_S9_backscatter_signatures.docx",
+          "missing": "VH event",
+          "expected": "-13.49",
+          "note": "value not found in DOCX (possibly stale)"
+        }
+      ]
+    },
+    "N_figure_freshness": {
+      "count": 0,
+      "issues": []
+    },
+    "O_bundle_refs": {
+      "count": 0,
+      "issues": []
+    }
+  },
+  "total_issues": 2
+}

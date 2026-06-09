@@ -289,9 +289,9 @@ toc_entries = [
     ("Table S6", "MDE and power curves at G = 8", "T6"),
     ("Table S7", "Placebo / falsification permutation tests", "T7"),
     ("Table S8", "Pre-Kharif cyclone climatology — per-storm percentiles", "T8"),
-    ("Table S9", "Canonical Sentinel-1 dual-pol backscatter features", "T9"),
+    ("Table S9", "Real Sentinel-1 RTC dual-pol backscatter signatures (4 Bulbul probe districts)", "T9"),
     ("Figure S1", "Pre-Kharif cyclone climatology — track + intensity-vs-DOY", "F1"),
-    ("Figure S2", "Canonical backscatter signatures — VH/VV/CR vs DOY", "F2"),
+    ("Figure S2", "Real Sentinel-1 RTC backscatter signatures — VH/VV/CR vs DOY (Planetary Computer)", "F2"),
 ]
 for label, title_text, anchor in toc_entries:
     p = doc.add_paragraph()
@@ -342,8 +342,8 @@ table_specs = [
      "Table_S7_placebo.docx"),
     ("S8", "Table S8 — Pre-Kharif cyclone climatology",
      "Table_S8_cyclone_climatology.docx"),
-    ("S9", "Table S9 — Canonical S1 dual-pol features",
-     "Table_S9_backscatter_features.docx"),
+    ("S9", "Table S9 — Real Sentinel-1 RTC dual-pol backscatter signatures (Planetary Computer)",
+     "Table_S9_backscatter_signatures.docx"),
 ]
 for tid, heading_text, fname in table_specs:
     _heading(doc, heading_text, level=1,
@@ -360,7 +360,7 @@ fig_specs = [
      "Saffir-Simpson bands (right). Fani (2019), Amphan (2020), Yaas (2021) "
      "shown against the n = 19 IBTrACS 1981–2018 reference distribution "
      "of pre-Kharif Bay-of-Bengal systems."),
-    ("S2", "Figure S2 — Canonical Sentinel-1 backscatter signatures",
+    ("S2", "Figure S2 — Real Sentinel-1 RTC backscatter signatures (Planetary Computer)",
      FIGS / "figS2_backscatter_signatures.png",
      "Three-panel stack (VH cross-pol, VV co-pol, CR cross-ratio vs day-of-year) "
      "for transplanting flood, saline storm-surge, and freshwater rainfall "
