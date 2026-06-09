@@ -60,7 +60,7 @@ A district is recorded as "inside 95% PI" if $\Delta_{\mathrm{obs},d}$ lies in t
 | Ganjam | coastal_rainfall | 184.4 | 198.3 | +14.0 | −1.11 | yes |
 | Khordha | coastal_rainfall | 141.7 | 179.3 | +37.6 | +22.49 | yes |
 | Nayagarh | inland_rainfall | 147.0 | 175.1 | +28.1 | +12.99 | yes |
-| **Mean (n = 4)** |  | **160.6** | **182.3** | **+21.7** | **+6.56** |  |
+| **Mean (n = 4)** | **—** | **160.6** | **182.3** | **+21.7** | **+6.56** | **4 / 4** |
 
 **Verdict.** Residuals on the four paddy-dominant probe districts are centred near zero (mean residual $\bar{r} = +6.56\,\mathrm{d}$, range $[-8.11, +22.49]\,\mathrm{d}$) and **4 / 4** observed shifts lie inside the 95% prediction interval. The pre-registered pass criterion ("$|r_d|$ small AND $\geq 5/6$ districts inside the 95% PI") is satisfied in the proportional form ($4/4 = 100\%$). The probe therefore registers as a **PASS**: the v2.1 corrected coefficient generalises out-of-sample to post-monsoon freshwater-rainfall Bulbul-cohort districts in a manner consistent with the headline coefficient.
 
