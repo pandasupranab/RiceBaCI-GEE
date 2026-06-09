@@ -923,6 +923,114 @@ def check_category_T():
     return issues
 
 
+# ---------------------------------------------------------------------------
+# U_caption_correctness
+#   Guard against (1) figure filenames leaking into Figures_Bundle headings
+#   (e.g. "Figure 1. figure1_study_area.png") and (2) caption text in
+#   scripts/build_figures_bundle.py drifting away from the figure content
+#   actually rendered. We don't OCR the figures; instead we (a) inspect the
+#   bundle DOCX heading style and (b) require the caption strings to contain
+#   small content-anchor substrings that pin the caption to the figure.
+# ---------------------------------------------------------------------------
+CAPTION_ANCHORS = {
+    "fig1b_identification_dag.png": ["identification", "DAG"],
+    "fig2_did_coefplot.png": ["TWFE", "district-clustered"],
+    "fig3_event_study.png": ["SOS", "POS", "EOS", "pipelines", "k = -1"],
+    "fig4_district_sos_panel.png": ["Per-district", "coastal treatment",
+                                     "inland control", "corrected"],
+    "fig5_power_curves.png": ["power", "tau", "G = 8"],
+    "fig6_placebo_distribution.png": ["placebo", "56 permutations",
+                                        "raw/EOS", "corrected/EOS"],
+    "figS1_cyclone_climatology.png": ["climatology", "IBTrACS"],
+    "figS2_backscatter_signatures.png": ["VH", "VV", "backscatter"],
+    "figure1_study_area.png": ["Study area", "coastal", "inland"],
+}
+
+BANNED_CAPTION_PHRASES = [
+    # Stale Fig 4 caption (Pass 21 fix): there is no solid/dashed raw-vs-
+    # corrected overlay in fig4_district_sos_panel.png.
+    "Solid lines show raw-pipeline SOS",
+    "dashed lines show classifier-corrected SOS",
+    # Stale Fig 3 caption (Pass 20 grid is 3x2, captions used to claim it
+    # was a single-metric event-study).
+    "Event-study plot, raw vs. corrected pipelines (Kharif 2017-2024).",
+]
+
+
+def check_category_U():
+    issues = []
+    bundle_script = ROOT / "scripts" / "build_figures_bundle.py"
+    if not bundle_script.exists():
+        issues.append({"check": "U_bundle_script_missing",
+                       "path": str(bundle_script)})
+        return issues
+    src = bundle_script.read_text(encoding="utf-8", errors="ignore")
+
+    # 1. The heading must NOT include the .png filename. Specifically catch
+    #    the old f"{label}. {fname}" template.
+    if 'add_heading(f"{label}. {fname}"' in src or \
+       'add_heading(f"{label}. " + fname' in src:
+        issues.append({
+            "check": "U_heading_leaks_filename",
+            "detail": ("build_figures_bundle.py emits the figure filename in "
+                       "the heading; should be `label` only."),
+        })
+
+    # 2. Each FIGURES caption must contain its content anchors.
+    for fname, anchors in CAPTION_ANCHORS.items():
+        # Find the tuple block for this fname.
+        marker = f'"{fname}"'
+        idx = src.find(marker)
+        if idx == -1:
+            issues.append({
+                "check": "U_caption_block_missing", "figure": fname,
+            })
+            continue
+        # Extract roughly the next 2000 chars (captions are <1500).
+        block = src[idx: idx + 2000]
+        # Block ends at the next tuple opener.
+        end = block.find('\n    ("Figure')
+        if end > 0:
+            block = block[:end]
+        block_lower = block.lower()
+        for anchor in anchors:
+            if anchor.lower() not in block_lower:
+                issues.append({
+                    "check": "U_caption_missing_anchor",
+                    "figure": fname, "anchor": anchor,
+                })
+
+    # 3. No banned caption phrases.
+    for phrase in BANNED_CAPTION_PHRASES:
+        if phrase in src:
+            issues.append({
+                "check": "U_caption_banned_phrase",
+                "phrase": phrase,
+            })
+
+    # 4. Figures_Bundle.docx itself must not contain a heading paragraph whose
+    #    text matches r"^Figure [0-9SB]+\.\s+\w+\.png".
+    bundle = ROOT / "manuscript" / "Figures_Bundle.docx"
+    if bundle.exists():
+        try:
+            from docx import Document  # noqa: F401
+            doc = Document(str(bundle))
+            pat = re.compile(r"^Figure\s+[0-9SB]+\.\s+\S+\.png\b")
+            for para in doc.paragraphs:
+                if pat.search((para.text or "").strip()):
+                    issues.append({
+                        "check": "U_bundle_heading_filename_leak",
+                        "heading": para.text.strip(),
+                    })
+        except Exception as e:
+            issues.append({
+                "check": "U_bundle_inspect_error",
+                "detail": str(e),
+            })
+
+    return issues
+
+
 CATEGORIES = [
     ("A_md_forbidden", check_category_A),
     ("B_pdf_forbidden", check_category_B),
@@ -944,6 +1052,7 @@ CATEGORIES = [
     ("R_internal_anchors", check_category_R),
     ("S_submission_package", check_category_S),
     ("T_figure_data_correspondence", check_category_T),
+    ("U_caption_correctness", check_category_U),
 ]
 
 

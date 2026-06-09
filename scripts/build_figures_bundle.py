@@ -25,13 +25,13 @@ FIGURES = [
     ("Figure 2",  "fig2_did_coefplot.png",
      "TWFE-DiD coefficients (raw vs. classifier-corrected panel). Point estimates with district-clustered (CR1) standard-error bars and 95% wild-cluster restricted bootstrap intervals for SOS, POS, and EOS, raw and corrected pipelines on the real v2.1 panel."),
     ("Figure 3",  "fig3_event_study.png",
-     "Event-study plot, raw vs. corrected pipelines (Kharif 2017-2024). Coefficients at relative-year leads (k = -2, -1) test for pre-trends; coefficients at lags (k = 0, 1, 2) trace dynamic treatment effects; k = -1 (2018) is the omitted reference."),
+     "Event-study coefficients on the real v2.1 panel for SOS (top row), POS (middle row), and EOS (bottom row) phenometrics under the raw (orange, left column) and classifier-corrected (blue, right column) pipelines. Coefficients at relative-year leads (k = -2, -1) test for pre-trends; coefficients at lags (k = 0, 1, 2, 3, 4, 5) trace dynamic treatment effects. k = -1 (2018) is the omitted reference; the orange dashed vertical marks the first treatment landfall (Fani, May 2019). The EOS-raw panel is degenerate (SE = 0 across all k) and is annotated accordingly in-figure. Whiskers: 95 % CI computed from district-clustered (CR1) standard errors."),
     ("Figure 4",  "fig4_district_sos_panel.png",
-     "District-level SOS trajectories, raw vs. corrected (2017-2024). Solid lines show raw-pipeline SOS dates; dashed lines show classifier-corrected SOS dates; vertical bands mark cyclone landfall years. Treated coastal districts are coloured; inland controls are grey."),
+     "Per-district SOS trajectories on the classifier-corrected pipeline, Kharif 2017-2024. Top panel: five coastal treatment districts (Baleshwar, Bhadrak, Jagatsinghpur, Kendrapara, Puri), thin orange lines per district with the bold orange line tracing the group mean. Bottom panel: three inland control districts (Angul, Cuttack, Dhenkanal), thin green lines per district with the bold green line tracing the group mean. Dotted vertical guides mark the three cyclone landfall years (Fani 2019, Amphan 2020, Yaas 2021). Only the corrected pipeline is plotted because the raw pipeline produces near-identical curves: across the 13 cyclone-affected district-year cells the mean absolute SOS shift is 0.245 \u00b1 0.272 days (range 0.04-1.01 d), with the largest single correction in Bhadrak 2021 (Cyclone Yaas, -1.01 d). Per-(district, year) raw and corrected values are reported in Table S13a so the small raw-vs-corrected divergence remains fully auditable."),
     ("Figure 5",  "fig5_power_curves.png",
      "Empirical power curves from the Monte-Carlo simulation (Note S4). Rejection rate of H0 against true effect size tau over 999 replications per grid point at G = {4, 6, 8, 12} with empirical variance components sigma_u = 13.06 d, sigma_t = 41.75 d, sigma_epsilon = 31.28 d estimated from the real v2.1 corrected-SOS panel. At G = 8 (this study) power >= 0.80 is reached only for tau >= 60 d; the type-I rate under H0 is 0.07, close to nominal 0.05."),
     ("Figure 6",  "fig6_placebo_distribution.png",
-     "In-space placebo distributions (donor-swap, 56 permutations). Histograms of placebo tau_hat values from all swaps of treated/control labels across district pairs, with the observed tau_hat marked as a vertical line. The corrected/EOS cell yields p_perm = 0.018 (non-significant after Bonferroni correction across the six-cell family)."),
+     "In-space placebo distributions (donor-swap, 56 permutations). Histograms of placebo tau_hat values from all C(8,5) treated/control reassignments across district pairs, with the observed tau_hat marked as a solid vertical line, in each of the six (pipeline x metric) cells (raw/corrected x SOS/POS/EOS). Both raw/EOS and corrected/EOS cells return p_perm = 0.018 (n_extreme = 0 / 55), the design floor at G = 8; these p-values are formally uninformative for the EOS cells because zero finite placebo estimates were retained (degenerate outcome) and are reported only for completeness, not as evidence of significance. The SOS and POS cells return p_perm = 0.286-0.500, consistent with the small-G null result."),
     ("Figure S1", "figS1_cyclone_climatology.png",
      "Cyclone climatology for the Bay of Bengal, 1980-2024. Annual landfall counts in the 50-km IBTrACS buffer around the coastal Odisha districts, stratified by Saffir-Simpson category and pre-monsoon vs. post-monsoon timing."),
     ("Figure S2", "figS2_backscatter_signatures.png",
@@ -67,8 +67,9 @@ def build():
         if not fp.exists():
             missing.append((label, fname))
             continue
-        # Heading
-        h = doc.add_heading(f"{label}. {fname}", level=2)
+        # Heading (label only; filename intentionally omitted to keep the
+        # bundle publication-clean)
+        h = doc.add_heading(label, level=2)
         # Image
         p = doc.add_paragraph()
         p.alignment = 1

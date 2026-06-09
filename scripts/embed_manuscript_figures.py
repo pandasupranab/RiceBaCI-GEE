@@ -41,7 +41,7 @@ FIGURES = [
     ("Figure 3",   FIGDIR / "fig3_event_study.png",
      re.compile(r"in\s+Figure\s+3\b")),
     ("Figure 4",   FIGDIR / "fig4_district_sos_panel.png",
-     re.compile(r"\(Figure\s+4\b")),
+     re.compile(r"plotted\s+in\s+Figure\s+4\b")),
     ("Figure 5",   FIGDIR / "fig5_power_curves.png",
      re.compile(r"reported\s+in\s+Figure\s+5\b")),
     ("Figure 6",   FIGDIR / "fig6_placebo_distribution.png",
