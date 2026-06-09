@@ -23,12 +23,18 @@ where \(\widehat{SE}(\hat\tau)\) is the cluster-robust standard error
 recovered in §3.Y.3 (Module 05a). Results land in
 `analysis/results/power_mde.csv` and Table S6.
 
-For the six cells in our specification the MDE ranges from **1.04 d**
-(raw / POS) to **2.49 d** (raw / SOS); five of six observed effects
-exceed their MDE (`detectable = "yes"`). The single cell that does not —
-**corrected / EOS, |τ̂| = 0.56 d vs MDE = 1.31 d** — is precisely the
-cell our wild-cluster bootstrap fails to reject (p = 0.20, §3.Y.3).
-Power and inference therefore tell the same story.
+For the six cells in our specification on the real v2.1 panel
+(`analysis/results/real_v21/power_mde.csv`), the MDE₂-sided ranges from
+**0.551 d** (corrected / EOS) to **56.501 d** (raw / SOS); **none** of
+the six observed effects exceeds its MDE at α = 0.05, power = 0.80, df = 7
+(all cells `detectable = "no"`, with raw / EOS reported as a degenerate
+zero-variance cell). The closest cell to its MDE is
+**corrected / EOS, |τ̂| = 0.239 d vs MDE = 0.551 d** (|τ̂|/MDE = 0.43),
+the same cell our wild-cluster bootstrap fails to reject
+(p = 0.2035, §3.Y.3). Power and inference therefore tell the same story
+and we report this honestly as the formal small-G underpowering result:
+the design at G = 8 cannot detect the observed effects with conventional
+power, motivating the Monte-Carlo power-curve simulation in §3.Y.4.2.
 
 ## 3.Y.4.2 Power curves (Monte-Carlo)
 

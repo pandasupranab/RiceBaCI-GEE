@@ -566,6 +566,136 @@ def check_category_O():
     return issues
 
 
+# ----- INTERNAL-CONTENT FILES (methods modules, READMEs, declarations, etc.) -----
+INTERNAL_FILES = [
+    "README.md",
+    "SUBMISSION_README.md",
+    "manuscript/00_cover_letter.md",
+    "manuscript/01_highlights.md",
+    "manuscript/02_declarations.md",
+    "manuscript/03_submission_checklist.md",
+    "manuscript/04_graphical_abstract_concept.md",
+    "manuscript/methods_module02_baseline.md",
+    "manuscript/methods_module05_did.md",
+    "manuscript/methods_module05e_placebo.md",
+    "manuscript/methods_module09_power.md",
+    "manuscript/methods_module10_dag.md",
+    "manuscript/supplement/methods_module05b_bulbul.md",
+    "manuscript/supplement/methods_module11_climatology.md",
+    "manuscript/supplement/methods_module12_backscatter.md",
+    "docs/Data_Sources_Manifest.md",
+    "docs/02_OSF_Pre_Registration.md",
+    "docs/04_Week_1_Action_Plan.md",
+    "docs/user_guides/01_how_to_run_phenology_in_GEE.md",
+    "docs/user_guides/02_how_to_draw_labels.md",
+    "docs/user_guides/03_active_learning_review.md",
+]
+
+
+def check_category_P():
+    """Internal-content files (methods modules, READMEs, declarations, manifests, user guides)
+    must not contain unresolved placeholders, TODO/TBD/FIXME, 'DOI: pending', or scaffold-era
+    disclaimers indicating no real numbers exist. Pre-* backup snapshots are excluded."""
+    issues = []
+    # active placeholder/scaffold patterns
+    patterns = {
+        "PLACEHOLDER_marker": re.compile(r"\[PLACEHOLDER"),
+        "DOI_pending":        re.compile(r"DOI:?\s*pending", re.I),
+        "TBD":                re.compile(r"\bTBD\b"),
+        "TODO":               re.compile(r"\bTODO\b"),
+        "FIXME":              re.compile(r"\bFIXME\b"),
+        "XXXX":               re.compile(r"\bXXXX+\b"),
+        "forthcoming":        re.compile(r"forthcoming", re.I),
+        "scaffold_disclaimer":re.compile(r"results\s+and\s+validation\s+numbers\s+are\s+placeholders", re.I),
+        "illustrative_watermark": re.compile(r"ILLUSTRATIVE\s*—\s*REPLACE\s+WITH\s+REAL\s+DATA", re.I),
+        "fabricated_results":  re.compile(r"no\s+legitimate\s+journal\s+will\s+accept\s+fabricated", re.I),
+        "to_be_added":        re.compile(r"to\s+be\s+added", re.I),
+        "to_be_released":     re.compile(r"to\s+be\s+released", re.I),
+    }
+    # whitelist phrases that look like hits but are legitimate references
+    whitelist = [
+        "Search the project for `[PLACEHOLDER:",  # SUBMISSION_README historical wording is removed
+    ]
+    for rel in INTERNAL_FILES:
+        fp = ROOT / rel
+        if not fp.exists():
+            issues.append({"check": "internal_content", "file": rel, "note": "expected internal file missing"})
+            continue
+        txt = fp.read_text()
+        for label, pat in patterns.items():
+            for m in pat.finditer(txt):
+                snippet = txt[max(0, m.start()-30):m.end()+30].replace("\n", " ")
+                if any(w in snippet for w in whitelist):
+                    continue
+                line_no = txt[:m.start()].count("\n") + 1
+                issues.append({"check": "internal_content", "file": rel,
+                               "pattern": label, "line": line_no,
+                               "snippet": snippet.strip()})
+    return issues
+
+
+def check_category_Q():
+    """Internal-content files must not carry old synthetic-σ power/MDE numbers
+    that contradict the real v2.1 panel (MDE range 0.551–56.501 d on the
+    real panel; corrected/EOS τ̂ = -0.239 d, MDE = 0.551 d)."""
+    issues = []
+    stale_patterns = {
+        "old_MDE_1.04":   re.compile(r"\b1\.04\s*d\b"),
+        "old_MDE_2.49":   re.compile(r"\b2\.49\s*d\b"),
+        "old_MDE_1.31":   re.compile(r"\b1\.31\s*d\b"),
+        "old_tau_0.56":   re.compile(r"\|τ̂\|\s*=\s*0\.56"),
+        "old_tau_5.662":  re.compile(r"(?<![\d.])5\.662(?![\d])"),
+        "old_MDE_2.491":  re.compile(r"(?<![\d.])2\.491(?![\d])"),
+    }
+    for rel in INTERNAL_FILES:
+        fp = ROOT / rel
+        if not fp.exists():
+            continue
+        txt = fp.read_text()
+        for label, pat in stale_patterns.items():
+            for m in pat.finditer(txt):
+                line_no = txt[:m.start()].count("\n") + 1
+                issues.append({"check": "stale_numeric", "file": rel,
+                               "pattern": label, "line": line_no})
+    return issues
+
+
+def check_category_R():
+    """Real v2.1 identifiers / numerics that MUST appear in selected internal files
+    so they remain self-consistent with the manuscript."""
+    issues = []
+    must_appear = {
+        "SUBMISSION_README.md": [
+            "v1.0.1-submission",
+            "10.5281/zenodo.20587316",
+            "10.17632/z3zxk4xy3c.1",
+            "c4mp8",
+            "0009-0009-6496-6545",
+            "0000-0002-8048-1910",
+        ],
+        "manuscript/04_graphical_abstract_concept.md": [
+            "15.108",  # corrected SOS τ̂
+        ],
+        "manuscript/methods_module09_power.md": [
+            "56.501",  # raw/SOS MDE
+            "0.551",   # corrected/EOS MDE
+            "0.239",   # |τ̂| corrected/EOS
+        ],
+    }
+    for rel, needles in must_appear.items():
+        fp = ROOT / rel
+        if not fp.exists():
+            issues.append({"check": "required_anchor", "file": rel, "note": "file missing"})
+            continue
+        txt = fp.read_text()
+        for n in needles:
+            if n not in txt:
+                issues.append({"check": "required_anchor", "file": rel,
+                               "missing": n,
+                               "note": "required real-v2.1 anchor not present in internal file"})
+    return issues
+
+
 CATEGORIES = [
     ("A_md_forbidden", check_category_A),
     ("B_pdf_forbidden", check_category_B),
@@ -582,6 +712,9 @@ CATEGORIES = [
     ("M_table_content", check_category_M),
     ("N_figure_freshness", check_category_N),
     ("O_bundle_refs", check_category_O),
+    ("P_internal_content", check_category_P),
+    ("Q_internal_stale_numerics", check_category_Q),
+    ("R_internal_anchors", check_category_R),
 ]
 
 

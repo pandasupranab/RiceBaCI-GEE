@@ -26,7 +26,7 @@ A horizontal three-panel composition reading left-to-right, telling the story in
 - Two miniature maps of coastal Odisha, side by side
   - Left: SOS map with raw pipeline (showing biased early dates near coast)
   - Right: SOS map with corrected pipeline (showing accurate dates)
-- Below the maps: a small bar chart showing MAE reduction (raw vs. corrected) — labelled *[PLACEHOLDER: X days]*
+- Below the maps: a small bar chart showing the headline DiD coefficient on the real v2.1 panel — τ̂_raw_SOS = +15.289 d versus τ̂_corrected_SOS = +15.108 d, with both 95% CIs (WCR-restricted bootstrap) spanning zero — visualising the transparent-null result reported in the manuscript
 - Caption: *"Corrected SOS/POS/EOS dates for cyclone-impacted years."*
 
 ## Title strip
