@@ -216,16 +216,16 @@ def build_fig_s2(df: pd.DataFrame, pdf: Path, png: Path):
                    label="_nolegend_" if ax is not axes[0] else "Bulbul landfall")
         ax.axvspan(171, 220, color="#cccccc", alpha=0.2, zorder=0)
         ax.grid(alpha=0.25)
-    axes[0].legend(loc="upper right", frameon=False, fontsize=8, ncol=2)
+    # Legend placed above the figure, outside the axes, so it cannot
+    # overlap any data points. Caption text lives only in the supplement.
+    axes[0].legend(loc="lower center", bbox_to_anchor=(0.5, 1.02),
+                   frameon=False, fontsize=8, ncol=5,
+                   handlelength=1.6, columnspacing=1.2)
     axes[2].set_xlabel("Day of year (2019)")
 
-    fig.suptitle(
-        "Figure S2. Real Sentinel-1 dual-pol backscatter time series "
-        "across rice-phenology phases (4 Bulbul probe districts, 2019)",
-        fontsize=10, y=0.995)
-    plt.tight_layout()
+    plt.tight_layout(rect=(0, 0, 1, 0.97))
     fig.savefig(pdf, bbox_inches="tight", pad_inches=0.05)
-    fig.savefig(png, bbox_inches="tight", pad_inches=0.05, dpi=300)
+    fig.savefig(png, bbox_inches="tight", pad_inches=0.05, dpi=1000)
     plt.close(fig)
     print(f"[OK] wrote {pdf}")
     print(f"[OK] wrote {png}")
