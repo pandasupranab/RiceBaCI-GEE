@@ -1,0 +1,11 @@
+{
+  "district": "CTK",
+  "n_cell_years": 492,
+  "n_ok": 315,
+  "n_failed_skipped": 164,
+  "fit_fail_rate": 0.3598,
+  "unique_sos_doy": 84,
+  "unique_pos_doy": 71,
+  "unique_eos_doy": 26,
+  "out_file": "analysis\\v22\\fits\\CTK_fits.parquet"
+}

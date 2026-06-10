@@ -1,0 +1,90 @@
+[
+  {
+    "district": "ANG",
+    "n_cell_years": 642,
+    "n_ok": 386,
+    "n_failed_skipped": 214,
+    "fit_fail_rate": 0.3988,
+    "unique_sos_doy": 87,
+    "unique_pos_doy": 76,
+    "unique_eos_doy": 31,
+    "out_file": "analysis\\v22\\fits\\ANG_fits.parquet"
+  },
+  {
+    "district": "BHA",
+    "n_cell_years": 276,
+    "n_ok": 162,
+    "n_failed_skipped": 92,
+    "fit_fail_rate": 0.413,
+    "unique_sos_doy": 89,
+    "unique_pos_doy": 56,
+    "unique_eos_doy": 33,
+    "out_file": "analysis\\v22\\fits\\BHA_fits.parquet"
+  },
+  {
+    "district": "BLS",
+    "n_cell_years": 422,
+    "n_ok": 268,
+    "n_failed_skipped": 138,
+    "fit_fail_rate": 0.3649,
+    "unique_sos_doy": 112,
+    "unique_pos_doy": 62,
+    "unique_eos_doy": 41,
+    "out_file": "analysis\\v22\\fits\\BLS_fits.parquet"
+  },
+  {
+    "district": "CTK",
+    "n_cell_years": 492,
+    "n_ok": 315,
+    "n_failed_skipped": 164,
+    "fit_fail_rate": 0.3598,
+    "unique_sos_doy": 84,
+    "unique_pos_doy": 71,
+    "unique_eos_doy": 26,
+    "out_file": "analysis\\v22\\fits\\CTK_fits.parquet"
+  },
+  {
+    "district": "DHK",
+    "n_cell_years": 444,
+    "n_ok": 281,
+    "n_failed_skipped": 148,
+    "fit_fail_rate": 0.3671,
+    "unique_sos_doy": 69,
+    "unique_pos_doy": 56,
+    "unique_eos_doy": 31,
+    "out_file": "analysis\\v22\\fits\\DHK_fits.parquet"
+  },
+  {
+    "district": "JGS",
+    "n_cell_years": 198,
+    "n_ok": 121,
+    "n_failed_skipped": 74,
+    "fit_fail_rate": 0.3889,
+    "unique_sos_doy": 75,
+    "unique_pos_doy": 48,
+    "unique_eos_doy": 16,
+    "out_file": "analysis\\v22\\fits\\JGS_fits.parquet"
+  },
+  {
+    "district": "KDP",
+    "n_cell_years": 270,
+    "n_ok": 112,
+    "n_failed_skipped": 98,
+    "fit_fail_rate": 0.5852,
+    "unique_sos_doy": 61,
+    "unique_pos_doy": 55,
+    "unique_eos_doy": 11,
+    "out_file": "analysis\\v22\\fits\\KDP_fits.parquet"
+  },
+  {
+    "district": "PUR",
+    "n_cell_years": 378,
+    "n_ok": 161,
+    "n_failed_skipped": 158,
+    "fit_fail_rate": 0.5741,
+    "unique_sos_doy": 82,
+    "unique_pos_doy": 64,
+    "unique_eos_doy": 25,
+    "out_file": "analysis\\v22\\fits\\PUR_fits.parquet"
+  }
+]

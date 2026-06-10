@@ -1,0 +1,11 @@
+{
+  "district": "JGS",
+  "n_cell_years": 198,
+  "n_ok": 121,
+  "n_failed_skipped": 74,
+  "fit_fail_rate": 0.3889,
+  "unique_sos_doy": 75,
+  "unique_pos_doy": 48,
+  "unique_eos_doy": 16,
+  "out_file": "analysis\\v22\\fits\\JGS_fits.parquet"
+}
