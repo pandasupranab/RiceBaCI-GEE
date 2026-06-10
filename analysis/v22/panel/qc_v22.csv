@@ -1,2 +1,2 @@
-unique_sos,unique_pos,unique_eos,mean_fit_fail_rate,pos_mode_share,eos_mode_share,pass_unique_pos,pass_unique_eos,pass_fail_rate,pass_min_n_ok,pass_pos_mode,pass_eos_mode,GATE_A_PASS
-35,26,31,0.6749,0.098,0.0784,False,True,True,False,True,True,False
+n_rows,min_n_ok_per_dy,unique_sos,unique_pos,unique_eos,mean_fit_fail_rate,pos_mode_share,eos_mode_share,pass_panel_complete,pass_min_n_ok,pass_unique_pos,pass_unique_eos,pass_pos_mode,pass_eos_mode,GATE_A_PASS
+48,5,33,25,30,0.6061,0.0833,0.0833,True,True,True,True,True,True,True
