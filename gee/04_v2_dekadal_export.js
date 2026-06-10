@@ -60,24 +60,30 @@ var DEKAD_DAYS = 10;                // 10-day composites
 var GRID_KM = 10;
 
 // 8 study districts (FAO GAUL level-2). Same set as v1.0.2.
+// NOTE: FAO GAUL spells the central Odisha district as "Angul"
+// (NOT "Anugul"). The original v1.0.2 spelling silently dropped
+// the district from the filter — hence the missing 8th export.
+// We include BOTH spellings defensively; .filter().inList() is
+// permissive of names that don't match.
 var DISTRICTS = ee.FeatureCollection('FAO/GAUL/2015/level2')
   .filter(ee.Filter.eq('ADM1_NAME', 'Orissa'))
   .filter(ee.Filter.inList('ADM2_NAME', [
     // coastal — treatment
     'Baleshwar', 'Bhadrak', 'Kendrapara', 'Jagatsinghpur', 'Puri',
     // inland — control
-    'Dhenkanal', 'Anugul', 'Cuttack'
+    'Dhenkanal', 'Angul', 'Anugul', 'Cuttack'
   ]));
 
 var CODE = {
   'Baleshwar':     'BLS',  'Bhadrak':   'BHA',  'Kendrapara':    'KDP',
   'Jagatsinghpur': 'JGS',  'Puri':      'PUR',
-  'Dhenkanal':     'DHK',  'Anugul':    'ANG',  'Cuttack':       'CTK'
+  'Dhenkanal':     'DHK',  'Angul':     'ANG',  'Anugul':    'ANG',
+  'Cuttack':       'CTK'
 };
 var TREATMENT = {
   'Baleshwar': 1, 'Bhadrak': 1, 'Kendrapara': 1,
   'Jagatsinghpur': 1, 'Puri': 1,
-  'Dhenkanal': 0, 'Anugul': 0, 'Cuttack': 0
+  'Dhenkanal': 0, 'Angul': 0, 'Anugul': 0, 'Cuttack': 0
 };
 
 // ============================================================
@@ -237,13 +243,25 @@ function reduceOverCells(year, districtFeat) {
 // ============================================================
 // 8. EXPORT PER DISTRICT (one CSV per district, all years stacked)
 // ============================================================
+// Set ONLY to an array of district codes (e.g. ['ANG']) to launch
+// ONLY those tasks — useful for re-running a single failed district
+// without re-doing the 7 already in Drive. Leave as [] for all 8.
+var ONLY = ['ANG'];   // <-- change to [] to export all 8 districts
+
 var districtList = DISTRICTS.toList(DISTRICTS.size());
 var nDistricts   = DISTRICTS.size().getInfo();   // 8
+print('Districts matched:', nDistricts);
+print('District names:',
+      DISTRICTS.aggregate_array('ADM2_NAME'));
 
 for (var di = 0; di < nDistricts; di++) {
   var feat   = ee.Feature(districtList.get(di));
   var dName  = feat.get('ADM2_NAME').getInfo();
   var dCode  = CODE[dName];
+  if (ONLY.length > 0 && ONLY.indexOf(dCode) < 0) {
+    print('Skipping ' + dName + ' (' + dCode + ') — not in ONLY list');
+    continue;
+  }
 
   // Concatenate all years for this district into one FeatureCollection
   var allYears = ee.FeatureCollection([]);
