@@ -50,10 +50,14 @@
 // ============================================================
 var YEARS    = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
 
-// Kharif window — extended slightly vs v1.0.2 so the double-logistic
-// has enough pre-SOS and post-EOS dekads to converge.
-var KHARIF_START_MMDD = '-05-01';   // 1 May
-var KHARIF_END_MMDD   = '-12-31';   // 31 Dec
+// Kharif window — START 1 May of year, END 28 Feb of year+1.
+// We extend past 31 Dec so the senescence shoulder is fully observed;
+// the v1.0.2 / first v2.2 run terminated on 31 Dec and produced
+// EOS pile-up at the right edge (KDP 68% at DOY 351, etc).
+// 8 extra dekads (Jan 1 – Feb 28) give the Beck fit room to decay
+// through half-amp before the data window ends.
+var KHARIF_START_MMDD = '-05-01';   // 1 May of year
+var KHARIF_END_MMDD   = '-02-28';   // 28 Feb of year+1   (was: '-12-31')
 var DEKAD_DAYS = 10;                // 10-day composites
 
 // 10 km grid in metres (EPSG:3857 is fine for this latitude band)
@@ -131,9 +135,18 @@ function maskS2(img) {
             .copyProperties(img, ['system:time_start']);
 }
 
+// Helper: kharif window for a given year, spanning into year+1
+function kharifWindow(year) {
+  return {
+    start: ee.Date(year + KHARIF_START_MMDD),
+    end:   ee.Date((year + 1) + KHARIF_END_MMDD)
+  };
+}
+
 function s2NdviCol(year) {
-  var start = ee.Date(year + KHARIF_START_MMDD);
-  var end   = ee.Date(year + KHARIF_END_MMDD);
+  var w = kharifWindow(year);
+  var start = w.start;
+  var end   = w.end;
   return ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
     .filterDate(start, end)
     .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 80))
@@ -150,8 +163,9 @@ function s2NdviCol(year) {
 // We use IW + descending only to keep geometry consistent
 // pre/post S1B failure. CR = VH − VV (dB).
 function s1Col(year) {
-  var start = ee.Date(year + KHARIF_START_MMDD);
-  var end   = ee.Date(year + KHARIF_END_MMDD);
+  var w = kharifWindow(year);
+  var start = w.start;
+  var end   = w.end;
   return ee.ImageCollection('COPERNICUS/S1_GRD')
     .filterDate(start, end)
     .filter(ee.Filter.eq('instrumentMode', 'IW'))
@@ -192,9 +206,10 @@ function dekadalImage(year, startDate) {
 }
 
 function dekadalSeries(year) {
-  // ~25 dekads per kharif window (1 May → 31 Dec)
-  var start = ee.Date(year + KHARIF_START_MMDD);
-  var end   = ee.Date(year + KHARIF_END_MMDD);
+  // ~31 dekads per kharif window (1 May year → 28 Feb year+1)
+  var w = kharifWindow(year);
+  var start = w.start;
+  var end   = w.end;
   var nDekads = end.difference(start, 'day').divide(DEKAD_DAYS).floor();
   var idxs = ee.List.sequence(0, nDekads.subtract(1));
   return ee.ImageCollection(idxs.map(function(i) {
@@ -246,7 +261,7 @@ function reduceOverCells(year, districtFeat) {
 // Set ONLY to an array of district codes (e.g. ['ANG']) to launch
 // ONLY those tasks — useful for re-running a single failed district
 // without re-doing the 7 already in Drive. Leave as [] for all 8.
-var ONLY = ['ANG'];   // <-- change to [] to export all 8 districts
+var ONLY = [];   // [] = export all 8 districts; e.g. ['ANG'] to rerun a single one
 
 var districtList = DISTRICTS.toList(DISTRICTS.size());
 var nDistricts   = DISTRICTS.size().getInfo();   // 8
