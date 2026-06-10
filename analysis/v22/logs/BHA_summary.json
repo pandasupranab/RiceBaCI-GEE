@@ -1,11 +1,11 @@
 {
   "district": "BHA",
-  "n_cell_years": 276,
-  "n_ok": 162,
-  "n_failed_skipped": 92,
-  "fit_fail_rate": 0.413,
-  "unique_sos_doy": 89,
-  "unique_pos_doy": 56,
-  "unique_eos_doy": 33,
+  "n_cell_years": 322,
+  "n_ok": 103,
+  "n_failed_skipped": 46,
+  "fit_fail_rate": 0.6801,
+  "unique_sos_doy": 58,
+  "unique_pos_doy": 40,
+  "unique_eos_doy": 53,
   "out_file": "analysis\\v22\\fits\\BHA_fits.parquet"
 }

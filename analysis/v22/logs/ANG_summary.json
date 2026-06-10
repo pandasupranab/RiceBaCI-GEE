@@ -1,11 +1,11 @@
 {
   "district": "ANG",
-  "n_cell_years": 642,
-  "n_ok": 386,
-  "n_failed_skipped": 214,
-  "fit_fail_rate": 0.3988,
-  "unique_sos_doy": 87,
-  "unique_pos_doy": 76,
-  "unique_eos_doy": 31,
+  "n_cell_years": 720,
+  "n_ok": 217,
+  "n_failed_skipped": 136,
+  "fit_fail_rate": 0.6986,
+  "unique_sos_doy": 73,
+  "unique_pos_doy": 47,
+  "unique_eos_doy": 58,
   "out_file": "analysis\\v22\\fits\\ANG_fits.parquet"
 }

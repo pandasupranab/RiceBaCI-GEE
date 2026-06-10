@@ -1,11 +1,11 @@
 {
   "district": "BLS",
-  "n_cell_years": 422,
-  "n_ok": 268,
-  "n_failed_skipped": 138,
-  "fit_fail_rate": 0.3649,
-  "unique_sos_doy": 112,
-  "unique_pos_doy": 62,
-  "unique_eos_doy": 41,
+  "n_cell_years": 480,
+  "n_ok": 209,
+  "n_failed_skipped": 80,
+  "fit_fail_rate": 0.5646,
+  "unique_sos_doy": 82,
+  "unique_pos_doy": 43,
+  "unique_eos_doy": 48,
   "out_file": "analysis\\v22\\fits\\BLS_fits.parquet"
 }

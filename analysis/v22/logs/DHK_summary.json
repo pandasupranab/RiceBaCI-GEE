@@ -1,11 +1,11 @@
 {
   "district": "DHK",
-  "n_cell_years": 444,
-  "n_ok": 281,
-  "n_failed_skipped": 148,
-  "fit_fail_rate": 0.3671,
-  "unique_sos_doy": 69,
-  "unique_pos_doy": 56,
-  "unique_eos_doy": 31,
+  "n_cell_years": 455,
+  "n_ok": 196,
+  "n_failed_skipped": 137,
+  "fit_fail_rate": 0.5692,
+  "unique_sos_doy": 75,
+  "unique_pos_doy": 51,
+  "unique_eos_doy": 50,
   "out_file": "analysis\\v22\\fits\\DHK_fits.parquet"
 }

@@ -1,11 +1,11 @@
 {
   "district": "KDP",
-  "n_cell_years": 270,
-  "n_ok": 112,
-  "n_failed_skipped": 98,
-  "fit_fail_rate": 0.5852,
-  "unique_sos_doy": 61,
-  "unique_pos_doy": 55,
-  "unique_eos_doy": 11,
+  "n_cell_years": 306,
+  "n_ok": 81,
+  "n_failed_skipped": 62,
+  "fit_fail_rate": 0.7353,
+  "unique_sos_doy": 51,
+  "unique_pos_doy": 36,
+  "unique_eos_doy": 45,
   "out_file": "analysis\\v22\\fits\\KDP_fits.parquet"
 }
