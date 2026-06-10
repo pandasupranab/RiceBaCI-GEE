@@ -299,7 +299,10 @@ def fig02_workflow():
     ax.legend(loc="lower left", fontsize=8, framealpha=0.9)
 
     add_watermark(ax)
-    savefig(fig, "Fig02_workflow.png")
+    # DEPRECATED 2026-06-10 (Pass 48): workflow figure was consolidated into the
+    # identification DAG (now Figure 2 of the manuscript). Output preserved in
+    # assets/_deprecated/ for archival reference only.
+    savefig(fig, "_deprecated/Fig02_workflow.png")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
