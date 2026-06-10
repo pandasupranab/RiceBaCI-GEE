@@ -1,0 +1,43 @@
+==============================================================================
+RiceBaCI v22 Module 05 — DiD + Event Study (2019–2024 panel)
+==============================================================================
+
+Design: 5 coastal-treatment vs 3 inland-control districts.
+Cyclone years (treatment × post=1): 2019 Fani, 2020 Amphan, 2021 Yaas.
+SEs district-clustered (8 clusters). WCB = Rademacher wild-cluster bootstrap.
+
+Static DiD  (Y = α_d + γ_t + τ · (treat × cyc) + ε)
+------------------------------------------------------------------------------
+metric   tau(d)     SE      t   p_clu   p_wcb                 CI95  n_tp
+SOS       +7.56   9.17  +0.82  0.4100  0.3850 [-10.42,+25.53]   15
+POS       -2.32   2.88  -0.81  0.4196  0.4680 [ -7.96, +3.32]   15
+EOS       -4.11   5.77  -0.71  0.4759  0.4450 [-15.41, +7.19]   15
+
+Event study  (k = year − 2019, reference k=0)
+------------------------------------------------------------------------------
+metric   k  beta(d)     SE                 CI95  n_treat
+SOS      0    +0.00   0.00 [ +0.00, +0.00]    5
+SOS      1   +19.70  12.57 [ -4.95,+44.35]    5
+SOS      2    -0.57  11.54 [-23.18,+22.05]    5
+SOS      3   +16.27  16.19 [-15.47,+48.00]    5
+SOS      4    +1.60  14.96 [-27.72,+30.92]    5
+SOS      5   -21.40  18.79 [-58.23,+15.43]    5
+POS      0    +0.00   0.00 [ +0.00, +0.00]    5
+POS      1    -4.30   7.21 [-18.43, +9.82]    5
+POS      2    -0.67   9.28 [-18.86,+17.52]    5
+POS      3    -1.20   8.19 [-17.24,+14.84]    5
+POS      4    +5.17   8.19 [-10.89,+21.22]    5
+POS      5    -1.97   6.74 [-15.17,+11.24]    5
+EOS      0    +0.00   0.00 [ +0.00, +0.00]    5
+EOS      1    +3.40   7.04 [-10.40,+17.20]    5
+EOS      2    +8.67   8.18 [ -7.37,+24.71]    5
+EOS      3    +9.27   7.34 [ -5.12,+23.65]    5
+EOS      4    -1.70   7.06 [-15.54,+12.13]    5
+EOS      5   +16.83  13.04 [ -8.72,+42.39]    5
+
+Notes:
+  • No pre-treatment parallel-trends test (2017–2018 data unavailable;
+    see Methods rewrite for the data-availability rationale).
+  • Identification rests on inland-control year-FE absorption and the
+    within-cohort dynamics of the 5 coastal districts (k=1..5).
+  • WCB p-value uses 999 Rademacher draws (Cameron-Gelbach-Miller 2008).
