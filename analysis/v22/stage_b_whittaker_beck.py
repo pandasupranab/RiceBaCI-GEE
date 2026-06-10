@@ -367,16 +367,38 @@ def process_cell_year(df_cy: pd.DataFrame) -> Optional[CellYearResult]:
     #   • season length (EOS - SOS) in [40, 200] d — too short or
     #     too long are physically implausible single-cycle fits
     # ------------------------------------------------------------------
-    fit_ok = pheno["ok"]
-    fit_reason = pheno["reason"]
+    # NOTE: phenometrics here are in SEASON_DOY units (0 = 1 May of
+    # the season-year). Convert to calendar-DOY for QC and for the
+    # downstream panel / Gate A reports by adding the 1 May anchor (121).
+    # 121 = doy(May 1) in non-leap; the +/-1 leap-year drift is well
+    # below the dekad resolution (10 d) of the input series.
+    SEASON_ANCHOR_CDOY = 121   # 1 May
+    def _to_cdoy(sd):
+        return float(sd) + SEASON_ANCHOR_CDOY if np.isfinite(sd) else np.nan
+
+    pheno_cdoy = {
+        "sos": _to_cdoy(pheno["sos"]),
+        "pos": _to_cdoy(pheno["pos"]),
+        "eos": _to_cdoy(pheno["eos"]),
+        "ok":  pheno["ok"],
+        "reason": pheno["reason"],
+    }
+
+    fit_ok = pheno_cdoy["ok"]
+    fit_reason = pheno_cdoy["reason"]
     if fit_ok:
         amp_fit = float(params["mNDVI"]) - float(params["wNDVI"])
         if amp_fit < 0.25:
             fit_ok, fit_reason = False, "qc_low_amp_fit"
-        elif not (213.0 <= pheno["pos"] <= 335.0):
+        # SOS must be in kharif transplant window (1 Jun – 7 Sep,
+        # cdoy 152–250). Earlier values almost certainly trace
+        # pre-monsoon weed/rabi residual NDVI in the cell.
+        elif not (152.0 <= pheno_cdoy["sos"] <= 250.0):
+            fit_ok, fit_reason = False, "qc_sos_outside_kharif"
+        elif not (213.0 <= pheno_cdoy["pos"] <= 335.0):
             fit_ok, fit_reason = False, "qc_pos_outside_kharif"
         else:
-            season_len = pheno["eos"] - pheno["sos"]
+            season_len = pheno_cdoy["eos"] - pheno_cdoy["sos"]
             if not (40.0 <= season_len <= 200.0):
                 fit_ok, fit_reason = False, "qc_season_length"
 
@@ -386,10 +408,13 @@ def process_cell_year(df_cy: pd.DataFrame) -> Optional[CellYearResult]:
         cell_id=str(df_cy["cell_id"].iloc[0]),
         year=int(df_cy["year"].iloc[0]),
         treatment=int(df_cy["treatment"].iloc[0]),
-        sos=pheno["sos"], pos=pheno["pos"], eos=pheno["eos"],
-        sos_p25=_pct(boot_sos, 25), sos_p75=_pct(boot_sos, 75),
-        eos_p25=_pct(boot_eos, 25), eos_p75=_pct(boot_eos, 75),
-        pos_p25=_pct(boot_pos, 25), pos_p75=_pct(boot_pos, 75),
+        sos=pheno_cdoy["sos"], pos=pheno_cdoy["pos"], eos=pheno_cdoy["eos"],
+        sos_p25=_pct(boot_sos, 25) + SEASON_ANCHOR_CDOY if boot_sos else np.nan,
+        sos_p75=_pct(boot_sos, 75) + SEASON_ANCHOR_CDOY if boot_sos else np.nan,
+        eos_p25=_pct(boot_eos, 25) + SEASON_ANCHOR_CDOY if boot_eos else np.nan,
+        eos_p75=_pct(boot_eos, 75) + SEASON_ANCHOR_CDOY if boot_eos else np.nan,
+        pos_p25=_pct(boot_pos, 25) + SEASON_ANCHOR_CDOY if boot_pos else np.nan,
+        pos_p75=_pct(boot_pos, 75) + SEASON_ANCHOR_CDOY if boot_pos else np.nan,
         n_dekads_used=len(df_cy), lam=float(lam),
         fit_ok=fit_ok, fit_reason=fit_reason,
         wNDVI=float(params["wNDVI"]), mNDVI=float(params["mNDVI"]),
@@ -415,6 +440,45 @@ def process_district_csv(csv_path: Path) -> dict:
                 f"{csv_path.name}: could not parse cell coords from system:index"
             )
         df["cell_id"] = cid
+
+    # ----------------------------------------------------------------
+    # Season-year reframe (v2.2 extended-window fix).
+    # GEE export carries:
+    #   - `year` = the season year as set in the export loop (2017..2024)
+    #   - `dekad_start` = ISO date string YYYY-MM-DD (true calendar date)
+    #   - `doy` = day-of-CALENDAR-year (resets at Jan 1)
+    # The extended kharif window now runs 1 May year -> 28 Feb year+1.
+    # So dekads with calendar month in {Jan, Feb} of year+1 carry
+    # small calendar DOY values (6, 16, 26, ...) but BELONG to the
+    # PRIOR season-year. We:
+    #   (a) reassign `year` to the season-year using dekad_start
+    #       (Jan/Feb dekads -> season-year = calendar_year - 1)
+    #   (b) replace `doy` with a continuous `season_doy` =
+    #       days since 1 May of the season-year (range 0..303 for a
+    #       1 May -> 28 Feb window). All downstream Beck fitting,
+    #       half-amp extraction, and panel building uses season_doy.
+    # ----------------------------------------------------------------
+    if "dekad_start" not in df.columns:
+        raise KeyError(f"{csv_path.name}: missing 'dekad_start' column")
+    ds = pd.to_datetime(df["dekad_start"], errors="coerce")
+    if ds.isna().any():
+        raise ValueError(f"{csv_path.name}: unparseable dekad_start values")
+    cal_year  = ds.dt.year.to_numpy()
+    cal_month = ds.dt.month.to_numpy()
+    # season-year = calendar year unless we're in Jan/Feb (then prior year)
+    season_year = np.where(cal_month <= 2, cal_year - 1, cal_year)
+    df["year"] = season_year.astype(int)
+    season_anchor = pd.to_datetime(
+        [f"{y}-05-01" for y in season_year]
+    )
+    df["season_doy"] = (ds.values - season_anchor.values).astype(
+        "timedelta64[D]"
+    ).astype(int)
+    # Use season_doy as the DOY axis for Stage B fitting
+    df["doy"] = df["season_doy"]
+    # Drop any dekads outside [0, 305] just in case of edge bleed
+    df = df[(df["season_doy"] >= 0) & (df["season_doy"] <= 305)].copy()
+
     dcode = df["district_code"].iloc[0]
     results: list[CellYearResult] = []
     failed = 0
