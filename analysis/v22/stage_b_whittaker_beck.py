@@ -274,6 +274,10 @@ def process_cell_year(df_cy: pd.DataFrame) -> Optional[CellYearResult]:
 # ----------------------------------------------------------------------------
 def process_district_csv(csv_path: Path) -> dict:
     df = pd.read_csv(csv_path)
+    # GEE exports the grid-cell identifier as "system:index".
+    # Rename to cell_id for downstream use.
+    if "system:index" in df.columns and "cell_id" not in df.columns:
+        df = df.rename(columns={"system:index": "cell_id"})
     dcode = df["district_code"].iloc[0]
     results: list[CellYearResult] = []
     failed = 0

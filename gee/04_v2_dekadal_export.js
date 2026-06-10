@@ -92,17 +92,25 @@ var RICE_MASK = cropland.and(notPerennialWater).selfMask();
 // ============================================================
 // 3. 10 KM GRID CELLS PER DISTRICT
 // ============================================================
+// NOTE: We deliberately DO NOT do a per-cell .intersection(geom)
+// here. Inside .map(), the closure variable `geom` is sometimes
+// dropped by GEE's serializer (Error code 3 — Parameter 'right'
+// is required and may not be null), especially for districts with
+// multipart geometries (Dhenkanal, Cuttack). The geographic
+// restriction is already enforced downstream by RICE_MASK
+// (ESA WorldCover cropland AND NOT perennial water), which only
+// retains rice pixels — cells lying entirely outside the district
+// will simply have zero pixel count and drop out of the panel.
 function gridCellsFor(districtFeat) {
-  var geom = districtFeat.geometry();
+  var geom = ee.Geometry(districtFeat.geometry());
   var name = districtFeat.get('ADM2_NAME');
-  // Tessellate the bounding box into 10 km × 10 km tiles,
-  // then clip to district geometry and drop empty cells.
-  var grid = geom.coveringGrid('EPSG:3857', GRID_KM * 1000);
-  return grid.map(function(cell) {
-    return cell
-      .intersection(geom, 1)
-      .set('district', name)
-      .set('cell_id', cell.id());
+  var grid = ee.FeatureCollection(
+    geom.coveringGrid('EPSG:3857', GRID_KM * 1000)
+  );
+  // Keep only cells that actually touch the district bounding
+  // geometry; tag district name on each.
+  return grid.filterBounds(geom).map(function(cell) {
+    return cell.set('district', name);
   });
 }
 
@@ -250,7 +258,7 @@ for (var di = 0; di < nDistricts; di++) {
     fileNamePrefix: 'v22_dekadal_' + dCode,
     fileFormat: 'CSV',
     selectors: [
-      'district', 'district_code', 'treatment', 'cell_id',
+      'district', 'district_code', 'treatment', 'system:index',
       'year', 'dekad_start', 'doy',
       'NDVI_mean', 'NDVI_count',
       'VH_mean',   'VH_count',
