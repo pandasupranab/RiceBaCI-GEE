@@ -1,0 +1,16 @@
+district_id,district_name,year,treatment,event,metric,value_days,n_pixels,qa_flag,sensor
+BHA,Bhadrak,2014,1,pre,SOS,166,2176125,OK,Landsat_harmonised
+BHA,Bhadrak,2014,1,pre,POS,288,2176125,OK,Landsat_harmonised
+BHA,Bhadrak,2014,1,pre,EOS,349,2176125,OK,Landsat_harmonised
+BHA,Bhadrak,2015,1,pre,SOS,258,2095747,OK,Landsat_harmonised
+BHA,Bhadrak,2015,1,pre,POS,288,2095747,OK,Landsat_harmonised
+BHA,Bhadrak,2015,1,pre,EOS,349,2095747,OK,Landsat_harmonised
+BHA,Bhadrak,2016,1,pre,SOS,167,2146170,OK,Landsat_harmonised
+BHA,Bhadrak,2016,1,pre,POS,289,2146170,OK,Landsat_harmonised
+BHA,Bhadrak,2016,1,pre,EOS,350,2146170,OK,Landsat_harmonised
+BHA,Bhadrak,2017,1,pre,SOS,258,2175012,OK,Landsat_harmonised
+BHA,Bhadrak,2017,1,pre,POS,288,2175012,OK,Landsat_harmonised
+BHA,Bhadrak,2017,1,pre,EOS,,2175012,OK,Landsat_harmonised
+BHA,Bhadrak,2018,1,pre,SOS,196,2176125,OK,Landsat_harmonised
+BHA,Bhadrak,2018,1,pre,POS,288,2176125,OK,Landsat_harmonised
+BHA,Bhadrak,2018,1,pre,EOS,349,2176125,OK,Landsat_harmonised

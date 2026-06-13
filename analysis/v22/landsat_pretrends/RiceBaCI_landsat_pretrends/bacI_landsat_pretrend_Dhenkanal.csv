@@ -1,0 +1,16 @@
+district_id,district_name,year,treatment,event,metric,value_days,n_pixels,qa_flag,sensor
+DHK,Dhenkanal,2014,0,pre,SOS,166,1603861,OK,Landsat_harmonised
+DHK,Dhenkanal,2014,0,pre,POS,258,1603861,OK,Landsat_harmonised
+DHK,Dhenkanal,2014,0,pre,EOS,349,1603861,OK,Landsat_harmonised
+DHK,Dhenkanal,2015,0,pre,SOS,196,1601834,OK,Landsat_harmonised
+DHK,Dhenkanal,2015,0,pre,POS,258,1601834,OK,Landsat_harmonised
+DHK,Dhenkanal,2015,0,pre,EOS,,1601834,OK,Landsat_harmonised
+DHK,Dhenkanal,2016,0,pre,SOS,167,781222,OK,Landsat_harmonised
+DHK,Dhenkanal,2016,0,pre,POS,259,781222,OK,Landsat_harmonised
+DHK,Dhenkanal,2016,0,pre,EOS,,781222,OK,Landsat_harmonised
+DHK,Dhenkanal,2017,0,pre,SOS,166,1566415,OK,Landsat_harmonised
+DHK,Dhenkanal,2017,0,pre,POS,288,1566415,OK,Landsat_harmonised
+DHK,Dhenkanal,2017,0,pre,EOS,,1566415,OK,Landsat_harmonised
+DHK,Dhenkanal,2018,0,pre,SOS,135,1603861,OK,Landsat_harmonised
+DHK,Dhenkanal,2018,0,pre,POS,288,1603861,OK,Landsat_harmonised
+DHK,Dhenkanal,2018,0,pre,EOS,349,1603861,OK,Landsat_harmonised

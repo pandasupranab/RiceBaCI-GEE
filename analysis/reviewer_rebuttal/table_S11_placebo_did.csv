@@ -1,0 +1,4 @@
+metric,placebo_year,tau_placebo,se,ci_lower,ci_upper,p_value,interpretation
+SOS,2016,-20.347,16.21,-52.118,11.424,0.2094,null effect (parallel trends OK)
+POS,2016,-8.72,8.955,-26.271,8.831,0.3302,null effect (parallel trends OK)
+EOS,2016,-0.0,0.0,-0.0,0.0,0.2477,null effect (parallel trends OK)

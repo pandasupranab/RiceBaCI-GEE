@@ -1,0 +1,4 @@
+metric,model,n_obs,n_cells,tau,se,ci_lo,ci_hi,p_cluster,p_wcb,verdict_wcb
+SOS,Model 2 (cell-level fit_ok),436,345,17.708,4.717,8.464,26.953,0.0002,0.024,VIOLATION (WCB-significant)
+POS,Model 2 (cell-level fit_ok),436,345,5.984,3.233,-0.353,12.321,0.0642,0.1161,NULL — placebo passes under WCB
+EOS,Model 2 (cell-level fit_ok),436,345,5.129,2.686,-0.135,10.394,0.0562,0.1021,NULL — placebo passes under WCB

@@ -1,0 +1,4 @@
+metric,n_cells,n_obs,tau_cell_level,se,ci_lower,ci_upper,p_value,fe_structure,cluster
+SOS,7987,47711,3.136,7.969,-12.483,18.755,0.694,cell + year,district
+POS,7987,47711,-2.082,2.775,-7.521,3.356,0.4529,cell + year,district
+EOS,6939,26625,1.119,1.945,-2.694,4.932,0.5651,cell + year,district

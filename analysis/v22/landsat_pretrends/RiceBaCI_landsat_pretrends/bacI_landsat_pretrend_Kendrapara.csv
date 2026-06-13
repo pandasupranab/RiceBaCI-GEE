@@ -1,0 +1,16 @@
+district_id,district_name,year,treatment,event,metric,value_days,n_pixels,qa_flag,sensor
+KDP,Kendrapara,2014,1,pre,SOS,166,1939608,OK,Landsat_harmonised
+KDP,Kendrapara,2014,1,pre,POS,288,1939608,OK,Landsat_harmonised
+KDP,Kendrapara,2014,1,pre,EOS,349,1939608,OK,Landsat_harmonised
+KDP,Kendrapara,2015,1,pre,SOS,196,1605412,OK,Landsat_harmonised
+KDP,Kendrapara,2015,1,pre,POS,288,1605412,OK,Landsat_harmonised
+KDP,Kendrapara,2015,1,pre,EOS,,1605412,OK,Landsat_harmonised
+KDP,Kendrapara,2016,1,pre,SOS,167,1930129,OK,Landsat_harmonised
+KDP,Kendrapara,2016,1,pre,POS,289,1930129,OK,Landsat_harmonised
+KDP,Kendrapara,2016,1,pre,EOS,350,1930129,OK,Landsat_harmonised
+KDP,Kendrapara,2017,1,pre,SOS,196,1931277,OK,Landsat_harmonised
+KDP,Kendrapara,2017,1,pre,POS,288,1931277,OK,Landsat_harmonised
+KDP,Kendrapara,2017,1,pre,EOS,,1931277,OK,Landsat_harmonised
+KDP,Kendrapara,2018,1,pre,SOS,166,1939984,OK,Landsat_harmonised
+KDP,Kendrapara,2018,1,pre,POS,288,1939984,OK,Landsat_harmonised
+KDP,Kendrapara,2018,1,pre,EOS,349,1939984,OK,Landsat_harmonised

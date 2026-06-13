@@ -1,0 +1,4 @@
+metric,placebo_year,n_obs,n_cells,tau,se,ci_lo,ci_hi,p_cluster,p_wcb,verdict_wcb
+SOS,2022,15253,7813,20.402,7.697,5.315,35.489,0.008,0.037,VIOLATION (WCB-significant)
+POS,2022,15253,7813,0.607,2.973,-5.22,6.435,0.8382,0.8138,NULL — placebo passes under WCB
+EOS,2022,7564,5132,0.987,1.282,-1.527,3.5,0.4416,0.4735,NULL — placebo passes under WCB

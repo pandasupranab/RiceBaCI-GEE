@@ -1,0 +1,2 @@
+outcome,did_coefficient,std_error,ci_lower,ci_upper,p_value,verdict,interpretation
+fit_fail_rate,-0.0089,0.0233,-0.0546,0.0367,0.7016,MAR (no selection bias),"Treatment × post effect on fit-failure rate is -0.009 (95% CI [-0.055, 0.037], p = 0.702)."

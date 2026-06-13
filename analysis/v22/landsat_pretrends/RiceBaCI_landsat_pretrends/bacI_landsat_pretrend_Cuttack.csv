@@ -1,0 +1,16 @@
+district_id,district_name,year,treatment,event,metric,value_days,n_pixels,qa_flag,sensor
+CTK,Cuttack,2014,0,pre,SOS,166,2021854,OK,Landsat_harmonised
+CTK,Cuttack,2014,0,pre,POS,288,2021854,OK,Landsat_harmonised
+CTK,Cuttack,2014,0,pre,EOS,349,2021854,OK,Landsat_harmonised
+CTK,Cuttack,2015,0,pre,SOS,196,1795711,OK,Landsat_harmonised
+CTK,Cuttack,2015,0,pre,POS,288,1795711,OK,Landsat_harmonised
+CTK,Cuttack,2015,0,pre,EOS,,1795711,OK,Landsat_harmonised
+CTK,Cuttack,2016,0,pre,SOS,167,615362,OK,Landsat_harmonised
+CTK,Cuttack,2016,0,pre,POS,259,615362,OK,Landsat_harmonised
+CTK,Cuttack,2016,0,pre,EOS,,615362,OK,Landsat_harmonised
+CTK,Cuttack,2017,0,pre,SOS,196,1981968,OK,Landsat_harmonised
+CTK,Cuttack,2017,0,pre,POS,288,1981968,OK,Landsat_harmonised
+CTK,Cuttack,2017,0,pre,EOS,,1981968,OK,Landsat_harmonised
+CTK,Cuttack,2018,0,pre,SOS,196,2022330,OK,Landsat_harmonised
+CTK,Cuttack,2018,0,pre,POS,288,2022330,OK,Landsat_harmonised
+CTK,Cuttack,2018,0,pre,EOS,349,2022330,OK,Landsat_harmonised

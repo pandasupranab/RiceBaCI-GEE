@@ -1,0 +1,4 @@
+metric,placebo_year,n_cells,n_obs,tau_placebo,se,ci_lower,ci_upper,p_value,interpretation
+SOS,2022,7979,23848,12.788,5.666,1.684,23.893,0.024,VIOLATION — placebo significant
+POS,2022,7979,23848,4.611,2.688,-0.658,9.88,0.0863,marginal violation (10%)
+EOS,2022,6517,13909,0.028,4.914,-9.603,9.659,0.9954,null effect (parallel trends OK)

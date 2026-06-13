@@ -1,0 +1,16 @@
+district_id,district_name,year,treatment,event,metric,value_days,n_pixels,qa_flag,sensor
+BLS,Baleshwar,2014,1,pre,SOS,166,2669450,OK,Landsat_harmonised
+BLS,Baleshwar,2014,1,pre,POS,288,2669450,OK,Landsat_harmonised
+BLS,Baleshwar,2014,1,pre,EOS,349,2669450,OK,Landsat_harmonised
+BLS,Baleshwar,2015,1,pre,SOS,258,2668880,OK,Landsat_harmonised
+BLS,Baleshwar,2015,1,pre,POS,288,2668880,OK,Landsat_harmonised
+BLS,Baleshwar,2015,1,pre,EOS,349,2668880,OK,Landsat_harmonised
+BLS,Baleshwar,2016,1,pre,SOS,167,2589602,OK,Landsat_harmonised
+BLS,Baleshwar,2016,1,pre,POS,289,2589602,OK,Landsat_harmonised
+BLS,Baleshwar,2016,1,pre,EOS,350,2589602,OK,Landsat_harmonised
+BLS,Baleshwar,2017,1,pre,SOS,166,2570319,OK,Landsat_harmonised
+BLS,Baleshwar,2017,1,pre,POS,288,2570319,OK,Landsat_harmonised
+BLS,Baleshwar,2017,1,pre,EOS,349,2570319,OK,Landsat_harmonised
+BLS,Baleshwar,2018,1,pre,SOS,135,2669477,OK,Landsat_harmonised
+BLS,Baleshwar,2018,1,pre,POS,288,2669477,OK,Landsat_harmonised
+BLS,Baleshwar,2018,1,pre,EOS,349,2669477,OK,Landsat_harmonised

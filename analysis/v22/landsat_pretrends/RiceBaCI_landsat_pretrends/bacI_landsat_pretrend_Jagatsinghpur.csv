@@ -1,0 +1,16 @@
+district_id,district_name,year,treatment,event,metric,value_days,n_pixels,qa_flag,sensor
+JGS,Jagatsinghpur,2014,1,pre,SOS,196,1282519,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2014,1,pre,POS,288,1282519,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2014,1,pre,EOS,,1282519,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2015,1,pre,SOS,196,1087697,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2015,1,pre,POS,288,1087697,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2015,1,pre,EOS,,1087697,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2016,1,pre,SOS,167,379317,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2016,1,pre,POS,259,379317,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2016,1,pre,EOS,,379317,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2017,1,pre,SOS,196,1276166,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2017,1,pre,POS,288,1276166,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2017,1,pre,EOS,,1276166,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2018,1,pre,SOS,196,1282518,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2018,1,pre,POS,288,1282518,OK,Landsat_harmonised
+JGS,Jagatsinghpur,2018,1,pre,EOS,349,1282518,OK,Landsat_harmonised

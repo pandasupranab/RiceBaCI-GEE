@@ -1,0 +1,4 @@
+metric,tau_main,se_main,manski_lower,manski_upper,lee_lower,lee_upper,robust_null_under_manski,robust_null_under_lee
+SOS,7.56,8.1,0.29,14.83,-1.78,16.9,False,True
+POS,-2.32,2.91,-7.47,2.83,-8.94,4.3,True,True
+EOS,-4.11,4.62,-12.72,4.5,-15.16,6.94,True,True

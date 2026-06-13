@@ -12,6 +12,9 @@ Bengal coast.**
 [![Earth Engine](https://img.shields.io/badge/runs%20on-Google%20Earth%20Engine-darkgreen)](https://earthengine.google.com)
 [![Python 3.12.8](https://img.shields.io/badge/python-3.12.8-blue)](#reproducibility)
 
+> **📌 Latest release: [`v2.1.0-submission`](release_notes/v2.1.0-submission.md)** — post-rebuttal RSE submission package (13 Jun 2026).
+> Final manuscript, supplement, response letter, and all reviewer-driven analyses are in [`manuscript/v2/`](manuscript/v2/) and [`analysis/v22/`](analysis/v22/).
+
 > **One line.** Every published Sentinel-1 rice-mapping pipeline reads
 > the SAR backscatter trough as transplanting; in cyclone-prone deltas
 > the same trough can be a saline storm-surge weeks earlier — silently

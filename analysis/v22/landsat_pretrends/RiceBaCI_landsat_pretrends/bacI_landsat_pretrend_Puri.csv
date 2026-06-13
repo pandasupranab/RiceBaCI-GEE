@@ -1,0 +1,16 @@
+district_id,district_name,year,treatment,event,metric,value_days,n_pixels,qa_flag,sensor
+PUR,Puri,2014,1,pre,SOS,196,1708977,OK,Landsat_harmonised
+PUR,Puri,2014,1,pre,POS,288,1708977,OK,Landsat_harmonised
+PUR,Puri,2014,1,pre,EOS,349,1708977,OK,Landsat_harmonised
+PUR,Puri,2015,1,pre,SOS,196,1553947,OK,Landsat_harmonised
+PUR,Puri,2015,1,pre,POS,288,1553947,OK,Landsat_harmonised
+PUR,Puri,2015,1,pre,EOS,,1553947,OK,Landsat_harmonised
+PUR,Puri,2016,1,pre,SOS,167,1707613,OK,Landsat_harmonised
+PUR,Puri,2016,1,pre,POS,289,1707613,OK,Landsat_harmonised
+PUR,Puri,2016,1,pre,EOS,350,1707613,OK,Landsat_harmonised
+PUR,Puri,2017,1,pre,SOS,258,1674521,OK,Landsat_harmonised
+PUR,Puri,2017,1,pre,POS,288,1674521,OK,Landsat_harmonised
+PUR,Puri,2017,1,pre,EOS,,1674521,OK,Landsat_harmonised
+PUR,Puri,2018,1,pre,SOS,135,1709017,OK,Landsat_harmonised
+PUR,Puri,2018,1,pre,POS,288,1709017,OK,Landsat_harmonised
+PUR,Puri,2018,1,pre,EOS,349,1709017,OK,Landsat_harmonised

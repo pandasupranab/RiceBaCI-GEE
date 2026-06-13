@@ -1,0 +1,4 @@
+metric,tau_main,se_district,mde_district_80pct,se_cell_cluster_robust,mde_cell_cluster_robust_80pct,note
+SOS,7.56,8.1,22.68,4.956,13.88,"District-level model can detect effects >= 22.7 d at 80% power. Cell-level Model 2 with cluster-robust SE (8 districts) detects >= 13.9 d. Earlier pixel MDE of 0.59 d assumed pixel independence and is withdrawn."
+POS,-2.32,2.91,8.15,1.727,4.83,"District-level model can detect effects >= 8.1 d at 80% power. Cell-level Model 2 with cluster-robust SE detects >= 4.8 d. Earlier pixel MDE of 0.21 d assumed pixel independence and is withdrawn."
+EOS,-4.11,4.62,12.94,3.642,10.20,"District-level model can detect effects >= 12.9 d at 80% power. Cell-level Model 2 with cluster-robust SE detects >= 10.2 d. Earlier pixel MDE of 0.33 d assumed pixel independence and is withdrawn."
